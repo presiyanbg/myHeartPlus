@@ -22,7 +22,7 @@ const Home: React.FC<Props> = ({
       </View>
       <View style={HomeStyles.home}>
         <View style={HomeStyles.homeView}>
-          <Contacts />
+          <Contacts contacts={Data} />
         </View>
         <View style={HomeStyles.mainButtons}>
           <Pressable style={HomeStyles.mainButton}>
@@ -37,5 +37,31 @@ const Home: React.FC<Props> = ({
   );
 }
 
+const Data = [
+  {
+    id: 1,
+    uuid: '1223123123',
+    fullName: 'Ivan Ivanov',
+    editMode: false,
+  },
+  {
+    id: 2,
+    uuid: 'asdas1eas',
+    fullName: 'Ivan Ivanov',
+    editMode: false,
+  },
+  {
+    id: 3,
+    uuid: ';pojoerf',
+    fullName: 'Ivan Ivanov',
+    editMode: false,
+  },
+  {
+    id: 4,
+    uuid: ';1231as',
+    fullName: 'Ivan Ivanov',
+    editMode: false,
+  },
+];
 
 export default Home;

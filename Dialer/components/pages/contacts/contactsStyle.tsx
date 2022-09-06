@@ -11,6 +11,19 @@ const contactsStyle = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
   },
+  contactPressed: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    transform: [
+      { scaleY: 1.1 },
+    ],
+  },
   contactFullName: {
     flex: 2,
     padding: 10,
