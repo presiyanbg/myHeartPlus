@@ -1,2 +1,2 @@
 # PhoneApp
-Phone dialer application build with React Native
+Phone dialer application build with React Native and Typescript
