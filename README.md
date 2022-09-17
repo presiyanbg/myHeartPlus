@@ -1,2 +1,2 @@
-# PhoneApp
-Phone dialer application build with React Native and Typescript
+# myHeartPlus
+Medicine app made with React Native and TypeScript 
