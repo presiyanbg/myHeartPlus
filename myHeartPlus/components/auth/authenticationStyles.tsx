@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
-import Styles from '../../../styles/styles';
-import ScreenServices from '../../../utils/screenServices';
+import { Colors } from '../../styles/colors';
+import Styles from '../../styles/styles';
+import ScreenServices from '../../utils/screenServices';
 
 const style = Styles();
 const screen = ScreenServices();
@@ -22,6 +22,8 @@ const AuthenticationStyles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
+    textTransform: 'uppercase',
+    ...style.H4(),
   },
   socialMediaWrapper: {
     display: 'flex',
@@ -42,8 +44,8 @@ const AuthenticationStyles = StyleSheet.create({
   },
   forgotPasswordText: {
     textAlign: 'center',
-    color: Colors.white,
-    ...style.H5(),
+    color: Colors.darkGray,
+    ...style.H4(),
   }
 });
 
