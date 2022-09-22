@@ -1,31 +1,44 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet} from 'react-native';
-import Home from './components/pages/home/home';
+import { StyleSheet, View, Image } from 'react-native';
+import DynamicStatusBar from './components/dynamicStatusBar/dynamicStatusBar';
+import Home from './components/screens/home/home';
+import Authentication from './components/auth/authentication';
+export interface IUserAuth {
+  firstName: string;
+  emailAddress: string;
+  authenticated: boolean
+}
 
-const App: React.FC = ({
-}) => {
+const App: React.FC = ({ }) => {
+  /**
+   * User authentication.
+   * r
+   * Get basic user data when user is authenticated.
+   * When is not userAuth is undefined.
+   * 
+   */
+  const [userAuth, setUserAuth] = useState<IUserAuth | undefined>(undefined);
+
   return (
-    <>
-      <View style={styles.statusbar}>
-        <StatusBar style="light"></StatusBar>
-      </View>
-      <View>
-        <Home appName="Phone Dialer" />
-      </View>
-    </>
+    <View style={AppStyles.mainView}>
+      <DynamicStatusBar ></DynamicStatusBar>
+      {userAuth?.authenticated ? <Home appName="myHeart+" navVisible={false} /> : <Authentication></Authentication>}
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  statusbar: {
-    backgroundColor: '#9277FF',
-    width: '100%',
-    height: '4%'
-  }
-});
-
 export default App;
 
+const AppStyles = StyleSheet.create({
+  mainView: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '100%',
+    width: '100%',
+    backgroundColor: "#2e86de",
+  }
+});
 
 

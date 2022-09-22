@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const HomeStyles = StyleSheet.create({
   home: {
-    backgroundColor: "#8D69D4",
+    backgroundColor: "#2e86de",
     height: '100%',
   },
   homeView: {
