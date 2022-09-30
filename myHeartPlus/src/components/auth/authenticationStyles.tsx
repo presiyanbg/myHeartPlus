@@ -25,6 +25,17 @@ const AuthenticationStyles = StyleSheet.create({
     textTransform: 'uppercase',
     ...style.H4(),
   },
+  buttonWithIcon: {
+    width: '100%',
+    ...style.WhiteBox(),
+    padding: '2%',
+    alignItems: 'center',
+
+  },
+  buttonIcon: {
+    height: screen.CalculateHeight(5),
+    width: screen.CalculateHeight(5),
+  },
   socialMediaWrapper: {
     display: 'flex',
     width: '100%',
