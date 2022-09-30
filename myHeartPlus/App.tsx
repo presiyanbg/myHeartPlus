@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
-import DynamicStatusBar from './components/dynamicStatusBar/dynamicStatusBar';
-import Home from './components/screens/home/home';
-import Authentication from './components/auth/authentication';
+import i18n from './src/i18n/i18n';
+import DynamicStatusBar from './src/components/dynamicStatusBar/dynamicStatusBar';
+import Home from './src/components/screens/home/home';
+import Authentication from './src/components/auth/authentication';
+import './src/localization/i18n';
 export interface IUserAuth {
   firstName: string;
   emailAddress: string;
