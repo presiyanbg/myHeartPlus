@@ -1,59 +1,32 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
-import AuthenticationStyles from './authenticationStyles';
-import googleIcon from '../../assets/images/googleIcon.png';
-import facebookIcon from '../../assets/images/facebookLogo.png';
-import appleIcon from '../../assets/images/appleLogo.png';
-import { useTranslation } from 'react-i18next'
+import { View } from 'react-native';
+import AuthenticationStyles from '../screens/auth/authentication/authenticationStyles';
+import Authentication from '../screens/auth/authentication/authentication';
+import Login from '../screens/auth/login/login';
 
-const Authentication: React.FC<Props> = ({ }) => {
-  const { t } = useTranslation();
+type Props = {};
+
+const Auth: React.FC<Props> = ({ }) => {
+  const [currentScreen, serCurrentScreen] = useState<string>('Auth');
+
+  const changeScreen = (screen: string | undefined) => {
+    if (!screen) serCurrentScreen('Auth');
+
+    if (typeof screen == 'string') {
+      serCurrentScreen(screen);
+    }
+  }
+
+  const screens = {
+    'Auth': <Authentication changeScreen={changeScreen}></Authentication>,
+    'Login': <Login changeScreen={changeScreen}></Login>
+  };
 
   return (
     <View style={AuthenticationStyles.mainView}>
-      <Pressable style={AuthenticationStyles.button}>
-        <View>
-          <Text style={AuthenticationStyles.buttonText}>{t('login')}</Text>
-        </View>
-      </Pressable>
-
-      <Pressable style={AuthenticationStyles.button}>
-        <View>
-          <Text style={AuthenticationStyles.buttonText}>{t('register')}</Text>
-        </View>
-      </Pressable>
-
-      <Pressable style={AuthenticationStyles.buttonWithIcon}>
-        <View>
-          <Image style={AuthenticationStyles.buttonIcon} source={googleIcon}></Image>
-        </View>
-      </Pressable>
-
-      {/* <View style={AuthenticationStyles.socialMediaWrapper}>
-        <Pressable style={AuthenticationStyles.socialMediaButton}>
-          <View>
-            <Image style={AuthenticationStyles.socialMediaIcon} source={googleIcon}></Image>
-          </View>
-        </Pressable>
-
-        <Pressable style={AuthenticationStyles.socialMediaButton}>
-          <View>
-            <Image style={AuthenticationStyles.socialMediaIcon} source={facebookIcon}></Image>
-          </View>
-        </Pressable>
-
-        <Pressable style={AuthenticationStyles.socialMediaButton}>
-          <View>
-            <Image style={AuthenticationStyles.socialMediaIcon} source={appleIcon}></Image>
-          </View>
-        </Pressable>
-      </View> */}
-
-      <Pressable>
-        <Text style={AuthenticationStyles.forgotPasswordText}>Forgot password ?</Text>
-      </Pressable>
+      {screens[currentScreen]}
     </View>
   );
 }
 
-export default Authentication;
+export default Auth;

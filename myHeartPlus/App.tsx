@@ -3,7 +3,7 @@ import { StyleSheet, View, Image } from 'react-native';
 import i18n from './src/i18n/i18n';
 import DynamicStatusBar from './src/components/dynamicStatusBar/dynamicStatusBar';
 import Home from './src/components/screens/home/home';
-import Authentication from './src/components/auth/authentication';
+import Auth from './src/components/auth/authentication';
 import './src/localization/i18n';
 export interface IUserAuth {
   firstName: string;
@@ -14,7 +14,7 @@ export interface IUserAuth {
 const App: React.FC = ({ }) => {
   /**
    * User authentication.
-   * r
+   * 
    * Get basic user data when user is authenticated.
    * When is not userAuth is undefined.
    * 
@@ -24,7 +24,7 @@ const App: React.FC = ({ }) => {
   return (
     <View style={AppStyles.mainView}>
       <DynamicStatusBar ></DynamicStatusBar>
-      {userAuth?.authenticated ? <Home appName="myHeart+" navVisible={false} /> : <Authentication></Authentication>}
+      {userAuth?.authenticated ? <Home appName="myHeart+" navVisible={false} /> : <Auth></Auth>}
     </View>
   );
 };

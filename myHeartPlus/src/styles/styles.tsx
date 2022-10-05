@@ -31,6 +31,15 @@ const Styles = () => {
     });
   }
 
+  const customInputWrapper = () => {
+    return ({
+      shadowOffset: { width: 10, height: 10 },
+      shadowColor: '#000',
+      shadowOpacity: 1,
+      elevation: 10,
+      textAlign: 'center',
+    });
+  }
 
   /**
    *  Styles for views -- End
@@ -77,10 +86,30 @@ const Styles = () => {
    *  Styles for text -- End
    */
 
+  /**
+   * Styles for buttons -- Start
+   */
+
+  const buttonCircle = () => {
+    return ({
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 50,
+      height: 50,
+      borderRadius: 100,
+    })
+  }
+
+  /**
+   * Styles for buttons -- End
+   */
+
+
   return {
     // Views
     DefaultShadow,
     WhiteBox,
+    customInputWrapper,
 
     // Text
     H1,
@@ -88,6 +117,9 @@ const Styles = () => {
     H3,
     H4,
     H5,
+
+    // Buttons
+    buttonCircle
   }
 }
 

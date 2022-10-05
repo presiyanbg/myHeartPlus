@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../styles/colors';
-import Styles from '../../styles/styles';
-import ScreenServices from '../../utils/screenServices';
+import { Colors } from '../../../../styles/colors';
+import Styles from '../../../../styles/styles';
+import ScreenServices from '../../../../utils/screenServices';
 
 const style = Styles();
 const screen = ScreenServices();
@@ -57,6 +57,20 @@ const AuthenticationStyles = StyleSheet.create({
     textAlign: 'center',
     color: Colors.darkGray,
     ...style.H4(),
+  },
+  buttonBack: {
+    backgroundColor: Colors.black,
+    ...style.buttonCircle(),
+  },
+  buttonBackText: {
+    color: Colors.white,
+  },
+  fieldWrapper: {
+    ...style.customInputWrapper(),
+
+  },
+  fieldLabel: {
+    ...style.H1,
   }
 });
 
