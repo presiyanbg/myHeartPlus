@@ -7,10 +7,7 @@ const Home = ({ }: Props) => {
 
   return (
     <div className='page'>
-
       <Navigation></Navigation>
-
-
     </div>)
 }
 
