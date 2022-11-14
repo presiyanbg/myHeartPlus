@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import NavigationLink from './navigationLink';
 import Logo from '../../assets/images/logo.png';
 import { NavLinks } from '../../ts/types';
+import { faHeart, faFileCircleCheck, faUserDoctor, faStaffSnake } from '@fortawesome/free-solid-svg-icons'
 
 const NavigationLinks = () => {
   const [links, setLinks] = useState<NavLinks>([
@@ -10,32 +11,37 @@ const NavigationLinks = () => {
       url: 'home1',
       logo: Logo,
       selected: false,
+      icon: faHeart,
     },
     {
       title: 'Home',
       url: 'home1',
       selected: true,
+      icon: faHeart,
+      context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
     },
     {
-      title: 'Home 1 ',
+      title: 'Check',
       url: 'home2',
       selected: false,
+      icon: faFileCircleCheck,
+      context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
     },
     {
-      title: 'Home 2 ',
+      title: 'Contact a doctor',
       url: 'home3',
       selected: false,
+      icon: faUserDoctor,
+      context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
     },
     {
-      title: 'Home 3 ',
+      title: 'Recomended',
       url: 'home4',
       selected: false,
+      icon: faStaffSnake,
+      context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
     },
-    {
-      title: 'Home 4 ',
-      url: 'home5',
-      selected: false,
-    }
+
   ]);
 
   const linkItems = links.map((link) => {
