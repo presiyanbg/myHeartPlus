@@ -1,0 +1,9 @@
+#
+#	TODO 15.11.22
+#
+
+	Animation on scroll
+		- Blur background
+		- White background for navigation -- Ready 16.11.22
+		- Hide main logo  -- Ready 16.11.22
+		- Show logo in navigation  -- Ready 16.11.22

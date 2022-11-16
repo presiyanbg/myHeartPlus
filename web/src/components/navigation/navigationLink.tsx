@@ -1,15 +1,20 @@
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink } from '../../ts/types';
-import { classNames } from '../../utils/utils';
+import { classNames, changeOpacityOnScroll } from '../../utils/utils';
 
 const NavigationLink = (link: NavLink) => {
   /* Logo Link */
   if (link.logo && link.logo) {
+    let logoRef = React.createRef<HTMLDivElement>();
+
+    changeOpacityOnScroll(logoRef, true, 'opacity');
+
     return (
-      <li className="navigation__link navigation__link--logo">
-        <a href="#">
+      <li className="navigation__link navigation__link--logo" >
+        <div ref={logoRef}>
           <img src={link.logo} alt="Company logo"></img>
-        </a>
+        </div>
       </li>
     );
   }
