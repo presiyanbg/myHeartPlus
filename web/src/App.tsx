@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from './components/navigation/navigation';
+import TopNavigation from './components/navigation/topNavigation/topNavigation';
 import Home from './pages/home/home';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
-      <Navigation></Navigation>
+      <TopNavigation></TopNavigation>
       <Home></Home>
     </div>
   );

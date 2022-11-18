@@ -1,4 +1,5 @@
 @import 'colors.scss';
+@import 'constants.scss';
 
 /* 
   Resets  
@@ -196,6 +197,56 @@ li {
   }
 }
 
+/* Side Navigation - For EKG Monitor Controls */
+.side-navigation {
+  height: 100%;
+  padding: 2rem 0;
+
+
+  .side-navigation__links {
+    height: 100%;
+    padding-left: 1rem;
+    padding-right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .side-navigation__link {
+      padding: 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      background-color: $white;
+      border-radius: 2rem;
+      box-shadow: inset 0 0 0.5rem rgba(0, 0, 0, 0.1);
+      transition: ease-in-out 250ms all;
+      cursor: pointer;
+
+      .side-navigation__link--text {
+        text-transform: uppercase;
+        color: $gray;
+      }
+
+      &.selected {
+        background-color: $main;
+
+        .side-navigation__link--text {
+          color: $white
+        }
+      }
+
+      &:hover {
+        background-color: $main;
+
+        .side-navigation__link--text {
+          text-transform: uppercase;
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
 /* Hero */
 .hero {
   margin-bottom: 100vh;
@@ -229,6 +280,56 @@ li {
   overflow: hidden;
 }
 
+/* EKG Monitor Panel - Main panel that holds site router and pages */
+.ekg-monitor-panel {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  width: 100%;
+  height: 80vh;
+  border-radius: 5rem;
+  overflow: hidden;
+  background-color: $white;
+  box-shadow: inset 0 0 0.5rem rgba(0, 0, 0, 0.3);
+
+  .ekg-monitor-panel--controls {
+    flex: 0 0 20%;
+    min-width: 10vw;
+    border-left: $borderLight;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  .ekg-monitor-panel--body {
+    flex: auto;
+    width: 100%;
+    margin: 2rem;
+    border-radius: 3rem;
+    box-shadow: $shadowBorder;
+    position: relative;
+    overflow: hidden;
+
+    /* Loader */
+    .ekg-monitor-panel--loader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      .loader--image {
+        width: 10vw;
+        margin-left: 5vw;
+        mix-blend-mode: exclusion;
+        filter: hue-rotate(15deg) brightness(0.5);
+      }
+    }
+
+    .ekg-monitor-panel--content {
+      overflow-y: auto;
+    }
+  }
+
+}
+
 /* Wrapper */
 .wrapper {
   width: 1200px;
@@ -237,7 +338,7 @@ li {
 
 /* Page */
 .page {
-  margin-bottom: 10rem;
+  margin-bottom: 3rem;
 }
 
 /* Box */

@@ -9,6 +9,7 @@
 			- White background for navigation -- Ready 16.11.22
 			- Hide main logo  -- Ready 16.11.22
 			- Show logo in navigation  -- Ready 16.11.22
+			- Make main pabel box that looks like hearth rate monitor -- Ready 19.11.22
 	</Design>
 </Web>
 

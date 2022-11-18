@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Hero from '../../assets/images/hero__7.jpg';
 import Logo from '../../assets/images/logo--white.png';
+import Loader from '../../assets/loader--ekg.gif';
 import { changeOpacityOnScroll } from '../../utils/utils';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faFileCircleCheck, faUserDoctor, faStaffSnake } from '@fortawesome/free-solid-svg-icons'
+import SideNavigation from '../../components/navigation/sideNavigation/sideNavigation';
 
 type Props = {};
 
@@ -24,59 +24,23 @@ const Home = ({ }: Props) => {
 
       <div className="wrapper">
         <div className="page">
-          <div className="box-wrapper">
-            <div className="box">
-              <div className="box--head">
-                <div className="box--icon">
-                  <FontAwesomeIcon icon={faHeart} size="6x" />
+          <div className="ekg-monitor-panel">
+            <div className="ekg-monitor-panel--body">
+              <div className="ekg-monitor-panel--loader">
+                <div className="loader--image">
+                  <img src={Loader} />
                 </div>
               </div>
-              <div className="box--body">
-                <div className="box--title">
-                  <h3>Health</h3>
-                </div>
-                <div className="box--content">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas consequuntur sint quam et, tempora impedit itaque quia provident assumenda distinctio vitae iusto quidem harum? Nostrum dolores facilis debitis ab enim!
-                </div>
+
+              <div className="ekg-monitor-panel--content">
+
               </div>
             </div>
 
-            <div className="box">
-              <div className="box--head">
-                <div className="box--icon">
-                  <FontAwesomeIcon icon={faFileCircleCheck} size="6x" />
-                </div>
-              </div>
-              <div className="box--body">
-                <div className="box--title">
-                  <h3>Check</h3>
-                </div>
-                <div className="box--content">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas consequuntur sint quam et, tempora impedit itaque quia provident assumenda distinctio vitae iusto quidem harum? Nostrum dolores facilis debitis ab enim!
-                </div>
-              </div>
-            </div>
-
-            <div className="box">
-              <div className="box--head">
-                <div className="box--icon">
-                  <FontAwesomeIcon icon={faUserDoctor} size="6x" />
-                </div>
-              </div>
-              <div className="box--body">
-                <div className="box--title">
-                  <h3>Contact a doctor</h3>
-                </div>
-                <div className="box--content">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas consequuntur sint quam et, tempora impedit itaque quia provident assumenda distinctio vitae iusto quidem harum? Nostrum dolores facilis debitis ab enim!
-                </div>
-              </div>
+            <div className="ekg-monitor-panel--controls">
+              <SideNavigation></SideNavigation>
             </div>
           </div>
-
-          {/* <div className="box box-xl">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem libero repellendus sit ipsa deleniti, deserunt sapiente facilis omnis, aut beatae suscipit, alias eum veniam in repudiandae odit asperiores molestias fuga?
-          </div> */}
         </div>
       </div>
 

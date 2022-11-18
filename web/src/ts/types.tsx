@@ -5,6 +5,7 @@ type NavLink = {
   url: string,
   title: string,
   icon: IconProp
+  topLink: boolean,
   selected: boolean,
   logo?: string,
   context?: string,

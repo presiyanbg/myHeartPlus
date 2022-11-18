@@ -1,9 +1,8 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { NavLink } from '../../ts/types';
-import { classNames, changeOpacityOnScroll } from '../../utils/utils';
+import { NavLink } from '../../../ts/types';
+import { classNames, changeOpacityOnScroll } from '../../../utils/utils';
 
-const NavigationLink = (link: NavLink) => {
+const TopNavigationLink = (link: NavLink) => {
   /* Logo Link */
   if (link.logo && link.logo) {
     let logoRef = React.createRef<HTMLDivElement>();
@@ -31,4 +30,4 @@ const NavigationLink = (link: NavLink) => {
   );
 }
 
-export default NavigationLink;
+export default TopNavigationLink;
