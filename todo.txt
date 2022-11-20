@@ -13,6 +13,12 @@
 	</Design>
 </Web>
 
+<API>
+	Users
+		Users migration -- Ready 20.11.22
+		Users register, login, logout -- Ready 20.11.22
+</API>
+
 <Functionality>
 	Check 
 		- At least 3 free test 
