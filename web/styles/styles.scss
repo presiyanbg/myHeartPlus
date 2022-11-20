@@ -135,6 +135,7 @@ li {
     height: 100%;
     background-color: $white;
     z-index: 100;
+    opacity: 0;
   }
 
   .navigation__links-wrapper {
@@ -167,6 +168,8 @@ li {
         transition: ease-in-out all 150ms;
         color: $darkGray;
         padding: 1rem;
+        padding-right: 0;
+        margin-left: 1rem;
 
         span {
           position: relative;
