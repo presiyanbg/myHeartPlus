@@ -2,12 +2,12 @@ import React from 'react';
 
 type Props = {};
 
-const Home = ({ }: Props) => {
+const Default = ({ }: Props) => {
   return (
     <div className="row">
-      Test
+      Default page
     </div>
   );
 }
 
-export default Home;
+export default Default;

@@ -227,6 +227,7 @@ li {
 
       .side-navigation__link--text {
         text-transform: uppercase;
+        text-align: center;
         color: $gray;
       }
 
@@ -278,9 +279,14 @@ li {
   position: fixed;
   top: 0;
   left: 0;
+  height: 100%;
+  width: 100%;
   z-index: -3;
-  max-height: 100vh;
   overflow: hidden;
+
+  .hero--background-image {
+    height: 100%;
+  }
 }
 
 /* EKG Monitor Panel - Main panel that holds site router and pages */

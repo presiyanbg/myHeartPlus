@@ -1,20 +1,24 @@
 import React from 'react';
 import { NavLink } from '../../../ts/types';
 import { classNames, changeOpacityOnScroll } from '../../../utils/utils';
+import { Link } from "react-router-dom";
+import { v4 as uuid } from 'uuid';
 
 const TopNavigationLink = (link: NavLink) => {
   /* Logo Link */
   if (link.logo && link.logo) {
-    let logoRef = React.createRef<HTMLDivElement>();
+    const logoRef = React.createRef<HTMLDivElement>();
 
     changeOpacityOnScroll(logoRef, true, 'opacity');
 
     return (
-      <li className="navigation__link navigation__link--logo" >
-        <div ref={logoRef}>
-          <img src={link.logo} alt="Company logo"></img>
-        </div>
-      </li>
+      <Link to={link.url} key={uuid()}>
+        <li className="navigation__link navigation__link--logo" >
+          <div ref={logoRef}>
+            <img src={link.logo} alt="Company logo"></img>
+          </div>
+        </li>
+      </Link>
     );
   }
 
@@ -22,11 +26,11 @@ const TopNavigationLink = (link: NavLink) => {
   const linkClasses = classNames('navigation__link', link.selected && 'selected');
 
   return (
-    <li className={linkClasses}>
-      <a href={link.url} className='navigation__link--text'>
+    <Link to={link.url} key={uuid()} className={linkClasses} onClick={() => link.onClick(link)}>
+      <span className='navigation__link--text'>
         <span>{link.title}</span>
-      </a>
-    </li>
+      </span>
+    </Link>
   );
 }
 

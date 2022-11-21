@@ -1,24 +1,31 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import TopNavigationLink from './sideNavigationLink';
-import { NavLinks } from '../../../ts/types';
-import { Links } from '../links';
+import { NavLinks, NavLink } from '../../../ts/types';
+import Links from '../links';
+import { BrowserRouter as Router } from "react-router-dom";
+import { v4 as uuid } from 'uuid';
 
 const TopNavigationLinks = () => {
-  const [links, setLinks] = useState<NavLinks>(Links);
+  const linksComponent = Links();
+  const [links, setLinks] = useState<NavLinks>(linksComponent.links);
 
   /**
    * Display only links marked with topLink flag
    */
   const linkItems = links.map((link) => {
     if (!link.logo) {
-      return (<TopNavigationLink {...link}></TopNavigationLink >)
+      link.onClick = linksComponent.updateSelectedLink;
+
+      return (
+        <TopNavigationLink key={uuid()} {...link}></ TopNavigationLink >
+      )
     }
   });
 
   return (
-    <Fragment>
+    <Router>
       {linkItems}
-    </Fragment>
+    </Router>
   );
 }
 

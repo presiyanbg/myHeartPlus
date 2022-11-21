@@ -2,12 +2,12 @@ import React from 'react';
 
 type Props = {};
 
-const Home = ({ }: Props) => {
+const Forum = ({ }: Props) => {
   return (
     <div className="row">
-      Test
+      Forum
     </div>
   );
 }
 
-export default Home;
+export default Forum;

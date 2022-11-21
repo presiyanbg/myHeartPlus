@@ -2,12 +2,12 @@ import React from 'react';
 
 type Props = {};
 
-const Home = ({ }: Props) => {
+const Authentication = ({ }: Props) => {
   return (
     <div className="row">
-      Test
+      Authentication
     </div>
   );
 }
 
-export default Home;
+export default Authentication;

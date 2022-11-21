@@ -9,6 +9,7 @@ type NavLink = {
   selected: boolean,
   logo?: string,
   context?: string,
+  onClick: Function
 };
 
 type NavLinks = Array<NavLink>;
