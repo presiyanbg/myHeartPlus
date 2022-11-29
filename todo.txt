@@ -28,6 +28,7 @@
 		- At least 3 free test 
 			- Patient answers questions (A, B, C, D) and gets answer - You are fine or Go see a doctor 
 
+	Get users height, weight, etc and show them where their are on graph with data 
 </Functionality>
 
 
