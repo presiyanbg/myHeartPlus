@@ -21,7 +21,7 @@ const Router = ({ }: Props) => {
       <Route path="/" element={<Home></Home>} />
       <Route path="/check" element={<Check></Check>} />
       <Route path="/doctors" element={<Doctors></Doctors>} />
-      <Route path="/login" element={<Authentication></Authentication>} />
+      <Route path="/authentication" element={<Authentication></Authentication>} />
       <Route path="/forum" element={<Forum></Forum>} />
       <Route path="*" element={<Home></Home>} />
     </Routes>

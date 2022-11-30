@@ -29,3 +29,28 @@ $darkAqua: #01a3a4;
 $pink: #ff9ff3;
 $darkPing: #f368e0;
 $lightBlue: #a4cce4;
+
+/* 
+    Overwrite Bootstrap
+*/
+$blue: $softBlue;
+$indigo: $darkPurple;
+$purple: $purple;
+$pink: $pink;
+$red: $red;
+$orange: $darkYellow;
+$yellow: $yellow;
+$green: $darkGreen;
+$teal: $green;
+$cyan: $darkAqua;
+$white: #fff;
+$gray: $gray;
+$gray-dark: $darkGray;
+$primary: $main;
+$secondary: $lightGray;
+$success: $green;
+$info: $softBlue;
+$warning: $darkYellow;
+$danger: $darkRed;
+$light: $light;
+$dark: $darkGray;

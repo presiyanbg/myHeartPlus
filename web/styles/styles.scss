@@ -333,7 +333,9 @@ li {
     }
 
     .ekg-monitor-panel--content {
-      overflow-y: auto;
+      height: 100%;
+      width: 100%;
+      padding: 1.5rem;
     }
   }
 
@@ -464,4 +466,9 @@ li {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   white-space: normal;
+}
+
+/* Common */
+.cursor-pointer {
+  cursor: pointer;
 }
