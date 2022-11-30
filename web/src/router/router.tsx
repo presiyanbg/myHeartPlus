@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  BrowserRouter as ReactRouter,
+  HashRouter,
   Routes,
   Route,
   Link
@@ -8,22 +8,23 @@ import {
 
 import Home from '../pages/home/home';
 import Check from '../pages/check/check';
+import Doctors from '../pages/doctors/doctors';
+import Forum from '../pages/forum/forum';
+import Authentication from '../components/authentication/authentication';
 
 type Props = {};
 
 const Router = ({ }: Props) => {
 
   return (
-    <ReactRouter>
-      <Routes>
-        <Route path="/" element={<Home></Home>} />
-        <Route path="/check" element={<Check></Check>} />
-        <Route path="/doctors" element={<Home></Home>} />
-        <Route path="/login" element={<Home></Home>} />
-        <Route path="/forum" element={<Home></Home>} />
-        <Route path="*" element={<Home></Home>} />
-      </Routes>
-    </ReactRouter>
+    <Routes>
+      <Route path="/" element={<Home></Home>} />
+      <Route path="/check" element={<Check></Check>} />
+      <Route path="/doctors" element={<Doctors></Doctors>} />
+      <Route path="/login" element={<Authentication></Authentication>} />
+      <Route path="/forum" element={<Forum></Forum>} />
+      <Route path="*" element={<Home></Home>} />
+    </Routes>
   );
 }
 

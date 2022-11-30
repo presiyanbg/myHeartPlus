@@ -23,9 +23,9 @@ const TopNavigationLinks = () => {
   });
 
   return (
-    <Router>
+    <>
       {linkItems}
-    </Router>
+    </>
   );
 }
 

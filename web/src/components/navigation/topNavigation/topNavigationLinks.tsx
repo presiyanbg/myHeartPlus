@@ -26,9 +26,9 @@ const TopNavigationLinks = () => {
   }, [linksComponent.selectedLink])
 
   return (
-    <Router>
+    <>
       {linkItems}
-    </Router>
+    </>
   );
 }
 
