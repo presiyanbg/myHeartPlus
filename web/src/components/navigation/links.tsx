@@ -60,23 +60,9 @@ const Links = () => {
       onClick: () => { },
     },
   ]);
-  const [selectedLink, setSelectedLink] = useState(links[0]);
-
-  const updateSelectedLink = (link: NavLink) => {
-    const newLinks = links.map(localLink => {
-      localLink.selected = localLink.url === link.url;
-
-      return localLink;
-    });
-
-    setLinks(newLinks);
-    setSelectedLink(link);
-  };
 
   return {
-    updateSelectedLink: updateSelectedLink,
     links: links,
-    selectedLink: selectedLink
   }
 }
 

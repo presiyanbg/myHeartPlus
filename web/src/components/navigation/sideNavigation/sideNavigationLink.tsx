@@ -1,18 +1,16 @@
 import React from 'react';
-import { NavLink } from '../../../ts/types';
+import { NavLink as LinkType } from '../../../ts/types';
 import { classNames } from '../../../utils/utils';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
-const TopNavigationLink = (link: NavLink) => {
-  const linkClasses = classNames('side-navigation__link', link.selected && 'selected');
-
+const TopNavigationLink = (link: LinkType) => {
   /* Default Link */
   return (
-    <Link to={link.url} key={uuid()} className={linkClasses} onClick={() => link.onClick(link)}>
+    <NavLink to={link.url} key={uuid()} className={({ isActive }) => (isActive && "selected") + ' side-navigation__link'}>
       <li className='side-navigation__link--text'>
         {link.title}
       </li>
-    </Link>
+    </NavLink >
   );
 }
 
