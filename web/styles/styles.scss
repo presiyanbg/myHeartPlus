@@ -163,6 +163,10 @@ li {
         }
       }
 
+      &.navigation__link--icon {
+        padding: 1rem;
+      }
+
       .navigation__link--text {
         display: inline-block;
         transition: ease-in-out all 150ms;
@@ -306,6 +310,8 @@ li {
     min-width: 10vw;
     border-left: $borderLight;
     background-color: rgba(0, 0, 0, 0.02);
+    display: flex;
+    justify-content: center;
   }
 
   .ekg-monitor-panel--body {

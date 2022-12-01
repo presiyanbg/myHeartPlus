@@ -1,6 +1,8 @@
 import React from 'react';
 import TopNavigationLinks from './topNavigationLinks';
 import { changeOpacityOnScroll } from '../../../utils/utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {};
 
@@ -14,6 +16,12 @@ const TopNavigation = ({ }: Props) => {
       <div className="navigation__bar" ref={navRef}></div>
       <ul className="navigation__links-wrapper">
         <TopNavigationLinks></TopNavigationLinks>
+
+        <li className='navigation__link'>
+          <span className='navigation__link--text'>
+            <FontAwesomeIcon icon={faMoon} size="xl" />
+          </span>
+        </li>
       </ul>
     </div>
   )
