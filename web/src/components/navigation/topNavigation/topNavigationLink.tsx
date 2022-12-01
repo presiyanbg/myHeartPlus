@@ -24,7 +24,7 @@ const TopNavigationLink = (link: LinkType) => {
 
   return (
     <NavLink to={link.url} key={uuid()} className={({ isActive }) => (isActive && "selected") + ' navigation__link'}>
-      <span className='navigation__link--text'>
+      <span className="navigation__link--text">
         <span>{link.title}</span>
       </span>
     </NavLink>

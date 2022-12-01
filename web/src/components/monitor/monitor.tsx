@@ -15,7 +15,7 @@ const Monitor = ({ }: Props) => {
 
   return (
     <>
-      <div className='hero' >
+      <div className="hero" >
         <div className="hero--head">
           <div className="hero--head-logo" ref={heroRef}>
             <img src={Logo} alt="" />
@@ -45,7 +45,7 @@ const Monitor = ({ }: Props) => {
         </div>
       </div>
 
-      <div className='hero--background'>
+      <div className="hero--background">
         <div className="hero--background-image img-shadow img-shadow--left">
           <img src={Hero} alt="Medicine wallpaper" />
         </div>

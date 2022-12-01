@@ -7,7 +7,7 @@ const TopNavigationLink = (link: LinkType) => {
   /* Default Link */
   return (
     <NavLink to={link.url} key={uuid()} className={({ isActive }) => (isActive && "selected") + ' side-navigation__link'}>
-      <li className='side-navigation__link--text'>
+      <li className="side-navigation__link--text">
         {link.title}
       </li>
     </NavLink >

@@ -11,7 +11,7 @@ const TopNavigation = ({ }: Props) => {
 
   return (
     <div className="navigation" >
-      <div className='navigation__bar' ref={navRef}></div>
+      <div className="navigation__bar" ref={navRef}></div>
       <ul className="navigation__links-wrapper">
         <TopNavigationLinks></TopNavigationLinks>
       </ul>
