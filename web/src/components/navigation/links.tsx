@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { NavLinks, NavLink } from '../../ts/types';
+import React, { useState, useEffect } from 'react';
+import { NavLinks, NavLink, UserType } from '../../ts/types';
 import { faHeart, faFileCircleCheck, faUserDoctor, faStaffSnake } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../../assets/images/logo.png';
 
@@ -48,6 +48,7 @@ const Links = () => {
       icon: faStaffSnake,
       context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
       topLink: true,
+      authentication: true,
       onClick: () => { },
     },
     {
@@ -61,8 +62,28 @@ const Links = () => {
     },
   ]);
 
+  const toggleAuthLink = (authenticated: boolean) => {
+    setLinks((prev) => {
+      return prev.map((link) => {
+        // Display log in link
+        if (link.authentication && !authenticated) {
+          link.title = 'Login';
+        }
+
+        // Display log out link
+        if (link.authentication && authenticated) {
+          console.log('log out')
+          link.title = 'Logout';
+        }
+
+        return link;
+      });
+    });
+  }
+
   return {
     links: links,
+    toggleAuthLink: toggleAuthLink
   }
 }
 
