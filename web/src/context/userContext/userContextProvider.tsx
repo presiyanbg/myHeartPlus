@@ -26,7 +26,6 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
 
   }, []);
 
-
   return (
     <UserContext.Provider value={{ user, setUser, isAuth, setIsAuth, token }}>
       {children}
