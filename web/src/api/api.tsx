@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import * as Constants from "../constants/constants";
+import * as Constants from "../constants/api";
 
 const Api = () => {
   const [token, setToken] = useState('');

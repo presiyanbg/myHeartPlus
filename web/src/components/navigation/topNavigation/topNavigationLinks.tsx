@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import TopNavigationLink from './topNavigationLink';
-import { NavLinks } from '../../../ts/types';
-import Links from '../links';
-import { BrowserRouter as Router } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
+import { NavigationContext } from '../../../context/navigationContext/navigationContextProvider';
 
 const TopNavigationLinks = () => {
-  const links = Links().links;
+  const { links } = useContext(NavigationContext);
 
   /**
    * Display only links marked with topLink flag

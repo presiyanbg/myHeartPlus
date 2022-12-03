@@ -1,11 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import TopNavigationLink from './sideNavigationLink';
-import { NavLinks, NavLink } from '../../../ts/types';
-import Links from '../links';
 import { v4 as uuid } from 'uuid';
+import { NavigationContext } from '../../../context/navigationContext/navigationContextProvider';
 
 const TopNavigationLinks = () => {
-  const links = Links().links;
+  const { links } = useContext(NavigationContext);
 
   /**
    * Display only links marked with topLink flag

@@ -1,7 +1,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 /* Navigation Types */
-type NavLink = {
+type NavLinkType = {
   url: string,
   title: string,
   icon: IconProp
@@ -13,7 +13,7 @@ type NavLink = {
   authentication?: boolean
 };
 
-type NavLinks = Array<NavLink>;
+type NavLinksType = Array<NavLinkType>;
 
 /* User Types */
 type UserType = {
@@ -28,8 +28,8 @@ type RegistrationFormType = {
 }
 
 export type {
-  NavLink,
-  NavLinks,
+  NavLinkType,
+  NavLinksType,
   UserType,
   RegistrationFormType
 }

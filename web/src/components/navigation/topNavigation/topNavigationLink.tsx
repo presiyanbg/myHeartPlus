@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavLink as LinkType } from '../../../ts/types';
+import { NavLinkType } from '../../../ts/types';
 import { classNames, changeOpacityOnScroll } from '../../../utils/utils';
 import { NavLink } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 
-const TopNavigationLink = (link: LinkType) => {
+const TopNavigationLink = (link: NavLinkType) => {
   /* Logo Link */
   if (link.logo && link.logo) {
     const logoRef = React.createRef<HTMLDivElement>();

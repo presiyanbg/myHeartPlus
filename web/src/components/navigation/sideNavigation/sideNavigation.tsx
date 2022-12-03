@@ -1,7 +1,9 @@
 import React from 'react';
+import { NavLinkType } from '../../../ts/types';
 import TopNavigationLinks from './sideNavigationLinks';
 
-type Props = {};
+type Props = {
+};
 
 const SideNavigation = ({ }: Props) => {
   return (
