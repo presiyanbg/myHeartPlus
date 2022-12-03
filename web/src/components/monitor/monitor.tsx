@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Hero from '../../assets/images/hero__7.jpg';
 import Logo from '../../assets/images/logo--white.png';
 import Loader from '../../assets/loader--ekg.gif';
 import { changeOpacityOnScroll } from '../../utils/utils';
 import SideNavigation from '../navigation/sideNavigation/sideNavigation';
 import Router from '../../router/router';
+import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
 
 type Props = {};
 
 const Monitor = ({ }: Props) => {
-  let heroRef = React.createRef<HTMLDivElement>();
+  const heroRef = React.createRef<HTMLDivElement>();
+  const { isLoading } = useContext(LoadingContext);
 
   changeOpacityOnScroll(heroRef, false, 'opacity');
 
@@ -27,11 +29,15 @@ const Monitor = ({ }: Props) => {
         <div className="page">
           <div className="ekg-monitor-panel">
             <div className="ekg-monitor-panel--body">
-              {/* <div className="ekg-monitor-panel--loader">
-                <div className="loader--image">
-                  <img src={Loader} />
-                </div>
-              </div> */}
+              {isLoading &&
+                <>
+                  <div className="ekg-monitor-panel--loader">
+                    <div className="loader--image">
+                      <img src={Loader} />
+                    </div>
+                  </div>
+                </>
+              }
 
               <div className="ekg-monitor-panel--content">
                 <Router></Router>

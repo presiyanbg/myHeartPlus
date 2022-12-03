@@ -18,18 +18,6 @@ const LoginLogic = () => {
     }
   }
 
-  // Check user session
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const token = localStorage.getItem('token');
-
-    if (user?.first_name && token?.length) {
-      setUser(user);
-      setIsAuth(true);
-    }
-
-  }, []);
-
   return {
     login,
   }

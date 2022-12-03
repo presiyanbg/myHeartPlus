@@ -1,19 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import * as Constants from "../constants/api";
+import { LoadingContext } from '../context/loadingContext/loadingContextProvider';
+import { UserContext } from '../context/userContext/userContextProvider';
 
 const Api = () => {
-  const [token, setToken] = useState('');
   const apiUrl = Constants.API_URL;
-  useEffect(() => {
-    const localStorageToken = localStorage.getItem("token");
-
-    if (localStorageToken) {
-      setToken(localStorageToken);
-    }
-  }, []);
+  const { setLoading } = useContext(LoadingContext);
+  const { token } = useContext(UserContext);
 
   const post = async (url: string, params?: {}) => {
+    setLoading(true);
+
     const qs = require('qs');
     const data = qs.stringify(params);
     const config = {
@@ -29,9 +27,13 @@ const Api = () => {
 
     return axios(config)
       .then(function (response: any) {
+        setLoading(false);
+
         return response.data;
       })
       .catch(function (error: any) {
+        setLoading(false);
+
         console.log(error);
       });
   }
