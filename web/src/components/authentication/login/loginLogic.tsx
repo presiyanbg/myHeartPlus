@@ -11,8 +11,11 @@ const LoginLogic = () => {
     const data = await auth.login(params);
 
     if (data.token && data.user) {
+      // Save data to local storage 
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
+
+      // Save data to provider
       setUser(data.user);
       setIsAuth(true);
     }
