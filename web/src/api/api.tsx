@@ -3,6 +3,8 @@ import axios from "axios";
 import * as Constants from "../constants/api";
 import { LoadingContext } from '../context/loadingContext/loadingContextProvider';
 import { UserContext } from '../context/userContext/userContextProvider';
+// @ts-ignore
+import { NotificationManager } from 'react-notifications';
 
 const Api = () => {
   const apiUrl = Constants.API_URL;
@@ -28,13 +30,13 @@ const Api = () => {
     return axios(config)
       .then(function (response: any) {
         setLoading(false);
+        NotificationManager.success(response.data.message, 'Success', 10000);
 
         return response.data;
       })
       .catch(function (error: any) {
         setLoading(false);
-
-        console.log(error);
+        NotificationManager.error(error.message, 'Error');
       });
   }
 

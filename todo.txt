@@ -14,6 +14,8 @@
 		- Install i18 translations -- Ready 21.11.22 
 		- Install uuidv4 for elements keys -- Ready 21.11.22
 		- Form validation
+		- Small control panel accessible from top navigation
+		- Notification -- Ready 04.12.22
 </Web>
 
 <API>
