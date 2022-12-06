@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import LogoutLogic from "./logoutLogic";
 
 const Logout = () => {
@@ -16,6 +17,9 @@ const Logout = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div className="row text-center mb-5 mt-5 ">
+        <h1>ARE U SURE ABOUT THAT?</h1>
+      </div>
       <div className="row">
         <div className="col-12 text-center">
           <button type="submit" className="btn bg-primary btn-lg text-white">

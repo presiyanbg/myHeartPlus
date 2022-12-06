@@ -187,6 +187,38 @@ li {
         }
       }
 
+      &.navigation__link--dropdown {
+        margin-left: 1rem;
+        border: none !important;
+
+        &:focus,
+        &:active {
+          border: none !important;
+        }
+
+        .dropdown-item {
+          color: $gray;
+          padding: 1rem;
+
+          a {
+            color: inherit;
+          }
+
+          &:hover:not(.dropdown--picture) {
+            color: $white;
+            background-color: $main;
+          }
+
+          &.dropdown--picture:hover {
+            background-color: unset;
+
+            .image {
+              outline-color: $main;
+            }
+          }
+        }
+      }
+
       &.selected {
         .navigation__link--text {
           color: $main;
@@ -524,5 +556,21 @@ li {
 .notification-container {
   div {
     border-radius: 5rem !important;
+  }
+}
+
+.profile--picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  .image {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 100%;
+    overflow: hidden;
+    outline: 3px solid $lightBlue;
   }
 }

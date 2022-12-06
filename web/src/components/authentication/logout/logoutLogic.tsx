@@ -4,19 +4,15 @@ import { UserContext } from "../../../context/userContext/userContextProvider";
 
 const LogoutLogic = () => {
   const auth = AuthenticationServices();
-  const { setUser, setIsAuth } = useContext(UserContext);
+  const { renounce } = useContext(UserContext);
 
   const logout = () => {
-    // Delete variables 
-    setUser(false);
-    setIsAuth(false);
-
-    // Delete local storage items 
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-
     // API Logout
-    auth.logout();
+    auth.logout().then(() => {
+
+      // Context Logout 
+      renounce();
+    });
   }
 
   return {

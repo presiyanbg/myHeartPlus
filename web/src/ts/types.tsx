@@ -10,16 +10,24 @@ type NavLinkType = {
   logo?: string,
   context?: string,
   onClick: Function,
-  authentication?: boolean
+  authentication?: boolean,
+  isAuth?: boolean
 };
 
 type NavLinksType = Array<NavLinkType>;
 
 /* User Types */
 type UserType = {
-  email: string,
+  id: string,
   first_name: string,
   last_name: string,
+  full_name: string,
+  role: string,
+  email: string,
+  last_activity: string,
+  email_verified_at: string,
+  created_at: string,
+  updated_at: string,
 }
 
 type RegistrationFormType = {

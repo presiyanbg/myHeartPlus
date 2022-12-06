@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLinkType } from '../../../ts/types';
-import { classNames, changeOpacityOnScroll } from '../../../utils/utils';
+import { changeOpacityOnScroll } from '../../../utils/utils';
 import { NavLink } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 

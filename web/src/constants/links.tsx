@@ -1,4 +1,4 @@
-import { faHeart, faFileCircleCheck, faUserDoctor, faStaffSnake } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faFileCircleCheck, faUserDoctor, faStaffSnake, faUser } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../assets/images/logo.png';
 
 export const LINKS = [
@@ -55,6 +55,16 @@ export const LINKS = [
     icon: faStaffSnake,
     context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
     topLink: false,
+    onClick: () => { },
+  },
+  {
+    title: 'Profile 123123 12',
+    url: '/profile',
+    selected: false,
+    icon: faUser,
+    context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
+    topLink: false,
+    isAuth: true,
     onClick: () => { },
   },
 ];

@@ -1,15 +1,14 @@
-
-interface User {
-  url: string,
-  linkTitle: string
-};
+import { UserClass } from './classes';
 
 /* Context */
 interface UserContextInterface {
-  user: {} | null,
+  user: UserClass,
   setUser: Function,
   isAuth: boolean,
-  setIsAuth: Function
+  setIsAuth: Function,
+  token: string,
+  authenticate: Function,
+  renounce: Function,
 }
 
 /* Common */
@@ -18,7 +17,6 @@ interface ReactNoteInterface {
 }
 
 export type {
-  User,
   UserContextInterface,
   ReactNoteInterface
 }
