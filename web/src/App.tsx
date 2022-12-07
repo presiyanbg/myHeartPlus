@@ -7,10 +7,12 @@ import UserContextProvider from './context/userContext/userContextProvider';
 import LoadingContextProvider from './context/loadingContext/loadingContextProvider';
 // @ts-ignore
 import { NotificationContainer } from 'react-notifications';
+import './localization/i18n';
 
 const App = () => {
   return (
     <div className="App">
+
       {/* Notifications Start */}
       <NotificationContainer />
       {/* Notifications End */}

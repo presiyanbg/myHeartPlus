@@ -58,7 +58,7 @@ export const LINKS = [
     onClick: () => { },
   },
   {
-    title: 'Profile 123123 12',
+    title: 'Profile page',
     url: '/profile',
     selected: false,
     icon: faUser,

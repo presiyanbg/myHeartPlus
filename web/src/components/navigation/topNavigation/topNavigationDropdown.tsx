@@ -4,18 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faUser, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { UserClass } from '../../../ts/classes';
 import { NavLink } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   user: UserClass
 };
 
 const TopNavigationDropDown = (props: Props) => {
+  // Translations
+  const { t } = useTranslation();
+
+  // User data
   const user = props.user;
 
   return (
     <Dropdown className="navigation__link navigation__link--dropdown" >
       <Dropdown.Toggle variant="" className="navigation__link--dropdown-title">
-        Hello, {user?.first_name}
+        {t('Hello')}, {user?.first_name}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
@@ -31,11 +36,11 @@ const TopNavigationDropDown = (props: Props) => {
         {/* User full name */}
         <Dropdown.Item href="#/action-1">
           <div className="row">
-            <div className="col-3">
-              <FontAwesomeIcon icon={faUser} size="xl" />
+            <div className="col-1">
+              <FontAwesomeIcon icon={faUser} />
             </div>
             <div className="col-9">
-              Profile
+              {t('Profile page')}
             </div>
           </div>
         </Dropdown.Item>
@@ -43,11 +48,11 @@ const TopNavigationDropDown = (props: Props) => {
         {/* Switch to dark/light mode */}
         <Dropdown.Item href="#/action-2">
           <div className="row">
-            <div className="col-3">
-              <FontAwesomeIcon icon={faMoon} size="xl" />
+            <div className="col-1">
+              <FontAwesomeIcon icon={faMoon} />
             </div>
             <div className="col-9">
-              Switch mode
+              {t('Switch mode')}
             </div>
           </div>
         </Dropdown.Item>
@@ -55,11 +60,11 @@ const TopNavigationDropDown = (props: Props) => {
         {/* Logout */}
         <Dropdown.Item href="#/action-3">
           <NavLink to={'/authentication'} className="row">
-            <div className="col-3">
-              <FontAwesomeIcon icon={faTimesCircle} size="xl" />
+            <div className="col-1">
+              <FontAwesomeIcon icon={faTimesCircle} />
             </div>
             <div className="col-9">
-              Logout
+              {t('Logout')}
             </div>
           </NavLink>
         </Dropdown.Item>

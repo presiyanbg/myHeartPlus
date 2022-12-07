@@ -3,8 +3,13 @@ import { NavLinkType } from '../../../ts/types';
 import { changeOpacityOnScroll } from '../../../utils/utils';
 import { NavLink } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
+import { useTranslation } from 'react-i18next';
 
 const TopNavigationLink = (link: NavLinkType) => {
+
+  // Translations
+  const { t } = useTranslation();
+
   /* Logo Link */
   if (link.logo && link.logo) {
     const logoRef = React.createRef<HTMLDivElement>();
@@ -25,7 +30,7 @@ const TopNavigationLink = (link: NavLinkType) => {
   return (
     <NavLink to={link.url} key={uuid()} className={({ isActive }) => (isActive && "selected") + ' navigation__link'}>
       <span className="navigation__link--text">
-        <span>{link.title}</span>
+        <span>{t(link.title)}</span>
       </span>
     </NavLink>
   );

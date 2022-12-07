@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
-import i18n from './src/i18n/i18n';
 import DynamicStatusBar from './src/components/dynamicStatusBar/dynamicStatusBar';
 import Home from './src/components/screens/home/home';
 import Auth from './src/components/auth/authentication';
