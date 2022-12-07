@@ -6,10 +6,12 @@
   "Logo": "Лого",
   "Home": "Начало",
   "Check": "Проверка",
-  "Contact a doctor": "Свържисе с лекар",
+  "Contact a doctor": "Свържи се с лекар",
   "Login": "Вход",
   "Forum": "Форум",
   "Profile page": "Личен профил",
   "Hello": "Здравей",
-  "Switch mode": "Промени вида"
+  "Dark mode": "Тъмен режим",
+  "Light mode": "Светъл режим",
+  "Language": "Език"
 }

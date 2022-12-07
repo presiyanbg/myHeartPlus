@@ -52,7 +52,7 @@ const TopNavigationDropDown = (props: Props) => {
               <FontAwesomeIcon icon={faMoon} />
             </div>
             <div className="col-9">
-              {t('Switch mode')}
+              {t('Dark mode')}
             </div>
           </div>
         </Dropdown.Item>

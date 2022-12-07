@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TopNavigation from './components/navigation/topNavigation/topNavigation';
 import Monitor from './components/monitor/monitor';
 import './App.scss';
@@ -8,8 +8,20 @@ import LoadingContextProvider from './context/loadingContext/loadingContextProvi
 // @ts-ignore
 import { NotificationContainer } from 'react-notifications';
 import './localization/i18n';
+import { useTranslation } from 'react-i18next'
 
 const App = () => {
+  const { i18n } = useTranslation();
+
+  /**
+   * Change default language on init
+   * 
+   * @TODO Take language from user or browser data 
+   */
+  useEffect(() => {
+    i18n.changeLanguage("bg");
+  }, []);
+
   return (
     <div className="App">
 
