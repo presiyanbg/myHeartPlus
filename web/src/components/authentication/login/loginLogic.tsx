@@ -17,7 +17,7 @@ const LoginLogic = () => {
       authenticate(data.user, data.token)
 
       // Navigate to home page
-      navigate('/home', { replace: true });
+      navigate('/', { replace: true });
     }
   }
 

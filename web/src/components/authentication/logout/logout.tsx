@@ -1,8 +1,12 @@
 import { useEffect } from "react";
 import LogoutLogic from "./logoutLogic";
+import { useTranslation } from 'react-i18next';
 
 const Logout = () => {
   const logic = LogoutLogic();
+
+  // Translations
+  const { t } = useTranslation();
 
   /**
    * Handle form submit
@@ -17,13 +21,10 @@ const Logout = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="row text-center mb-5 mt-5 ">
-        <h1>ARE U SURE ABOUT THAT?</h1>
-      </div>
       <div className="row">
         <div className="col-12 text-center">
           <button type="submit" className="btn bg-primary btn-lg text-white">
-            Log out
+            {t('Logout')}
           </button>
         </div>
       </div>

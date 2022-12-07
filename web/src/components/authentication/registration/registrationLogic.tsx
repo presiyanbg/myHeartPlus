@@ -16,7 +16,7 @@ const RegistrationLogic = () => {
       authenticate(data.user, data.token)
 
       // Navigate to home page
-      navigate('/home');
+      navigate('/');
     }
   }
 
