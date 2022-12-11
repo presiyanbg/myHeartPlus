@@ -7,7 +7,7 @@ export const classNames = (...args: any[]) => {
  * Change opacity on scroll
  * 
  * @param elem HTML Div -- Element that will get its opacity changed based on scroll
- * @param toggle Boolean -- If true element will be showned, If false element will be hidden
+ * @param toggle Boolean -- If true element will be showed, If false element will be hidden
  * @param mode string 'opacity' or 'background'
  * @param maxOpacity number -- Max opacity that will be set on the object
  */
@@ -44,5 +44,18 @@ export const changeOpacityOnScroll = (elem: React.RefObject<HTMLDivElement>, tog
     //   elem.current.style.backgroundColor = '#fff1' + ((elemHeight - scrollTop) / elemHeight);
     // }
   });
+}
+
+/**
+ * Scroll to element by string HTML selector
+ * 
+ * @param elemSelector string -- HTML Element selector 
+ */
+export const scrollToElement = (elemSelector: string) => {
+  const elem = document.querySelector(elemSelector);
+
+  if (elem) {
+    elem.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 

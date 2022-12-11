@@ -36,6 +36,10 @@
 
 /* Base */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Brandon Grotesque", sans-serif;
   font-weight: 100;

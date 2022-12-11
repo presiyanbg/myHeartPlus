@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import Hero from '../../assets/images/hero__7.jpg';
 import Logo from '../../assets/images/logo--white.png';
 import Loader from '../../assets/loader--ekg.gif';
-import { changeOpacityOnScroll } from '../../utils/utils';
+import { changeOpacityOnScroll, scrollToElement } from '../../utils/utils';
 import SideNavigation from '../navigation/sideNavigation/sideNavigation';
 import Router from '../../router/router';
 import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
+import { SELECTORS } from '../../constants/selectors';
 
 type Props = {};
 
@@ -15,9 +16,15 @@ const Monitor = ({ }: Props) => {
 
   changeOpacityOnScroll(heroRef, false, 'opacity');
 
+  const handleClick = (caller: string) => {
+    if (caller === 'logo') {
+      scrollToElement(SELECTORS.monitor);
+    }
+  }
+
   return (
     <>
-      <div className="hero" >
+      <div className="hero" onClick={e => handleClick('logo')}>
         <div className="hero--head">
           <div className="hero--head-logo" ref={heroRef}>
             <img src={Logo} alt="" />
