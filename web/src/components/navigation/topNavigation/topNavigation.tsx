@@ -3,14 +3,21 @@ import TopNavigationLinks from './topNavigationLinks';
 import TopNavigationDropDown from './topNavigationDropdown';
 import { changeOpacityOnScroll } from '../../../utils/utils';
 import { UserContext } from '../../../context/userContext/userContextProvider';
+import { CommonContext } from '../../../context/commonContext/commonContextProvider';
 
 type Props = {};
 
 const TopNavigation = ({ }: Props) => {
   let navRef = React.createRef<HTMLDivElement>();
   const { isAuth, user } = useContext(UserContext);
+  const { monitorExpanded } = useContext(CommonContext);
 
   changeOpacityOnScroll(navRef, true, 'opacity', 0.9);
+
+  // Hide top navigation when monitor is expanded
+  if (monitorExpanded) {
+    return (<></>);
+  }
 
   return (
     <div className="navigation" >

@@ -3,28 +3,33 @@
 #
 
 <Web>
-		- Animation on scroll
-		- Blur background
-			- White background for navigation -- Ready 16.11.22
-			- Hide main logo  -- Ready 16.11.22
-			- Show logo in navigation  -- Ready 16.11.22
-			- Make main panel box that looks like hearth rate monitor -- Ready 19.11.22
+		- White background for navigation -- Ready 16.11.22
+		- Hide main logo on scroll -- Ready 16.11.22
+		- Show logo in navigation  -- Ready 16.11.22
+		- Make main panel box that looks like hearth rate monitor -- Ready 19.11.22
 		- Login and register page -- Ready 04.12.22
 		- Install router -- Ready 21.11.22
 		- Install i18 translations -- Ready 21.11.22 
 		- Install uuidv4 for elements keys -- Ready 21.11.22
 		- Small control panel accessible from top navigation -- Ready 06.12.22
 		- Notification -- Ready 04.12.22
+		- Start using translations -- Ready 18.12.22
+		- Expanded mode -- Ready 18.12.22
+		- Animation on scroll
+		- Blur background
 		- Form validation
-		- Start using translations
 		- Beautiful home page
-		- Expanded mode
+		- When expanded - hamburger navigation
+		- Side navigation - add link icons
+		- Save common context to local storage 
+
 </Web>
 
 <API>
 	Users
-		Users migration -- Ready 20.11.22
-		Users register, login, logout -- Ready 20.11.22
+		- Migration -- Ready 20.11.22
+		- Register, login, logout -- Ready 20.11.22
+		- Save preferences as json
 </API>
 
 <Functionality>

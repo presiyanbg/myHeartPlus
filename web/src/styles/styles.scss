@@ -248,11 +248,10 @@ li {
   height: 100%;
   padding: 2rem 0;
 
-
   .side-navigation__links {
     height: 100%;
     padding-left: 1rem;
-    padding-right: 2rem;
+    padding-right: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -274,6 +273,15 @@ li {
         color: $gray;
       }
 
+      &.side-navigation__link--logo {
+        padding: 1rem;
+
+        img {
+          max-height: 4rem;
+          object-fit: contain;
+        }
+      }
+
       &.selected {
         background-color: $main;
 
@@ -282,7 +290,7 @@ li {
         }
       }
 
-      &:hover {
+      &:hover:not(.side-navigation__link--logo) {
         background-color: $main;
 
         .side-navigation__link--text {
@@ -301,7 +309,7 @@ li {
   .hero--head {
     position: relative;
     margin: auto;
-    width: 1200px;
+    max-width: 1200px;
     height: 1px;
 
     .hero--head-logo {
@@ -334,6 +342,7 @@ li {
 
 /* EKG Monitor Panel - Main panel that holds site router and pages */
 .ekg-monitor-panel {
+  position: relative;
   display: flex;
   align-items: stretch;
   justify-content: stretch;
@@ -344,13 +353,63 @@ li {
   background-color: $white;
   box-shadow: inset 0 0 0.5rem rgba(0, 0, 0, 0.3);
 
-  .ekg-monitor-panel--controls {
+  .ekg-monitor-panel--head {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 2rem;
+    max-height: 2rem;
+    padding: 0 4rem;
+    z-index: 100;
+
+    .head--icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      overflow: hidden;
+      padding: 0.1rem;
+      margin: 0.1rem;
+      height: 1rem;
+      width: 1rem;
+      cursor: pointer;
+      background-color: $light;
+      transition: all ease-in-out 200ms;
+
+      &.green {
+        background-color: $green;
+      }
+
+      &.yellow {
+        background-color: $yellow;
+      }
+
+      &.red {
+        background-color: $red;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      &:not(:last-child) {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .ekg-monitor-panel--links {
     flex: 0 0 20%;
     min-width: 10vw;
     border-left: $borderLight;
     background-color: rgba(0, 0, 0, 0.02);
     display: flex;
     justify-content: center;
+    z-index: 200;
   }
 
   .ekg-monitor-panel--body {
@@ -362,7 +421,6 @@ li {
     position: relative;
     overflow: hidden;
 
-    /* Loader */
     .ekg-monitor-panel--loader {
       display: flex;
       align-items: center;
@@ -382,20 +440,87 @@ li {
       height: 100%;
       width: 100%;
       padding: 1.5rem;
+      overflow-y: auto;
     }
   }
 
+  &.expanded {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+
+    .ekg-monitor-panel--head {
+      padding: 0 0.5rem;
+    }
+
+    .ekg-monitor-panel--links {
+      max-width: 300px;
+    }
+
+    .ekg-monitor-panel--body {
+      margin: 2rem 0 0 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .ekg-monitor-panel--links {
+      flex: unset;
+      width: 300px;
+      padding: 0;
+
+      .side-navigation {
+        width: 100%;
+        padding: 0;
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.15);
+
+        .side-navigation__links {
+          padding-left: 0;
+          padding-right: 0;
+          display: unset;
+
+          .side-navigation__link {
+            padding: 0;
+            margin-bottom: 0;
+            border-radius: 0;
+            box-shadow: unset;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+
+            .side-navigation__link--text {
+              width: 100%;
+              text-align: left;
+            }
+
+            &.side-navigation__link--logo {
+              justify-content: flex-start;
+              background-color: unset;
+              padding: 1rem 0;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 /* Wrapper */
 .wrapper {
-  width: 1200px;
+  max-width: 1200px;
   margin: auto;
 }
 
 /* Page */
 .page {
   margin-bottom: 3rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 /* Box */
@@ -576,5 +701,26 @@ li {
     border-radius: 100%;
     overflow: hidden;
     outline: 3px solid $lightBlue;
+  }
+}
+
+.page--loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $light;
+  opacity: 0.5;
+
+  .loader--image {
+    width: 20vw;
+    margin-left: 5vw;
+    mix-blend-mode: exclusion;
+    filter: hue-rotate(15deg) brightness(0.5);
   }
 }

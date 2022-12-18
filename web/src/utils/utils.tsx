@@ -1,4 +1,9 @@
-/* Class names function */
+/**
+ * Get element classes conditionally 
+ * 
+ * @param args boolean
+ * @returns 
+ */
 export const classNames = (...args: any[]) => {
   return args.filter(Boolean).join(' ')
 }

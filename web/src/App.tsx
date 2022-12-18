@@ -9,6 +9,7 @@ import LoadingContextProvider from './context/loadingContext/loadingContextProvi
 import { NotificationContainer } from 'react-notifications';
 import './localization/i18n';
 import { useTranslation } from 'react-i18next'
+import CommonContextProvider from './context/commonContext/commonContextProvider';
 
 const App = () => {
   const { i18n } = useTranslation();
@@ -30,18 +31,20 @@ const App = () => {
       {/* Notifications End */}
 
       {/* Context Providers Start */}
-      <LoadingContextProvider>
-        <UserContextProvider>
-          <NavigationContextProvider>
+      <CommonContextProvider>
+        <LoadingContextProvider>
+          <UserContextProvider>
+            <NavigationContextProvider>
 
-            {/* Components Start */}
-            <TopNavigation></TopNavigation>
-            <Monitor></Monitor>
-            {/* Components End */}
+              {/* Components Start */}
+              <TopNavigation></TopNavigation>
+              <Monitor></Monitor>
+              {/* Components End */}
 
-          </NavigationContextProvider>
-        </UserContextProvider>
-      </LoadingContextProvider>
+            </NavigationContextProvider>
+          </UserContextProvider>
+        </LoadingContextProvider>
+      </CommonContextProvider>
       {/* Context Providers End */}
     </div>
   );
