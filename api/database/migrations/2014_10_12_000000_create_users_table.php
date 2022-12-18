@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('full_name');
+            $table->string('image')->default('user.png');
             $table->string('role');
             $table->string('email')->unique();
             $table->timestamp('last_activity');

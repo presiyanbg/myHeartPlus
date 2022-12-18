@@ -90,7 +90,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        return $user;
     }
 
     /**

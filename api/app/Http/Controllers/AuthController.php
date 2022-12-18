@@ -9,8 +9,12 @@ use Carbon\Carbon;
 
 class AuthController extends Controller
 {
+
     /**
      * Login user
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function login(Request $request)
     {
@@ -41,6 +45,9 @@ class AuthController extends Controller
 
     /**
      * Logout user
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
     {
@@ -53,40 +60,60 @@ class AuthController extends Controller
 
     /**
      * Register User
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
     {
-        $fields = $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed',
-            'role' => 'required|string'
-        ]);
+        try {
+            // Validate request 
+            $fields = $request->validate([
+                'first_name' => 'required|string',
+                'last_name' => 'required|string',
+                'email' => 'required|string|unique:users,email',
+                'password' => 'required|string|confirmed',
+                'role' => 'required|string'
+            ]);
 
-        // Check and reset user role
-        if ($fields['role'] !== 'doctor' && $fields['role'] !== 'patient') {
-            $fields['role'] = 'patient';
+            // Check and reset user role
+            if ($fields['role'] !== 'doctor' && $fields['role'] !== 'patient') {
+                $fields['role'] = 'patient';
+            }
+
+            // Create user
+            $user = User::create([
+                'first_name' => $fields['first_name'],
+                'last_name' => $fields['last_name'],
+                'full_name' => $fields['first_name'] . ' ' . $fields['last_name'],
+                'email' => $fields['email'],
+                'role' => $fields['role'],
+                'password' => Hash::make($fields['password'], [
+                    'rounds' => 12,
+                ]),
+                'last_activity' => Carbon::now()->toDateTimeString(),
+            ]);
+
+            $token = $user->createToken('appToken')->plainTextToken;
+
+            // Upload image
+            if ($request->hasFile('image')) {
+                $filename = $request->image->getClientOriginalName();
+                $request->image->storeAs('images', $filename, 'public');
+                $user->update(['image' => $filename]);
+            }
+
+            return response([
+                'user' => $user,
+                'token' => $token,
+                'message' => 'Welcome!'
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+
+            return false;
         }
-
-        $user = User::create([
-            'first_name' => $fields['first_name'],
-            'last_name' => $fields['last_name'],
-            'full_name' => $fields['first_name'] . ' ' . $fields['last_name'],
-            'email' => $fields['email'],
-            'role' => $fields['role'],
-            'password' => Hash::make($fields['password'], [
-                'rounds' => 12,
-            ]),
-            'last_activity' => Carbon::now()->toDateTimeString(),
-        ]);
-
-        $token = $user->createToken('appToken')->plainTextToken;
-
-        return response([
-            'user' => $user,
-            'token' => $token,
-            'message' => 'Welcome!'
-        ], 200);
     }
 }
