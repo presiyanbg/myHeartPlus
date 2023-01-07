@@ -1,6 +1,7 @@
 import React from 'react';
 import ArticlesSlideshow from '../../components/articlesSlideshow/articlesSlideshow';
 import NewsLarge from '../../components/news/newsLarge/newsLarge';
+import NewsSmall from '../../components/news/newsSmall/newsSmall';
 
 import New1 from '../../assets/images/temp/new1.jpg';
 import New2 from '../../assets/images/temp/new2.jpg';
@@ -87,7 +88,7 @@ const Home = ({ }: Props) => {
             </div>
 
             <div className="col-12 col-md-5">
-              test
+              <NewsSmall articles={data}></NewsSmall>
             </div>
           </div>
         </div>
