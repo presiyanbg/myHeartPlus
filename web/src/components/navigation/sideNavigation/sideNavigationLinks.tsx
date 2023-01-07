@@ -20,9 +20,6 @@ const TopNavigationLinks = () => {
     // Don't show user specific links  when user is logged out
     if (typeof link.isAuth == 'boolean' && link.isAuth && !isAuth) return;
 
-    // Display logo only on expanded mode
-    if (link.logo && !monitorExpanded) return;
-
     return (<TopNavigationLink key={uuid()} {...link}></ TopNavigationLink >);
   });
 

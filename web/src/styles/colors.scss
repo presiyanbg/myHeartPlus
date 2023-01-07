@@ -29,6 +29,7 @@ $darkAqua: #01a3a4;
 $pink: #ff9ff3;
 $darkPing: #f368e0;
 $lightBlue: #a4cce4;
+$softLight: #e6e6e6;
 
 /* 
     Overwrite Bootstrap
@@ -54,3 +55,8 @@ $warning: $darkYellow;
 $danger: $darkRed;
 $light: $light;
 $dark: $darkGray;
+
+/* 
+    RGB Colors
+*/
+$halfWhite: rgba(255, 255, 255, 0.5);

@@ -1,63 +1,93 @@
 import React from 'react';
-import Hero from '../../assets/images/hero__7.jpg';
+import ArticlesSlideshow from '../../components/articlesSlideshow/articlesSlideshow';
+import NewsLarge from '../../components/news/newsLarge/newsLarge';
+
+import New1 from '../../assets/images/temp/new1.jpg';
+import New2 from '../../assets/images/temp/new2.jpg';
+import New3 from '../../assets/images/temp/new3.jpg';
+import New4 from '../../assets/images/temp/new4.jpg';
+import New5 from '../../assets/images/temp/new5.jpg';
+import New6 from '../../assets/images/temp/new6.jpg';
+import New7 from '../../assets/images/temp/new7.jpg';
+import Hero1 from '../../assets/images/hero__6.jpg';
+import Hero2 from '../../assets/images/hero__2.jpg';
+import Hero3 from '../../assets/images/hero__3.jpg';
+import Hero4 from '../../assets/images/hero__4.jpg';
+import Hero5 from '../../assets/images/hero__5.jpg';
 
 type Props = {};
 
 const Home = ({ }: Props) => {
+  const data = [
+    {
+      image: New1,
+      title: 'Very nice title',
+    },
+    {
+      image: New2,
+      title: 'Very nice title',
+    },
+    {
+      image: New3,
+      title: 'Very nice title',
+    },
+    {
+      image: New4,
+      title: 'Very nice title',
+    },
+    {
+      image: New5,
+      title: 'Very nice title',
+    },
+    {
+      image: New6,
+      title: 'Very nice title',
+    },
+    {
+      image: New7,
+      title: 'Very nice title',
+    },
+    {
+      image: Hero1,
+      title: 'Very nice title',
+    },
+    {
+      image: Hero2,
+      title: 'Very nice title',
+    },
+    {
+      image: Hero3,
+      title: 'Very nice title',
+    },
+    {
+      image: Hero4,
+      title: 'Very nice title',
+    },
+    {
+      image: Hero5,
+      title: 'Very nice title',
+    },
+  ];
   return (
     <>
-      <div className="row">
-        <div className="col-4 mb-3">
-          <div className="card" >
-            <img className="card-img-top p-3" src={Hero} alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" className="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
+      <div className="hero">
+        <div className="hero--content">
+          <ArticlesSlideshow articles={data}></ArticlesSlideshow>
         </div>
 
-        <div className="col-4 mb-3">
-          <div className="card" >
-            <img className="card-img-top p-3" src={Hero} alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" className="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
+        <div className="hero--controls">
 
-        <div className="col-4 mb-3">
-          <div className="card" >
-            <img className="card-img-top p-3" src={Hero} alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" className="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
         </div>
-
-        <div className="col-4 mb-3">
-          <div className="card" >
-            <img className="card-img-top p-3" src={Hero} alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" className="btn btn-primary">Go somewhere</a>
+      </div>
+      <div className="wrapper">
+        <div className="page">
+          <div className="row pt-3">
+            <div className="col-12 col-md-7">
+              <NewsLarge articles={data}></NewsLarge>
             </div>
-          </div>
-        </div>
 
-        <div className="col-4  mb-3">
-          <div className="card" >
-            <img className="card-img-top p-3" src={Hero} alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" className="btn btn-primary">Go somewhere</a>
+            <div className="col-12 col-md-5">
+              test
             </div>
           </div>
         </div>

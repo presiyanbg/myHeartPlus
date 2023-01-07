@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { NavLinksType } from "../../ts/types";
-import { LINKS } from "../../constants/links";
+import { LINKS, LOGO_LINK } from "../../constants/links";
 import { UserContext } from '../userContext/userContextProvider';
 
 interface NavigationProviderProps {
@@ -9,10 +9,12 @@ interface NavigationProviderProps {
 
 export const NavigationContext = createContext({
   links: LINKS,
+  logoLink: LOGO_LINK
 });
 
 export const NavigationContextProvider = ({ children }: NavigationProviderProps) => {
   const [links, setLinks] = useState(LINKS);
+  const logoLink = LOGO_LINK;
 
   const { isAuth } = useContext(UserContext);
 
@@ -37,7 +39,7 @@ export const NavigationContextProvider = ({ children }: NavigationProviderProps)
   }, [isAuth])
 
   return (
-    <NavigationContext.Provider value={{ links }}>
+    <NavigationContext.Provider value={{ links, logoLink }}>
       {children}
     </NavigationContext.Provider>
   );

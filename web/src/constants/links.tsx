@@ -3,15 +3,6 @@ import Logo from '../assets/images/logo.png';
 
 export const LINKS = [
   {
-    title: 'Logo',
-    url: '/',
-    logo: Logo,
-    selected: false,
-    icon: faHeart,
-    topLink: true,
-    onClick: () => { },
-  },
-  {
     title: 'Home',
     url: '/',
     selected: true,
@@ -68,3 +59,13 @@ export const LINKS = [
     onClick: () => { },
   },
 ];
+
+export const LOGO_LINK = {
+  title: 'Logo',
+  url: '/',
+  logo: Logo,
+  selected: false,
+  icon: faHeart,
+  topLink: true,
+  onClick: () => { },
+};

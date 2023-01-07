@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Hero from '../../assets/images/hero__7.jpg';
-import Logo from '../../assets/images/logo--white.png';
-import Loader from '../../assets/loader--ekg.gif';
 import { changeOpacityOnScroll, scrollToElement } from '../../utils/utils';
-import SideNavigation from '../navigation/sideNavigation/sideNavigation';
 import Router from '../../router/router';
 import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
 import { SELECTORS } from '../../constants/selectors';
@@ -11,7 +8,6 @@ import { CommonContext } from '../../context/commonContext/commonContextProvider
 import { classNames } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import TopNavigationDropDown from '../navigation/topNavigation/topNavigationDropdown';
 import { UserContext } from '../../context/userContext/userContextProvider';
 
 type Props = {};
@@ -69,7 +65,7 @@ const Monitor = ({ }: Props) => {
   return (
     <>
       {/* Page loader */}
-      {displayPageLoader &&
+      {isLoading &&
         <>
           <div className="page--loader">
             <div className="loader--image">
@@ -79,65 +75,10 @@ const Monitor = ({ }: Props) => {
         </>
       }
 
-      {
-        (!monitorExpanded || displayPageLoader) &&
-        <div className="hero" onClick={e => handleClick('logo')}>
-          <div className="hero--head">
-            <div className="hero--head-logo" ref={heroRef}>
-              <img src={Logo} alt="" />
-            </div>
-          </div>
-        </div>
-      }
+      {/* Pages */}
+      <Router></Router>
 
-      {!displayPageLoader &&
-        <div className="wrapper">
-          <div className="page">
-            <div className={monitorClasses}>
-              {/* Links */}
-              <div className="ekg-monitor-panel--links">
-                <SideNavigation></SideNavigation>
-              </div>
-
-              {/* Monitor controls */}
-              <div className="ekg-monitor-panel--head">
-                {/* User Panel */}
-                {isAuth && monitorExpanded && <TopNavigationDropDown user={user}></TopNavigationDropDown>}
-
-                {/* Help */}
-                <div className="head--icon green"></div>
-
-                {/* Expand/Collapse monitor */}
-                <div className="head--icon yellow"
-                  onClick={() => handleClick('toggleMonitor')}>
-                </div>
-
-                {/* Logout */}
-                <div className="head--icon red"></div>
-              </div>
-
-              <div className="ekg-monitor-panel--body">
-                {/* Loader */}
-                {isLoading &&
-                  <>
-                    <div className="ekg-monitor-panel--loader">
-                      <div className="loader--image">
-                        <img src={Loader} />
-                      </div>
-                    </div>
-                  </>
-                }
-
-                {/* Pages */}
-                <div className="ekg-monitor-panel--content">
-                  <Router></Router>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      }
-
+      {/* Background */}
       {
         (!monitorExpanded || displayPageLoader) &&
         <div className="hero--background">

@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLinkType } from '../../../ts/types';
-import { changeOpacityOnScroll } from '../../../utils/utils';
 import { NavLink } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
@@ -15,23 +14,6 @@ const TopNavigationLink = (link: NavLinkType) => {
   // Handle link click
   const handleClick = () => {
     scrollToElement(SELECTORS.monitor);
-  }
-
-  /* Logo Link */
-  if (link.logo && link.logo) {
-    const logoRef = React.createRef<HTMLDivElement>();
-
-    changeOpacityOnScroll(logoRef, true, 'opacity');
-
-    return (
-      <NavLink to={link.url} key={uuid()} onClick={handleClick}>
-        <li className="navigation__link navigation__link--logo" >
-          <div ref={logoRef}>
-            <img src={link.logo} alt="Company logo"></img>
-          </div>
-        </li>
-      </NavLink>
-    );
   }
 
   return (
