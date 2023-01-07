@@ -22,7 +22,6 @@
 		- When expanded - hamburger navigation
 		- Side navigation - add link icons
 		- Save common context to local storage 
-
 </Web>
 
 <API>
@@ -30,6 +29,7 @@
 		- Migration -- Ready 20.11.22
 		- Register, login, logout -- Ready 20.11.22
 		- Save preferences as json
+		- User profile picture
 </API>
 
 <Functionality>
