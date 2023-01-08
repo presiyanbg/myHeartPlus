@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -29,6 +30,10 @@ Route::post('/users/register', [AuthController::class, 'register']);
 Route::get('image/{path}', [ImageController::class, 'getImage'])->where('path', '.*');
 Route::post('image', [ImageController::class, 'uploadImage']);
 
+// Articles
+Route::post('articles', [ArticleController::class, 'index']);
+Route::post('articles/{id}', [ArticleController::class, 'show']);
+
 /*  
 |
 |   Authenticated Routes
@@ -39,4 +44,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/users', [UserController::class, 'index']);
     Route::post('/users/logout', [AuthController::class, 'logout']);
     Route::post('/users/{id}', [UserController::class, 'show']);
+    Route::post('articles/store', [ArticleController::class, 'store']);
 });
