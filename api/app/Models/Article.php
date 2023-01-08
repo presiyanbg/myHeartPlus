@@ -20,5 +20,7 @@ class Article extends Model
         'shares',
         'moment_views',
         'total_views',
+        'content',
+        'slug',
     ];
 }

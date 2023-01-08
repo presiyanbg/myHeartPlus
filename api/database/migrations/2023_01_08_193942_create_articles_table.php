@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('image')->unique();
+            $table->longText('content');
+            $table->string('slug');
             $table->integer('shares')->default(0);
             $table->integer('moment_views')->default(0);
             $table->integer('total_views')->default(0);

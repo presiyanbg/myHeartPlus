@@ -41,19 +41,32 @@ class ArticleController extends Controller
         try {
             $fields = $request->validate([
                 'title' => 'required|string',
+                'content' => 'required|string',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
+            // Create slug for url use
+            $articleSlug = str_replace(' ', '_', $fields['title']);
+
             // Store article image
-            $imageName = $fields['title'] . '-' . time() . '.' . $request->image->extension();
+            $imageName = $articleSlug . '-' . time() . '.' . $request->image->extension();
             $imagePath = 'images/articles/' . $imageName;
             $request->image->move(public_path('images/articles'), $imageName);
 
             // Save article to DB
             $article = Article::create([
                 'title' => $fields['title'],
+                'slug' => $articleSlug,
+                'content' => $fields['content'],
                 'image' => $imagePath,
             ]);
+
+            // Check if article was created 
+            if (!$article) {
+                return response([
+                    'message' => 'Internal error'
+                ], 500);
+            }
 
             // Create article HTML
             $fileName = $article->id . '.html';
@@ -82,14 +95,15 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::where('id', $id)->first();
-        $fileName = $article->id . '.html';
-        $page = null;
-
-        if (Storage::disk('articles')->exists($fileName)) {
-            $page = Storage::disk('articles')->get($fileName);
-        }
 
         if ($article) {
+            $fileName = $article->id . '.html';
+            $page = null;
+
+            if (Storage::disk('articles')->exists($fileName)) {
+                $page = Storage::disk('articles')->get($fileName);
+            }
+
             return response([
                 'article' => $article,
                 'page' => $page,
