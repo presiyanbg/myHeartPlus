@@ -32,7 +32,7 @@ Route::post('image', [ImageController::class, 'uploadImage']);
 
 // Articles
 Route::post('articles', [ArticleController::class, 'index']);
-Route::post('articles/{id}', [ArticleController::class, 'show']);
+Route::post('articles/view/{id}', [ArticleController::class, 'show']);
 
 /*  
 |

@@ -1,20 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 import { SERVER_URL } from '../../../constants/api';
+import { v4 as uuid } from 'uuid';
 
 type Props = {
   articles: any[];
 };
 
 const NewsLarge = (props: Props) => {
-  if (!props.articles) return (<></>);
+  if (!props.articles || !props.articles.length) return (<></>);
 
   return (
     <div className="news-display--large">
       {
         props.articles.map(article => {
           return (
-            <div className="news-box">
+            <div className="news-box" key={uuid()}>
               <div className="box--head">
                 <img src={SERVER_URL + article.image} alt="" />
               </div>
@@ -41,9 +42,7 @@ const NewsLarge = (props: Props) => {
                 </div>
 
                 <div className="box--content">
-                  <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta pariatur minus nihil natus odio repellendus ipsa id doloribus nam in aliquam distinctio nisi nemo nobis mollitia, ratione quaerat sapiente ipsam.
-                  </p>
+                  <p className="text-ellipsis">{article.content}</p>
                 </div>
               </div>
             </div>

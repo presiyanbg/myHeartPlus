@@ -11,7 +11,7 @@ const Api = () => {
   const { setLoading } = useContext(LoadingContext);
   const { token } = useContext(UserContext);
 
-  const post = async (url: string, params?: {}) => {
+  const post = async (url: string, params?: {}, notification: boolean = true) => {
     setLoading(true);
 
     const qs = require('qs');
@@ -30,13 +30,13 @@ const Api = () => {
     return axios(config)
       .then(function (response: any) {
         setLoading(false);
-        NotificationManager.success(response.data.message, 'Success', 10000);
+        notification && NotificationManager.success(response.data.message, 'Success', 10000);
 
         return response.data;
       })
       .catch(function (error: any) {
         setLoading(false);
-        NotificationManager.error(error.message, 'Error');
+        notification && NotificationManager.error(error.message, 'Error');
       });
   }
 

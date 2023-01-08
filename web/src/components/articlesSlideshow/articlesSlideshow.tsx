@@ -5,6 +5,8 @@ type Props = {
 };
 
 const ArticlesSlideshow = (props: Props) => {
+  if (!props.articles || !props.articles.length) return (<></>);
+
   const logic = ArticlesSlideshowLogic();
 
   return (

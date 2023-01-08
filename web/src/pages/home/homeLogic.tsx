@@ -1,8 +1,22 @@
+import ArticleServices from "../../services/articlesServices/articlesServices";
 
-type Props = {};
+const HomeLogic = () => {
+  const articlesServices = ArticleServices();
 
-const homeLogic = ({ }: Props) => {
+  const loadArticles = async () => {
+    const response = await articlesServices.articles();
 
+    if (response.articles && response.articles.data) {
+      return response.articles.data;
+    } else {
+      return [];
+    }
+
+  }
+
+  return {
+    loadArticles
+  }
 }
 
-export default homeLogic;
+export default HomeLogic;
