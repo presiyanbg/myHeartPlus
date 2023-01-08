@@ -1,10 +1,10 @@
 import Dropdown from 'react-bootstrap/Dropdown';
-import User from '../../../assets/images/user-photo__1.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faUser, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { UserClass } from '../../../ts/classes';
 import { NavLink } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { SERVER_URL } from '../../../constants/api';
 
 type Props = {
   user: UserClass
@@ -28,7 +28,7 @@ const TopNavigationDropDown = (props: Props) => {
         <Dropdown.Item href="#/action-1" className="dropdown--picture">
           <div className="profile--picture mb-3 mt-3">
             <div className="image">
-              <img src={User} alt="User photo" />
+              <img src={SERVER_URL + 'images/users/user-photo__1.jpg'} alt="User photo" />
             </div>
           </div>
         </Dropdown.Item>

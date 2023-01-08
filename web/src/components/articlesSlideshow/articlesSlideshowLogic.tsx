@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import { SERVER_URL } from '../../constants/api';
 
 const ARTICLES_PER_SLIDE = 7;
 
@@ -21,7 +22,7 @@ const ArticlesSlideshowLogic = () => {
 
     return (
       <div className={styles} key={uuid()} >
-        <img src={article.image} alt="Medicine wallpaper" />
+        <img src={SERVER_URL + article.image} alt="Medicine wallpaper" />
 
         <div className="slide-title">
           <h5>{article.title}</h5>

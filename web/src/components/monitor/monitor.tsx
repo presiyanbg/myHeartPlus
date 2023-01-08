@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Hero from '../../assets/images/hero__7.jpg';
 import { changeOpacityOnScroll, scrollToElement } from '../../utils/utils';
 import Router from '../../router/router';
 import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
@@ -9,6 +8,7 @@ import { classNames } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../../context/userContext/userContextProvider';
+import { SERVER_URL } from '../../constants/api';
 
 type Props = {};
 
@@ -83,7 +83,7 @@ const Monitor = ({ }: Props) => {
         (!monitorExpanded || displayPageLoader) &&
         <div className="hero--background">
           <div className="hero--background-image img-shadow img-shadow--left">
-            <img src={Hero} alt="Medicine wallpaper" />
+            <img src={SERVER_URL + 'images/hero/hero.jpg'} alt="Medicine wallpaper" />
           </div>
         </div>
       }

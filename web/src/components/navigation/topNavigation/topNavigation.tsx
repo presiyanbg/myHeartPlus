@@ -9,7 +9,6 @@ import { NavigationContext } from '../../../context/navigationContext/navigation
 type Props = {};
 
 const TopNavigation = ({ }: Props) => {
-  let navRef = React.createRef<HTMLDivElement>();
   const { isAuth, user } = useContext(UserContext);
   const { monitorExpanded } = useContext(CommonContext);
   const { logoLink } = useContext(NavigationContext);

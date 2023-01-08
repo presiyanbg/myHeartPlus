@@ -3,69 +3,56 @@ import ArticlesSlideshow from '../../components/articlesSlideshow/articlesSlides
 import NewsLarge from '../../components/news/newsLarge/newsLarge';
 import NewsSmall from '../../components/news/newsSmall/newsSmall';
 
-import New1 from '../../assets/images/temp/new1.jpg';
-import New2 from '../../assets/images/temp/new2.jpg';
-import New3 from '../../assets/images/temp/new3.jpg';
-import New4 from '../../assets/images/temp/new4.jpg';
-import New5 from '../../assets/images/temp/new5.jpg';
-import New6 from '../../assets/images/temp/new6.jpg';
-import New7 from '../../assets/images/temp/new7.jpg';
-import Hero1 from '../../assets/images/hero__6.jpg';
-import Hero2 from '../../assets/images/hero__2.jpg';
-import Hero3 from '../../assets/images/hero__3.jpg';
-import Hero4 from '../../assets/images/hero__4.jpg';
-import Hero5 from '../../assets/images/hero__5.jpg';
-
 type Props = {};
 
 const Home = ({ }: Props) => {
   const data = [
     {
-      image: New1,
+      image: 'images/news/new1.jpg',
       title: 'Very nice title',
     },
     {
-      image: New2,
+      image: 'images/news/new7.jpg',
       title: 'Very nice title',
     },
     {
-      image: New3,
+      image: 'images/news/new2.jpg',
       title: 'Very nice title',
     },
     {
-      image: New4,
+      image: 'images/news/new3.jpg',
       title: 'Very nice title',
     },
     {
-      image: New5,
+      image: 'images/news/new4.jpg',
       title: 'Very nice title',
     },
     {
-      image: New6,
+      image: 'images/news/new5.jpg',
       title: 'Very nice title',
     },
     {
-      image: New7,
+      image: 'images/news/new6.jpg',
       title: 'Very nice title',
     },
     {
-      image: Hero1,
+      image: 'images/news/new1.jpg',
       title: 'Very nice title',
     },
     {
-      image: Hero2,
+      image: 'images/news/new2.jpg',
       title: 'Very nice title',
     },
     {
-      image: Hero3,
+      image: 'images/news/new3.jpg',
       title: 'Very nice title',
     },
     {
-      image: Hero4,
+      image: 'images/news/new4.jpg',
       title: 'Very nice title',
     },
     {
-      image: Hero5,
+      image: 'images/news/new5.jpg',
       title: 'Very nice title',
     },
   ];

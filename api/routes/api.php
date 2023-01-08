@@ -16,11 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//  Unauthenticated Routes
+/*  
+|
+|   Unauthenticated Routes
+|
+*/
+// Users
 Route::post('/users/login', [AuthController::class, 'login']);
 Route::post('/users/register', [AuthController::class, 'register']);
 
-//  Authenticated Routes
+// Images
+Route::get('image/{path}', [ImageController::class, 'getImage'])->where('path', '.*');
+Route::post('image', [ImageController::class, 'uploadImage']);
+
+/*  
+|
+|   Authenticated Routes
+|
+*/
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // User Routes
     Route::post('/users', [UserController::class, 'index']);

@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
+import { SERVER_URL } from '../../../constants/api';
 
 type Props = {
   articles: any[]
@@ -25,7 +26,7 @@ const NewsSmall = (props: Props) => {
           return (
             <div className="news-box">
               <div className="box--head">
-                <img src={article.image} alt="" />
+                <img src={SERVER_URL + article.image} alt="" />
               </div>
 
               <div className="box--body">
