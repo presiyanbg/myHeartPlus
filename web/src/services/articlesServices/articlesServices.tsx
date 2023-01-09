@@ -3,8 +3,8 @@ import Api from "../../api/api";
 const ArticleServices = () => {
   const api = Api();
 
-  const articles = () => {
-    return api.post('/articles', undefined, false);
+  const articles = (page: number = 1) => {
+    return api.post(`/articles?page=${page}`, undefined, false);
   }
 
   return {
