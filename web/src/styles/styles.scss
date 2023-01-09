@@ -309,16 +309,17 @@ li {
   z-index: -3;
   overflow: hidden;
 
+  .hero--background-gradient {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(-45deg, $lightBlue, $softBlue, $purple, $main);
+    background-size: 400% 400%;
+    animation: animate 15s ease infinite;
+  }
+
   .hero--background-image {
     height: 100%;
     width: 100%;
-    background: linear-gradient(-45deg, $lightBlue, $blue, $main, $light);
-    background-size: 400% 400%;
-    animation: animate 15s ease infinite;
-
-    img {
-      display: none;
-    }
   }
 }
 
@@ -494,21 +495,28 @@ li {
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    $paddingSize: 5px;
 
     .articles-slideshow {
       display: grid;
       flex: 1;
-      grid-template-columns: repeat(3, 1fr) repeat(2, 2fr);
-      grid-template-rows: repeat(5, 1fr);
-      grid-gap: 5px;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      grid-gap: $paddingSize;
       height: 30rem;
       min-width: $pageWidth;
       background-color: $white;
+      padding-left: $paddingSize;
+
+      &:last-child {
+        padding-right: $paddingSize;
+      }
 
       .slide {
         position: relative;
         cursor: pointer;
         transition: all ease-in-out 100ms;
+
 
         .slide-title {
           position: absolute;
@@ -548,27 +556,27 @@ li {
       }
 
       .article-2 {
-        grid-area: 5 / 1 / 6 / 2;
+        grid-area: 5 / 1 / 7 / 2;
       }
 
       .article-3 {
-        grid-area: 5 / 2 / 6 / 3;
+        grid-area: 5 / 2 / 7 / 3;
       }
 
       .article-4 {
-        grid-area: 5 / 3 / 6 / 4;
+        grid-area: 5 / 3 / 7 / 4;
       }
 
       .article-5 {
-        grid-area: 1 / 4 / 6 / 5;
+        grid-area: 1 / 4 / 7 / 6;
       }
 
       .article-6 {
-        grid-area: 3 / 5 / 6 / 6;
+        grid-area: 4 / 6 / 7 / 8;
       }
 
       .article-7 {
-        grid-area: 1 / 5 / 3 / 6;
+        grid-area: 1 / 6 / 4 / 8;
       }
 
       .article-5-xl {

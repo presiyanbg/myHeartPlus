@@ -82,9 +82,10 @@ const Monitor = ({ }: Props) => {
       {
         (!monitorExpanded || displayPageLoader) &&
         <div className="hero--background">
-          <div className="hero--background-image img-shadow img-shadow--left">
+          <div className="hero--background-gradient"></div>
+          {/* <div className="hero--background-image img-shadow img-shadow--left">
             <img src={SERVER_URL + 'images/hero/hero.jpg'} alt="Medicine wallpaper" />
-          </div>
+          </div> */}
         </div>
       }
 
