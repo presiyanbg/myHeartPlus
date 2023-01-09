@@ -2,7 +2,12 @@
 /public/build
 /public/hot
 /public/storage
+/public/articles
+/public/images/articles
+/public/images/users
+/public/images/users
 /storage/*.key
+/storage/articles
 /vendor
 .env
 .env.backup
