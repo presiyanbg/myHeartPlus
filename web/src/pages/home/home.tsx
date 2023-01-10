@@ -3,69 +3,19 @@ import ArticlesSlideshow from '../../components/articlesSlideshow/articlesSlides
 import NewsLarge from '../../components/news/newsLarge/newsLarge';
 import NewsSmall from '../../components/news/newsSmall/newsSmall';
 import HomeLogic from './homeLogic';
+import { Articles } from '../../ts/types';
 
 type Props = {};
 
 const Home = ({ }: Props) => {
   const logic = HomeLogic();
-  const [articles, setArticles] = useState<any>([]);
+  const [articles, setArticles] = useState<Articles>();
 
   useEffect(() => {
     logic.loadArticles().then(data => {
       setArticles(data);
     });
   }, []);
-
-  const data = [
-    {
-      image: 'images/news/new1.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new7.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new2.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new3.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new4.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new5.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new6.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new1.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new2.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new3.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new4.jpg',
-      title: 'Very nice title',
-    },
-    {
-      image: 'images/news/new5.jpg',
-      title: 'Very nice title',
-    },
-  ];
 
   return (
     <>

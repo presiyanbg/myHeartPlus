@@ -1,18 +1,41 @@
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 import { SERVER_URL } from '../../../constants/api';
 import { v4 as uuid } from 'uuid';
+import { Articles } from '../../../ts/types';
+import NewsLogic from '../newsLogic';
 
 type Props = {
-  articles: any[]
+  articles?: Articles,
+  singleComponent?: boolean,
 }
 
 const NewsSmall = (props: Props) => {
-  if (!props.articles || !props.articles.length) return (<></>);
+  const [articles, setArticles] = useState<Articles>([]);
+  const logic = NewsLogic();
 
-  // Display only top 5 news
-  // @TODO Order by views when DB is ready
-  const articles = props.articles.slice(0, 5);
+  // Get articles from props 
+  useEffect(() => {
+    if (props.articles && props.articles.length >= 6) {
+      setArticles(props.articles.slice(0, 5));
+      return;
+    }
+
+    if (props.articles && props.articles.length <= 6) {
+      setArticles(props.articles);
+      return;
+    }
+  }, [props]);
+
+  // Get articles from API when component is used as single 
+  useEffect(() => {
+    if (props.singleComponent) {
+      logic.loadArticles().then(data => {
+        setArticles(data)
+      });
+    }
+  }, [])
 
   return (
     <div className="news-display--small">

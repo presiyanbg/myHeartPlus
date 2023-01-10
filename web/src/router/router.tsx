@@ -11,6 +11,7 @@ import Check from '../pages/check/check';
 import Doctors from '../pages/doctors/doctors';
 import Forum from '../pages/forum/forum';
 import Authentication from '../components/authentication/authentication';
+import Article from '../pages/article/article';
 
 type Props = {};
 
@@ -23,6 +24,8 @@ const Router = ({ }: Props) => {
       <Route path="/doctors" element={<Doctors></Doctors>} />
       <Route path="/authentication" element={<Authentication></Authentication>} />
       <Route path="/forum" element={<Forum></Forum>} />
+      <Route path="/article/:id" element={<Article></Article>} />
+
       <Route path="*" element={<Home></Home>} />
     </Routes>
   );
