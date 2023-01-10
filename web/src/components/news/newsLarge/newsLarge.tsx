@@ -2,9 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 import { SERVER_URL } from '../../../constants/api';
 import { v4 as uuid } from 'uuid';
+import { Articles } from '../../../ts/types';
 
 type Props = {
-  articles: any[];
+  articles?: Articles;
 };
 
 const NewsLarge = (props: Props) => {

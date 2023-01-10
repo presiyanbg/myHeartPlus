@@ -35,9 +35,26 @@ type RegistrationFormType = {
   last_name: string,
 }
 
+type Article = {
+  content: string,
+  created_at: string,
+  id: number,
+  image: string,
+  moment_views: number,
+  shares: number,
+  slug: string,
+  title: string,
+  total_views: number,
+  updated_at: string,
+}
+
+type Articles = Array<Article>;
+
 export type {
   NavLinkType,
   NavLinksType,
   UserType,
-  RegistrationFormType
+  RegistrationFormType,
+  Article,
+  Articles,
 }

@@ -1,7 +1,8 @@
 import ArticlesSlideshowLogic from './articlesSlideshowLogic';
+import { Articles } from '../../ts/types';
 
 type Props = {
-  articles: {}[]
+  articles?: Articles
 };
 
 const ArticlesSlideshow = (props: Props) => {
