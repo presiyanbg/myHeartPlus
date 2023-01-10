@@ -16,7 +16,7 @@ class ArticleController extends Controller
     public function index()
     {
         return response([
-            'articles' => Article::paginate(7),
+            'articles' => Article::orderByDesc('total_views')->paginate(7),
         ], 200);
     }
 
