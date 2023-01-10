@@ -5,6 +5,8 @@ import { SERVER_URL } from '../../../constants/api';
 import { v4 as uuid } from 'uuid';
 import { Articles } from '../../../ts/types';
 import NewsLogic from '../newsLogic';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 type Props = {
   articles?: Articles,
@@ -14,6 +16,7 @@ type Props = {
 const NewsSmall = (props: Props) => {
   const [articles, setArticles] = useState<Articles>([]);
   const logic = NewsLogic();
+  const { t } = useTranslation();
 
   // Get articles from props 
   useEffect(() => {
@@ -40,15 +43,13 @@ const NewsSmall = (props: Props) => {
   return (
     <div className="news-display--small">
       <div className="display--title">
-        <h5>
-          Топ новини
-        </h5>
+        <h5>{t('Top news')}</h5>
       </div>
 
       {
         articles.map(article => {
           return (
-            <div className="news-box" key={uuid()}>
+            <Link to={`/article/${article.id}`} className="news-box" key={uuid()}>
               <div className="box--head">
                 <img src={SERVER_URL + article.image} alt="" />
               </div>
@@ -78,7 +79,7 @@ const NewsSmall = (props: Props) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           )
         })
       }

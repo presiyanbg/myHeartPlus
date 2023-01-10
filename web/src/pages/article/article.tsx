@@ -21,7 +21,7 @@ const Article = ({ }: Props) => {
         setArticleHTML({ __html: articleData.page });
       });
     }
-  }, []);
+  }, [id]);
 
   return (
     <div className="wrapper">
