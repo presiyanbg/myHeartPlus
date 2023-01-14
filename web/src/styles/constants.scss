@@ -4,6 +4,8 @@ $borderLight: 1px solid rgba(0, 0, 0, 0.1);
 /* Shadows */
 $shadowBorder: 0 0 3px rgba(0, 0, 0, 0.1);
 
+$defaultShadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+
 /* Main page width */
 $pageWidth: 1200px;
 
@@ -18,4 +20,7 @@ $textBorder: 0 0 5px rgba(0, 0, 0, 1);
 $smallNewsBox: 100px;
 
 /* Border radius */
-$defaultRadius: 1rem;
+$defaultRadius: 0.5rem;
+
+/* Image sizes */
+$bigImageHeight: 500px;

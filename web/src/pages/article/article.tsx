@@ -26,7 +26,7 @@ const Article = ({ }: Props) => {
   return (
     <div className="wrapper">
       <div className="page article-page">
-        <div className="row">
+        <div className="row mb-3">
           <div className="col-7">
             <div className="row">
               <div className="col-12 article--title">
@@ -49,7 +49,7 @@ const Article = ({ }: Props) => {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row mb-3">
           <div className="col-sm-12">
             <Comments parentUrl="article" parentId={id}></Comments>
           </div>
