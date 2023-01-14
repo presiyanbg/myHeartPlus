@@ -31,11 +31,11 @@ const Home = ({ }: Props) => {
       <div className="wrapper">
         <div className="page">
           <div className="row pt-3">
-            <div className="col-12 col-md-7">
+            <div className="col-12 col-md-8">
               <NewsLarge articles={articles}></NewsLarge>
             </div>
 
-            <div className="col-12 col-md-5">
+            <div className="col-12 col-md-4">
               <NewsSmall articles={articles}></NewsSmall>
             </div>
           </div>

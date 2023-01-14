@@ -3,7 +3,7 @@ import { SERVER_URL } from '../../constants/api';
 import { Link } from 'react-router-dom';
 import { Articles, Article } from '../../ts/types';
 
-const ARTICLES_PER_SLIDE = 7;
+const ARTICLES_PER_SLIDE = 5;
 
 const ArticlesSlideshowLogic = () => {
 
@@ -16,11 +16,6 @@ const ArticlesSlideshowLogic = () => {
    */
   const buildArticleBox = (article: Article, index: number, slideSize: number) => {
     let styles = 'slide' + ' article-' + Number(index + 1);
-
-    // Display bigger article if slide is has less articles 
-    if (slideSize == 5 && Number(index + 1) == 5) {
-      styles += ' article-5-xl';
-    }
 
     return (
       <Link to={`article/` + article.id} className={styles} key={uuid()} >
@@ -66,7 +61,7 @@ const ArticlesSlideshowLogic = () => {
       const chunk = articles.slice(i, i + ARTICLES_PER_SLIDE);
 
       // Check length to prevent empty spaces
-      if (chunk && (chunk.length == 5 || chunk.length == 7)) {
+      if (chunk && (chunk.length == ARTICLES_PER_SLIDE)) {
         slidesHTML.push(buildSlideshows(chunk))
       }
     }

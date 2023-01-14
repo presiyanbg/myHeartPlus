@@ -6,6 +6,9 @@ $shadowBorder: 0 0 3px rgba(0, 0, 0, 0.1);
 
 $defaultShadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 
+$pageShadow: 0 0 2rem rgb(0, 0, 0, 0.2);
+$pageShadowInset: inset $pageShadow;
+
 /* Main page width */
 $pageWidth: 1200px;
 
@@ -23,4 +26,6 @@ $smallNewsBox: 100px;
 $defaultRadius: 0.5rem;
 
 /* Image sizes */
+$mediumImageHeight: 300px;
+$expandedMediumImageHeight: 400px;
 $bigImageHeight: 500px;
