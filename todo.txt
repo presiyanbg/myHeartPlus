@@ -4,9 +4,7 @@
 
 <Web>
 		- White background for navigation -- Ready 16.11.22
-		- Hide main logo on scroll -- Ready 16.11.22
 		- Show logo in navigation  -- Ready 16.11.22
-		- Make main panel box that looks like hearth rate monitor -- Ready 19.11.22
 		- Login and register page -- Ready 04.12.22
 		- Install router -- Ready 21.11.22
 		- Install i18 translations -- Ready 21.11.22 
@@ -14,14 +12,12 @@
 		- Small control panel accessible from top navigation -- Ready 06.12.22
 		- Notification -- Ready 04.12.22
 		- Start using translations -- Ready 18.12.22
-		- Expanded mode -- Ready 18.12.22
 		- Animation on scroll
-		- Blur background
 		- Form validation
-		- Beautiful home page
-		- When expanded - hamburger navigation
-		- Side navigation - add link icons
+		- Design i like
+		- Hamburger navigation
 		- Save common context to local storage 
+		- Images cache 
 </Web>
 
 <API>
