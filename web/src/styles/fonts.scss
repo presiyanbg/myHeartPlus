@@ -1,4 +1,11 @@
 @font-face {
-  font-family: RandomGrotesqueTypeface;
-  src: url(../fonts/RandomGrotesqueTypeface/RG-StandardBold.ttf) format('truetype');
+  font-family: "SalmaPro";
+  src: local("SalmaPro"),
+    url("../assets/fonts/SalmaPro/SalmaproMediumnarrow.otf") format("otf");
 }
+
+// Default fonts overwrite 
+$font-family-sans-serif: 'SalmaPro', sans-serif !default;
+$font-family-serif: 'SalmaPro', sans-serif !default;
+$font-family-monospace: 'SalmaPro', sans-serif !default;
+$font-family-base: $font-family-sans-serif !default;
