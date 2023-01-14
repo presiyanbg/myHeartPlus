@@ -315,26 +315,12 @@ li {
     width: 100%;
     background: linear-gradient(-45deg, $lightBlue, $softBlue, $purple, $main);
     background-size: 400% 400%;
-    animation: animate 15s ease infinite;
+    animation: backgroundPosition 15s ease infinite;
   }
 
   .hero--background-image {
     height: 100%;
     width: 100%;
-  }
-}
-
-@keyframes animate {
-  0% {
-    background-position: 0 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0 50%;
   }
 }
 
@@ -876,4 +862,19 @@ li {
 
 .hide--scroll ::-webkit-scrollbar {
   display: none;
+}
+
+/* Animations */
+@keyframes backgroundPosition {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }
