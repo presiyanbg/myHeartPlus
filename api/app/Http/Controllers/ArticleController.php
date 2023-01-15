@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderByDesc('total_views')->paginate(7);
+        $articles = Article::orderByDesc('total_views')->paginate(10);
 
         // Get name of article writer
         foreach ($articles as $article) {
