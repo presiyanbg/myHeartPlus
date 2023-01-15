@@ -37,14 +37,15 @@ type RegistrationFormType = {
 
 type Article = {
   content: string,
-  created_at: string,
   id: number,
   image: string,
   moment_views: number,
+  writer: string,
   shares: number,
   slug: string,
   title: string,
   total_views: number,
+  created_at: string,
   updated_at: string,
 }
 

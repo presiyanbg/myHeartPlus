@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { SERVER_URL } from '../../constants/api';
 import { Link } from 'react-router-dom';
 import { Articles, Article } from '../../ts/types';
+import Moment from 'react-moment';
 
 const ARTICLES_PER_SLIDE = 5;
 
@@ -19,10 +20,21 @@ const ArticlesSlideshowLogic = () => {
 
     return (
       <Link to={`article/` + article.id} className={styles} key={uuid()} >
-        <img src={SERVER_URL + article.image} alt="Medicine wallpaper" />
+        <div className="slide--head">
+          <img src={SERVER_URL + article.image} alt="Medicine wallpaper" />
+        </div>
 
-        <div className="slide-title">
-          <h5>{article.title}</h5>
+        <div className="slide--body">
+          <div className="slide-title">
+            <h5>{article.title}</h5>
+          </div>
+
+          <div className="slide-subtitle">
+            {article.writer},&nbsp;
+            <Moment format="DD/MM/YYYY">
+              {article.created_at}
+            </Moment>
+          </div>
         </div>
       </Link>
     )

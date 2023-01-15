@@ -3,6 +3,7 @@ import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 import { SERVER_URL } from '../../../constants/api';
 import { v4 as uuid } from 'uuid';
 import { Articles } from '../../../ts/types';
+import Moment from 'react-moment';
 
 type Props = {
   articles?: Articles;
@@ -23,27 +24,26 @@ const NewsLarge = (props: Props) => {
 
               <div className="box--body">
                 <div className="box--title">
-                  <h3>
+                  <h4>
                     {article.title}
-                  </h3>
+                  </h4>
                 </div>
 
-                <div className="box--icons">
-                  <div className="box--icon">
-                    <FontAwesomeIcon icon={faEye} /> | 10
-                  </div>
-
-                  <div className="box--icon">
-                    <FontAwesomeIcon icon={faComment} /> | 550
-                  </div>
-
-                  <div className="box--icon">
-                    <FontAwesomeIcon icon={faShare} /> | 71
-                  </div>
+                <div className="box--content text-ellipsis--3">
+                  <p>{article.content}</p>
                 </div>
 
-                <div className="box--content">
-                  <p className="text-ellipsis">{article.content}</p>
+                <div className="box--footer">
+                  <div className="row">
+                    <div className="col-8">
+                      <Moment format="DD/MM/YYYY">
+                        {article.created_at}
+                      </Moment>
+                    </div>
+                    <div className="col-4">
+                      <FontAwesomeIcon icon={faEye} /> | {article.total_views}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -10,6 +10,8 @@ import { NotificationContainer } from 'react-notifications';
 import './localization/i18n';
 import { useTranslation } from 'react-i18next'
 import CommonContextProvider from './context/commonContext/commonContextProvider';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 const App = () => {
   const { i18n } = useTranslation();
