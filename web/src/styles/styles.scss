@@ -500,7 +500,7 @@ li {
 
         .slide--head {
           img {
-            transition: all ease-in-out 200ms;
+            transition: $defaultTransition;
           }
         }
 
@@ -658,17 +658,25 @@ li {
       max-height: $mediumImageHeight;
       overflow: hidden;
       border-radius: $defaultRadius;
-      transition: all ease-in-out 200ms;
+      transition: $defaultTransition;
       margin-bottom: 1rem;
 
       img {
         height: $mediumImageHeight;
-        transition: all ease-in-out 200ms;
+        transition: $defaultTransition;
       }
     }
 
     .box--body {
       margin-bottom: 0.5rem;
+
+      .box--title {
+        transition: $defaultTransition;
+
+        &:hover {
+          color: $main;
+        }
+      }
 
       .box--content {
         margin-bottom: 0.5rem;
@@ -733,6 +741,7 @@ li {
       padding: 0.5rem;
 
       .box--title {
+        transition: $defaultTransition;
         margin-bottom: 0.5rem;
 
         h6 {
@@ -759,11 +768,14 @@ li {
       }
     }
 
-    &:hover {
-      color: $black;
+    .box--footer {
+      color: $lightGray;
+      font-size: 15px;
+    }
 
-      .box--icon {
-        color: $black;
+    &:hover {
+      .box--title {
+        color: $main;
       }
     }
   }
