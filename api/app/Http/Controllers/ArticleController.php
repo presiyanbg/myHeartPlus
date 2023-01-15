@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -15,8 +17,15 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $articles = Article::orderByDesc('total_views')->paginate(7);
+
+        // Get name of article writer
+        foreach ($articles as $article) {
+            $article->writer = User::where('id', $article->writer_id)->first()->full_name;
+        }
+
         return response([
-            'articles' => Article::orderByDesc('total_views')->paginate(7),
+            'articles' => $articles
         ], 200);
     }
 
