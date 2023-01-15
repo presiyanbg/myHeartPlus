@@ -499,6 +499,9 @@ li {
         z-index: 100;
 
         .slide--head {
+          width: 100%;
+          height: 100%;
+
           img {
             transition: $defaultTransition;
           }
