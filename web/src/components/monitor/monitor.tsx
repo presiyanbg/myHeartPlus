@@ -1,66 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { changeOpacityOnScroll, scrollToElement } from '../../utils/utils';
+import React, { useContext, useState } from 'react';
 import Router from '../../router/router';
 import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
-import { SELECTORS } from '../../constants/selectors';
 import { CommonContext } from '../../context/commonContext/commonContextProvider';
-import { classNames } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { UserContext } from '../../context/userContext/userContextProvider';
-import { SERVER_URL } from '../../constants/api';
 
 type Props = {};
 
 const Monitor = ({ }: Props) => {
   const [displayPageLoader, setDisplayPageLoader] = useState(false);
-  const heroRef = React.createRef<HTMLDivElement>();
   const { isLoading } = useContext(LoadingContext);
   const { monitorExpanded, toggleMonitorExpanded } = useContext(CommonContext);
-  const { user, isAuth } = useContext(UserContext);
-
-  changeOpacityOnScroll(heroRef, false, 'opacity');
-
-  const monitorClasses = classNames('ekg-monitor-panel', monitorExpanded && 'expanded');
-
-  /**
-   * Handle element click
-   * 
-   * @param caller string 
-   */
-  const handleClick = (caller: string) => {
-    if (caller === 'logo') {
-      scrollToElement(SELECTORS.monitor);
-    }
-
-    if (caller === 'toggleMonitor') {
-      toggleMonitorExpanded(undefined);
-      togglePageLoader(350);
-    }
-  }
-
-  /**
-   * Toggle page loader - display over all content
-   * 
-   * @param time number - Time for loaded to appear
-   */
-  const togglePageLoader = (time: number) => {
-    setDisplayPageLoader(true);
-
-    const timer = setTimeout(() => {
-      setDisplayPageLoader(false);
-    }, time);
-
-    return () => clearTimeout(timer);
-  }
-
-  // Scroll to monitor after page load
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      scrollToElement(SELECTORS.monitor);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <>
