@@ -7,7 +7,7 @@ const HomeLogic = () => {
     const response = await articlesServices.articles();
 
     if (response.articles && response.articles.data) {
-      return response.articles.data;
+      return response.articles;
     } else {
       return [];
     }

@@ -10,10 +10,12 @@ type Props = {};
 const Home = ({ }: Props) => {
   const logic = HomeLogic();
   const [articles, setArticles] = useState<Articles>();
+  const [pagination, setPagination] = useState<Object>({});
 
   useEffect(() => {
-    logic.loadArticles().then(data => {
-      setArticles(data);
+    logic.loadArticles().then(response => {
+      setArticles(response.data);
+      setPagination(response);
     });
   }, []);
 
@@ -21,7 +23,7 @@ const Home = ({ }: Props) => {
     <>
       <div className="hero">
         <div className="hero--content">
-          <ArticlesSlideshow articles={articles}></ArticlesSlideshow>
+          <ArticlesSlideshow articles={articles} pagination={pagination}></ArticlesSlideshow>
         </div>
 
         <div className="hero--controls">

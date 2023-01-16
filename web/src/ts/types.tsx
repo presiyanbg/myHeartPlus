@@ -51,6 +51,7 @@ type Article = {
 
 type Articles = Array<Article>;
 
+
 export type {
   NavLinkType,
   NavLinksType,

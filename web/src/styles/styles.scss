@@ -114,6 +114,19 @@ img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                      supported by Chrome, Edge, Opera and Firefox */
 }
 
 li {
@@ -160,6 +173,8 @@ li {
 
       &.navigation__link--logo {
         float: left;
+        max-height: 100%;
+        padding: 0.5rem;
 
         img {
           height: 6vh;
@@ -465,6 +480,7 @@ li {
   overflow-y: hidden;
   width: 100%;
   height: 100%;
+  position: relative;
 
   .articles-scroll {
     display: flex;
@@ -483,7 +499,7 @@ li {
       grid-gap: $paddingSize;
       height: 35rem;
       min-width: 100%;
-      padding-left: $paddingSize;
+      padding: 0 $paddingSize;
 
 
       &:last-child {
@@ -609,6 +625,50 @@ li {
           }
         }
       }
+    }
+  }
+
+  .articles-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: $pageWidth;
+    height: 100%;
+    margin: 0 auto;
+
+    .articles-controls-right,
+    .articles-controls-left {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      cursor: pointer;
+      padding: 0 3rem;
+      color: rgba(255, 255, 255, 0.8);
+      transition: $defaultTransition;
+
+      svg {
+        filter: drop-shadow(0 1rem 1rem rgba(0, 0, 0, 0.5));
+      }
+
+      &:hover {
+        color: $white;
+        filter: drop-shadow(0 0 3rem rgba(0, 0, 0, 0.8));
+      }
+
+      &:active {
+        color: $darkGray;
+        filter: drop-shadow(0 0 3rem $white);
+      }
+    }
+
+    .articles-controls-right {
+      left: 0;
+    }
+
+    .articles-controls-left {
+      right: 0;
     }
   }
 }

@@ -1,3 +1,4 @@
 export const SELECTORS = {
-  monitor: '.ekg-monitor-panel',
+  articlesScroll: 'articles-scroll',
+  articleSlide: 'articles-scroll',
 }

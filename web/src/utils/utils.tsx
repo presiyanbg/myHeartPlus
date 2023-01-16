@@ -55,12 +55,20 @@ export const changeOpacityOnScroll = (elem: React.RefObject<HTMLDivElement>, tog
  * Scroll to element by string HTML selector
  * 
  * @param elemSelector string -- HTML Element selector 
+ * @param horizontal number -- Scroll horizontally 
  */
-export const scrollToElement = (elemSelector: string) => {
+export const scrollToElement = (elemSelector: string, horizontal?: number) => {
   const elem = document.querySelector(elemSelector);
 
-  if (elem) {
-    elem.scrollIntoView({ behavior: 'smooth' });
+  if (elem && !horizontal) {
+    elem.scrollIntoView({ behavior: 'smooth', });
+  }
+
+  if (elem && horizontal) {
+    elem.scrollTo({
+      left: elem.scrollLeft + horizontal,
+      behavior: "smooth"
+    });
   }
 }
 

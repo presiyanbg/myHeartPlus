@@ -1,12 +1,57 @@
+import React, { useState, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 import { SERVER_URL } from '../../constants/api';
 import { Link } from 'react-router-dom';
 import { Articles, Article } from '../../ts/types';
 import Moment from 'react-moment';
+import { scrollToElement } from '../../utils/utils';
+import { SELECTORS } from '../../constants/selectors';
 
 const ARTICLES_PER_SLIDE = 5;
 
+type Props = {
+  articles?: Articles,
+  pagination?: object
+};
+
 const ArticlesSlideshowLogic = () => {
+  const [articles, setArticles] = useState<Articles>();
+  const [pagination, setPagination] = useState<Object>();
+  const slideRef = React.createRef<HTMLDivElement>();
+
+  /**
+   * Initialize states
+   * 
+   * @param data object { articles, pagination }
+   */
+  const init = (data: Props) => {
+    if (data.articles && data.articles.length) {
+      setArticles(data.articles)
+    }
+
+    if (data.pagination) {
+      setPagination(data.articles)
+    }
+  }
+
+  /**
+   * Change slide
+   * 
+   * @param direction string - < for left, > for right
+   */
+  const changeSlide = (direction: string) => {
+    const slideWidth = slideRef.current?.offsetWidth;
+
+    if (!slideWidth) return;
+
+    if (direction == '<') {
+      scrollToElement(`.${SELECTORS.articlesScroll}`, -slideWidth)
+    }
+
+    if (direction == '>') {
+      scrollToElement(`.${SELECTORS.articlesScroll}`, slideWidth)
+    }
+  }
 
   /**
    * Build article HTML
@@ -15,11 +60,11 @@ const ArticlesSlideshowLogic = () => {
    * @param index number - Index of article in chunk
    * @returns HTML
    */
-  const buildArticleBox = (article: Article, index: number, slideSize: number) => {
+  const buildArticleBox = (article: Article, index: number) => {
     let styles = 'slide' + ' article-' + Number(index + 1);
 
     return (
-      <Link to={`article/` + article.id} className={styles} key={uuid()} >
+      <Link to={`article/` + article.id} className={styles} key={uuid()}>
         <div className="slide--head">
           <img src={SERVER_URL + article.image} alt="Medicine wallpaper" />
         </div>
@@ -48,10 +93,10 @@ const ArticlesSlideshowLogic = () => {
    */
   const buildSlideshows = (articles: Articles) => {
     return (
-      <div className="articles-slideshow" key={uuid()}>
+      <div className="articles-slideshow" key={uuid()} ref={slideRef}>
         {
           articles.map((article, index) => {
-            return buildArticleBox(article, index, articles.length);
+            return buildArticleBox(article, index);
           })
         }
       </div>
@@ -64,7 +109,7 @@ const ArticlesSlideshowLogic = () => {
    * @param articles array - Articles data 
    * @returns HTML
    */
-  const formatArticles = (articles: Articles) => {
+  const formatArticles = () => {
     if (!articles || !articles.length) return (<></>);
 
     let slidesHTML = [];
@@ -82,7 +127,9 @@ const ArticlesSlideshowLogic = () => {
   }
 
   return {
-    formatArticles
+    init,
+    formatArticles,
+    changeSlide
   }
 }
 
