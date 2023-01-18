@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "a877e828-ce5d-4df9-badf-6ef698f4556a",
+		"name": "myHeartPlus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24526622"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|vMVOtyf18Hg3mxIBggo8xToAnhxUKH2udeXRNKQC",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "first_name",
+							"value": "Presiyan",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Tsonevski",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "dev.presiyan@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234567890",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "1234567890",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Article Store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "10|emxeuazyHBtZHwAKwjOOzrWY22D9qqEyOO6efKpv",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/Desktop/Images/new7.jpg"
+						},
+						{
+							"key": "title",
+							"value": "Lorem health care",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.0.73:8020/api/articles/store",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"73"
+					],
+					"port": "8020",
+					"path": [
+						"api",
+						"articles",
+						"store"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local Article Store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "10|emxeuazyHBtZHwAKwjOOzrWY22D9qqEyOO6efKpv",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/Desktop/Images/new7.jpg"
+						},
+						{
+							"key": "title",
+							"value": "Lorem health care",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.0.73:8020/api/articles/store",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"73"
+					],
+					"port": "8020",
+					"path": [
+						"api",
+						"articles",
+						"store"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|lJewDickQAMKOQ7HDWNaJuIn7XsormBX6doSXkGB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/Photos/Profile Pictures/E0i_jjFXoAM-Gx4.jpg"
+						},
+						{
+							"key": "first_name",
+							"value": "test1",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "test2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "1.test.1@abv.bg",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "doctor",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.0.73:8020/api/users/login",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"73"
+					],
+					"port": "8020",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|lJewDickQAMKOQ7HDWNaJuIn7XsormBX6doSXkGB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/Photos/Profile Pictures/E0i_jjFXoAM-Gx4.jpg"
+						},
+						{
+							"key": "first_name",
+							"value": "test1",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "test2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "1.test.1@abv.bg",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "doctor",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
