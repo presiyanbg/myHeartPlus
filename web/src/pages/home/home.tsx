@@ -3,14 +3,14 @@ import ArticlesSlideshow from '../../components/articlesSlideshow/articlesSlides
 import NewsLarge from '../../components/news/newsLarge/newsLarge';
 import NewsSmall from '../../components/news/newsSmall/newsSmall';
 import HomeLogic from './homeLogic';
-import { Articles } from '../../ts/types';
+import { Articles, Pagination } from '../../ts/types';
 
 type Props = {};
 
 const Home = ({ }: Props) => {
   const logic = HomeLogic();
   const [articles, setArticles] = useState<Articles>();
-  const [pagination, setPagination] = useState<Object>({});
+  const [pagination, setPagination] = useState<Pagination>();
 
   useEffect(() => {
     logic.loadArticles().then(response => {

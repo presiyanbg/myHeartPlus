@@ -72,3 +72,40 @@ export const scrollToElement = (elemSelector: string, horizontal?: number) => {
   }
 }
 
+
+/**
+ * Check if element can scroll more
+ * 
+ * Used to load more data on scroll
+ * 
+ * @param elemSelector string -- HTML Element selector
+ * @returns boolean
+ */
+export const checkElementCanScroll = (elemSelector: string): boolean => {
+  const elem = document.querySelector(elemSelector);
+
+  if (elem) {
+    // Add +1 to prevent dividing by 0
+    const scrollLeft = elem.scrollLeft + 1;
+    const clientWidth = elem.clientWidth + 1;
+
+    // Check if less then 2 percent is left for scroll
+    return (clientWidth / scrollLeft) >= 2;
+  }
+
+  return false;
+}
+
+
+export const arrayFilterUnique = (array: any[], identifier: string): any[] => {
+  if (!array.length) return [];
+
+  const filter = [...array].map(article => article[identifier])
+    .filter((value, index, self) => self.indexOf(value) === index);
+
+  const filteredArray = filter.map(el => {
+    return array.find(item => item[identifier] == el);
+  });
+
+  return filteredArray;
+}

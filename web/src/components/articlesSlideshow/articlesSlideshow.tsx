@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import ArticlesSlideshowLogic from './articlesSlideshowLogic';
-import { Articles } from '../../ts/types';
+import { Articles, Pagination } from '../../ts/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import { SELECTORS } from '../../constants/selectors';
 
 type Props = {
   articles?: Articles,
-  pagination?: object
+  pagination?: Pagination
 };
 
 const ArticlesSlideshow = (props: Props) => {
@@ -15,7 +15,7 @@ const ArticlesSlideshow = (props: Props) => {
 
   useEffect(() => {
     if (props.pagination) {
-      logic.init(props)
+      logic.init(props, true);
     }
   }, [props]);
 

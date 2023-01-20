@@ -8,17 +8,19 @@ import { NotificationManager } from 'react-notifications';
 
 const Api = () => {
   const apiUrl = Constants.API_URL;
-  const { setLoading } = useContext(LoadingContext);
+  const { setLoading, setDisplayLoader } = useContext(LoadingContext);
   const { token } = useContext(UserContext);
 
-  const post = async (url: string, params?: {}, notification: boolean = true) => {
+  const post = async (url: string, params?: {}, notification: boolean = true, displayLoading: boolean = true) => {
     setLoading(true);
+    setDisplayLoader(displayLoading);
 
+    const cleanUrl = url.replace(`${apiUrl}`, '');
     const qs = require('qs');
     const data = qs.stringify(params);
     const config = {
       method: 'post',
-      url: `${apiUrl}${url}`,
+      url: `${apiUrl}${cleanUrl}`,
       headers: {
         'Accept': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -30,12 +32,16 @@ const Api = () => {
     return axios(config)
       .then(function (response: any) {
         setLoading(false);
+        setDisplayLoader(false);
+
         notification && NotificationManager.success(response.data.message, 'Success', 10000);
 
         return response.data;
       })
       .catch(function (error: any) {
         setLoading(false);
+        setDisplayLoader(false);
+
         notification && NotificationManager.error(error.message, 'Error');
       });
   }

@@ -35,6 +35,7 @@ type RegistrationFormType = {
   last_name: string,
 }
 
+/* Article Types */
 type Article = {
   content: string,
   id: number,
@@ -51,6 +52,22 @@ type Article = {
 
 type Articles = Array<Article>;
 
+/* Pagination Types */
+type Pagination = {
+  data: any,
+  links: any,
+  current_page: number,
+  from: number,
+  last_page: number,
+  per_page: number,
+  to: number,
+  total: number,
+  first_page_url: string,
+  last_page_url: string,
+  next_page_url: string,
+  path: string,
+  prev_page_url: string,
+}
 
 export type {
   NavLinkType,
@@ -59,4 +76,5 @@ export type {
   RegistrationFormType,
   Article,
   Articles,
+  Pagination
 }

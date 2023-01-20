@@ -9,11 +9,14 @@ export const LoadingContext = createContext({
   setLoading: (active: boolean) => { },
   urlIsLoading: {},
   setUrlLoading: (url: string, loading: boolean) => { },
+  displayLoader: false,
+  setDisplayLoader: (active: boolean) => { },
 });
 
 export const LoadingContextProvider = ({ children }: LoadingProviderProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [urlIsLoading, setUrlIsLoading] = useState({});
+  const [displayLoader, setDisplayLoader] = useState(false);
 
   /**
    * Set main loading flag
@@ -39,7 +42,9 @@ export const LoadingContextProvider = ({ children }: LoadingProviderProps) => {
       isLoading,
       setLoading,
       urlIsLoading,
-      setUrlLoading
+      setUrlLoading,
+      displayLoader,
+      setDisplayLoader,
     }}>
       {children}
     </LoadingContext.Provider>

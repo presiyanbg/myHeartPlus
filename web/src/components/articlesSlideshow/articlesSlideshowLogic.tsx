@@ -2,51 +2,80 @@ import React, { useState, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 import { SERVER_URL } from '../../constants/api';
 import { Link } from 'react-router-dom';
-import { Articles, Article } from '../../ts/types';
+import { Articles, Article, Pagination } from '../../ts/types';
 import Moment from 'react-moment';
-import { scrollToElement } from '../../utils/utils';
+import { scrollToElement, checkElementCanScroll, arrayFilterUnique } from '../../utils/utils';
 import { SELECTORS } from '../../constants/selectors';
 import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
+import PaginationServices from '../../services/paginationServices/paginationServices';
 
 
 const ARTICLES_PER_SLIDE = 5;
 
 type Props = {
   articles?: Articles,
-  pagination?: object
+  pagination?: Pagination
 };
 
 const ArticlesSlideshowLogic = () => {
   const [articles, setArticles] = useState<Articles>();
-  const [pagination, setPagination] = useState<Object>();
+  const [pagination, setPagination] = useState<Pagination>();
+  const { isLoading, displayLoader } = useContext(LoadingContext);
   const slideRef = React.createRef<HTMLDivElement>();
-  const { isLoading } = useContext(LoadingContext);
+  const paginationServices = PaginationServices();
 
   /**
    * Initialize states
    * 
    * @param data object { articles, pagination }
    */
-  const init = (data: Props) => {
+  const init = (data: Props, fromParent: boolean = false) => {
     if (data.articles && data.articles.length) {
-      setArticles(data.articles)
+      setArticles((prev) => {
+        // Combine previous data with new
+        if (prev && data.articles) {
+          // Removed loading articles 
+          const combine = [...prev, ...data.articles].filter(article => article.id > 0);
+
+          // Remove duplicates
+          return arrayFilterUnique(combine, 'id');
+        }
+
+        return data.articles;
+      })
     }
 
-    if (data.pagination) {
-      setPagination(data.articles)
+    if (!fromParent && data.pagination) {
+      setPagination(data.pagination)
     }
+
+    // Get pagination from parent only on load
+    if (!pagination && fromParent && data.pagination) {
+      setPagination(data.pagination)
+    }
+
   }
 
   /**
-   * Change slide
-   * 
-   * @param direction string - < for left, > for right
-   */
-  const changeSlide = (direction: string) => {
+  * Change slide
+  * 
+  * @param direction string - < for left, > for right
+  * @param autoScroll boolean - when called after articles load
+  * 
+  * @returns void
+  */
+  const changeSlide = (direction: string, autoScroll: boolean = false) => {
     const slideWidth = slideRef.current?.offsetWidth;
 
+    // Check if no articles is displayed 
     if (!slideWidth) return;
 
+    // Check if users has scrolled to the end and load more articles
+    if (!autoScroll && !checkElementCanScroll(`.${SELECTORS.articlesScroll}`)) {
+      loadArticles(direction);
+    }
+
+    // Scroll
     if (direction == '<') {
       scrollToElement(`.${SELECTORS.articlesScroll}`, -slideWidth)
     }
@@ -54,6 +83,27 @@ const ArticlesSlideshowLogic = () => {
     if (direction == '>') {
       scrollToElement(`.${SELECTORS.articlesScroll}`, slideWidth)
     }
+  }
+
+  /**
+   * Load articles from api
+   * @param direction string - < for left, > for right
+   * 
+   * @returns void
+   */
+  const loadArticles = (direction?: string) => {
+    if (isLoading) return;
+    if (!pagination || !pagination.next_page_url) return;
+    if (pagination.to == pagination.total) return;
+
+    paginationServices.load(pagination?.next_page_url).then(response => {
+      if (response.articles) {
+        init({
+          articles: response.articles.data,
+          pagination: response.articles
+        });
+      }
+    });
   }
 
   /**
@@ -140,7 +190,7 @@ const ArticlesSlideshowLogic = () => {
   const loadingArticles = () => {
     const emptyArticle: Article = {
       content: '',
-      id: 0,
+      id: -1,
       image: '',
       moment_views: 0,
       writer: '',
@@ -152,7 +202,7 @@ const ArticlesSlideshowLogic = () => {
       updated_at: '2023-01-18T20:03:46.000000Z',
     }
 
-    const emptyArticles: Articles = [...Array(ARTICLES_PER_SLIDE).fill(0).map(x => (emptyArticle))];
+    const emptyArticles: Articles = [...Array(10).fill(0).map(x => (emptyArticle))];
 
     return buildSlideshows(emptyArticles);
   }
@@ -166,10 +216,10 @@ const ArticlesSlideshowLogic = () => {
     return (
       <>
         {
-          isLoading && loadingArticles()
+          displayLoader && loadingArticles()
         }
         {
-          !isLoading && formatArticles()
+          !displayLoader && formatArticles()
         }
       </>
     )

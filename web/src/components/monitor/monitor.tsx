@@ -9,13 +9,13 @@ type Props = {};
 
 const Monitor = ({ }: Props) => {
   const [displayPageLoader, setDisplayPageLoader] = useState(false);
-  const { isLoading } = useContext(LoadingContext);
+  const { displayLoader } = useContext(LoadingContext);
   const { monitorExpanded, toggleMonitorExpanded } = useContext(CommonContext);
 
   return (
     <>
       {/* Page loader */}
-      {isLoading &&
+      {displayLoader &&
         <>
           <div className="page--loader">
             <div className="loader--icon">
