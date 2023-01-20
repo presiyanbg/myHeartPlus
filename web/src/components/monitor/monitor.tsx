@@ -18,8 +18,8 @@ const Monitor = ({ }: Props) => {
       {isLoading &&
         <>
           <div className="page--loader">
-            <div className="loader--image">
-              <FontAwesomeIcon icon={faSpinner} spin size="6x" color="white" />
+            <div className="loader--icon">
+              <FontAwesomeIcon icon={faSpinner} spin size="6x" />
             </div>
           </div>
         </>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 import { SERVER_URL } from '../../constants/api';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { Articles, Article } from '../../ts/types';
 import Moment from 'react-moment';
 import { scrollToElement } from '../../utils/utils';
 import { SELECTORS } from '../../constants/selectors';
+import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
+
 
 const ARTICLES_PER_SLIDE = 5;
 
@@ -18,6 +20,7 @@ const ArticlesSlideshowLogic = () => {
   const [articles, setArticles] = useState<Articles>();
   const [pagination, setPagination] = useState<Object>();
   const slideRef = React.createRef<HTMLDivElement>();
+  const { isLoading } = useContext(LoadingContext);
 
   /**
    * Initialize states
@@ -65,6 +68,10 @@ const ArticlesSlideshowLogic = () => {
 
     return (
       <Link to={`article/` + article.id} className={styles} key={uuid()}>
+        {
+          isLoading &&
+          <div className='slide--loader'>Tet</div>
+        }
         <div className="slide--head">
           <img src={SERVER_URL + article.image} alt="Medicine wallpaper" />
         </div>
@@ -106,7 +113,6 @@ const ArticlesSlideshowLogic = () => {
   /**
    * Format articles data into HTML
    * 
-   * @param articles array - Articles data 
    * @returns HTML
    */
   const formatArticles = () => {
@@ -126,10 +132,55 @@ const ArticlesSlideshowLogic = () => {
     return slidesHTML;
   }
 
+  /**
+   * Displaying empty articles while loading data from API
+   * 
+   * @returns HTML
+   */
+  const loadingArticles = () => {
+    const emptyArticle: Article = {
+      content: '',
+      id: 0,
+      image: '',
+      moment_views: 0,
+      writer: '',
+      shares: 0,
+      slug: '',
+      title: '',
+      total_views: 0,
+      created_at: '2023-01-18T20:03:46.000000Z',
+      updated_at: '2023-01-18T20:03:46.000000Z',
+    }
+
+    const emptyArticles: Articles = [...Array(ARTICLES_PER_SLIDE).fill(0).map(x => (emptyArticle))];
+
+    return buildSlideshows(emptyArticles);
+  }
+
+  /**
+   * Display loading or real articles when data is loaded 
+   * 
+   * @returns HTML
+   */
+  const displayArticles = () => {
+    return (
+      <>
+        {
+          isLoading && loadingArticles()
+        }
+        {
+          !isLoading && formatArticles()
+        }
+      </>
+    )
+  }
+
   return {
     init,
     formatArticles,
-    changeSlide
+    changeSlide,
+    loadingArticles,
+    displayArticles,
   }
 }
 

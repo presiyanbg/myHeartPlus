@@ -4,8 +4,9 @@ type Props = {};
 
 const Check = ({ }: Props) => {
   return (
-    <div className="row">
-      Check CheckCheckCheckCheckCheck
+    <div className="wrapper">
+      <div className="page article-page">
+      </div>
     </div>
   );
 }

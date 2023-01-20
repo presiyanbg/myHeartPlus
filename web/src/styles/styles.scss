@@ -73,7 +73,6 @@ h3 {
 h4 {
   font-size: 16px;
   line-height: 1.5em;
-  letter-spacing: 0.1em;
 }
 
 h5 {
@@ -330,11 +329,12 @@ li {
   .hero--background-gradient {
     height: 100%;
     width: 100%;
+    background-color: $softLight;
+    box-shadow: $pageShadowInset;
+    // background: rgb(218, 218, 218);
     // background: linear-gradient(-45deg, $lightBlue, $softBlue, $purple, $main);
     // background-size: 400% 400%;
     // animation: backgroundPosition 15s ease infinite;
-    background-color: $white;
-    box-shadow: $pageShadowInset
   }
 
   .hero--background-image {
@@ -523,6 +523,24 @@ li {
 
           img {
             transition: $defaultTransition;
+          }
+        }
+
+        .slide--loader {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $softGray;
+            z-index: 1000;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
           }
         }
 
@@ -945,7 +963,7 @@ li {
 }
 
 .page--loader {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -954,14 +972,11 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $light;
-  opacity: 0.5;
+  background-color: $black;
+  opacity: 0.6;
 
-  .loader--image {
-    width: 20vw;
-    margin-left: 5vw;
-    mix-blend-mode: exclusion;
-    filter: hue-rotate(15deg) brightness(0.5);
+  .loader--icon {
+    color: $white;
   }
 }
 

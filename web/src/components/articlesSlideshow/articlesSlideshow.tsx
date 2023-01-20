@@ -22,7 +22,7 @@ const ArticlesSlideshow = (props: Props) => {
   return (
     <div className="articles-wrapper hide--scroll">
       <div className={SELECTORS.articlesScroll}>
-        {logic.formatArticles()}
+        {logic.displayArticles()}
       </div>
 
       <div className="articles-controls">

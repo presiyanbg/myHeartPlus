@@ -4,8 +4,9 @@ type Props = {};
 
 const Default = ({ }: Props) => {
   return (
-    <div className="row">
-      Default page
+    <div className="wrapper">
+      <div className="page article-page">
+      </div>
     </div>
   );
 }

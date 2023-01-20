@@ -4,8 +4,9 @@ type Props = {};
 
 const Doctors = ({ }: Props) => {
   return (
-    <div className="row">
-      Doctors
+    <div className="wrapper">
+      <div className="page article-page">
+      </div>
     </div>
   );
 }
