@@ -119,7 +119,7 @@ const ArticlesSlideshowLogic = () => {
     return (
       <Link to={`article/` + article.id} className={styles} key={uuid()}>
         {
-          isLoading &&
+          isLoading && !pagination &&
           <div className='slide--loader'>Tet</div>
         }
         <div className="slide--head">
