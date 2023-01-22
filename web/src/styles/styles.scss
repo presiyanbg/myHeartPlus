@@ -810,12 +810,6 @@ li {
       max-height: $smallNewsBox;
       overflow: hidden;
       border-radius: $defaultRadius;
-
-      img {
-        object-fit: cover;
-        width: 100%;
-        height: $smallNewsBox;
-      }
     }
 
     .box--body {
