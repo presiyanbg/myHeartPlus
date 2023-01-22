@@ -15,12 +15,11 @@ const Api = () => {
     setLoading(true);
     setDisplayLoader(displayLoading);
 
-    const cleanUrl = url.replace(`${apiUrl}`, '');
     const qs = require('qs');
     const data = qs.stringify(params);
     const config = {
       method: 'post',
-      url: `${apiUrl}${cleanUrl}`,
+      url: `${apiUrl}${url}`,
       headers: {
         'Accept': 'application/json',
         'Authorization': `Bearer ${token}`,

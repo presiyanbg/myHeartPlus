@@ -105,7 +105,7 @@ const ArticlesSlideshowLogic = () => {
     if (!pagination || !pagination.next_page_url) return;
     if (pagination.to == pagination.total) return;
 
-    paginationServices.load(pagination?.next_page_url).then(response => {
+    paginationServices.load('articles', pagination.current_page + 1).then(response => {
       if (response.articles) {
         init({
           articles: response.articles.data,
