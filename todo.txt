@@ -20,6 +20,7 @@
 		- Images cache 
 		- Calendar with switch for Personal tracking / News, change date color depending on data
 		- Articles infinity scroll
+		- Add caching service 
 </Web>
 
 <API>
