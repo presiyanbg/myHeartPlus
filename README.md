@@ -1,5 +1,6 @@
 # myHeartPlus
-Medicine app made with React Native and TypeScript 
+Medicine app made with 
 
-### Additional software 
-- i18n 
+API - Laravel
+WEB - React 
+Mobile - React Native 
