@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 import { SERVER_URL } from '../../../constants/api';
 import { v4 as uuid } from 'uuid';
-import { Articles } from '../../../ts/types';
+import { ArticlesType } from '../../../ts/types';
 import NewsLogic from '../newsLogic';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -11,12 +11,12 @@ import Moment from 'react-moment';
 import ImageLoader from '../../loaders/imageLoader/imageLoader';
 
 type Props = {
-  articles?: Articles,
+  articles?: ArticlesType,
   singleComponent?: boolean,
 }
 
 const NewsSmall = (props: Props) => {
-  const [articles, setArticles] = useState<Articles>([]);
+  const [articles, setArticles] = useState<ArticlesType>([]);
   const logic = NewsLogic();
   const { t } = useTranslation();
 

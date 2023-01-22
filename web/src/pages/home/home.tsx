@@ -3,14 +3,14 @@ import ArticlesSlideshow from '../../components/articlesSlideshow/articlesSlides
 import NewsLarge from '../../components/news/newsLarge/newsLarge';
 import NewsSmall from '../../components/news/newsSmall/newsSmall';
 import HomeLogic from './homeLogic';
-import { Articles, Pagination } from '../../ts/types';
+import { ArticlesType, PaginationType } from '../../ts/types';
 
 type Props = {};
 
 const Home = ({ }: Props) => {
   const logic = HomeLogic();
-  const [articles, setArticles] = useState<Articles>();
-  const [pagination, setPagination] = useState<Pagination>();
+  const [articles, setArticles] = useState<ArticlesType>();
+  const [pagination, setPagination] = useState<PaginationType>();
 
   useEffect(() => {
     logic.loadArticles().then(response => {
@@ -40,6 +40,9 @@ const Home = ({ }: Props) => {
             <div className="col-12 col-md-4">
               <NewsSmall articles={articles}></NewsSmall>
             </div>
+          </div>
+
+          <div className="row">
           </div>
         </div>
       </div>

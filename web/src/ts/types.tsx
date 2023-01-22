@@ -36,7 +36,7 @@ type RegistrationFormType = {
 }
 
 /* Article Types */
-type Article = {
+type ArticleType = {
   content: string,
   id: number,
   image: string,
@@ -50,10 +50,10 @@ type Article = {
   updated_at: string,
 }
 
-type Articles = Array<Article>;
+type ArticlesType = Array<ArticleType>;
 
 /* Pagination Types */
-type Pagination = {
+type PaginationType = {
   data: any,
   links: any,
   current_page: number,
@@ -74,7 +74,7 @@ export type {
   NavLinksType,
   UserType,
   RegistrationFormType,
-  Article,
-  Articles,
-  Pagination
+  ArticleType,
+  ArticlesType,
+  PaginationType
 }

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { SERVER_URL } from '../../constants/api';
 import { Link } from 'react-router-dom';
-import { Articles, Article, Pagination } from '../../ts/types';
+import { ArticlesType, ArticleType, PaginationType } from '../../ts/types';
 import Moment from 'react-moment';
 import { scrollToElement, checkElementCanScroll, arrayFilterUnique } from '../../utils/utils';
 import { SELECTORS } from '../../constants/selectors';
@@ -13,13 +13,13 @@ import ImageLoader from '../loaders/imageLoader/imageLoader';
 const ARTICLES_PER_SLIDE = 5;
 
 type Props = {
-  articles?: Articles,
-  pagination?: Pagination
+  articles?: ArticlesType,
+  pagination?: PaginationType
 };
 
 const ArticlesSlideshowLogic = () => {
-  const [articles, setArticles] = useState<Articles>();
-  const [pagination, setPagination] = useState<Pagination>();
+  const [articles, setArticles] = useState<ArticlesType>();
+  const [pagination, setPagination] = useState<PaginationType>();
   const [slideLoaded, setSlideLoaded] = useState<boolean>(false);
   const { isLoading, displayLoader } = useContext(LoadingContext);
   const slideRef = React.createRef<HTMLDivElement>();
@@ -124,7 +124,7 @@ const ArticlesSlideshowLogic = () => {
    * @param index number - Index of article in chunk
    * @returns HTML
    */
-  const buildArticleBox = (article: Article, index: number) => {
+  const buildArticleBox = (article: ArticleType, index: number) => {
     let styles = 'slide' + ' article-' + Number(index + 1);
 
     return (
@@ -159,7 +159,7 @@ const ArticlesSlideshowLogic = () => {
    * @param articles array - Chunk of articles to display in slide
    * @returns HTML
    */
-  const buildSlideshows = (articles: Articles) => {
+  const buildSlideshows = (articles: ArticlesType) => {
     return (
       <div className="articles-slideshow" key={uuid()} ref={slideRef} >
         {
@@ -199,7 +199,7 @@ const ArticlesSlideshowLogic = () => {
    * @returns HTML
    */
   const loadingArticles = () => {
-    const emptyArticle: Article = {
+    const emptyArticle: ArticleType = {
       content: '',
       id: -1,
       image: '',
@@ -213,7 +213,7 @@ const ArticlesSlideshowLogic = () => {
       updated_at: '2023-01-18T20:03:46.000000Z',
     }
 
-    const emptyArticles: Articles = [...Array(10).fill(0).map(x => (emptyArticle))];
+    const emptyArticles: ArticlesType = [...Array(10).fill(0).map(x => (emptyArticle))];
 
     return buildSlideshows(emptyArticles);
   }
