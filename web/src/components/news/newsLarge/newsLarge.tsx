@@ -4,6 +4,7 @@ import { SERVER_URL } from '../../../constants/api';
 import { v4 as uuid } from 'uuid';
 import { Articles } from '../../../ts/types';
 import Moment from 'react-moment';
+import ImageLoader from '../../loaders/imageLoader/imageLoader';
 
 type Props = {
   articles?: Articles;
@@ -19,7 +20,7 @@ const NewsLarge = (props: Props) => {
           return (
             <div className="news-box" key={uuid()}>
               <div className="box--head">
-                <img src={SERVER_URL + article.image} alt="" />
+                <ImageLoader src={article.image} alt={article.title}></ImageLoader>
               </div>
 
               <div className="box--body">

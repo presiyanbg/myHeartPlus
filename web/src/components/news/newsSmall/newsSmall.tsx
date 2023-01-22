@@ -8,6 +8,7 @@ import NewsLogic from '../newsLogic';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import ImageLoader from '../../loaders/imageLoader/imageLoader';
 
 type Props = {
   articles?: Articles,
@@ -52,7 +53,7 @@ const NewsSmall = (props: Props) => {
           return (
             <Link to={`/article/${article.id}`} className="news-box" key={uuid()}>
               <div className="box--head">
-                <img src={SERVER_URL + article.image} alt="" />
+                <ImageLoader src={article.image} alt={article.title}></ImageLoader>
               </div>
 
               <div className="box--body">

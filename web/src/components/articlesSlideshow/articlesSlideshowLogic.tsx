@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { SERVER_URL } from '../../constants/api';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { scrollToElement, checkElementCanScroll, arrayFilterUnique } from '../..
 import { SELECTORS } from '../../constants/selectors';
 import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
 import PaginationServices from '../../services/paginationServices/paginationServices';
-
+import ImageLoader from '../loaders/imageLoader/imageLoader';
 
 const ARTICLES_PER_SLIDE = 5;
 
@@ -20,9 +20,22 @@ type Props = {
 const ArticlesSlideshowLogic = () => {
   const [articles, setArticles] = useState<Articles>();
   const [pagination, setPagination] = useState<Pagination>();
+  const [slideLoaded, setSlideLoaded] = useState<boolean>(false);
   const { isLoading, displayLoader } = useContext(LoadingContext);
   const slideRef = React.createRef<HTMLDivElement>();
   const paginationServices = PaginationServices();
+
+  /**
+   * Automatically change slide after loading new articles
+   */
+  useEffect(() => {
+    // Check if slide was loaded and slide HTML is rendered 
+    if (slideLoaded && slideRef.current) {
+      changeSlide('>', true);
+
+      setSlideLoaded(false);
+    }
+  }, [articles])
 
   /**
    * Initialize states
@@ -71,7 +84,7 @@ const ArticlesSlideshowLogic = () => {
 
     // Check if users has scrolled to the end and load more articles
     if (!autoScroll && !checkElementCanScroll(`.${SELECTORS.articlesScroll}`)) {
-      loadArticles(direction);
+      loadArticles();
     }
 
     // Scroll
@@ -86,11 +99,8 @@ const ArticlesSlideshowLogic = () => {
 
   /**
    * Load articles from api
-   * 
-   * @param direction string - < for left, > for right
-   * @returns void
    */
-  const loadArticles = (direction?: string) => {
+  const loadArticles = () => {
     if (isLoading) return;
     if (!pagination || !pagination.next_page_url) return;
     if (pagination.to == pagination.total) return;
@@ -101,6 +111,8 @@ const ArticlesSlideshowLogic = () => {
           articles: response.articles.data,
           pagination: response.articles
         });
+
+        setSlideLoaded(true);
       }
     });
   }
@@ -118,11 +130,11 @@ const ArticlesSlideshowLogic = () => {
     return (
       <Link to={`article/` + article.id} className={styles} key={uuid()}>
         {
-          isLoading && !pagination &&
+          displayLoader && !pagination &&
           <div className='slide--loader'>Tet</div>
         }
         <div className="slide--head">
-          <img src={SERVER_URL + article.image} alt="Medicine wallpaper" />
+          <ImageLoader src={article.image} alt={article.title}></ImageLoader>
         </div>
 
         <div className="slide--body">
@@ -149,7 +161,7 @@ const ArticlesSlideshowLogic = () => {
    */
   const buildSlideshows = (articles: Articles) => {
     return (
-      <div className="articles-slideshow" key={uuid()} ref={slideRef}>
+      <div className="articles-slideshow" key={uuid()} ref={slideRef} >
         {
           articles.map((article, index) => {
             return buildArticleBox(article, index);
