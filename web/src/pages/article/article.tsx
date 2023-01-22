@@ -5,6 +5,8 @@ import ArticleLogic from "./articleLogic";
 import Comments from "../../components/comments/comments";
 import NewsSmall from "../../components/news/newsSmall/newsSmall";
 import { SERVER_URL } from "../../constants/api";
+import { SELECTORS } from "../../constants/selectors";
+import { scrollToElement } from '../../utils/utils';
 
 type Props = {};
 
@@ -19,6 +21,7 @@ const Article = ({ }: Props) => {
       logic.loadArticle(id).then(articleData => {
         setArticle(articleData.article);
         setArticleHTML({ __html: articleData.page });
+        scrollToElement(`.${SELECTORS.articleTitle}`);
       });
     }
   }, [id]);

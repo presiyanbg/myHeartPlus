@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
-import { SERVER_URL } from '../../../constants/api';
 import { v4 as uuid } from 'uuid';
 import { Articles } from '../../../ts/types';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import ImageLoader from '../../loaders/imageLoader/imageLoader';
 
@@ -18,7 +18,7 @@ const NewsLarge = (props: Props) => {
       {
         props.articles.map(article => {
           return (
-            <div className="news-box" key={uuid()}>
+            <Link to={`/article/${article.id}`} className="news-box" key={uuid()}>
               <div className="box--head">
                 <ImageLoader src={article.image} alt={article.title}></ImageLoader>
               </div>
@@ -47,7 +47,7 @@ const NewsLarge = (props: Props) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           )
 
         })
