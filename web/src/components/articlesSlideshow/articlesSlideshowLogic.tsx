@@ -61,7 +61,6 @@ const ArticlesSlideshowLogic = () => {
   * 
   * @param direction string - < for left, > for right
   * @param autoScroll boolean - when called after articles load
-  * 
   * @returns void
   */
   const changeSlide = (direction: string, autoScroll: boolean = false) => {
@@ -87,8 +86,8 @@ const ArticlesSlideshowLogic = () => {
 
   /**
    * Load articles from api
-   * @param direction string - < for left, > for right
    * 
+   * @param direction string - < for left, > for right
    * @returns void
    */
   const loadArticles = (direction?: string) => {
