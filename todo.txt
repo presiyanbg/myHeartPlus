@@ -17,7 +17,6 @@
 		- Form validation
 		- Hamburger navigation
 		- Save common context to local storage 
-		- Images cache 
 		- Calendar with switch for Personal tracking / News, change date color depending on data
 		- Articles infinity scroll
 		- Add caching service 
