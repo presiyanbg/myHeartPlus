@@ -1,4 +1,5 @@
 import { UserClass } from './classes';
+import { CacheType } from './types';
 
 /* Context */
 interface UserContextInterface {
@@ -11,6 +12,13 @@ interface UserContextInterface {
   renounce: Function,
 }
 
+interface CommonContextInterface {
+  monitorExpanded: boolean,
+  toggleMonitorExpanded: (toggle: boolean | undefined) => void,
+  cache: CacheType,
+  setCache: (data: CacheType) => void
+}
+
 /* Common */
 interface ReactNoteInterface {
   children: React.ReactNode
@@ -18,5 +26,6 @@ interface ReactNoteInterface {
 
 export type {
   UserContextInterface,
-  ReactNoteInterface
+  ReactNoteInterface,
+  CommonContextInterface
 }

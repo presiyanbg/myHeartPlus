@@ -69,6 +69,11 @@ type PaginationType = {
   prev_page_url: string,
 }
 
+/* Cache Types */
+type CacheType = {
+  [key: string]: any;
+}
+
 export type {
   NavLinkType,
   NavLinksType,
@@ -76,5 +81,6 @@ export type {
   RegistrationFormType,
   ArticleType,
   ArticlesType,
-  PaginationType
+  PaginationType,
+  CacheType
 }
