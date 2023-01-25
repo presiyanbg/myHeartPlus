@@ -12,14 +12,14 @@
 		- Small control panel accessible from top navigation -- Ready 06.12.22
 		- Notification -- Ready 04.12.22
 		- Start using translations -- Ready 18.12.22
-		- Design i like - Ready 15.01.22
+		- Design i like -- Ready 15.01.22
 		- Animation on scroll
 		- Form validation
 		- Hamburger navigation
 		- Save common context to local storage 
 		- Calendar with switch for Personal tracking / News, change date color depending on data
 		- Articles infinity scroll
-		- Add caching service 
+		- Add caching service -- Ready 25.01.2023
 </Web>
 
 <API>
