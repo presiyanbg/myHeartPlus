@@ -943,6 +943,48 @@ li {
   }
 }
 
+/* User form */
+.user-form--field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .user-form--profile--picture {
+    cursor: pointer;
+    position: relative;
+    height: 6rem;
+    width: 6rem;
+    margin-bottom: 0.5rem;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 100%;
+      overflow: hidden;
+      outline: 3px solid $main;
+    }
+
+    input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6rem;
+      height: 6rem;
+      opacity: 0;
+    }
+
+    &:hover {
+      img {
+        outline-color: $darkMain;
+      }
+    }
+  }
+}
+
 /* Common */
 .cursor-pointer {
   cursor: pointer;

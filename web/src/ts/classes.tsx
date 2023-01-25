@@ -9,6 +9,7 @@ class UserClass {
   email_verified_at: string = '';
   created_at: string = '';
   updated_at: string = '';
+  image: string = '';
 
   constructor(
   ) { }
@@ -24,6 +25,7 @@ class UserClass {
     this.email_verified_at = user.email_verified_at;
     this.created_at = user.created_at;
     this.updated_at = user.updated_at;
+    this.image = user.image;
   }
 }
 

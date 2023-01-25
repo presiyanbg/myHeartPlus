@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../context/userContext/userContextProvider';
-import Login from './login/login';
-import Logout from './logout/logout';
-import Registration from './registration/registration';
+import Login from '../../components/authentication/login/login';
+import Logout from '../../components/authentication/logout/logout';
+import Registration from '../../components/authentication/registration/registration';
 
 type Props = {};
 
@@ -29,12 +29,13 @@ const Authentication = ({ }: Props) => {
           }
           {
             !isAuth && <>
-              <div className="row justify-content-center">
+              <div className="row justify-content-center mb-3">
                 <div className="col-8">
                   {display == 'login' && <Login></Login>}
                   {display == 'register' && <Registration></Registration>}
                 </div>
               </div>
+
               <div className="row">
                 <div className="col-12">
                   <p className="cursor-pointer text-capitalize text-center" onClick={toggleDisplay}>

@@ -14,7 +14,19 @@ const Api = () => {
   const { cache, setCache } = useContext(CommonContext);
   const { token } = useContext(UserContext);
 
-  const post = async (url: string, params?: {}, notification: boolean = true, displayLoading: boolean = true, loadCache: boolean = true) => {
+  /**
+   * Post data to API
+   * 
+   * @param url string - API url that data is sended to
+   * @param data object - Data for the API
+   * @param notification boolean - Flag if notifications should be visible 
+   * @param displayLoading boolean - Flag if visual loaders should be visible 
+   * @param loadCache boolean - Flag if data can be cached 
+   * @param formData boolean - Flag if data send should be send as json of Form data
+   * 
+   * @returns object - Api response data
+   */
+  const post = async (url: string, data?: {}, notification: boolean = true, displayLoading: boolean = true, loadCache: boolean = true, formData: boolean = false) => {
     // Check if data is saved in cache 
     if (loadCache && cache[url] != undefined) {
       setLoading(false);
@@ -27,9 +39,13 @@ const Api = () => {
     setLoading(true);
     setDisplayLoader(displayLoading);
 
+    // Format data as json 
+    if (!formData) {
+      const qs = require('qs');
+      data = qs.stringify(data);
+    }
+
     // Request data from API
-    const qs = require('qs');
-    const data = qs.stringify(params);
     const config = {
       method: 'post',
       url: `${apiUrl}${url}`,
@@ -38,7 +54,7 @@ const Api = () => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data: data
+      data: data,
     };
 
     return axios(config)

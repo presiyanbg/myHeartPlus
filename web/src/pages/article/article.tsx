@@ -7,11 +7,12 @@ import NewsSmall from "../../components/news/newsSmall/newsSmall";
 import { SERVER_URL } from "../../constants/api";
 import { SELECTORS } from "../../constants/selectors";
 import { scrollToElement } from '../../utils/utils';
+import { ArticleType } from "../../ts/types";
 
 type Props = {};
 
 const Article = ({ }: Props) => {
-  const [article, setArticle] = useState<any>({});
+  const [article, setArticle] = useState<ArticleType | any>({});
   const [articleHTML, setArticleHTML] = useState({ __html: "" });
   const logic = ArticleLogic();
   const { id } = useParams();

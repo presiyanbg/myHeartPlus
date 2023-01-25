@@ -30,9 +30,15 @@ type UserType = {
   updated_at: string,
 }
 
-type RegistrationFormType = {
+type UserFormType = {
+  email: string,
   first_name: string,
   last_name: string,
+  password: string,
+  password_confirmation: string,
+  role: boolean,
+  profile_picture: File | string,
+  [key: string]: any;
 }
 
 /* Article Types */
@@ -78,7 +84,7 @@ export type {
   NavLinkType,
   NavLinksType,
   UserType,
-  RegistrationFormType,
+  UserFormType,
   ArticleType,
   ArticlesType,
   PaginationType,

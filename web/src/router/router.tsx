@@ -10,7 +10,7 @@ import Home from '../pages/home/home';
 import Check from '../pages/check/check';
 import Doctors from '../pages/doctors/doctors';
 import Forum from '../pages/forum/forum';
-import Authentication from '../components/authentication/authentication';
+import Authentication from '../pages/authentication/authentication';
 import Article from '../pages/article/article';
 
 type Props = {};

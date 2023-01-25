@@ -28,7 +28,7 @@ const TopNavigationDropDown = (props: Props) => {
         <Dropdown.Item href="#/action-1" className="dropdown--picture">
           <div className="profile--picture mb-3 mt-3">
             <div className="image">
-              <img src={SERVER_URL + 'images/users/user-photo__1.jpg'} alt="User photo" />
+              <img src={SERVER_URL + user?.image} alt="User photo" />
             </div>
           </div>
         </Dropdown.Item>
