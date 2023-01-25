@@ -21,7 +21,15 @@ class ArticleController extends Controller
 
         // Get name of article writer
         foreach ($articles as $article) {
-            $article->writer = User::where('id', $article->writer_id)->first()->full_name;
+            $writer = User::where('id', $article->writer_id)->first();
+
+            if ($writer) {
+                $article->writer = $writer->full_name;
+            }
+
+            if (!$writer) {
+                $article->writer = 'Presiyan Tsonevski';
+            }
         }
 
         return response([

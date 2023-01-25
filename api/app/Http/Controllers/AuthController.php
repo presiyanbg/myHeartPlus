@@ -73,7 +73,8 @@ class AuthController extends Controller
                 'last_name' => 'required|string',
                 'email' => 'required|string|unique:users,email',
                 'password' => 'required|string|confirmed',
-                'role' => 'required|string'
+                'role' => 'required|string',
+                'profile_picture' => 'nullable|file'
             ]);
 
             // Check and reset user role
@@ -94,19 +95,27 @@ class AuthController extends Controller
                 'last_activity' => Carbon::now()->toDateTimeString(),
             ]);
 
-            $token = $user->createToken('appToken')->plainTextToken;
-
             // Upload image
-            if ($request->hasFile('image')) {
-                $filename = $request->image->getClientOriginalName();
-                $request->image->storeAs('images', $filename, 'public');
-                $user->update(['image' => $filename]);
+            if ($request->hasFile('profile_picture')) {
+                $imageName = $user->id . '-' . time() . '.' . $request->profile_picture->extension();
+                $imagePath = 'images/users/' . $imageName;
+                $request->profile_picture->move(public_path('images/users'), $imageName);
+
+                $user->update(['image' => $imagePath]);
             }
+
+            if (!$request->hasFile('profile_picture')) {
+                $user->update(['image' => '<images>
+                <users>default.png']);
+            }
+
+            $token = $user->createToken('appToken')->plainTextToken;
 
             return response([
                 'user' => $user,
                 'token' => $token,
-                'message' => 'Welcome!'
+                'message' => 'Welcome!',
+                'test' => $request->hasFile('profile_picture')
             ], 200);
         } catch (Throwable $e) {
             return response([
