@@ -21,7 +21,7 @@ const Article = ({ }: Props) => {
       logic.loadArticle(id).then(articleData => {
         setArticle(articleData.article);
         setArticleHTML({ __html: articleData.page });
-        scrollToElement(`.${SELECTORS.articleTitle}`);
+        scrollToElement(`.${SELECTORS.anchorScroll}`);
       });
     }
   }, [id]);
@@ -29,6 +29,9 @@ const Article = ({ }: Props) => {
   return (
     <div className="wrapper">
       <div className="page article-page">
+        {/* Empty element used for auto scroll on page change */}
+        <div className={`${SELECTORS.anchorScroll} t-nav`}></div>
+
         <div className="row mb-3">
           <div className="col-7">
             <div className="row">
