@@ -105,8 +105,7 @@ class AuthController extends Controller
             }
 
             if (!$request->hasFile('profile_picture')) {
-                $user->update(['image' => '<images>
-                <users>default.png']);
+                $user->update(['image' => 'images/users/default.png']);
             }
 
             $token = $user->createToken('appToken')->plainTextToken;
