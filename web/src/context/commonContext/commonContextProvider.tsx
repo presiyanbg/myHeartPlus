@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
 import { CacheType } from "../../ts/types";
 import { CommonContextInterface } from "../../ts/interfaces";
 interface CommonProviderProps {

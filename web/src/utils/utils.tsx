@@ -13,7 +13,7 @@ export const classNames = (...args: any[]) => {
  * 
  * @param elem HTML Div -- Element that will get its opacity changed based on scroll
  * @param toggle Boolean -- If true element will be showed, If false element will be hidden
- * @param mode string 'opacity' or 'background'
+ * @param mode string -- 'opacity' or 'background'
  * @param maxOpacity number -- Max opacity that will be set on the object
  */
 export const changeOpacityOnScroll = (elem: React.RefObject<HTMLDivElement>, toggle: boolean, mode: 'opacity' | 'background', maxOpacity?: number) => {
@@ -96,16 +96,34 @@ export const checkElementCanScroll = (elemSelector: string): boolean => {
   return false;
 }
 
-
-export const arrayFilterUnique = (array: any[], identifier: string): any[] => {
+/**
+ * Filter only unique objects in array by key;
+ * 
+ * @param array array -- Array with objects to be filtered
+ * @param key string -- Key for the object property  
+ * 
+ * @returns array
+ */
+export const arrayFilterUnique = (array: any[], key: string): any[] => {
   if (!array.length) return [];
 
-  const filter = [...array].map(article => article[identifier])
+  const filter = [...array].map(article => article[key])
     .filter((value, index, self) => self.indexOf(value) === index);
 
   const filteredArray = filter.map(el => {
-    return array.find(item => item[identifier] == el);
+    return array.find(item => item[key] == el);
   });
 
   return filteredArray;
+}
+
+/**
+ * Copy object and remove reference to main object
+ * 
+ * @param object object -- Object to make a copy from
+ * 
+ * @returns object
+ */
+export const copyObject = (object: any) => {
+  return JSON.parse(JSON.stringify(object));
 }

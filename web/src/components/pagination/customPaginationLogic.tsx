@@ -1,6 +1,6 @@
 import { PaginationType } from "../../ts/types";
 import PaginationServices from "../../services/paginationServices/paginationServices";
-
+import { copyObject } from "../../utils/utils";
 
 const CustomPaginationLogic = () => {
   const paginationServices = PaginationServices();
@@ -15,14 +15,15 @@ const CustomPaginationLogic = () => {
    * @returns data from API or empty object
    */
   const changePage = async (url: string, direction: string, pagination: PaginationType, page?: number) => {
+    const paginationCopy = copyObject(pagination);
     let pageToLoad = 0;
 
-    if (direction == '>' && pagination.current_page++ <= pagination.last_page) {
-      pageToLoad = pagination.current_page++;
+    if (direction == '>' && paginationCopy.current_page++ <= paginationCopy.last_page) {
+      pageToLoad = paginationCopy.current_page++;
     }
 
-    if (direction == '<' && pagination.current_page-- >= 1) {
-      pageToLoad = pagination.current_page--;
+    if (direction == '<' && paginationCopy.current_page-- >= 1) {
+      pageToLoad = paginationCopy.current_page--;
     }
 
     if (!pageToLoad) return;
