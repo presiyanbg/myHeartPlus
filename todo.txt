@@ -1,6 +1,40 @@
-#
-#	TODO 15.11.22
-#
+
+# *********************************************************************************
+#										TODO 
+# *********************************************************************************
+
+<Web>
+		- Animation on scroll
+		- Form validation
+		- Hamburger navigation
+		- Save common context to local storage 
+		- Calendar with switch for Personal tracking / News, change date color depending on data
+		- Articles infinity scroll
+		- Comments
+		- Doctor test 
+		- Doctor page / list / select 
+</Web>
+
+<API>
+		- Save preferences as json
+		- Comments real time
+		- Collect data from doctor test table 
+		- Doctor table
+</API>
+
+<Ideas>
+	Check 
+		- At least 3 free test 
+			- Patient answers questions (A, B, C, D) and gets answer - You are fine or Go see a doctor 
+
+	Get users height, weight, etc and show them where their are on graph with data 
+</Ideas>
+
+
+
+# *********************************************************************************
+#										Ready 
+# *********************************************************************************
 
 <Web>
 		- White background for navigation -- Ready 16.11.22
@@ -14,35 +48,11 @@
 		- Start using translations -- Ready 18.12.22
 		- Design i like -- Ready 15.01.22
 		- Add caching service -- Ready 25.01.2023
-		- Animation on scroll
-		- Form validation
-		- Hamburger navigation
-		- Save common context to local storage 
-		- Calendar with switch for Personal tracking / News, change date color depending on data
-		- Articles infinity scroll
-		- Comments
-		- Doctor test 
-		- Doctor page / list / select 
 </Web>
 
 <API>
-	Users
 		- Migration -- Ready 20.11.22
 		- Register, login, logout -- Ready 20.11.22
 		- User profile picture -- Ready 25.1.22
-		- Save preferences as json
-		- Comments real time
-		- Collect data from doctor test table 
-		- Doctor table
 </API>
-
-<Functionality>
-	Check 
-		- At least 3 free test 
-			- Patient answers questions (A, B, C, D) and gets answer - You are fine or Go see a doctor 
-
-	Get users height, weight, etc and show them where their are on graph with data 
-</Functionality>
-
-
 	
