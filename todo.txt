@@ -20,14 +20,20 @@
 		- Save common context to local storage 
 		- Calendar with switch for Personal tracking / News, change date color depending on data
 		- Articles infinity scroll
+		- Comments
+		- Doctor test 
+		- Doctor page / list / select 
 </Web>
 
 <API>
 	Users
 		- Migration -- Ready 20.11.22
 		- Register, login, logout -- Ready 20.11.22
+		- User profile picture -- Ready 25.1.22
 		- Save preferences as json
-		- User profile picture
+		- Comments real time
+		- Collect data from doctor test table 
+		- Doctor table
 </API>
 
 <Functionality>
