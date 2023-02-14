@@ -46,4 +46,69 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get user medical profiles or create new if none exists
+     */
+    public function getMedicalProfiles()
+    {
+        try {
+            $medicalProfiles = [];
+
+            // Get patient profile data
+            if ($this->role == 'patient' || $this->role == 'admin') {
+                $profile = Patient::where('user_id', $this->id)->first();
+
+                !!$profile && $medicalProfiles['patient'] = $profile;
+            }
+
+            // Get doctor profile data
+            if ($this->role == 'doctor' || $this->role == 'admin') {
+                $profile = Doctor::where('user_id', $this->id)->first();
+
+                !!$profile && $medicalProfiles['doctor'] = $profile;
+            }
+
+            // Create new record for user if non found
+            if (empty($medicalProfiles)) {
+                return $this->createMedicalProfiles($this->id);
+            }
+
+            return $medicalProfiles;
+        } catch (Throwable $e) {
+            return $e;
+        }
+    }
+
+    /**
+     * Create doctor or patient based on type ( doctor | patient | admin )
+     */
+    public function createMedicalProfiles()
+    {
+        try {
+            $medicalProfiles = [];
+
+            // Get patient profile data
+            if ($this->role == 'patient' || $this->role == 'admin') {
+                $profile = Patient::create([
+                    'user_id' => $this->id
+                ]);
+
+                !!$profile && $medicalProfiles['patient'] = $profile;
+            }
+
+            // Get doctor profile data
+            if ($this->role == 'doctor' || $this->role == 'admin') {
+                $profile = Doctor::create([
+                    'user_id' => $this->id
+                ]);
+
+                !!$profile && $medicalProfiles['doctor'] = $profile;
+            }
+
+            return $medicalProfiles;
+        } catch (Throwable $e) {
+            return $e;
+        }
+    }
 }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -73,14 +75,12 @@ class AuthController extends Controller
                 'last_name' => 'required|string',
                 'email' => 'required|string|unique:users,email',
                 'password' => 'required|string|confirmed',
-                'role' => 'required|string',
-                'profile_picture' => 'nullable|file'
+                'profile_picture' => 'nullable|file',
+                'role' => [
+                    'required',
+                    Rule::in(['doctor', 'patient', 'admin']),
+                ],
             ]);
-
-            // Check and reset user role
-            if ($fields['role'] !== 'doctor' && $fields['role'] !== 'patient') {
-                $fields['role'] = 'patient';
-            }
 
             // Create user
             $user = User::create([
@@ -95,6 +95,9 @@ class AuthController extends Controller
                 'last_activity' => Carbon::now()->toDateTimeString(),
             ]);
 
+            // Get medical profiles 
+            $medical_profiles = $user->getMedicalProfiles();
+
             // Upload image
             if ($request->hasFile('profile_picture')) {
                 $imageName = $user->id . '-' . time() . '.' . $request->profile_picture->extension();
@@ -104,15 +107,18 @@ class AuthController extends Controller
                 $user->update(['image' => $imagePath]);
             }
 
+            // Set default image
             if (!$request->hasFile('profile_picture')) {
                 $user->update(['image' => 'images/users/default.png']);
             }
 
+            // Generate AUTH token
             $token = $user->createToken('appToken')->plainTextToken;
 
             return response([
                 'user' => $user,
                 'token' => $token,
+                'medical_profiles' => $medical_profiles,
                 'message' => 'Welcome!',
                 'test' => $request->hasFile('profile_picture')
             ], 200);

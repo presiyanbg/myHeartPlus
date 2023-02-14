@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,9 @@ Route::post('image', [ImageController::class, 'uploadImage']);
 Route::post('articles', [ArticleController::class, 'index']);
 Route::post('articles/view/{id}', [ArticleController::class, 'show']);
 
+// Doctors 
+Route::post('doctors', [DoctorController::class, 'index']);
+
 /*  
 |
 |   Authenticated Routes
@@ -45,4 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/users/logout', [AuthController::class, 'logout']);
     Route::post('/users/{id}', [UserController::class, 'show']);
     Route::post('articles/store', [ArticleController::class, 'store']);
+
+    //Patients
+    Route::post('patients', [PatientController::class, 'index']);
 });

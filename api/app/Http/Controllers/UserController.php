@@ -8,12 +8,6 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    protected $auth;
-
-    public function __construct()
-    {
-        $this->auth = new AuthController();
-    }
 
     /**
      * Display a listing of the resource.
@@ -56,10 +50,12 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
+        $medical_profiles = $user->getMedicalProfiles();
 
         if ($user) {
             return response([
                 'user' => $user,
+                'medical_profiles' => $medical_profiles,
             ], 200);
         }
 
@@ -67,6 +63,24 @@ class UserController extends Controller
             return response([
                 'message' => 'User was not found',
             ], 404);
+        }
+    }
+
+    public function getMedicalProfile($user_id)
+    {
+        try {
+            $user = User::where('id', $user_id)->first();
+            $medical_profiles = $user->getMedicalProfiles();
+
+            return response([
+                'user' => $user,
+                'medical_profiles' => $medical_profiles,
+                'message' => 'Success',
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
         }
     }
 
