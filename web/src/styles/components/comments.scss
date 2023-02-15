@@ -1,0 +1,38 @@
+/* Comments */
+.comments-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .comment {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    .comment--head {
+      padding: 0 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .comment--body {
+      padding: 0 0.5rem;
+    }
+
+    .comment--content {
+      text-align: left;
+    }
+
+    .comment--reply {
+      padding: 0 3rem;
+      text-align: right;
+      color: $main;
+      cursor: pointer;
+    }
+  }
+}

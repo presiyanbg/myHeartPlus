@@ -1,0 +1,290 @@
+/* Wrapper */
+.wrapper {
+  max-width: $pageWidth;
+  margin: auto;
+}
+
+/* Box */
+.box-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/*Default box */
+.box {
+  margin: auto;
+  flex: auto;
+  min-height: 300px;
+  background-color: $softLight;
+  border-radius: $defaultRadius;
+  margin-bottom: 1rem;
+  color: $gray;
+  text-align: center;
+  transition: ease-in-out 150ms all;
+
+  .box--head {
+    padding: 0.5rem;
+  }
+
+  .box--body {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .box--title {
+    margin-bottom: 0.5rem;
+  }
+
+  .box--icon {
+    transition: ease-in-out 250ms all;
+    color: $lightBlue;
+
+    svg {
+      filter: drop-shadow(0 3px 3px rgb(0 0 0 / 0.2));
+    }
+  }
+
+  &.box-xl {
+    width: 75%;
+  }
+}
+
+/* Medium box */
+.medium-box {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  border-radius: $defaultRadius;
+  padding: 0.5rem;
+  color: $darkGray;
+
+  .box--head {
+    flex: 0 0 100%;
+    height: $mediumImageHeight;
+    max-height: $mediumImageHeight;
+    overflow: hidden;
+    border-radius: $defaultRadius;
+    transition: $defaultTransition;
+    margin-bottom: 1rem;
+
+    img {
+      height: $mediumImageHeight;
+      transition: $defaultTransition;
+    }
+  }
+
+  .box--body {
+    margin-bottom: 0.5rem;
+
+    .box--title {
+      transition: $defaultTransition;
+
+      &:hover {
+        color: $main;
+      }
+    }
+
+    .box--subtitle {
+      transition: $defaultTransition;
+
+      &:hover {
+        color: $main;
+      }
+    }
+
+    .box--content {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .box--footer {
+    margin-bottom: 0.5rem;
+    color: $lightGray;
+    font-size: 15px;
+  }
+
+  &:hover {
+    .box--head {
+      img {
+        height: $expandedMediumImageHeight;
+      }
+    }
+  }
+
+}
+
+/* Carousel */
+.carousel {
+  height: 100%;
+  width: 100%;
+
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Shadows */
+.img-shadow {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.5);
+  }
+}
+
+.img-shadow--left {
+  &::before {
+    box-shadow: inset 25rem 0 20rem -15rem rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Text */
+.text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.text-ellipsis--2 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.text-ellipsis--3 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.text-underline-hover {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Change text color on hover */
+.text-primary-hover {
+  color: inherit;
+
+  &:hover {
+    color: $main;
+  }
+}
+
+/* Common */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.logo {
+  img {
+    max-height: 8vh;
+    object-fit: contain;
+  }
+
+  &.logo--lg {
+    img {
+      max-height: 15vh;
+      object-fit: contain;
+    }
+  }
+}
+
+.form-group {
+
+  label,
+  input {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.notification-container {
+  div {
+    border-radius: 5rem !important;
+  }
+}
+
+.profile--picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  .image {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 100%;
+    overflow: hidden;
+    outline: 3px solid $lightBlue;
+  }
+
+  .comment--user-icon {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 100%;
+    overflow: hidden;
+    outline: 3px solid $lightBlue;
+  }
+}
+
+.page--loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $black;
+  opacity: 0.6;
+
+  .loader--icon {
+    color: $white;
+  }
+}
+
+.hide--scroll {
+  scrollbar-width: none;
+
+  * {
+    scrollbar-width: none;
+  }
+}
+
+.hide--scroll ::-webkit-scrollbar {
+  display: none;
+}
+
+.anchor--scroll {
+
+  // Anchor under navigation
+  // Add it inside a relative element
+  &.t-nav {
+    position: absolute;
+    top: -$navigationHeight;
+    left: 0;
+  }
+}
