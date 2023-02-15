@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 use App\Models\Doctor;
+use App\Models\User;
 
 class DoctorController extends Controller
 {
@@ -15,8 +16,20 @@ class DoctorController extends Controller
      */
     public function index()
     {
+        $doctors = Doctor::paginate(10);
+
+        // Get name of article writer
+        foreach ($doctors as $doctor) {
+            $user = User::where('id', $doctor->user_id)->first();
+
+            if ($user) {
+                $doctor->full_name = $user->full_name;
+                $doctor->image = $user->image;
+            }
+        }
+
         return response([
-            'doctors' => Doctor::all(),
+            'doctors' => $doctors
         ], 200);
     }
 
