@@ -13,6 +13,11 @@ const DoctorsList = ({ }: Props) => {
   const logic = DoctorsLogic();
   const { t } = useTranslation();
 
+  /**
+   * Save loaded data 
+   * 
+   * @param data API paginated response
+   */
   const onDataLoad = (data: any) => {
     if (data?.doctors?.data) {
       setDoctors(data.doctors.data);
@@ -20,6 +25,9 @@ const DoctorsList = ({ }: Props) => {
     }
   }
 
+  /**
+   * Load doctor records on init
+   */
   useEffect(() => {
     if (!doctors.length) {
       logic.loadDoctors().then((response: any) => {
@@ -51,7 +59,7 @@ const DoctorsList = ({ }: Props) => {
           </div>
 
           <div className="col-sm-12 col-md-4">
-            Doctor preview ?
+            Doctor preview
           </div>
         </div>
       </div>
