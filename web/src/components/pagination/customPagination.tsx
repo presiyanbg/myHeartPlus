@@ -4,7 +4,6 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { PaginationType } from '../../ts/types';
 import { useTranslation } from 'react-i18next';
 import CustomPaginationLogic from './customPaginationLogic';
-import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
 
 type Props = {
   url: string,
@@ -15,9 +14,7 @@ type Props = {
 const CustomPagination = (props: Props) => {
   const [pagination, setPagination] = useState<PaginationType>();
   const logic = CustomPaginationLogic();
-  const { isLoading } = useContext(LoadingContext);
   const { t } = useTranslation();
-
 
   /**
    * Handle click
