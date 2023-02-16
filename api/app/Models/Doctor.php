@@ -24,5 +24,8 @@ class Doctor extends Model
         'address_3',
         'address_4',
         'address_5',
+        'description',
+        'rating',
+
     ];
 }
