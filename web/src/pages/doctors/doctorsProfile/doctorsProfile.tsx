@@ -30,7 +30,7 @@ const DoctorsProfile = () => {
     <div className="wrapper">
       <div className="page">
         <div className="page--title">
-          {t('Dr.') + ' ' + doctor.full_name}
+          <h3>{t('Dr.') + ' ' + doctor.full_name} </h3>
         </div>
 
         <div className="page--content doctor-profile--page">
@@ -39,7 +39,7 @@ const DoctorsProfile = () => {
             <div className="col-sm-12 col-md-8">
               <div className="row">
                 {/* Base */}
-                <div className="col-12 row mb-2">
+                <div className="col-12 mb-4">
                   <div className="profile-card">
                     {/* Doctors image */}
                     <div className="col-sm-12 col-md-5 profile-picture">
@@ -107,57 +107,75 @@ const DoctorsProfile = () => {
                 {/* Description */}
                 <div className="col-12 mb-4">
                   <div className="row">
-                    <div className="row">
-                      <h4>{t('About me')}</h4>
+                    <div className="col-12">
+                      <h4 className="border-bottom pb-1">{t('About me')}</h4>
                     </div>
                   </div>
 
                   <div className="row">
-                    <p>{doctor.description}</p>
+                    <div className="col-12">
+                      <p>{doctor.description}</p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Personal health check tests */}
-                <div className="col-12">
+                <div className="col-12 mb-4">
                   <div className="row">
-                    <h4>{t('Health checks')}</h4>
+                    <div className="col-12">
+                      <h4 className="border-bottom pb-1">{t('Health checks')}</h4>
+                    </div>
                   </div>
 
                   <div className="row">
-
+                    <div className="col-12">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa harum nisi quos cupiditate deleniti veritatis accusantium consequuntur natus, corrupti soluta, delectus sint, vel dicta obcaecati inventore. Rem sit reprehenderit cumque?</p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Recommends */}
-                <div className="col-12">
+                <div className="col-12 mb-4">
                   <div className="row">
-                    <h4>{t('Recommends')}</h4>
+                    <div className="col-12">
+                      <h4 className="border-bottom pb-1">{t('Recommends')}</h4>
+                    </div>
                   </div>
 
                   <div className="row">
-
+                    <div className="col-12">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa harum nisi quos cupiditate deleniti veritatis accusantium consequuntur natus, corrupti soluta, delectus sint, vel dicta obcaecati inventore. Rem sit reprehenderit cumque?</p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Map */}
-                <div className="col-12">
+                <div className="col-12 mb-4">
                   <div className="row">
-                    <h4>{t('Address')}</h4>
+                    <div className="col-12">
+                      <h4 className="border-bottom pb-1">{t('Address')}</h4>
+                    </div>
                   </div>
 
                   <div className="row">
-
+                    <div className="col-12">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa harum nisi quos cupiditate deleniti veritatis accusantium consequuntur natus, corrupti soluta, delectus sint, vel dicta obcaecati inventore. Rem sit reprehenderit cumque?</p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Reviews */}
-                <div className="col-12">
+                <div className="col-12 mb-4">
                   <div className="row">
-                    <h4>{t('Reviews')}</h4>
+                    <div className="col-12">
+                      <h4 className="border-bottom pb-1">{t('Reviews')}</h4>
+                    </div>
                   </div>
 
                   <div className="row">
-
+                    <div className="col-12">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa harum nisi quos cupiditate deleniti veritatis accusantium consequuntur natus, corrupti soluta, delectus sint, vel dicta obcaecati inventore. Rem sit reprehenderit cumque?</p>
+                    </div>
                   </div>
                 </div>
               </div>

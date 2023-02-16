@@ -33,25 +33,23 @@ const Article = ({ }: Props) => {
         {/* Empty element used for auto scroll on page change */}
         <div className={`${SELECTORS.anchorScroll} t-nav`}></div>
 
+        <div className="page--title">
+          <h3>{article.title}</h3>
+        </div>
+
         <div className="row mb-3">
-          <div className="col-7">
-            <div className="row">
-              <div className="col-12 article--title">
-                <h1>{article.title}</h1>
+          <div className="col-8">
+            <div className="col-12">
+              <div className="article--image">
+                <img src={SERVER_URL + article.image} alt={article.title} />
               </div>
 
               <div className="col-12">
-                <div className="article--content">
-                  <div className="article--image">
-                    <img src={SERVER_URL + article.image} alt={article.title} />
-                  </div>
-
-                  <div dangerouslySetInnerHTML={articleHTML} ></div>
-                </div>
+                <div dangerouslySetInnerHTML={articleHTML} ></div>
               </div>
             </div>
           </div>
-          <div className="col-5">
+          <div className="col-4">
             <NewsSmall singleComponent={true}></NewsSmall>
           </div>
         </div>

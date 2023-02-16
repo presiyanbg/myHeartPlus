@@ -215,28 +215,19 @@
 }
 
 /* Single article page */
-.article-page {
+.article--content {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: $white;
+  border-radius: $defaultRadius;
+}
 
-  .article--title {
-    margin-bottom: 1rem;
-    padding: 0 1rem;
-  }
-
-  .article--content {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-color: $white;
-    border-radius: $defaultRadius;
-
-  }
-
-  .article--image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-    border-radius: $defaultRadius;
-    height: $bigImageHeight;
-    overflow: hidden;
-  }
+.article--image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border-radius: $defaultRadius;
+  height: $bigImageHeight;
+  overflow: hidden;
 }
