@@ -81,7 +81,7 @@ class DoctorController extends Controller
 
         // Return only need user data with doctor profile information 
         $doctor->full_name = $user->full_name;
-        $doctor->image = $doctor->image;
+        $doctor->image = $user->image;
 
         return response([
             'doctor' => $doctor,
