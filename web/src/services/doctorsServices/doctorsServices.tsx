@@ -7,13 +7,13 @@ const DoctorsServices = () => {
     return api.post(`/doctors?page=${page}`, undefined, false);
   }
 
-  const doctorsShow = (id: number) => {
-    return api.post(`/doctors/view/${id}`, undefined, false);
+  const doctorShow = (id: number | string) => {
+    return api.post(`/doctors/${id}`, undefined, false);
   }
 
   return {
     doctors,
-    doctorsShow,
+    doctorShow,
   }
 }
 

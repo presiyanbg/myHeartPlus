@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import MedicalProfilesList from '../../../components/medicalProfiles/medicalProfilesList/medicalProfilesList';
 import CustomPagination from '../../../components/pagination/customPagination';
 import DoctorsLogic from '../doctorsLogic';
-import { PaginationType } from '../../../ts/types';
+import { DoctorsType, PaginationType } from '../../../ts/types';
 import { useTranslation } from 'react-i18next';
 
 type Props = {};
 
 const DoctorsList = ({ }: Props) => {
-  const [doctors, setDoctors] = useState<any>([]);
+  const [doctors, setDoctors] = useState<any | DoctorsType>([]);
   const [pagination, setPagination] = useState<PaginationType>();
   const logic = DoctorsLogic();
   const { t } = useTranslation();

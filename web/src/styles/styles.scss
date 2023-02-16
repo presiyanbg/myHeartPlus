@@ -1,15 +1,21 @@
+// Main
 @import 'colors.scss';
 @import 'constants.scss';
 @import 'fonts.scss';
 @import 'base.scss';
-@import './components/page.scss';
+
+// Components 
 @import './components/navigation.scss';
-@import './components/common.scss';
 @import './components/articles.scss';
 @import './components/news.scss';
 @import './components/hero.scss';
 @import './components/animations.scss';
-@import './components/forms.scss';
 @import './components/comments.scss';
 @import './components/pagination.scss';
 @import './components/medical-records.scss';
+@import './components/doctors.scss';
+
+// Common
+@import './components/page.scss';
+@import './components/forms.scss';
+@import './components/common.scss';

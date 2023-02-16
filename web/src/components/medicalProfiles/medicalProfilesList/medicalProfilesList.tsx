@@ -4,9 +4,10 @@ import ImageLoader from '../../loaders/imageLoader/imageLoader';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+import { DoctorsType } from '../../../ts/types';
 
 type Props = {
-  records: any[],
+  records: any[] | DoctorsType,
   type: 'patients' | 'doctors'
 }
 

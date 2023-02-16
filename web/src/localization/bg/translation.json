@@ -19,5 +19,15 @@
   "Back": "Назад",
   "Specialty": "Специалност",
   "Doctors": "Лекари",
-  "Find your doctor": "Намери твоя лекар"
+  "Find your doctor": "Намери твоя лекар",
+  "Dr.": "Др.",
+  "Name": "Име",
+  "Mobile number": "Мобилен телефон",
+  "Office number": "Служебен телефон",
+  "Address": "Адрес",
+  "Rating": "Рейтинг",
+  "Reviews": "Ревюта",
+  "Recommends": "Препоръчва",
+  "Health checks": "Проверка на симптоми",
+  "About me": "Кратко описание"
 }

@@ -15,8 +15,15 @@ const DoctorsLogic = () => {
     return data;
   }
 
+  const loadDoctor = async (doctorId: string | number) => {
+    const data = await doctorsServices.doctorShow(doctorId);
+
+    return data;
+  }
+
   return {
     loadDoctors,
+    loadDoctor,
   }
 }
 

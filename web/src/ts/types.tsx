@@ -75,6 +75,28 @@ type PaginationType = {
   prev_page_url: string,
 }
 
+/* Doctor Types */
+type DoctorType = {
+  id: number,
+  user_id: number,
+  rating: number,
+  specialty: string,
+  mobile_number: string,
+  office_number: string,
+  address_1: string,
+  address_2: string,
+  address_3: string,
+  address_4: string,
+  address_5: string,
+  created_at: string,
+  updated_at: string,
+  description: string,
+  full_name: string,
+  image: string
+}
+
+type DoctorsType = Array<DoctorType>;
+
 /* Cache Types */
 type CacheType = {
   [key: string]: any;
@@ -83,10 +105,16 @@ type CacheType = {
 export type {
   NavLinkType,
   NavLinksType,
+
   UserType,
   UserFormType,
+
   ArticleType,
   ArticlesType,
+
+  DoctorType,
+  DoctorsType,
+
   PaginationType,
-  CacheType
+  CacheType,
 }
