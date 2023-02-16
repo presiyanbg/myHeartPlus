@@ -50,20 +50,19 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-        $medical_profiles = $user->getMedicalProfiles();
-
-        if ($user) {
-            return response([
-                'user' => $user,
-                'medical_profiles' => $medical_profiles,
-            ], 200);
-        }
 
         if (!$user) {
             return response([
                 'message' => 'User was not found',
             ], 404);
         }
+
+        $medical_profiles = $user->getMedicalProfiles();
+
+        return response([
+            'user' => $user,
+            'medical_profiles' => $medical_profiles,
+        ], 200);
     }
 
     public function getMedicalProfile($user_id)

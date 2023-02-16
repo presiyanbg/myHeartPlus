@@ -37,6 +37,7 @@ Route::post('articles/view/{id}', [ArticleController::class, 'show']);
 
 // Doctors 
 Route::post('doctors', [DoctorController::class, 'index']);
+Route::post('doctors/{id}', [DoctorController::class, 'show']);
 
 /*  
 |

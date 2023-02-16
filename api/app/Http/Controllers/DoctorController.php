@@ -60,9 +60,32 @@ class DoctorController extends Controller
      * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function show(Doctor $doctor)
+    public function show(int $id)
     {
-        //
+        $doctor = Doctor::where('id', $id)->first();
+
+        if (!$doctor) {
+            return response([
+                'message' => 'Doctor was not found',
+            ], 404);
+        }
+
+        // Load doctor's user profile 
+        $user = User::where('id', $doctor->user_id)->first();
+
+        if (!$user) {
+            return response([
+                'message' => 'Doctors user profile was not found',
+            ], 404);
+        }
+
+        // Return only need user data with doctor profile information 
+        $doctor->full_name = $user->full_name;
+        $doctor->image = $doctor->image;
+
+        return response([
+            'doctor' => $doctor,
+        ], 200);
     }
 
     /**
