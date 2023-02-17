@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { scrollToElement } from '../../utils/utils';
 import { ArticleType } from "../../ts/types";
 
-import PageTitle from "../../components/common/pageTitle";
+import PageTitle from "../../components/common/pageTitle/pageTitle";
 import ArticleLogic from "./articleLogic";
 import Comments from "../../components/comments/comments";
 import NewsSmall from "../../components/news/newsSmall/newsSmall";

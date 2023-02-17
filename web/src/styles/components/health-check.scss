@@ -1,0 +1,40 @@
+// Health check preview
+.health-check--preview {
+  cursor: pointer;
+  padding: 1rem;
+  color: $dark;
+
+  &:hover {
+    background-color: $softLight;
+
+    .health-check--title {
+      color: $main;
+    }
+  }
+}
+
+.health-check--view {
+  .answers--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .btn-answer {
+      flex: 1;
+      max-width: 25%;
+      text-align: center;
+      margin: 0 0.5rem;
+      padding: 0.5rem;
+      border-radius: $defaultRadius;
+      border: 1px solid $gray;
+      cursor: pointer;
+
+
+      &:hover {
+        background-color: $gray;
+        color: $white;
+      }
+    }
+  }
+
+}

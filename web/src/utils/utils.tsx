@@ -118,6 +118,35 @@ export const arrayFilterUnique = (array: any[], key: string): any[] => {
 }
 
 /**
+ * Order array by property
+ * 
+ * @param array array -- Array with object to be ordered by property
+ * @param key string -- Property key
+ * 
+ * @returns array
+ */
+export const arrayOrderByProp = (array: any[], key: string, reverse: boolean = false): any[] => {
+
+  /** Compare function */
+  const compare = (a: any, b: any) => {
+    if (a[key] < a[key]) {
+      return -1;
+    }
+    if (a[key] > a[key]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  if (reverse) {
+    return array.sort(compare).reverse();
+  }
+
+  return array.sort(compare);
+}
+
+
+/**
  * Copy object and remove reference to main object
  * 
  * @param object object -- Object to make a copy from

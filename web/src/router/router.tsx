@@ -7,7 +7,9 @@ import {
 } from "react-router-dom";
 
 import Home from '../pages/home/home';
-import Check from '../pages/check/check';
+import HealthTestsList from '../pages/healthCheck/healthTestsList/healthTestsList';
+import HealthTest from '../pages/healthCheck/healthTest/healthTest';
+
 import Forum from '../pages/forum/forum';
 import Authentication from '../pages/authentication/authentication';
 import Article from '../pages/article/article';
@@ -22,7 +24,8 @@ const Router = ({ }: Props) => {
   return (
     <Routes>
       <Route path="/" element={<Home></Home>} />
-      <Route path="/check" element={<Check></Check>} />
+      <Route path="/check" element={<HealthTestsList></HealthTestsList>} />
+      <Route path="/check/:id" element={<HealthTest></HealthTest>} />
 
       <Route path="/doctors" element={<DoctorsList></DoctorsList>} />
       <Route path="/doctors/:id" element={<DoctorsProfile></DoctorsProfile>} />

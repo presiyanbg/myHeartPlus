@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Login from '../../components/authentication/login/login';
 import Logout from '../../components/authentication/logout/logout';
 import Registration from '../../components/authentication/registration/registration';
-import PageTitle from '../../components/common/pageTitle';
+import PageTitle from '../../components/common/pageTitle/pageTitle';
 
 import { UserContext } from '../../context/userContext/userContextProvider';
 import { useTranslation } from 'react-i18next';

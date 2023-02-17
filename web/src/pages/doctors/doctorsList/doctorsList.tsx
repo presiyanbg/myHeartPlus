@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MedicalProfilesList from '../../../components/medicalProfiles/medicalProfilesList/medicalProfilesList';
 import CustomPagination from '../../../components/pagination/customPagination';
 import DoctorsLogic from '../doctorsLogic';
-import PageTitle from '../../../components/common/pageTitle';
+import PageTitle from '../../../components/common/pageTitle/pageTitle';
 
 import { DoctorsType, PaginationType } from '../../../ts/types';
 import { useTranslation } from 'react-i18next';

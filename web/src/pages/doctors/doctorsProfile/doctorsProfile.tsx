@@ -8,7 +8,9 @@ import { scrollToElement } from "../../../utils/utils";
 
 import DoctorCard from "../../../components/doctor/doctorCard/doctorCard";
 import DoctorsLogic from "../doctorsLogic";
-import PageTitle from "../../../components/common/pageTitle";
+import PageTitle from "../../../components/common/pageTitle/pageTitle";
+import DoctorDescription from "../../../components/doctor/doctorDescription/doctorDescription";
+import HealthTestsFromDoctor from "../../../components/healthTests/healthTestsFromDoctor/healthTestsFromDoctor";
 
 const DoctorsProfile = () => {
   const [doctor, setDoctor] = useState<any | DoctorType>({});
@@ -58,34 +60,10 @@ const DoctorsProfile = () => {
                 </div>
 
                 {/* Description */}
-                <div className="col-12 mb-4">
-                  <div className="row">
-                    <div className="col-12">
-                      <h4 className="border-bottom pb-1">{t('About me')}</h4>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-12">
-                      <p>{doctor.description}</p>
-                    </div>
-                  </div>
-                </div>
+                <DoctorDescription description={doctor.description}></DoctorDescription>
 
                 {/* Personal health check tests */}
-                <div className="col-12 mb-4">
-                  <div className="row">
-                    <div className="col-12">
-                      <h4 className="border-bottom pb-1">{t('Health checks')}</h4>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-12">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa harum nisi quos cupiditate deleniti veritatis accusantium consequuntur natus, corrupti soluta, delectus sint, vel dicta obcaecati inventore. Rem sit reprehenderit cumque?</p>
-                    </div>
-                  </div>
-                </div>
+                <HealthTestsFromDoctor doctor_id={doctor.id}></HealthTestsFromDoctor>
 
                 {/* Recommends */}
                 <div className="col-12 mb-4">
