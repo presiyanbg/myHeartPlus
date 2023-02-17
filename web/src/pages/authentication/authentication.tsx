@@ -56,7 +56,7 @@ const Authentication = ({ }: Props) => {
 
               <div className="row">
                 <div className="col-12">
-                  <p className="cursor-pointer text-capitalize text-center" onClick={toggleDisplay}>
+                  <p className="cursor-pointer text-center" onClick={toggleDisplay}>
 
                     {/* Login message */}
                     {display == 'register' && t('Already have a registration?') + ' '}
