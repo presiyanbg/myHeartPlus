@@ -22,9 +22,6 @@ const healthTestViewLogic = () => {
       allAnswers.push(answer)
     }
 
-    console.log(allAnswers)
-
-
     return allAnswers;
   }
 
@@ -51,16 +48,11 @@ const healthTestViewLogic = () => {
   }
 
   const getPrevQuestion = (questions: any, answers: any) => {
-    console.log(questions)
-    console.log(answers)
-
     if (!questions?.length) return {};
 
     if (!answers?.length) return questions[0];
 
     const lastAnswer = arrayOrderByProp(answers, 'prev_question_id', true);
-
-    console.log(lastAnswer)
 
     return questions.find((question: any) => question.id == lastAnswer[0].question_id)
   }
