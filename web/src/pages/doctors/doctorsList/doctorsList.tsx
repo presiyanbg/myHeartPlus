@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import MedicalProfilesList from '../../../components/medicalProfiles/medicalProfilesList/medicalProfilesList';
 import CustomPagination from '../../../components/pagination/customPagination';
 import DoctorsLogic from '../doctorsLogic';
+import PageTitle from '../../../components/common/pageTitle';
+
 import { DoctorsType, PaginationType } from '../../../ts/types';
 import { useTranslation } from 'react-i18next';
+import { SELECTORS } from "../../../constants/selectors";
+import { scrollToElement } from "../../../utils/utils";
 
 type Props = {};
 
@@ -22,6 +26,7 @@ const DoctorsList = ({ }: Props) => {
     if (data?.doctors?.data) {
       setDoctors(data.doctors.data);
       setPagination(data.doctors);
+      scrollToElement(`.${SELECTORS.anchorScroll}`);
     }
   }
 
@@ -39,17 +44,10 @@ const DoctorsList = ({ }: Props) => {
   return (
     <div className="wrapper">
       <div className="page">
-        <div className="page--title">
-          <div className="col-6">
-            <div className="title">
-              <h2>{t('Find your doctor')}</h2>
-            </div>
-          </div>
+        {/* Empty element used for auto scroll on page change */}
+        <div className={`${SELECTORS.anchorScroll} t-nav`}></div>
 
-          <div className="col-6">
-            Search
-          </div>
-        </div>
+        <PageTitle title={t('Find your doctor')}></PageTitle>
 
         <div className="row">
           <div className="col-sm-12 col-md-8">

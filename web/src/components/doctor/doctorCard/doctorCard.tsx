@@ -1,16 +1,22 @@
 import { DoctorType } from "../../../ts/types";
-import ImageLoader from "../../loaders/imageLoader/imageLoader";
 import { useTranslation } from 'react-i18next';
+
+import ImageLoader from "../../loaders/imageLoader/imageLoader";
+import DoctorLogic from "../doctorLogic";
 
 type Props = {
   doctor: DoctorType | any
 }
 
 const DoctorCard = (props: Props) => {
-  const { t } = useTranslation();
   const doctor = props.doctor;
+  const logic = DoctorLogic();
+
+  const { t } = useTranslation();
 
   if (!props.doctor) return (<></>);
+
+  doctor.address = logic.buildDoctorAddress(doctor);
 
   return (
     <div className="profile-card">
@@ -56,11 +62,7 @@ const DoctorCard = (props: Props) => {
           <div className="col-5 text-end">{t('Address')}:</div>
           <div className="col-7">
             <p>
-              {doctor.address_1},
-              {doctor.address_2},
-              {doctor.address_3},
-              {doctor.address_4},
-              {doctor.address_5},
+              {doctor.address}
             </p>
           </div>
         </div>

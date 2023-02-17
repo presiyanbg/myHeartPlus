@@ -29,5 +29,12 @@
   "Reviews": "Ревюта",
   "Recommends": "Препоръчва",
   "Health checks": "Проверка на симптоми",
-  "About me": "Кратко описание"
+  "About me": "Кратко описание",
+  "login": "Вход",
+  "register": "Регистрация",
+  "logout": "Изход",
+  "Login here": "Влез от тук",
+  "Register here": "Регистрирай се тук",
+  "Already have a registration?": "Вече имаш регистрация?",
+  "New user?": "Нов потребител?"
 }

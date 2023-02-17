@@ -1,10 +1,14 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { LoadingContext } from "../../../context/loadingContext/loadingContextProvider";
-import DoctorsLogic from "../doctorsLogic";
 import { useTranslation } from 'react-i18next';
 import { DoctorType } from "../../../ts/types";
+import { SELECTORS } from "../../../constants/selectors";
+import { scrollToElement } from "../../../utils/utils";
+
 import DoctorCard from "../../../components/doctor/doctorCard/doctorCard";
+import DoctorsLogic from "../doctorsLogic";
+import PageTitle from "../../../components/common/pageTitle";
 
 const DoctorsProfile = () => {
   const [doctor, setDoctor] = useState<any | DoctorType>({});
@@ -18,6 +22,7 @@ const DoctorsProfile = () => {
     if (id != undefined) {
       logic.loadDoctor(id).then(doctorData => {
         setDoctor(doctorData.doctor);
+        scrollToElement(`.${SELECTORS.anchorScroll}`);
       });
     }
   }, [id]);
@@ -29,9 +34,18 @@ const DoctorsProfile = () => {
   return (
     <div className="wrapper">
       <div className="page">
-        <div className="page--title">
-          <h3>{t('Dr.') + ' ' + doctor.full_name} </h3>
-        </div>
+        {/* Empty element used for auto scroll on page change */}
+        <div className={`${SELECTORS.anchorScroll} t-nav`}></div>
+
+        <PageTitle title={t('Dr.') + ' ' + doctor.full_name}
+          breadCrumbs={[
+            { url: "/doctors", title: t('Find your doctor') }
+          ]}></PageTitle>
+        {/* <div className="page--title">
+          <h4>
+            <Link to='/doctors'>{t('Find your doctor') + '/'}</Link>  {t('Dr.') + ' ' + doctor.full_name}
+          </h4>
+        </div> */}
 
         <div className="page--content doctor-profile--page">
           <div className="row">
