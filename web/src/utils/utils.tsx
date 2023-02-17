@@ -127,3 +127,22 @@ export const arrayFilterUnique = (array: any[], key: string): any[] => {
 export const copyObject = (object: any) => {
   return JSON.parse(JSON.stringify(object));
 }
+
+/**
+ * Build address to string 
+ * 
+ * @param addresses array of string -- Example: [...address_1, address_2]
+ * @param divider string -- Divider used to join the array of addresses
+ * @returns string
+ */
+export const buildAddress = (addresses: string[], divider: string = ',') => {
+  let build = '';
+
+  addresses.forEach(address => {
+    if (address?.length) {
+      build += address + divider + ' ';
+    }
+  });
+
+  return build;
+}
