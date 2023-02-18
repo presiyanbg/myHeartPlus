@@ -3,6 +3,8 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\HealthCategoryController;
+use App\Http\Controllers\HealthTestController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +26,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Users
-Route::post('/users/login', [AuthController::class, 'login']);
-Route::post('/users/register', [AuthController::class, 'register']);
+Route::post('users/login', [AuthController::class, 'login']);
+Route::post('users/register', [AuthController::class, 'register']);
 
 // Images
 Route::get('image/{path}', [ImageController::class, 'getImage'])->where('path', '.*');
@@ -39,18 +41,33 @@ Route::post('articles/view/{id}', [ArticleController::class, 'show']);
 Route::post('doctors', [DoctorController::class, 'index']);
 Route::post('doctors/{id}', [DoctorController::class, 'show']);
 
+// Health tests
+Route::post('health', [HealthTestController::class, 'index']);
+Route::post('health/view/{id}', [HealthTestController::class, 'show']);
+
+// Health categories
+Route::post('health-category', [HealthCategoryController::class, 'index']);
+Route::post('health-category/store', [HealthCategoryController::class, 'store']);
+
 /*  
 |
 |   Authenticated Routes
 |
 */
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    // User Routes
-    Route::post('/users', [UserController::class, 'index']);
-    Route::post('/users/logout', [AuthController::class, 'logout']);
-    Route::post('/users/{id}', [UserController::class, 'show']);
+    // Users
+    Route::post('users', [UserController::class, 'index']);
+    Route::post('users/logout', [AuthController::class, 'logout']);
+    Route::post('users/{id}', [UserController::class, 'show']);
     Route::post('articles/store', [ArticleController::class, 'store']);
 
-    //Patients
+    // Patients
     Route::post('patients', [PatientController::class, 'index']);
+
+    // Health tests
+    Route::post('health/store', [HealthTestController::class, 'store']);
+
+    // Health categories
+    Route::post('health-category/store', [HealthCategoryController::class, 'store']);
+    Route::post('health-category/view/{id}', [HealthCategoryController::class, 'show']);
 });
