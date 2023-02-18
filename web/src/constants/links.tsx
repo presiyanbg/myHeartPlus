@@ -12,7 +12,7 @@ export const LINKS = [
     onClick: () => { },
   },
   {
-    title: 'Check',
+    title: 'Health checks',
     url: '/health-tests',
     selected: false,
     icon: faFileCircleCheck,
