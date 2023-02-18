@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 use App\Models\Doctor;
+use App\Models\HealthCategory;
+use App\Models\HealthTest;
 use App\Models\User;
 
 class DoctorController extends Controller
@@ -18,7 +20,7 @@ class DoctorController extends Controller
     {
         $doctors = Doctor::paginate(10);
 
-        // Get name of article writer
+        // Get full name of doctor and image 
         foreach ($doctors as $doctor) {
             $user = User::where('id', $doctor->user_id)->first();
 
@@ -57,7 +59,7 @@ class DoctorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Doctor  $doctor
+     * @param  int  $id ID of doctor
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
@@ -86,6 +88,28 @@ class DoctorController extends Controller
         return response([
             'doctor' => $doctor,
         ], 200);
+    }
+
+    /**
+     * Display health tests connected to passed doctor.
+     *
+     * @param  int  $id ID of doctor
+     * @return \Illuminate\Http\Response
+     */
+    public function showHealthTests(int $id)
+    {
+        $tests =  HealthTest::where('doctor_id', $id)->orderByDesc('rating')->paginate(3);
+
+        // Get test categories
+        foreach ($tests as $test) {
+            $category = HealthCategory::where('id', $test->category_id)->first();
+
+            if ($category) {
+                $test->category = $category;
+            }
+        }
+
+        return response($tests, 200);
     }
 
     /**

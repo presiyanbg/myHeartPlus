@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HealthCategory;
 use App\Models\HealthTest;
 use App\Models\HealthTestQuestionsAndAnswers;
 use Illuminate\Http\Request;
@@ -15,7 +16,20 @@ class HealthTestController extends Controller
      */
     public function index()
     {
-        //
+        $tests = HealthTest::paginate(10);
+
+        // Get category for test
+        foreach ($tests as $test) {
+            $category = HealthCategory::where('id', $test->category_id)->first();
+
+            if ($category) {
+                $test->category = $category;
+            }
+        }
+
+        return response([
+            'tests' => $tests
+        ], 200);
     }
 
     /**
@@ -54,13 +68,10 @@ class HealthTestController extends Controller
                 'doctor_id' => $fields['doctor_id'],
             ]);
 
-            // Encode data to json to save in DB
-            $questions_and_answers = json_encode($fields['questions_and_answers']);
-
             // Save test QA to DB
             $testQA = HealthTestQuestionsAndAnswers::create([
                 'test_id' => $test->id,
-                'questions_and_answers' => $questions_and_answers,
+                'questions_and_answers' => $fields['questions_and_answers'],
             ]);
 
             return response([
@@ -80,12 +91,30 @@ class HealthTestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\HealthTest  $healthTest
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(HealthTest $healthTest)
+    public function show(int $id)
     {
-        //
+        $test =  HealthTest::where('id', $id)->first();
+
+        if (!$test) {
+            return response([
+                'message' => 'Test was not found',
+            ], 404);
+        }
+
+        // Load test questions and answers 
+        $testQA = HealthTestQuestionsAndAnswers::where('test_id', $id)->first();
+
+        // if ($testQA && $testQA->questions_and_answers) {
+        //     $testQA->questions_and_answers = json_decode($testQA->questions_and_answers);
+        // }
+
+        return response([
+            'test' => $test,
+            'testQA' => $testQA,
+        ], 200);
     }
 
     /**

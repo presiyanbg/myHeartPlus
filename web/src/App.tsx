@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import TopNavigation from './components/navigation/topNavigation/topNavigation';
-import Monitor from './components/monitor/monitor';
+import TopNavigation from './components/navigationComponents/topNavigation/topNavigation';
+import Monitor from './components/monitorComponents/monitor';
 import './App.scss';
 import NavigationContextProvider from './context/navigationContext/navigationContextProvider'
 import UserContextProvider from './context/userContext/userContextProvider';

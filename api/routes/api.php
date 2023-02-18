@@ -39,11 +39,12 @@ Route::post('articles/view/{id}', [ArticleController::class, 'show']);
 
 // Doctors 
 Route::post('doctors', [DoctorController::class, 'index']);
-Route::post('doctors/{id}', [DoctorController::class, 'show']);
+Route::post('doctors/view/{id}', [DoctorController::class, 'show']);
+Route::post('doctors/health-tests/{id}', [DoctorController::class, 'showHealthTests']);
 
 // Health tests
-Route::post('health', [HealthTestController::class, 'index']);
-Route::post('health/view/{id}', [HealthTestController::class, 'show']);
+Route::post('health-tests', [HealthTestController::class, 'index']);
+Route::post('health-tests/view/{id}', [HealthTestController::class, 'show']);
 
 // Health categories
 Route::post('health-category', [HealthCategoryController::class, 'index']);
@@ -65,7 +66,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('patients', [PatientController::class, 'index']);
 
     // Health tests
-    Route::post('health/store', [HealthTestController::class, 'store']);
+    Route::post('health-tests/store', [HealthTestController::class, 'store']);
 
     // Health categories
     Route::post('health-category/store', [HealthCategoryController::class, 'store']);
