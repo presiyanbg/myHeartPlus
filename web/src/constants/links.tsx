@@ -13,7 +13,7 @@ export const LINKS = [
   },
   {
     title: 'Check',
-    url: '/check',
+    url: '/health-tests',
     selected: false,
     icon: faFileCircleCheck,
     context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',

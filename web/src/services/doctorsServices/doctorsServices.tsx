@@ -8,12 +8,17 @@ const DoctorsServices = () => {
   }
 
   const doctorShow = (id: number | string) => {
-    return api.post(`/doctors/${id}`, undefined, false);
+    return api.post(`/doctors/view/${id}`, undefined, false);
+  }
+
+  const doctorShowHealthTests = (id: number | string) => {
+    return api.post(`/doctors/health-tests/${id}`, undefined, false);
   }
 
   return {
     doctors,
     doctorShow,
+    doctorShowHealthTests,
   }
 }
 

@@ -6,16 +6,16 @@ import {
   Link
 } from "react-router-dom";
 
-import Home from '../pages/home/home';
-import HealthTestsList from '../pages/healthCheck/healthTestsList/healthTestsList';
-import HealthTest from '../pages/healthCheck/healthTest/healthTest';
+import Home from '../pages/homePage/home';
+import HealthTestsList from '../pages/healthTestsPage/healthTestsList/healthTestsList';
+import HealthTest from '../pages/healthTestsPage/healthTest/healthTest';
 
-import Forum from '../pages/forum/forum';
-import Authentication from '../pages/authentication/authentication';
-import Article from '../pages/article/article';
+import Forum from '../pages/forumPage/forum';
+import Authentication from '../pages/authenticationPage/authentication';
+import Article from '../pages/articlePage/article';
 
-import DoctorsList from '../pages/doctors/doctorsList/doctorsList';
-import DoctorsProfile from '../pages/doctors/doctorsProfile/doctorsProfile';
+import DoctorsList from '../pages/doctorsPage/doctorsList/doctorsList';
+import DoctorsProfile from '../pages/doctorsPage/doctorsProfile/doctorsProfile';
 
 type Props = {};
 
@@ -24,8 +24,9 @@ const Router = ({ }: Props) => {
   return (
     <Routes>
       <Route path="/" element={<Home></Home>} />
-      <Route path="/check" element={<HealthTestsList></HealthTestsList>} />
-      <Route path="/check/:id" element={<HealthTest></HealthTest>} />
+
+      <Route path="/health-tests" element={<HealthTestsList></HealthTestsList>} />
+      <Route path="/health-tests/:id" element={<HealthTest></HealthTest>} />
 
       <Route path="/doctors" element={<DoctorsList></DoctorsList>} />
       <Route path="/doctors/:id" element={<DoctorsProfile></DoctorsProfile>} />
