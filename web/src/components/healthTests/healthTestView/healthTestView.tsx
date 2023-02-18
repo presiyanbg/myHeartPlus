@@ -60,7 +60,7 @@ const HealthTestView = (props: Props) => {
   return (
     <div className="row col-12 p-5 health-check--view">
       {/* Title and description */}
-      <div className="row col-12 text-center mb-4">
+      <div className="row col-12 question--wrapper">
         <div className="col-12 mb-2">
           <h5>{currentQuestion?.title}</h5>
         </div>
@@ -71,7 +71,7 @@ const HealthTestView = (props: Props) => {
       </div>
 
       {/* Answers buttons */}
-      <div className="row answers--wrapper mb-5">
+      <div className="row answers--wrapper">
         {
           currentQuestion?.answers?.map((answer: any) => {
             return (
@@ -86,20 +86,31 @@ const HealthTestView = (props: Props) => {
       </div>
 
       {/* Pagination */}
-      <div className="row">
-        <div className="col-4 cursor-pointer text-primary-hover"
-          onClick={() => displayPreviousQuestion()}>
-          <span>
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </span>
+      <div className="custom-pagination row">
+        {/* Check to display previous button  */}
+        {
+          !!(currentQuestion?.id > 1) && (
+            <div className="pagination--left col-4 m-0"
+              onClick={() => displayPreviousQuestion()}>
+              <span>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </span>
 
-          <span className="ms-3">
-            {t('Previous question')}
-          </span>
-        </div>
+              <span className="ms-2">
+                {t('Previous question')}
+              </span>
+            </div>
+          )
+        }
+        {
+          !(currentQuestion?.id > 1) && (<div className="col-4"></div>)
+        }
+
         <div className="col-4 text-center">
           {currentQuestion.id} / {props.testQA.length}
         </div>
+
+        <div className="col-4"></div>
       </div>
     </div>
   )

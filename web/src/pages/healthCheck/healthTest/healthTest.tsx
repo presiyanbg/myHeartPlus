@@ -46,7 +46,7 @@ const HealthTest = () => {
   }, [id]);
 
   // Return 404 
-  if (!test || !id) {
+  if (!test || !id || !testQA) {
     return (<></>);
   }
 

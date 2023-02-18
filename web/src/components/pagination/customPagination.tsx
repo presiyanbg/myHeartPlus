@@ -51,7 +51,9 @@ const CustomPagination = (props: Props) => {
       {
         !!(pagination?.current_page && pagination.current_page > 1) &&
         <div className="pagination--left" onClick={() => handleClick('changePage', '<')}>
-          <FontAwesomeIcon icon={faArrowLeft} /> {t('Back')}
+          <FontAwesomeIcon icon={faArrowLeft} />
+
+          <span className="ms-2">{t('Back')}</span>
         </div>
       }
 
@@ -64,7 +66,9 @@ const CustomPagination = (props: Props) => {
       {
         !!(pagination?.current_page && pagination.current_page != pagination.last_page) &&
         <div className="pagination--right" onClick={() => handleClick('changePage', '>')}>
-          {t('Next+Page')} <FontAwesomeIcon icon={faArrowRight} />
+          <span className="me-2">{t('Next+Page')}</span>
+
+          <FontAwesomeIcon icon={faArrowRight} />
         </div>
       }
     </div>
