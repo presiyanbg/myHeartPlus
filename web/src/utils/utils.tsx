@@ -145,7 +145,6 @@ export const arrayOrderByProp = (array: any[], key: string, reverse: boolean = f
   return array.sort(compare);
 }
 
-
 /**
  * Copy object and remove reference to main object
  * 

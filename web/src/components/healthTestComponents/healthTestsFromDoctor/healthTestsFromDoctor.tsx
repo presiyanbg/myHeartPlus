@@ -43,7 +43,7 @@ const HealthTestsFromDoctor = (props: Props) => {
           {
             !!tests?.length && tests.map((test: any) => {
               return (
-                <Link to={`/health-tests/${test.id}`} className="col-12 row" key={uuid()}>
+                <div className="col-12 row" key={uuid()}>
                   {/* Icon pointer */}
                   <div className="col-1 d-flex justify-content-center align-items-center">
                     <FontAwesomeIcon className="rotate--90" icon={faArrowTurnUp} />
@@ -53,7 +53,7 @@ const HealthTestsFromDoctor = (props: Props) => {
                   <div className="col-11 d-flex health-check--preview">
                     <HealthTestLink test={test} key={uuid()}></HealthTestLink>
                   </div>
-                </Link>
+                </div>
               )
             })
           }

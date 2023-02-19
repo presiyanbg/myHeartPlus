@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import ImageLoader from "../../loadersComponents/imageLoader/imageLoader";
 import DoctorLogic from "../doctorLogic";
+import StarsRating from "../../starsRatingComponent/starsRating";
 
 type Props = {
   doctor: DoctorType | any
@@ -58,23 +59,17 @@ const DoctorCard = (props: Props) => {
         </div>
 
         {/* Address */}
-        <div className="row mb-4">
+        <div className="row mb-2">
           <div className="col-5 text-end">{t('Address')}:</div>
           <div className="col-7">
-            <p>
+            <p className="mb-0">
               {doctor.address}
             </p>
           </div>
         </div>
 
         {/* Rating */}
-        <div className="row mb-2 text-center">
-          <div className="col-12">
-            <h3 className="btn btn-success text-white">
-              {t('Rating') + ' : ' + doctor.rating}
-            </h3>
-          </div>
-        </div>
+        <StarsRating rating={doctor.rating} title="Rating" format={{ titleCol: 'col-5 text-end', starsCol: 'col-7 text-start' }}></StarsRating>
       </div>
     </div>
   )

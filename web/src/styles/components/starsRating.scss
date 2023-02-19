@@ -1,0 +1,14 @@
+.stars-rating--wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+
+  .stars-rating--title {
+    width: 50%;
+  }
+
+  .stars-rating--content {
+    width: 50%;
+  }
+}
