@@ -1,8 +1,10 @@
 import HealthTestLink from "../healthTestLink/healthTestLink";
 import { v4 as uuid } from 'uuid';
 
+import { HealthTestType, HealthTestsType } from "../../../ts/types";
+
 type Props = {
-  healthTests: any
+  healthTests: HealthTestsType | any
 }
 
 const HealthTestsTable = (props: Props) => {
@@ -11,7 +13,7 @@ const HealthTestsTable = (props: Props) => {
   return (
     <div className="health-test--table">
       {
-        props.healthTests.map((test: any) => {
+        props.healthTests.map((test: HealthTestType) => {
           return (<HealthTestLink test={test} key={uuid()}></HealthTestLink>)
         })
       }

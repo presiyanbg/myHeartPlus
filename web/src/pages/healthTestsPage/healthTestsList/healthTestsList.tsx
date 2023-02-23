@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import PageTitle from '../../../components/commonComponents/pageTitle/pageTitle';
 import HealthTestsLogic from '../healthTestsLogic';
 import CustomPagination from '../../../components/paginationComponents/customPagination';
+import HealthTestsTable from '../../../components/healthTestComponents/healthTestsTable/healthTestsTable';
 
 import { useTranslation } from 'react-i18next';
 import { SELECTORS } from '../../../constants/selectors';
 import { scrollToElement } from '../../../utils/utils';
-import { PaginationType } from '../../../ts/types';
-import HealthTestsTable from '../../../components/healthTestComponents/healthTestsTable/healthTestsTable';
+import { HealthTestType, PaginationType } from '../../../ts/types';
 
 type Props = {};
 
 const HealthTestsList = ({ }: Props) => {
-  const [healthTests, setHealthTests] = useState<any>();
+  const [healthTests, setHealthTests] = useState<HealthTestType>();
   const [pagination, setPagination] = useState<PaginationType>();
 
   const logic = HealthTestsLogic();

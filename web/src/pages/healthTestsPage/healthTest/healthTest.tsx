@@ -1,18 +1,19 @@
 
 import React, { useEffect, useState } from 'react';
 import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
+import HealthTestsLogic from '../healthTestsLogic';
+import HealthTestView from '../../../components/healthTestComponents/healthTestView/healthTestView';
+import HealthTestResult from '../../../components/healthTestComponents/healthTestResult/healthTestResult';
 
 import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { scrollToElement } from '../../../utils/utils';
 import { SELECTORS } from '../../../constants/selectors';
-import HealthTestsLogic from '../healthTestsLogic';
-import HealthTestView from '../../../components/healthTestComponents/healthTestView/healthTestView';
-import HealthTestResult from '../../../components/healthTestComponents/healthTestResult/healthTestResult';
+import { HealthTestQAType, HealthTestType } from '../../../ts/types';
 
 const HealthTest = () => {
-  const [test, setTest] = useState<any>();
-  const [testQA, setTestQA] = useState<any>();
+  const [test, setTest] = useState<HealthTestType>();
+  const [testQA, setTestQA] = useState<HealthTestQAType>();
   const [showResult, setShowResult] = useState<boolean>(false);
 
   const { id } = useParams();
@@ -26,7 +27,7 @@ const HealthTest = () => {
    * @param data 
    */
   const handleTestSubmit = (data: any) => {
-    console.log(data)
+    // console.log(data)
   }
 
   // Load test on init
@@ -38,8 +39,8 @@ const HealthTest = () => {
 
         // Format JSON questions and answers 
         if (response?.testQA?.questions_and_answers) {
-          const testQA = JSON.parse(response.testQA.questions_and_answers);
-          setTestQA(testQA);
+          response.testQA.questions_and_answers_array = JSON.parse(response?.testQA?.questions_and_answers)?.questions;
+          setTestQA(response.testQA);
         }
 
         scrollToElement(`.${SELECTORS.anchorScroll}`);
@@ -65,7 +66,7 @@ const HealthTest = () => {
 
         {/* Show test view */}
         {
-          !showResult && <HealthTestView testQA={testQA.questions} submitTest={handleTestSubmit}></HealthTestView>
+          !showResult && <HealthTestView testQA={testQA} submitTest={handleTestSubmit}></HealthTestView>
         }
 
         {/* Show test result */}

@@ -1,41 +1,43 @@
 
+import { HealthTestAnswerType, HealthTestAnswersType, HealthTestQAType, HealthTestQuestionType, HealthTestQuestionsType } from "../../../ts/types";
 import { arrayOrderByProp } from "../../../utils/utils"
 
 const healthTestViewLogic = () => {
 
-  const saveAnswer = (allAnswers: any[], answer: any) => {
-    if (!allAnswers?.length) return [answer];
+  const saveAnswer = (answers: HealthTestAnswersType, answer: HealthTestAnswerType): HealthTestAnswersType | any => {
+    if (!answers?.length) return [answer];
 
     let checkOldAnswer = false;
 
     // Update answer for question 
-    allAnswers = allAnswers.map(oldAnswer => {
+    answers = answers.map((oldAnswer: HealthTestAnswerType) => {
       if (oldAnswer.question_id == answer.question_id) {
         oldAnswer = answer;
         checkOldAnswer = true;
       }
+
       return oldAnswer;
     });
 
     // Push new answer for question 
     if (!checkOldAnswer) {
-      allAnswers.push(answer)
+      answers.push(answer)
     }
 
-    return allAnswers;
+    return answers;
   }
 
-  const removeAnswer = (allAnswers: any[], question: any) => {
-    if (!allAnswers?.length) return [];
+  const removeAnswer = (answers: HealthTestAnswersType, question: HealthTestAnswerType): HealthTestAnswersType | any => {
+    if (!answers?.length) return [];
 
-    if (!question) return allAnswers;
+    if (!question) return answers;
 
-    return allAnswers.filter(oldAnswer => {
+    return answers.filter(oldAnswer => {
       return oldAnswer.question_id != question.id;
     });
   }
 
-  const getNextQuestion = (questions: any, next_question_id: number) => {
+  const getNextQuestion = (questions: HealthTestQuestionsType, next_question_id: number): HealthTestQuestionType | any => {
     if (!questions?.length) return {};
 
     if (!next_question_id) {
@@ -47,7 +49,7 @@ const healthTestViewLogic = () => {
     });
   }
 
-  const getPrevQuestion = (questions: any, answers: any) => {
+  const getPrevQuestion = (questions: HealthTestQuestionsType, answers: HealthTestAnswersType): HealthTestQuestionType | any => {
     if (!questions?.length) return {};
 
     if (!answers?.length) return questions[0];

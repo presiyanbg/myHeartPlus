@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
+import { HealthTestType } from "../../../ts/types";
 
 type Props = {
-  test: any
+  test: HealthTestType
 }
 
 const HealthTestLink = (props: Props) => {
