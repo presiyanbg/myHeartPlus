@@ -10,7 +10,10 @@ const HealthTestLink = (props: Props) => {
   if (!props?.test) return (<></>);
 
   return (
-    <Link to={`/health-tests/${props.test.id}`} className="health-test--link" key={uuid()}>
+    <Link to={`/health-tests/${props.test.id}`}
+      className="health-test--link"
+      key={uuid()}
+      style={{ "--category-bg-color": props.test.category.bg_color } as React.CSSProperties}>
       {/* Test title */}
       <div className="test-title">
         <h4>{props.test.title}</h4>

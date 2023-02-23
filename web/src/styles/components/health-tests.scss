@@ -75,7 +75,7 @@
   }
 
   &:hover {
-    border-color: $main;
+    border-color: var(--category-bg-color);
 
     .test-title {
       * {
