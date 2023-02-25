@@ -4,6 +4,7 @@
 /public/storage
 /public/articles
 /public/images/articles
+/public/images/medicaments
 /public/images/users
 /public/images/users
 /storage/*.key

@@ -5,7 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HealthCategoryController;
 use App\Http\Controllers\HealthTestController;
+use App\Http\Controllers\MedicamentController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,4 +72,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Health categories
     Route::post('health-category/store', [HealthCategoryController::class, 'store']);
     Route::post('health-category/view/{id}', [HealthCategoryController::class, 'show']);
+
+    // Medicaments 
+    Route::post('medicaments/store', [MedicamentController::class, 'store']);
+
+    // Prescriptions 
+    Route::post('prescriptions/store', [PrescriptionController::class, 'store']);
 });
