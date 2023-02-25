@@ -56,7 +56,6 @@ class HealthTestController extends Controller
                 'description' => 'required|string',
                 'category_id' => 'required|exists:health_categories,id',
                 'doctor_id' => 'required|exists:doctors,id',
-                'questions_and_answers' => 'required',
             ]);
 
             // Save test to DB
@@ -68,17 +67,8 @@ class HealthTestController extends Controller
                 'doctor_id' => $fields['doctor_id'],
             ]);
 
-            return $fields['questions_and_answers'];
-
-            // Save test QA to DB
-            $testQA = HealthTestQuestionsAndAnswers::create([
-                'test_id' => $test->id,
-                'questions_and_answers' => $fields['questions_and_answers'],
-            ]);
-
             return response([
                 'test' => $test,
-                'questions_and_answers' => $testQA,
                 'message' => 'Success'
             ], 200);
         } catch (Throwable $e) {
