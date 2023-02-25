@@ -68,6 +68,8 @@ class HealthTestController extends Controller
                 'doctor_id' => $fields['doctor_id'],
             ]);
 
+            return $fields['questions_and_answers'];
+
             // Save test QA to DB
             $testQA = HealthTestQuestionsAndAnswers::create([
                 'test_id' => $test->id,
