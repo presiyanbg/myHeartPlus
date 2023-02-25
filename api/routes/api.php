@@ -48,7 +48,6 @@ Route::post('health-tests/view/{id}', [HealthTestController::class, 'show']);
 
 // Health categories
 Route::post('health-category', [HealthCategoryController::class, 'index']);
-Route::post('health-category/store', [HealthCategoryController::class, 'store']);
 
 /*  
 |
