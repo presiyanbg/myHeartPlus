@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePrescriptionRequest;
 use App\Http\Requests\UpdatePrescriptionRequest;
 use App\Models\Prescription;
+use Illuminate\Http\Request;
 
 class PrescriptionController extends Controller
 {
@@ -31,12 +32,47 @@ class PrescriptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePrescriptionRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePrescriptionRequest $request)
+    public function store(Request $request)
     {
-        //
+        try {
+            $fields = $request->validate([
+                'doctor_id' => 'required|exists:doctors,id',
+                'category_id' => 'required|exists:health_categories,id',
+                'title' => 'required|string',
+                'description' => 'required|string',
+                'medicaments_array' => 'json',
+            ]);
+
+            // Save prescription to DB
+            $prescription = Prescription::create([
+                'doctor_id' => $fields['doctor_id'],
+                'category_id' => $fields['category_id'],
+                'title' => $fields['title'],
+                'description' => $fields['description'],
+                'medicaments_array' => $fields['medicaments_array'],
+            ]);
+
+            // Check if prescription was created 
+            if (!$prescription) {
+                return response([
+                    'message' => 'Internal error'
+                ], 500);
+            }
+
+            return response([
+                'prescription' => $prescription,
+                'message' => 'Success'
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+
+            return false;
+        }
     }
 
     /**
