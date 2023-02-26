@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('health_test_questions_and_answers', function (Blueprint $table) {
-            $table->unsignedBigInteger('patient_id')->default(0);
+            $table->unsignedBigInteger('patient_id')->nullable();
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
         });
@@ -28,7 +28,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('health_test_questions_and_answers', function (Blueprint $table) {
-            //
+            $table->dropForeign(['patient_id']);
+            $table->dropColumn('patient_id');
         });
     }
 };

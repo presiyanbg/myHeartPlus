@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('test_id');
             $table->unsignedBigInteger('question_id');
-            $table->unsignedBigInteger('next_question_id');
-            $table->unsignedBigInteger('prev_question_id');
+            $table->unsignedBigInteger('next_question_order_number');
+            $table->unsignedBigInteger('prev_question_order_number');
 
             $table->longText('content');
             $table->float('points');
@@ -26,8 +26,6 @@ return new class extends Migration
 
             $table->foreign('test_id')->references('id')->on('health_tests')->onDelete('cascade');
             $table->foreign('question_id')->references('id')->on('health_test_questions')->onDelete('cascade');
-            $table->foreign('next_question_id')->references('id')->on('health_test_questions')->onDelete('cascade');
-            $table->foreign('prev_question_id')->references('id')->on('health_test_questions')->onDelete('cascade');
         });
     }
 

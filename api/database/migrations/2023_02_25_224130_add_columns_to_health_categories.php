@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('health_categories', function (Blueprint $table) {
-            $table->unique('title');
+            $table->unique('title')->change();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('health_categories', function (Blueprint $table) {
-            //
+            $table->dropUnique(['title']);
         });
     }
 };

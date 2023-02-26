@@ -30,7 +30,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('health_test_results', function (Blueprint $table) {
-            //
+            $table->dropForeign(['test_id']);
+            $table->dropForeign(['patient_id']);
+            $table->dropForeign(['doctor_id']);
         });
     }
 };

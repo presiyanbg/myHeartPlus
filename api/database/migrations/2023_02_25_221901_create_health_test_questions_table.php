@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('health_test_questions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('test_id');
+            $table->integer('order_number');
 
             $table->string('title');
             $table->longText('description');

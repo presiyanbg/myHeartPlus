@@ -16,6 +16,7 @@ class HealthTestQuestion extends Model
      */
     protected $fillable = [
         'test_id',
+        'order_number',
         'title',
         'description',
         'is_final_question',

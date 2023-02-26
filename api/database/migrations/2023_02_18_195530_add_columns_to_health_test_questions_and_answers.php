@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('health_test_questions_and_answers', function (Blueprint $table) {
-            //
+            $table->dropForeign(['test_id']);
         });
     }
 };

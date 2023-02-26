@@ -17,8 +17,8 @@ class HealthTestAnswer extends Model
     protected $fillable = [
         'test_id',
         'question_id',
-        'next_question_id',
-        'prev_question_id',
+        'next_question_order_number',
+        'prev_question_order_number',
         'content',
         'points',
     ];
