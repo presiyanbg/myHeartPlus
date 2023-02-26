@@ -174,3 +174,11 @@ export const buildAddress = (addresses: string[], divider: string = ',') => {
 
   return build;
 }
+
+
+export const calculatePercentage = (total: any, current: any) => {
+  total = Number(total);
+  current = Number(current);
+
+  return Number(((current / total) * 100).toFixed(2));
+}

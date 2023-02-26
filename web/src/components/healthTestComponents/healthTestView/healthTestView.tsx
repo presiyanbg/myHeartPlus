@@ -4,6 +4,8 @@ import { v4 as uuid } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { HealthTestAnswerType, HealthTestAnswersType, HealthTestQuestionsType } from "../../../ts/types";
+import { calculatePercentage } from "../../../utils/utils";
+import { ProgressBar } from "react-bootstrap";
 
 import healthTestViewLogic from "./healthTestViewLogic"
 import HealthTestsLogic from "../healthTestsLogic";
@@ -86,6 +88,12 @@ const HealthTestView = (props: Props) => {
             )
           })
         }
+      </div>
+
+      <div className="row mb-5">
+        <div className="col-12">
+          <ProgressBar now={calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)} />
+        </div>
       </div>
 
       {/* Pagination */}
