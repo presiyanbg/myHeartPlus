@@ -60,7 +60,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Users
     Route::post('users', [UserController::class, 'index']);
     Route::post('users/logout', [AuthController::class, 'logout']);
-    Route::post('users/{id}', [UserController::class, 'show']);
+    Route::post('users/view/{id}', [UserController::class, 'show']);
     Route::post('articles/store', [ArticleController::class, 'store']);
 
     // Patients

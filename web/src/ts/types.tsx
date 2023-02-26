@@ -11,14 +11,14 @@ type NavLinkType = {
   context?: string,
   onClick: Function,
   authentication?: boolean,
-  isAuth?: boolean
+  isAuth?: boolean,
 };
 
 type NavLinksType = Array<NavLinkType>;
 
 /* User Types */
 type UserType = {
-  id: string,
+  id: number,
   first_name: string,
   last_name: string,
   full_name: string,
@@ -28,6 +28,7 @@ type UserType = {
   email_verified_at: string,
   created_at: string,
   updated_at: string,
+  image: string;
 }
 
 type UserFormType = {
