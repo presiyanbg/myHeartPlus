@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { classNames } from "../../../utils/utils";
 
 type Props = {
   rating: number,

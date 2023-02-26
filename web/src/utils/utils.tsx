@@ -175,8 +175,14 @@ export const buildAddress = (addresses: string[], divider: string = ',') => {
   return build;
 }
 
-
-export const calculatePercentage = (total: any, current: any) => {
+/**
+ * Calculate percentage 
+ * 
+ * @param total number | any 
+ * @param current number | any
+ * @returns number
+ */
+export const calculatePercentage = (total: number | any, current: number | any) => {
   total = Number(total);
   current = Number(current);
 
