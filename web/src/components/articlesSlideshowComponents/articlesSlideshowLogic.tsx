@@ -128,7 +128,7 @@ const ArticlesSlideshowLogic = () => {
     let styles = 'slide' + ' article-' + Number(index + 1);
 
     return (
-      <Link to={`article/` + article.id} className={styles} key={uuid()}>
+      <Link to={`articles/` + article.id} className={styles} key={uuid()}>
         {
           displayLoader && !pagination &&
           <div className='slide--loader'>Tet</div>

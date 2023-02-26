@@ -18,7 +18,7 @@ const NewsLarge = (props: Props) => {
       {
         props.articles.map(article => {
           return (
-            <Link to={`/article/${article.id}`} className="medium-box" key={uuid()}>
+            <Link to={`/articles/${article.id}`} className="medium-box" key={uuid()}>
               <div className="box--head">
                 <ImageLoader src={article.image} alt={article.title}></ImageLoader>
               </div>
