@@ -51,7 +51,7 @@ const NewsSmall = (props: Props) => {
       {
         articles.map(article => {
           return (
-            <Link to={`/article/${article.id}`} className="news-box" key={uuid()}>
+            <Link to={`/articles/${article.id}`} className="news-box" key={uuid()}>
               <div className="box--head">
                 <ImageLoader src={article.image} alt={article.title}></ImageLoader>
               </div>

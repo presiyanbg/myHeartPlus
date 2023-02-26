@@ -35,7 +35,9 @@ const Router = ({ }: Props) => {
 
       <Route path="/forum" element={<Forum></Forum>} />
 
-      <Route path="/article/:id" element={<Article></Article>} />
+      <Route path="/articles/:id" element={<Article></Article>} />
+
+      <Route path="/users/:id" element={<Article></Article>} />
 
       <Route path="*" element={<Home></Home>} />
     </Routes>
