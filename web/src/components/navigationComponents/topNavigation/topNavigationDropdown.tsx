@@ -18,7 +18,7 @@ const TopNavigationDropDown = (props: Props) => {
   const user = props.user;
 
   return (
-    <Dropdown className="navigation__link navigation__link--dropdown-wrapper">
+    <Dropdown className="navigation__link navigation__link--dropdown-wrapper" drop="down" align="end">
       {/* User Image */}
       <Dropdown.Toggle variant="" className="navigation__link navigation__link--picture navigation__link--picture-profile">
         <div className="image">
