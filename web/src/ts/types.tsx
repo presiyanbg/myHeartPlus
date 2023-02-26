@@ -124,33 +124,23 @@ type HealthTestType = {
 
 type HealthTestsType = Array<HealthTestType>;
 
-type HealthTestQAType = {
-  id: number,
-  test_id: number,
-  questions_and_answers: string,
-  questions_and_answers_array: HealthTestQuestionsType,
-  created_at: string,
-  updated_at: string,
-}
-
-type HealthTestsQAType = Array<HealthTestQAType>;
-
 type HealthTestAnswerType = {
   id: number,
   question_id: number,
-  next_question_id: number,
-  prev_question_id: number,
+  next_question_order_number: number,
+  prev_question_order_number: number,
   points: number,
-  text: string,
+  content: string,
 }
 
 type HealthTestAnswersType = Array<HealthTestAnswerType>;
 
 type HealthTestQuestionType = {
   id: number,
+  order_number: number,
   title: string,
   description: string,
-  final_question: boolean,
+  is_final_question: boolean,
   answers: HealthTestAnswersType,
 }
 
@@ -179,9 +169,6 @@ export type {
 
   HealthTestType,
   HealthTestsType,
-
-  HealthTestQAType,
-  HealthTestsQAType,
 
   HealthTestAnswerType,
   HealthTestAnswersType,

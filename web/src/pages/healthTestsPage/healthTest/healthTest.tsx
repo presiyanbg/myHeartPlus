@@ -9,11 +9,11 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { scrollToElement } from '../../../utils/utils';
 import { SELECTORS } from '../../../constants/selectors';
-import { HealthTestQAType, HealthTestType } from '../../../ts/types';
+import { HealthTestQuestionsType, HealthTestType } from '../../../ts/types';
 
 const HealthTest = () => {
   const [test, setTest] = useState<HealthTestType>();
-  const [testQA, setTestQA] = useState<HealthTestQAType>();
+  const [testQA, setTestQA] = useState<HealthTestQuestionsType>();
   const [showResult, setShowResult] = useState<boolean>(false);
 
   const { id } = useParams();
@@ -36,12 +36,7 @@ const HealthTest = () => {
       // Load test basic data 
       logic.loadHeathTest(id).then(response => {
         setTest(response.test);
-
-        // Format JSON questions and answers 
-        if (response?.testQA?.questions_and_answers) {
-          response.testQA.questions_and_answers_array = JSON.parse(response?.testQA?.questions_and_answers)?.questions;
-          setTestQA(response.testQA);
-        }
+        setTestQA(response.testQA);
 
         scrollToElement(`.${SELECTORS.anchorScroll}`);
       });

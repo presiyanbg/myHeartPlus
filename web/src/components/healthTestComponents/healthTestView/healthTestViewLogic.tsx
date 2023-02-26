@@ -1,5 +1,5 @@
 
-import { HealthTestAnswerType, HealthTestAnswersType, HealthTestQAType, HealthTestQuestionType, HealthTestQuestionsType } from "../../../ts/types";
+import { HealthTestAnswerType, HealthTestAnswersType, HealthTestQuestionType, HealthTestQuestionsType } from "../../../ts/types";
 import { arrayOrderByProp } from "../../../utils/utils"
 
 const healthTestViewLogic = () => {
@@ -37,15 +37,15 @@ const healthTestViewLogic = () => {
     });
   }
 
-  const getNextQuestion = (questions: HealthTestQuestionsType, next_question_id: number): HealthTestQuestionType | any => {
+  const getNextQuestion = (questions: HealthTestQuestionsType, next_question_order_number: number): HealthTestQuestionType | any => {
     if (!questions?.length) return {};
 
-    if (!next_question_id) {
+    if (!next_question_order_number) {
       return questions[0];
     }
 
-    return questions.find((question: any) => {
-      return question.id == next_question_id
+    return questions.find((question: HealthTestQuestionType) => {
+      return question.order_number == next_question_order_number
     });
   }
 
@@ -54,12 +54,12 @@ const healthTestViewLogic = () => {
 
     if (!answers?.length) return questions[0];
 
-    const lastAnswer = arrayOrderByProp(answers, 'prev_question_id', true);
+    const lastAnswer = arrayOrderByProp(answers, 'prev_question_order_number', true);
 
-    return questions.find((question: any) => question.id == lastAnswer[0].question_id)
+    return questions.find((question: HealthTestQuestionType) => question.id == lastAnswer[0].question_id)
   }
 
-  const calculateResult = (answers: any[]) => {
+  const calculateResult = (answers: HealthTestAnswersType) => {
 
   }
 

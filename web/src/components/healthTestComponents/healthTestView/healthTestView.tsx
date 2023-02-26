@@ -3,26 +3,26 @@ import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { HealthTestAnswersType, HealthTestQAType, HealthTestQuestionType } from "../../../ts/types";
+import { HealthTestAnswerType, HealthTestAnswersType, HealthTestQuestionsType } from "../../../ts/types";
 
 import healthTestViewLogic from "./healthTestViewLogic"
 import HealthTestsLogic from "../healthTestsLogic";
 
 type Props = {
-  testQA: HealthTestQAType,
+  testQA: HealthTestQuestionsType,
   submitTest: (data: any) => void
 }
 
 const HealthTestView = (props: Props) => {
-  const [currentQuestion, setCurrentQuestion] = useState<HealthTestQuestionType | any>({});
+  const [currentQuestion, setCurrentQuestion] = useState<HealthTestQuestionsType | any>({});
   const [answers, setAnswers] = useState<HealthTestAnswersType | any>([]);
 
   const { t } = useTranslation();
   const logic = HealthTestsLogic();
   const viewLogic = healthTestViewLogic();
 
-  const submitAnswer = (answer: any) => {
-    if (currentQuestion.final_question) {
+  const submitAnswer = (answer: HealthTestAnswerType) => {
+    if (currentQuestion.is_final_question) {
       setAnswers((prev: HealthTestAnswersType) => viewLogic.saveAnswer(prev, answer));
       alert('ananas');
 
@@ -31,18 +31,18 @@ const HealthTestView = (props: Props) => {
       return;
     }
 
-    if (answer?.next_question_id) {
+    if (answer?.next_question_order_number) {
       setAnswers((prev: HealthTestAnswersType) => viewLogic.saveAnswer(prev, answer));
-      setCurrentQuestion(viewLogic.getNextQuestion(props.testQA.questions_and_answers_array, answer.next_question_id));
+      setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, answer.next_question_order_number));
       return;
     }
   }
 
   const displayPreviousQuestion = () => {
-    setAnswers((prev: any) => {
+    setAnswers((prev: HealthTestAnswersType) => {
       const newAnswers = viewLogic.removeAnswer(prev, currentQuestion);
 
-      setCurrentQuestion(viewLogic.getPrevQuestion(props.testQA.questions_and_answers_array, newAnswers));
+      setCurrentQuestion(viewLogic.getPrevQuestion(props.testQA, newAnswers));
 
       return newAnswers;
     });
@@ -51,7 +51,7 @@ const HealthTestView = (props: Props) => {
   // Load initial question
   useEffect(() => {
     if (props?.testQA) {
-      setCurrentQuestion(viewLogic.getNextQuestion(props.testQA.questions_and_answers_array, 0));
+      setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, 0));
     }
   }, [props.testQA]);
 
@@ -76,12 +76,12 @@ const HealthTestView = (props: Props) => {
       {/* Answers buttons */}
       <div className="row answers--wrapper">
         {
-          currentQuestion?.answers?.map((answer: any) => {
+          currentQuestion?.answers?.map((answer: HealthTestAnswerType) => {
             return (
               <div className="btn btn-answer"
                 onClick={() => submitAnswer(answer)}
                 key={uuid()}>
-                {answer.text}
+                {answer.content}
               </div>
             )
           })

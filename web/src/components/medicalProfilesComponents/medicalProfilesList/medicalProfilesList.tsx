@@ -1,7 +1,7 @@
 
 
 import ImageLoader from '../../loadersComponents/imageLoader/imageLoader';
-import StarsRating from '../../starsRatingComponent/starsRating';
+import StarsRating from '../../commonComponents/starsRatingComponent/starsRating';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';

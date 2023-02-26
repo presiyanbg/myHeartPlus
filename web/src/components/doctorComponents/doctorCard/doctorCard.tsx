@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import ImageLoader from "../../loadersComponents/imageLoader/imageLoader";
 import DoctorLogic from "../doctorLogic";
-import StarsRating from "../../starsRatingComponent/starsRating";
+import StarsRating from "../../commonComponents/starsRatingComponent/starsRating";
 
 type Props = {
   doctor: DoctorType | any

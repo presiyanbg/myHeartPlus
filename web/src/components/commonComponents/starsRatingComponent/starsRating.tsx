@@ -1,11 +1,11 @@
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { RATING_SYSTEM } from "../../constants/rating";
+import { RATING_SYSTEM } from "../../../constants/rating";
 import { v4 as uuid } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { classNames } from "../../utils/utils";
+import { classNames } from "../../../utils/utils";
 
 type Props = {
   rating: number,
@@ -50,6 +50,22 @@ const StarsRating = (props: Props) => {
     });
   }, [props.rating]);
 
+
+  // Table format
+  // Only start
+  if (props.format && !props.title) {
+    return (
+      <div className="row" >
+        {
+          props.format?.starsCol?.length && (
+            <div className={props.format.starsCol}>
+              {ratingStars}
+            </div>
+          )
+        }
+      </div>
+    )
+  }
 
   // Table format
   // Title is required

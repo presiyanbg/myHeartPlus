@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 import { HealthTestType } from "../../../ts/types";
+import StarsRating from "../../commonComponents/starsRatingComponent/starsRating";
 
 type Props = {
   test: HealthTestType
@@ -20,7 +21,7 @@ const HealthTestLink = (props: Props) => {
       </div>
 
       {/* Test description */}
-      <div className="text-description text-ellipsis--2">
+      <div className="text-description text-ellipsis--2 mb-2">
         <p>{props.test.description}</p>
       </div>
 
@@ -41,7 +42,7 @@ const HealthTestLink = (props: Props) => {
         </div>
 
         <div className="col-6 text-end">
-          <span className="badge rounded-pill text-bg-success text-white">{props.test.rating}</span>
+          <StarsRating rating={props.test.rating} format={{ starsCol: 'col-12 text-end' }}></StarsRating>
         </div>
       </div>
     </Link>
