@@ -16,6 +16,7 @@ import Article from '../pages/articlePage/article';
 
 import DoctorsList from '../pages/doctorsPage/doctorsList/doctorsList';
 import DoctorsProfile from '../pages/doctorsPage/doctorsProfile/doctorsProfile';
+import ProfilePage from '../pages/profilePage/profilePage';
 
 type Props = {};
 
@@ -37,7 +38,7 @@ const Router = ({ }: Props) => {
 
       <Route path="/articles/:id" element={<Article></Article>} />
 
-      <Route path="/users/:id" element={<Article></Article>} />
+      <Route path="/users/profile" element={<ProfilePage></ProfilePage>} />
 
       <Route path="*" element={<Home></Home>} />
     </Routes>

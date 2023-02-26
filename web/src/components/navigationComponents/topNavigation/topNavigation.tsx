@@ -22,7 +22,7 @@ const TopNavigation = ({ }: Props) => {
     <div className="navigation" >
       <div className="navigation__links-wrapper">
         <NavLink to={logoLink.url}>
-          <li className="navigation__link navigation__link--logo" >
+          <li className="navigation__link navigation__link--picture" >
             <img src={logoLink.logo} alt="Company logo"></img>
           </li>
         </NavLink>
