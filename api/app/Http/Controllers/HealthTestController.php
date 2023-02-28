@@ -100,10 +100,12 @@ class HealthTestController extends Controller
         try {
             // Decode json
             $questions_and_answers = json_decode($questions_and_answers);
-
-            if (!$questions_and_answers->questions) return [];
-
             $data = [];
+
+            // Check if json is valid 
+            if (json_last_error() != 0 && is_array($questions_and_answers->questions)) {
+                return $data;
+            }
 
             // Save each question and answer
             foreach ($questions_and_answers->questions as $question) {
