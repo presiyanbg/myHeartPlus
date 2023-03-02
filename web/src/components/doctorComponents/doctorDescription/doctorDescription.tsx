@@ -7,6 +7,9 @@ type Props = {
 const DoctorDescription = (props: Props) => {
   const { t } = useTranslation();
 
+  // Do not display component if no description is available
+  if (!props.description?.length) return (<></>);
+
   return (
     <div className="col-12 mb-4">
       <div className="row">

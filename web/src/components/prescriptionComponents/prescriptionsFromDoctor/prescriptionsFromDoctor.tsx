@@ -29,6 +29,9 @@ const PrescriptionsFromDoctor = (props: Props) => {
 
   }, [props.doctor_id])
 
+  // Do not display component if no prescriptions are available
+  if (!prescriptions?.length) return (<></>);
+
   return (
     <div className="col-12 mb-4">
       <div className="row">

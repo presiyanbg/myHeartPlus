@@ -31,6 +31,9 @@ const HealthTestsFromDoctor = (props: Props) => {
 
   }, [props.doctor_id])
 
+  // Do not display component if no tests are available
+  if (!tests?.length) return (<></>);
+
   return (
     <div className="col-12 mb-4">
       <div className="row">
