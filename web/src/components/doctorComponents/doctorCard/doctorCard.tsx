@@ -20,14 +20,14 @@ const DoctorCard = (props: Props) => {
   doctor.address = logic.buildDoctorAddress(doctor);
 
   return (
-    <div className="profile-card">
+    <div className="component-card">
       {/* Doctors image */}
-      <div className="col-sm-12 col-md-5 profile-picture">
+      <div className="col-sm-12 col-md-5 card-picture">
         <ImageLoader src={doctor.image} alt={doctor.full_name}></ImageLoader>
       </div>
 
       {/* Doctors stats  */}
-      <div className="col-sm-12 col-md-7">
+      <div className="col-sm-12 col-md-7 card-content">
         <div className="row mb-3"></div>
 
         {/* Name */}
