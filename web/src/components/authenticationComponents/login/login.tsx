@@ -53,24 +53,24 @@ const Login = ({ }: Props) => {
       </div>
 
       {/* Email */}
-      <div className="form-group mb-3">
-        <label htmlFor="email">Email address</label>
+      <div className="form-floating mb-3">
         <input type="email"
           className="form-control"
           id="email"
           aria-describedby="emailHelp"
           placeholder="Enter email"
           onChange={(e) => handleInputChange('email', e)} />
+        <label htmlFor="email">Email address</label>
       </div>
 
       {/* Password */}
-      <div className="form-group mb-4">
-        <label htmlFor="exampleInputPassword1">Password</label>
+      <div className="form-floating mb-4">
         <input type="password"
           className="form-control"
           id="exampleInputPassword1"
           placeholder="Password"
           onChange={(e) => handleInputChange('password', e)} />
+        <label htmlFor="exampleInputPassword1">Password</label>
         <div id="emailHelp" className="form-text text-end cursor-pointer text-primary-hover">Forgotten password</div>
       </div>
 
