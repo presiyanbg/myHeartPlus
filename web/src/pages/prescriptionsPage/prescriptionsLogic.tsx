@@ -15,17 +15,16 @@ const PrescriptionsLogic = () => {
   }
 
   /**
- * Load prescription 
- * 
- * @param prescription_id ID of prescription
- * @returns API response
- */
+   * Load prescription 
+   * 
+   * @param prescription_id ID of prescription
+   * @returns API response
+   */
   const loadPrescription = async (prescription_id: number | string) => {
     const data = await prescriptionServices.prescriptionShow(prescription_id);
 
     return data;
   }
-
 
   return {
     loadPrescriptions,

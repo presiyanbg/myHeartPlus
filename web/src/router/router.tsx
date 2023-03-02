@@ -23,6 +23,8 @@ import HealthTest from '../pages/healthTestsPage/healthTest/healthTest';
 
 import Prescription from '../pages/prescriptionsPage/prescription/prescription';
 import PrescriptionsList from '../pages/prescriptionsPage/prescriptionsList/prescriptionsList';
+import MedicamentsList from '../pages/medicamentsPage/medicamentsList/medicamentsList';
+import Medicament from '../pages/medicamentsPage/medicament/medicament';
 
 type Props = {};
 
@@ -46,6 +48,9 @@ const Router = ({ }: Props) => {
 
       <Route path="/prescriptions" element={<PrescriptionsList></PrescriptionsList>}></Route>
       <Route path="/prescriptions/:id" element={<Prescription></Prescription>}></Route>
+
+      <Route path="/medicaments" element={<MedicamentsList></MedicamentsList>}></Route>
+      <Route path="/medicaments/:id" element={<Medicament></Medicament>}></Route>
 
       <Route path="/users/profile" element={<Profile></Profile>} />
 

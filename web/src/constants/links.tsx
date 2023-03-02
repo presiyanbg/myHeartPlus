@@ -30,6 +30,15 @@ export const LINKS = [
     onClick: () => { },
   },
   {
+    title: 'Medicaments',
+    url: '/medicaments',
+    selected: false,
+    icon: faUserDoctor,
+    context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
+    topLink: true,
+    onClick: () => { },
+  },
+  {
     title: 'Contact a doctor',
     url: '/doctors',
     selected: false,

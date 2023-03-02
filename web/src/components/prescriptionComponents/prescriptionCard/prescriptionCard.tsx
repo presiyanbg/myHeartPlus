@@ -18,7 +18,7 @@ const PrescriptionCard = (props: Props) => {
   const categoryColor = props.prescription?.category?.bg_color || '';
 
   return (
-    <div className="prescription-card">
+    <div className="component-card pt-4 pb-4">
       <div className="col-4 d-flex justify-content-center align-items-center">
         <FontAwesomeIcon icon={faHouseChimneyMedical} size="6x" className="prescription-icon" style={{ color: categoryColor }} />
       </div>
@@ -26,16 +26,16 @@ const PrescriptionCard = (props: Props) => {
       <div className="col-8">
         {/* Title */}
         <div className="row mb-2">
-          <div className="col-2 text-end">{t('Title')}:</div>
-          <div className="col-10">
+          <div className="col-3 text-end">{t('Title')}:</div>
+          <div className="col-9">
             {props.prescription.title}
           </div>
         </div>
 
         {/* Doctor */}
         <div className="row mb-2">
-          <div className="col-2 text-end">{t('Doctor')}:</div>
-          <div className="col-10">
+          <div className="col-3 text-end">{t('Doctor')}:</div>
+          <div className="col-9">
             {props.prescription.doctor && (
               <Link to={`/doctors/${props.prescription.doctor_id}`}>
                 {props.prescription.doctor.full_name}
@@ -48,8 +48,8 @@ const PrescriptionCard = (props: Props) => {
         {
           props.prescription.category && (
             <div className="row mb-2">
-              <div className="col-2 text-end">{t('Category')}:</div>
-              <div className="col-10">
+              <div className="col-3 text-end">{t('Category')}:</div>
+              <div className="col-9">
                 <span className="badge rounded-pill"
                   style={{
                     'color': props.prescription?.category?.font_color,
@@ -63,7 +63,7 @@ const PrescriptionCard = (props: Props) => {
         }
 
         {/* Rating */}
-        <StarsRating rating={props.prescription.rating} title="Rating" format={{ titleCol: 'col-2 text-end', starsCol: 'col-10 text-start' }}></StarsRating>
+        <StarsRating rating={props.prescription.rating} title="Rating" format={{ titleCol: 'col-3 text-end', starsCol: 'col-9 text-start' }}></StarsRating>
       </div>
     </div>
   );

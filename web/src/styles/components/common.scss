@@ -337,3 +337,25 @@ $degrees: 45, 90, 135;
     }
   }
 }
+
+.component-card {
+  display: flex;
+  padding: 0.5rem;
+  border: $borderLight;
+  border-radius: $defaultRadius;
+  box-shadow: $shadowBorder;
+
+  .card-picture {
+    overflow: hidden;
+
+    img {
+      border-radius: $defaultRadius;
+      max-height: 500px;
+      width: 100%;
+    }
+  }
+
+  .card-content {
+    padding-top: 1rem;
+  }
+}

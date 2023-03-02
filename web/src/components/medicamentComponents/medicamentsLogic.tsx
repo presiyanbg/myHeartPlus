@@ -1,9 +1,6 @@
+
 const MedicamentsLogic = () => {
-
-
-  return {
-  }
-
+  return {}
 }
 
 export default MedicamentsLogic;

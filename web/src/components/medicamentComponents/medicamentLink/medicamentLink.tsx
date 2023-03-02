@@ -10,13 +10,13 @@ type Props = {
 }
 
 const MedicamentLink = (props: Props) => {
-  if (!props.medicament) return (<></>);
+  if (!props?.medicament) return (<></>);
 
   return (
     <Link to={`/medicaments/${props.medicament.id}`}
       className="component--link"
       key={uuid()}
-      style={{ "--category-bg-color": props.medicament.category.bg_color } as React.CSSProperties}>
+      style={{ "--category-bg-color": props.medicament?.category?.bg_color } as React.CSSProperties}>
       <div className="row">
         <div className="col-2 link-image">
           <ImageLoader src={props.medicament.image}></ImageLoader>

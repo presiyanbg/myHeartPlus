@@ -43,5 +43,6 @@
   "Title": "Заглавие",
   "Doctor": "Лекар",
   "Description": "Описание",
-  "Medicaments": "Лекарства"
+  "Medicaments": "Лекарства",
+  "Category": "Категория"
 }

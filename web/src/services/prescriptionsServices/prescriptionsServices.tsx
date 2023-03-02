@@ -11,15 +11,9 @@ const PrescriptionsServices = () => {
     return api.post(`/prescriptions/view/${id}`, undefined, false);
   }
 
-  const prescriptionShowMedicaments = (id: number | string) => {
-    return api.post(`/prescriptions/${id}/medicaments/`, undefined, false);
-  }
-
-
   return {
     prescriptions,
-    prescriptionShow,
-    prescriptionShowMedicaments,
+    prescriptionShow
   }
 }
 
