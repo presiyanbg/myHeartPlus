@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePrescriptionRequest;
 use App\Http\Requests\UpdatePrescriptionRequest;
+use App\Models\Doctor;
+use App\Models\HealthCategory;
+use App\Models\Medicament;
 use App\Models\Prescription;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PrescriptionController extends Controller
@@ -16,7 +20,20 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        //
+        $prescriptions = Prescription::paginate(10);
+
+        // Get category for test
+        foreach ($prescriptions as $prescription) {
+            $category = HealthCategory::where('id', $prescription->category_id)->first();
+
+            if ($category) {
+                $prescription->category = $category;
+            }
+        }
+
+        return response([
+            'prescriptions' => $prescriptions,
+        ], 200);
     }
 
     /**
@@ -78,12 +95,32 @@ class PrescriptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Prescription  $prescription
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Prescription $prescription)
+    public function show($id)
     {
-        //
+        $prescription = Prescription::where('id', $id)->first();
+
+        if (!$prescription) {
+            return response([
+                'message' => 'Prescription was not found',
+            ], 404);
+        }
+
+        // Load medicaments
+        $prescription->medicaments_array = Medicament::shotMedicaments($prescription->medicaments_array);
+
+        // Load category 
+        $prescription->category = HealthCategory::where('id', $prescription->category_id)->first();
+
+        // Load doctor
+        $prescription->doctor = Doctor::where('id', $prescription->doctor_id)->first();
+        $prescription->doctor = Doctor::getUserData($prescription->doctor);
+
+        return response([
+            'prescription' => $prescription,
+        ], 200);
     }
 
     /**

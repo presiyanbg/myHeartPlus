@@ -42,7 +42,8 @@ Route::post('articles/view/{id}', [ArticleController::class, 'show']);
 // Doctors 
 Route::post('doctors', [DoctorController::class, 'index']);
 Route::post('doctors/view/{id}', [DoctorController::class, 'show']);
-Route::post('doctors/health-tests/{id}', [DoctorController::class, 'showHealthTests']);
+Route::post('doctors/{id}/health-tests', [DoctorController::class, 'showHealthTests']);
+Route::post('doctors/{id}/prescriptions', [DoctorController::class, 'showPrescriptions']);
 
 // Health tests
 Route::post('health-tests', [HealthTestController::class, 'index']);
@@ -50,6 +51,11 @@ Route::post('health-tests/view/{id}', [HealthTestController::class, 'show']);
 
 // Health categories
 Route::post('health-category', [HealthCategoryController::class, 'index']);
+
+// Health categories
+Route::post('prescriptions', [PrescriptionController::class, 'index']);
+Route::post('prescriptions/view/{id}', [PrescriptionController::class, 'show']);
+
 
 /*  
 |

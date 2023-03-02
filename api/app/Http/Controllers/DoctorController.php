@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateDoctorRequest;
 use App\Models\Doctor;
 use App\Models\HealthCategory;
 use App\Models\HealthTest;
+use App\Models\Medicament;
+use App\Models\Prescription;
 use App\Models\User;
 
 class DoctorController extends Controller
@@ -72,18 +74,8 @@ class DoctorController extends Controller
             ], 404);
         }
 
-        // Load doctor's user profile 
-        $user = User::where('id', $doctor->user_id)->first();
-
-        if (!$user) {
-            return response([
-                'message' => 'Doctors user profile was not found',
-            ], 404);
-        }
-
-        // Return only need user data with doctor profile information 
-        $doctor->full_name = $user->full_name;
-        $doctor->image = $user->image;
+        // Load user data
+        $doctor = Doctor::getUserData($doctor);
 
         return response([
             'doctor' => $doctor,
@@ -110,6 +102,28 @@ class DoctorController extends Controller
         }
 
         return response($tests, 200);
+    }
+
+    /**
+     * Display prescriptions connected to passed doctor.
+     *
+     * @param  int  $id ID of doctor
+     * @return \Illuminate\Http\Response
+     */
+    public function showPrescriptions(int $id)
+    {
+        $prescriptions =  Prescription::where('doctor_id', $id)->orderByDesc('rating')->paginate(3);
+
+        foreach ($prescriptions as $prescription) {
+            // Get prescription categories
+            $category = HealthCategory::where('id', $prescription->category_id)->first();
+
+            if ($category) {
+                $prescription->category = $category;
+            }
+        }
+
+        return response($prescriptions, 200);
     }
 
     /**

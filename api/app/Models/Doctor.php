@@ -28,4 +28,28 @@ class Doctor extends Model
         'rating',
 
     ];
+
+    /**
+     * Get doctors user data
+     * 
+     * @param App\Models\Doctor $doctor 
+     * @return App\Models\Doctor $doctor
+     */
+    public static function getUserData($doctor)
+    {
+        if (!$doctor) return;
+
+        // Load doctor's user profile 
+        $user = User::where('id', $doctor->user_id)->first();
+
+        if (!$user) {
+            return $doctor;
+        }
+
+        // Return only need user data with doctor profile information 
+        $doctor->full_name = $user->full_name;
+        $doctor->image = $user->image;
+
+        return $doctor;
+    }
 }
