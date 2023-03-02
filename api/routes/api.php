@@ -52,10 +52,13 @@ Route::post('health-tests/view/{id}', [HealthTestController::class, 'show']);
 // Health categories
 Route::post('health-category', [HealthCategoryController::class, 'index']);
 
-// Health categories
+// Prescription categories
 Route::post('prescriptions', [PrescriptionController::class, 'index']);
 Route::post('prescriptions/view/{id}', [PrescriptionController::class, 'show']);
 
+// Medicaments categories
+Route::post('medicaments', [MedicamentController::class, 'index']);
+Route::post('medicaments/view/{id}', [MedicamentController::class, 'show']);
 
 /*  
 |

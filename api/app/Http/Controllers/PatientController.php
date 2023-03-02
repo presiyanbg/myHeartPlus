@@ -17,7 +17,7 @@ class PatientController extends Controller
     public function index()
     {
         return response([
-            'doctors' => Patient::all(),
+            'patients' => Patient::all(),
         ], 200);
     }
 

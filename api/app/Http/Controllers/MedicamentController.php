@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMedicamentRequest;
 use App\Http\Requests\UpdateMedicamentRequest;
+use App\Models\HealthCategory;
 use App\Models\Medicament;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,20 @@ class MedicamentController extends Controller
      */
     public function index()
     {
-        //
+        $medicaments = Medicament::paginate(10);
+
+        // Get category for medicament
+        foreach ($medicaments as $medicament) {
+            $category = HealthCategory::where('id', $medicament->category_id)->first();
+
+            if ($category) {
+                $medicament->category = $category;
+            }
+        }
+
+        return response([
+            'medicaments' => $medicaments
+        ], 200);
     }
 
     /**
@@ -84,12 +98,25 @@ class MedicamentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Medicament  $medicament
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Medicament $medicament)
+    public function show($id)
     {
-        //
+        $medicament = Medicament::where('id', $id)->first();
+
+        if (!$medicament) {
+            return response([
+                'message' => 'Medicament was not found',
+            ], 404);
+        }
+
+        // Load category 
+        $medicament->category = HealthCategory::where('id', $medicament->category_id)->first();
+
+        return response([
+            'medicament' => $medicament,
+        ], 200);
     }
 
     /**
