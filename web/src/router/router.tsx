@@ -7,16 +7,22 @@ import {
 } from "react-router-dom";
 
 import Home from '../pages/homePage/home';
-import HealthTestsList from '../pages/healthTestsPage/healthTestsList/healthTestsList';
-import HealthTest from '../pages/healthTestsPage/healthTest/healthTest';
+
+import Authentication from '../pages/authenticationPage/authentication';
+import Profile from '../pages/profilePage/profile';
 
 import Forum from '../pages/forumPage/forum';
-import Authentication from '../pages/authenticationPage/authentication';
+
 import Article from '../pages/articlePage/article';
 
 import DoctorsList from '../pages/doctorsPage/doctorsList/doctorsList';
 import DoctorsProfile from '../pages/doctorsPage/doctorsProfile/doctorsProfile';
-import Profile from '../pages/profilePage/profile';
+
+import HealthTestsList from '../pages/healthTestsPage/healthTestsList/healthTestsList';
+import HealthTest from '../pages/healthTestsPage/healthTest/healthTest';
+
+import Prescription from '../pages/prescriptionsPage/prescription/prescription';
+import PrescriptionsList from '../pages/prescriptionsPage/prescriptionsList/prescriptionsList';
 
 type Props = {};
 
@@ -37,6 +43,9 @@ const Router = ({ }: Props) => {
       <Route path="/forum" element={<Forum></Forum>} />
 
       <Route path="/articles/:id" element={<Article></Article>} />
+
+      <Route path="/prescriptions" element={<PrescriptionsList></PrescriptionsList>}></Route>
+      <Route path="/prescriptions/:id" element={<Prescription></Prescription>}></Route>
 
       <Route path="/users/profile" element={<Profile></Profile>} />
 

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 import { HealthTestType } from "../../../ts/types";
+
 import StarsRating from "../../commonComponents/starsRatingComponent/starsRating";
 
 type Props = {
@@ -12,16 +13,16 @@ const HealthTestLink = (props: Props) => {
 
   return (
     <Link to={`/health-tests/${props.test.id}`}
-      className="health-test--link"
+      className="component--link"
       key={uuid()}
       style={{ "--category-bg-color": props.test.category.bg_color } as React.CSSProperties}>
       {/* Test title */}
-      <div className="test-title">
+      <div className="link-title">
         <h4>{props.test.title}</h4>
       </div>
 
       {/* Test description */}
-      <div className="text-description text-ellipsis--2 mb-2">
+      <div className="link-description text-ellipsis--2 mb-2">
         <p>{props.test.description}</p>
       </div>
 

@@ -12,13 +12,18 @@ const DoctorsServices = () => {
   }
 
   const doctorShowHealthTests = (id: number | string) => {
-    return api.post(`/doctors/health-tests/${id}`, undefined, false);
+    return api.post(`/doctors/${id}/health-tests/`, undefined, false);
+  }
+
+  const doctorShowPrescriptions = (id: number | string) => {
+    return api.post(`/doctors/${id}/prescriptions/`, undefined, false);
   }
 
   return {
     doctors,
     doctorShow,
     doctorShowHealthTests,
+    doctorShowPrescriptions,
   }
 }
 
