@@ -11,12 +11,14 @@ import DoctorsLogic from "../doctorsLogic";
 import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
 import DoctorDescription from "../../../components/doctorComponents/doctorDescription/doctorDescription";
 import HealthTestsFromDoctor from "../../../components/healthTestComponents/healthTestsFromDoctor/healthTestsFromDoctor";
+import PrescriptionsFromDoctor from "../../../components/prescriptionComponents/prescriptionsFromDoctor/prescriptionsFromDoctor";
 
 const DoctorsProfile = () => {
   const [doctor, setDoctor] = useState<any | DoctorType>({});
-  const { isLoading } = useContext(LoadingContext);
 
   const logic = DoctorsLogic();
+
+  const { isLoading } = useContext(LoadingContext);
   const { id } = useParams();
   const { t } = useTranslation();
 
@@ -66,19 +68,7 @@ const DoctorsProfile = () => {
                 <HealthTestsFromDoctor doctor_id={doctor.id}></HealthTestsFromDoctor>
 
                 {/* Recommends */}
-                <div className="col-12 mb-4">
-                  <div className="row">
-                    <div className="col-12">
-                      <h4 className="border-bottom pb-1">{t('Recommends')}</h4>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-12">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa harum nisi quos cupiditate deleniti veritatis accusantium consequuntur natus, corrupti soluta, delectus sint, vel dicta obcaecati inventore. Rem sit reprehenderit cumque?</p>
-                    </div>
-                  </div>
-                </div>
+                <PrescriptionsFromDoctor doctor_id={doctor.id}></PrescriptionsFromDoctor>
 
                 {/* Map */}
                 <div className="col-12 mb-4">

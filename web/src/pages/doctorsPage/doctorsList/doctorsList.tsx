@@ -14,7 +14,9 @@ type Props = {};
 const DoctorsList = ({ }: Props) => {
   const [doctors, setDoctors] = useState<any | DoctorsType>([]);
   const [pagination, setPagination] = useState<PaginationType>();
+
   const logic = DoctorsLogic();
+
   const { t } = useTranslation();
 
   /**

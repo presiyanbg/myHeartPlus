@@ -53,6 +53,7 @@ const HealthTestsList = ({ }: Props) => {
         <div className="row">
           <div className="col-sm-12 col-md-8">
             <HealthTestsTable healthTests={healthTests}></HealthTestsTable>
+
             <div className="mb-5"></div>
 
             <CustomPagination url='health-tests' pagination={pagination} onDataLoad={onDataLoad}></CustomPagination>
