@@ -13,8 +13,6 @@ const MedicamentCard = (props: Props) => {
 
   if (!props?.medicament) return <></>;
 
-  console.log(props?.medicament)
-
   return (
     <div className="component-card">
       {/* Medicaments image */}

@@ -4,6 +4,8 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { PaginationType } from '../../ts/types';
 import { useTranslation } from 'react-i18next';
 import CustomPaginationLogic from './customPaginationLogic';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { v4 as uuid } from 'uuid';
 
 type Props = {
   url: string,
@@ -58,9 +60,18 @@ const CustomPagination = (props: Props) => {
       }
 
       {/* Current page */}
-      <div className="pagination--current-page">
-        {!!pagination?.current_page && pagination.current_page}
-      </div>
+      <OverlayTrigger
+        key={uuid()}
+        placement={'top'}
+        overlay={
+          <Tooltip id={'tooltip-' + + uuid()}>
+            {t('Current page')}
+          </Tooltip>
+        }>
+        <div className="pagination--current-page">
+          {!!pagination?.current_page && pagination.current_page}
+        </div>
+      </OverlayTrigger>
 
       {/* Next button */}
       {
