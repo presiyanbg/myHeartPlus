@@ -1,4 +1,5 @@
 import HealthTestsServices from "../../services/healthTestsServices/healthTestsServices";
+import { HealthTestQuestionsType } from "../../ts/types";
 
 const HealthTestsLogic = () => {
   const healthTestsServices = HealthTestsServices();
@@ -21,14 +22,21 @@ const HealthTestsLogic = () => {
     return data;
   }
 
-  const saveResult = (data: any) => {
+  const saveHealthTestResult = async (result: number, questions_and_answers: HealthTestQuestionsType) => {
+    const params = {
+      result,
+      questions_and_answers
+    }
 
+    const data = await healthTestsServices.healthTestSubmitResult(params);
+
+    return data;
   }
 
   return {
-    saveResult,
     loadHeathTest,
     loadHeathTestList,
+    saveHealthTestResult,
   }
 
 }

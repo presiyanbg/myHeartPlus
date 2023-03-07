@@ -11,9 +11,15 @@ const HealthTestsServices = () => {
     return api.post(`/health-tests/view/${id}`, undefined, false);
   }
 
+
+  const healthTestSubmitResult = (params: any) => {
+    return api.post(`/health-tests/submit-result/`, params, true, true, false, false);
+  }
+
   return {
     healthTests,
     healthTestShow,
+    healthTestSubmitResult,
   }
 }
 

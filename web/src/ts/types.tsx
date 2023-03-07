@@ -143,6 +143,7 @@ type HealthTestQuestionType = {
   description: string,
   is_final_question: boolean,
   answers: HealthTestAnswersType,
+  final_answer: HealthTestAnswerType | undefined,
 }
 
 type HealthTestQuestionsType = Array<HealthTestQuestionType>;

@@ -14,6 +14,7 @@ import { HealthTestQuestionsType, HealthTestType } from '../../../ts/types';
 const HealthTest = () => {
   const [test, setTest] = useState<HealthTestType>();
   const [testQA, setTestQA] = useState<HealthTestQuestionsType>();
+  const [result, setResult] = useState<any>();
   const [showResult, setShowResult] = useState<boolean>(false);
 
   const { id } = useParams();
@@ -26,8 +27,11 @@ const HealthTest = () => {
    * 
    * @param data 
    */
-  const handleTestSubmit = (data: any) => {
-    // console.log(data)
+  const handleTestSubmit = (result: number, questions_and_answers: any[]) => {
+    logic.saveHealthTestResult(result, questions_and_answers).then((response: any) => {
+      setResult(response);
+      setShowResult(true);
+    });
   }
 
   // Load test on init
@@ -61,7 +65,7 @@ const HealthTest = () => {
 
         {/* Show test view */}
         {
-          !showResult && <HealthTestView testQA={testQA} submitTest={handleTestSubmit}></HealthTestView>
+          !showResult && <HealthTestView testID={id} testQA={testQA} submitTest={handleTestSubmit}></HealthTestView>
         }
 
         {/* Show test result */}

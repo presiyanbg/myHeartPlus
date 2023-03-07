@@ -1,8 +1,8 @@
 
 import { HealthTestAnswerType, HealthTestAnswersType, HealthTestQuestionType, HealthTestQuestionsType } from "../../../ts/types";
-import { arrayOrderByProp } from "../../../utils/utils"
+import { arrayOrderByProp, copyObject } from "../../../utils/utils"
 
-const healthTestViewLogic = () => {
+const HealthTestViewLogic = () => {
 
   const saveAnswer = (answers: HealthTestAnswersType, answer: HealthTestAnswerType): HealthTestAnswersType | any => {
     if (!answers?.length) return [answer];
@@ -27,12 +27,12 @@ const healthTestViewLogic = () => {
     return answers;
   }
 
-  const removeAnswer = (answers: HealthTestAnswersType, question: HealthTestAnswerType): HealthTestAnswersType | any => {
+  const removeAnswer = (answers: HealthTestAnswersType, question: HealthTestQuestionType): HealthTestAnswersType | any => {
     if (!answers?.length) return [];
-
     if (!question) return answers;
 
     return answers.filter(oldAnswer => {
+
       return oldAnswer.question_id != question.id;
     });
   }
@@ -54,13 +54,44 @@ const healthTestViewLogic = () => {
 
     if (!answers?.length) return questions[0];
 
-    const lastAnswer = arrayOrderByProp(answers, 'prev_question_order_number', true);
+    const lastAnswer = arrayOrderByProp(copyObject(answers), 'prev_question_order_number', true);
 
     return questions.find((question: HealthTestQuestionType) => question.id == lastAnswer[0].question_id)
   }
 
   const calculateResult = (answers: HealthTestAnswersType) => {
+    if (!answers?.length) return 0;
 
+    let result = 0;
+
+    answers.forEach((answer: HealthTestAnswerType) => {
+      result += answer.points;
+    });
+
+    return result;
+  }
+
+  /**
+   * Add final answer to question 
+   * 
+   * @param answers HealthTestAnswersType -- Answers by user  
+   * @param questions HealthTestQuestionsType -- Questions 
+   * @returns questions HealthTestQuestionsType
+   */
+  const getFinalQuestionsAndAnswers = (answers: HealthTestAnswersType, questions: HealthTestQuestionsType): HealthTestQuestionsType | [] => {
+    if (!answers?.length || !questions?.length) return [];
+
+    const finalQuestionsAndAnswers: HealthTestQuestionsType | any = answers.map((answer: HealthTestAnswerType) => {
+      const findQuestion = questions.find((question: HealthTestQuestionType) => answer.question_id === question.id);
+
+      if (findQuestion) {
+        findQuestion.final_answer = answer;
+      }
+
+      return findQuestion;
+    });
+
+    return finalQuestionsAndAnswers || [];
   }
 
   return {
@@ -68,9 +99,10 @@ const healthTestViewLogic = () => {
     removeAnswer,
     getNextQuestion,
     getPrevQuestion,
-    calculateResult
+    calculateResult,
+    getFinalQuestionsAndAnswers,
   }
 
 }
 
-export default healthTestViewLogic;
+export default HealthTestViewLogic;
