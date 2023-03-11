@@ -10,7 +10,7 @@ import { DoctorType } from "../../../ts/types";
 import { SELECTORS } from "../../../constants/selectors";
 import { scrollToElement } from "../../../utils/utils";
 
-const DoctorsProfile = () => {
+const Doctor = () => {
   const [doctor, setDoctor] = useState<any | DoctorType>({});
 
   const logic = DoctorsLogic();
@@ -57,4 +57,4 @@ const DoctorsProfile = () => {
   )
 }
 
-export default DoctorsProfile;
+export default Doctor;

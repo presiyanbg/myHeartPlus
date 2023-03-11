@@ -15,10 +15,15 @@ const HealthTestsServices = () => {
     return api.post(`/health-tests/submit-result`, params, false, true, false);
   }
 
+  const healthTestPatientResults = (id: number | string) => {
+    return api.post(`/health-tests/results/${id}`, {}, false, true, false);
+  }
+
   return {
     healthTests,
     healthTestShow,
     healthTestSubmitResult,
+    healthTestPatientResults,
   }
 }
 

@@ -98,6 +98,21 @@ type DoctorType = {
 
 type DoctorsType = Array<DoctorType>;
 
+/* Patient Types */
+type PatientType = {
+  id: number,
+  user_id: number,
+  doctor_id: number | null,
+  height: number,
+  weight: number,
+  gender: string,
+  date_of_birth: string,
+  created_at: string,
+  updated_at: string,
+}
+
+type PatientsType = Array<PaginationType>;
+
 /* Medicament Types */
 type MedicamentType = {
   id: number,
@@ -218,6 +233,9 @@ export type {
 
   DoctorType,
   DoctorsType,
+
+  PatientType,
+  PatientsType,
 
   MedicamentType,
   MedicamentsType,

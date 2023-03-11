@@ -1,7 +1,7 @@
 import PageTitle from "../../components/commonComponents/pageTitle/pageTitle";
+import UserProfile from "../../components/userComponents/userProfile/userProfile";
 import ProfileLogic from "./profileLogic";
-import DoctorCard from "../../components/doctorComponents/doctorCard/doctorCard";
-import ImageLoader from "../../components/loadersComponents/imageLoader/imageLoader";
+import DoctorProfile from "../../components/doctorComponents/doctorProfile/doctorProfile";
 
 import { useState, useEffect, useContext } from "react";
 import { SERVER_URL } from "../../constants/api";
@@ -11,6 +11,9 @@ import { scrollToElement } from '../../utils/utils';
 import { UserContext } from "../../context/userContext/userContextProvider";
 import { Nav, Tab } from "react-bootstrap";
 import { UserType } from "../../ts/types";
+import PatientProfile from "../../components/patientComponent/patientProfile/patientProfile";
+import PatientStatistic from "../../components/patientComponent/patientStatistic/patientStatistic";
+import HealthTestResultsTable from "../../components/healthTestComponents/healthTestResultsTable/healthTestResultsTable";
 
 const Profile = () => {
   const [profile, setProfile] = useState<UserType>();
@@ -67,9 +70,7 @@ const Profile = () => {
                 {
                   profile &&
                   <Tab.Pane eventKey="#profile-page">
-                    {profile.full_name}
-                    Registered: {profile.created_at}
-                    <ImageLoader src={profile?.image} alt={profile.full_name}></ImageLoader>
+                    <UserProfile user={profile}></UserProfile>
                   </Tab.Pane>
                 }
 
@@ -77,7 +78,7 @@ const Profile = () => {
                 {
                   doctorProfile &&
                   <Tab.Pane eventKey="#doctor-page">
-                    <DoctorCard doctor={doctorProfile}></DoctorCard>
+                    <DoctorProfile doctor={doctorProfile}></DoctorProfile>
                   </Tab.Pane>
                 }
 
@@ -85,7 +86,24 @@ const Profile = () => {
                 {
                   patientProfile &&
                   <Tab.Pane eventKey="#patient-page">
-                    Patient
+                    <PatientProfile patient={patientProfile}></PatientProfile>
+                  </Tab.Pane>
+                }
+
+
+                {/* Patient statistics tab */}
+                {
+                  patientProfile &&
+                  <Tab.Pane eventKey="#patient-statistics">
+                    <PatientStatistic patient={patientProfile}></PatientStatistic>
+                  </Tab.Pane>
+                }
+
+                {/* Test results tab */}
+                {
+                  patientProfile &&
+                  <Tab.Pane eventKey="#health-test-results">
+                    <HealthTestResultsTable patientID={patientProfile?.id}></HealthTestResultsTable>
                   </Tab.Pane>
                 }
 

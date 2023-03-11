@@ -16,7 +16,7 @@ import Forum from '../pages/forumPage/forum';
 import Article from '../pages/articlePage/article';
 
 import DoctorsList from '../pages/doctorsPage/doctorsList/doctorsList';
-import DoctorsProfile from '../pages/doctorsPage/doctorsProfile/doctorsProfile';
+import Doctor from '../pages/doctorsPage/doctor/doctor';
 
 import HealthTestsList from '../pages/healthTestsPage/healthTestsList/healthTestsList';
 import HealthTest from '../pages/healthTestsPage/healthTest/healthTest';
@@ -38,7 +38,7 @@ const Router = ({ }: Props) => {
       <Route path="/health-tests/:id" element={<HealthTest></HealthTest>} />
 
       <Route path="/doctors" element={<DoctorsList></DoctorsList>} />
-      <Route path="/doctors/:id" element={<DoctorsProfile></DoctorsProfile>} />
+      <Route path="/doctors/:id" element={<Doctor></Doctor>} />
 
       <Route path="/authentication" element={<Authentication></Authentication>} />
 

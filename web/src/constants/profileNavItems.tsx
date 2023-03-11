@@ -16,8 +16,18 @@ export const PROFILE_NAV_ITEMS = [
     require: 'patient',
   },
   {
+    eventKey: '#patient-statistics',
+    itemTitle: 'Patient statistics',
+    require: 'patient',
+  },
+  {
+    eventKey: '#health-test-results',
+    itemTitle: 'Test results',
+    require: 'patient',
+  },
+  {
     eventKey: '#settings-page',
     itemTitle: 'Settings page',
     require: '',
   },
-];
+]; 
