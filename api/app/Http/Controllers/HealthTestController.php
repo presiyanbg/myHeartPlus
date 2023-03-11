@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\HealthCategory;
 use App\Models\HealthTest;
+use App\Models\HealthTestAdvice;
+use App\Models\User;
 use App\Models\HealthTestAnswer;
 use App\Models\HealthTestQuestion;
 use App\Models\HealthTestQuestionsAndAnswers;
+use App\Models\Medicament;
+use App\Models\Patient;
+use App\Models\Prescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -88,6 +93,74 @@ class HealthTestController extends Controller
         }
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeResult(Request $request)
+    {
+        try {
+            $fields = $request->validate([
+                'user_id' => 'sometimes|exists:users,id',
+                'test_id' => 'required|exists:health_tests,id',
+                'result' => 'required',
+                'questions_and_answers' => 'required'
+            ]);
+
+            // Set default user id
+            $user_id = $fields['user_id'] ?? 0;
+
+            // Save test result to user/patient profile 
+            if ($user_id && $user_id > 0) {
+                $patient = Patient::where('user_id', $user_id)->first();
+
+                $patient_id = $patient->id ?? null;
+                $questions_and_answers = json_encode($fields['questions_and_answers']);
+
+                HealthTestQuestionsAndAnswers::create([
+                    'patient_id' => $patient_id,
+                    'test_id' => $fields['test_id'],
+                    'questions_and_answers' => $questions_and_answers,
+                ]);
+            }
+
+            // Get all advices for test
+            $testAdvices = HealthTestAdvice::where('test_id', $fields['test_id'])->get();
+
+            if (!$testAdvices || count($testAdvices) == 0) {
+                return response([
+                    'message' => 'No advices were found'
+                ], 404);
+            }
+
+            // Find the best advices based on result points 
+            $result = (int)$fields['result'];
+            $resultAdvice = $testAdvices[0];
+
+            foreach ($testAdvices as $advice) {
+                if ($result >= $advice->min_points && $result <= $advice->max_points) {
+                    $resultAdvice = $advice;
+                }
+            }
+
+            // Get medicament and/or prescription 
+            $resultAdvice->medicament = Medicament::where('id', $resultAdvice->medicament_id)->first();
+            $resultAdvice->prescription = Prescription::where('id', $resultAdvice->prescription_id)->first();
+
+            return response([
+                'message' => 'Success',
+                'resultAdvice' => $resultAdvice,
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
+    }
+
     /**
      * Store question and answers connected to a test
      * 
@@ -119,7 +192,7 @@ class HealthTestController extends Controller
                         'answers' => $question->answers,
                     ],
                     [
-                        'test_id' => 'required|exists:health_test,id',
+                        'test_id' => 'required|exists:health_tests,id',
                         'order_number' => 'required|integer',
                         'title' => 'required|string',
                         'description' => 'required|string',

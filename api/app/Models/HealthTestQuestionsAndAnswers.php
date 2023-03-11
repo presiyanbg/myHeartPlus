@@ -17,5 +17,6 @@ class HealthTestQuestionsAndAnswers extends Model
     protected $fillable = [
         'test_id',
         'questions_and_answers',
+        'patient_id',
     ];
 }

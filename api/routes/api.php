@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HealthCategoryController;
+use App\Http\Controllers\HealthTestAdviceController;
 use App\Http\Controllers\HealthTestController;
 use App\Http\Controllers\MedicamentController;
 use App\Http\Controllers\PatientController;
@@ -48,6 +49,7 @@ Route::post('doctors/{id}/prescriptions', [DoctorController::class, 'showPrescri
 // Health tests
 Route::post('health-tests', [HealthTestController::class, 'index']);
 Route::post('health-tests/view/{id}', [HealthTestController::class, 'show']);
+Route::post('health-tests/submit-result', [HealthTestController::class, 'storeResult']);
 
 // Health categories
 Route::post('health-category', [HealthCategoryController::class, 'index']);
@@ -81,6 +83,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Health categories
     Route::post('health-category/store', [HealthCategoryController::class, 'store']);
     Route::post('health-category/view/{id}', [HealthCategoryController::class, 'show']);
+
+    // Health Advices
+    Route::post('health-advice/store', [HealthTestAdviceController::class, 'store']);
 
     // Medicaments 
     Route::post('medicaments/store', [MedicamentController::class, 'store']);
