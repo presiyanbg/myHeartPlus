@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -88,19 +90,31 @@ class User extends Authenticatable
         try {
             $medicalProfiles = [];
 
-            // Get patient profile data
-            if ($this->role == 'patient' || $this->role == 'admin') {
-                $profile = Patient::create([
-                    'user_id' => $this->id
-                ]);
+            // Create patient profile - created for all users
+            $profile = Patient::create([
+                'user_id' => $this->id,
+                'gender' => '',
+                'weight' => 0,
+                'height' => 0,
+                'date_of_birth' => new DateTime('now'),
+            ]);
 
-                !!$profile && $medicalProfiles['patient'] = $profile;
-            }
+            !!$profile && $medicalProfiles['patient'] = $profile;
 
-            // Get doctor profile data
+            // Create doctor profile - only for doctor and admin
             if ($this->role == 'doctor' || $this->role == 'admin') {
                 $profile = Doctor::create([
-                    'user_id' => $this->id
+                    'user_id' => $this->id,
+                    'rating' => 0,
+                    'specialty' => '',
+                    'mobile_number' => '',
+                    'office_number' => '',
+                    'address_1' => '',
+                    'address_2' => '',
+                    'address_3' => '',
+                    'address_4' => '',
+                    'address_5' => '',
+                    'description' => '',
                 ]);
 
                 !!$profile && $medicalProfiles['doctor'] = $profile;
