@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Health tests
     Route::post('health-tests/store', [HealthTestController::class, 'store']);
+    Route::post('health-tests/results/{patient}', [HealthTestController::class, 'showResults']);
 
     // Health categories
     Route::post('health-category/store', [HealthCategoryController::class, 'store']);
@@ -86,6 +87,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Health Advices
     Route::post('health-advice/store', [HealthTestAdviceController::class, 'store']);
+
 
     // Medicaments 
     Route::post('medicaments/store', [MedicamentController::class, 'store']);

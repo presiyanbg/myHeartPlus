@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\HealthCategory;
 use App\Models\HealthTest;
 use App\Models\HealthTestAdvice;
-use App\Models\User;
 use App\Models\HealthTestAnswer;
 use App\Models\HealthTestQuestion;
 use App\Models\HealthTestQuestionsAndAnswers;
+use App\Models\HealthTestResult;
 use App\Models\Medicament;
 use App\Models\Patient;
 use App\Models\Prescription;
@@ -110,6 +110,15 @@ class HealthTestController extends Controller
                 'questions_and_answers' => 'required'
             ]);
 
+            // Find test 
+            $test = HealthTest::where('id', $fields['test_id'])->first();
+
+            if (!$test) {
+                return response([
+                    'message' => 'Internal error - Test was not found'
+                ], 500);
+            }
+
             // Set default user id
             $user_id = $fields['user_id'] ?? 0;
 
@@ -124,6 +133,14 @@ class HealthTestController extends Controller
                     'patient_id' => $patient_id,
                     'test_id' => $fields['test_id'],
                     'questions_and_answers' => $questions_and_answers,
+                ]);
+
+                HealthTestResult::create([
+                    'test_id' => $test->id,
+                    'patient_id' => $patient_id,
+                    'doctor_id' => $test->doctor_id,
+                    'result' => (int)$fields['result'],
+                    'user_review' => 0,
                 ]);
             }
 
@@ -279,6 +296,38 @@ class HealthTestController extends Controller
             'test' => $test,
             'testQA' => $testQA,
         ], 200);
+    }
+
+    /**
+     * Show health test results connected to patient
+     * 
+     * @param App\Models\Patient $patient
+     * @return \Illuminate\Http\Response
+     */
+    public function showResults(Patient $patient)
+    {
+        try {
+            if (!$patient) {
+                return response([
+                    'message' => 'Patient was not found'
+                ], 404);
+            }
+
+            $results = HealthTestResult::where('patient_id', $patient->id)->paginate(10);
+
+            // Load test connected to the result
+            foreach ($results as $result) {
+                $result->test = HealthTest::where('id', $result->test_id)->first();
+            }
+
+            return response([
+                'results' => $results
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
     }
 
     public function showQuestionAndAnswers(HealthTest $test)
