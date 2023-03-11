@@ -1,14 +1,13 @@
-import { useParams } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
-import { scrollToElement } from '../../../utils/utils';
-import { SELECTORS } from '../../../constants/selectors';
-
 import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
-import { useState, useEffect } from "react";
-import { PaginationType } from "../../../ts/types";
 import PrescriptionsLogic from "../prescriptionsLogic";
 import CustomPagination from "../../../components/paginationComponents/customPagination";
 import PrescriptionsTable from "../../../components/prescriptionComponents/prescriptionsTable/prescriptionsTable";
+
+import { useTranslation } from 'react-i18next';
+import { scrollToElement } from '../../../utils/utils';
+import { SELECTORS } from '../../../constants/selectors';
+import { useState, useEffect } from "react";
+import { PaginationType } from "../../../ts/types";
 
 const PrescriptionsList = () => {
   const [prescriptions, setPrescriptions] = useState<any>([]);
@@ -24,11 +23,11 @@ const PrescriptionsList = () => {
    * @param data API paginated response
    */
   const onDataLoad = (data: any) => {
-    if (data?.prescriptions?.data) {
-      setPrescriptions(data.prescriptions.data);
-      setPagination(data.prescriptions);
-      scrollToElement(`.${SELECTORS.anchorScroll}`);
-    }
+    if (!data?.prescriptions?.data) return;
+
+    setPrescriptions(data.prescriptions.data);
+    setPagination(data.prescriptions);
+    scrollToElement(`.${SELECTORS.anchorScroll}`);
   }
 
   /**

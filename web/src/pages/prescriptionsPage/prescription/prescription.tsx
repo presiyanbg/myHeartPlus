@@ -1,31 +1,30 @@
+import PrescriptionsLogic from "../prescriptionsLogic";
+import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
+import PrescriptionView from "../../../components/prescriptionComponents/prescriptionView/prescriptionView";
+
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { scrollToElement } from '../../../utils/utils';
 import { SELECTORS } from '../../../constants/selectors';
 
-import PrescriptionsLogic from "../prescriptionsLogic";
-import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
-import PrescriptionView from "../../../components/prescriptionComponents/prescriptionView/prescriptionView";
-
 const Prescription = () => {
   const [prescription, setPrescription] = useState<any>();
+
+  const logic = PrescriptionsLogic();
 
   const { id } = useParams();
   const { t } = useTranslation();
 
-  const logic = PrescriptionsLogic();
-
   // Load test on init
   useEffect(() => {
-    if (id) {
-      // Load test basic data 
-      logic.loadPrescription(id).then(response => {
-        setPrescription(response.prescription);
+    if (!id) return;
 
-        scrollToElement(`.${SELECTORS.anchorScroll}`);
-      });
-    }
+    // Load test basic data 
+    logic.loadPrescription(id).then(response => {
+      setPrescription(response.prescription);
+      scrollToElement(`.${SELECTORS.anchorScroll}`);
+    });
   }, [id]);
 
   if (!id || !prescription) return (<></>);

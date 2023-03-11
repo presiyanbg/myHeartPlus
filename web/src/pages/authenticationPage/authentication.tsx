@@ -7,9 +7,7 @@ import PageTitle from '../../components/commonComponents/pageTitle/pageTitle';
 import { UserContext } from '../../context/userContext/userContextProvider';
 import { useTranslation } from 'react-i18next';
 
-type Props = {};
-
-const Authentication = ({ }: Props) => {
+const Authentication = () => {
   const [display, setDisplay] = useState<'login' | 'register' | 'logout'>('login');
 
   const { isAuth } = useContext(UserContext);
@@ -41,15 +39,21 @@ const Authentication = ({ }: Props) => {
         <PageTitle title={t(display)}></PageTitle>
 
         <div className="d-flex flex-column justify-content-between h-100">
+
+          {/* Logout page */}
           {
             isAuth && <Logout></Logout>
           }
+
+          {/* Login / Registration page */}
           {
             !isAuth && <>
               <div className="row justify-content-center mb-3">
                 <div className="col-8">
+                  {/* Login page */}
                   {display == 'login' && <Login></Login>}
 
+                  {/* Registration page */}
                   {display == 'register' && <Registration></Registration>}
                 </div>
               </div>

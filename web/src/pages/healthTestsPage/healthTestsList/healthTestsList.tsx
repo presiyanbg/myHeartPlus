@@ -24,11 +24,11 @@ const HealthTestsList = ({ }: Props) => {
    * @param data API paginated response
    */
   const onDataLoad = (data: any) => {
-    if (data?.tests?.data) {
-      setHealthTests(data.tests.data);
-      setPagination(data.tests);
-      scrollToElement(`.${SELECTORS.anchorScroll}`);
-    }
+    if (!data?.tests?.data) return;
+
+    setHealthTests(data.tests.data);
+    setPagination(data.tests);
+    scrollToElement(`.${SELECTORS.anchorScroll}`);
   }
 
   /**
@@ -36,7 +36,7 @@ const HealthTestsList = ({ }: Props) => {
    */
   useEffect(() => {
     if (!healthTests) {
-      logic.loadHeathTestList().then(response => {
+      logic.loadHealthTestList().then(response => {
         onDataLoad(response)
       });
     }

@@ -2,11 +2,12 @@ import StarsRating from "../../commonComponents/starsRatingComponent/starsRating
 
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowTurnUp, faHouseChimneyMedical, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons';
+import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
+import { PrescriptionType } from "../../../ts/types";
 
 type Props = {
-  prescription: any
+  prescription: PrescriptionType | any
 }
 
 const PrescriptionCard = (props: Props) => {

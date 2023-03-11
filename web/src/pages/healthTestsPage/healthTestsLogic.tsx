@@ -14,18 +14,31 @@ const HealthTestsLogic = () => {
    * @param test_id ID of test
    * @returns API response
    */
-  const loadHeathTest = async (test_id: number | string) => {
+  const loadHealthTest = async (test_id: number | string) => {
     const data = await healthTestsServices.healthTestShow(test_id);
 
     return data;
   }
 
-  const loadHeathTestList = async () => {
+  /**'
+   * Load health tests
+   * 
+   * @returns API paginated response
+   */
+  const loadHealthTestList = async () => {
     const data = await healthTestsServices.healthTests();
 
     return data;
   }
 
+  /**
+   * Save test result and get advice
+   * 
+   * @param test_id number - ID of test
+   * @param result number - result calculated from answers points
+   * @param questions_and_answers HealthTestQuestionsType
+   * @returns API response 
+   */
   const saveHealthTestResult = async (test_id: number | string, result: number, questions_and_answers: HealthTestQuestionsType) => {
     let params: HealthTestSubmitParamsType = {
       user_id: undefined,
@@ -45,8 +58,8 @@ const HealthTestsLogic = () => {
   }
 
   return {
-    loadHeathTest,
-    loadHeathTestList,
+    loadHealthTest,
+    loadHealthTestList,
     saveHealthTestResult,
   }
 

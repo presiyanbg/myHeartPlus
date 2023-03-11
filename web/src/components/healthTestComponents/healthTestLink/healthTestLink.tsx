@@ -1,8 +1,8 @@
+import StarsRating from "../../commonComponents/starsRatingComponent/starsRating";
+
 import { Link } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 import { HealthTestType } from "../../../ts/types";
-
-import StarsRating from "../../commonComponents/starsRatingComponent/starsRating";
 
 type Props = {
   test: HealthTestType

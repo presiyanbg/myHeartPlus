@@ -9,9 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { SELECTORS } from "../../../constants/selectors";
 import { scrollToElement } from "../../../utils/utils";
 
-type Props = {};
-
-const DoctorsList = ({ }: Props) => {
+const DoctorsList = () => {
   const [doctors, setDoctors] = useState<any | DoctorsType>([]);
   const [pagination, setPagination] = useState<PaginationType>();
 
@@ -25,11 +23,11 @@ const DoctorsList = ({ }: Props) => {
    * @param data API paginated response
    */
   const onDataLoad = (data: any) => {
-    if (data?.doctors?.data) {
-      setDoctors(data.doctors.data);
-      setPagination(data.doctors);
-      scrollToElement(`.${SELECTORS.anchorScroll}`);
-    }
+    if (!data?.doctors?.data) return;
+
+    setDoctors(data.doctors.data);
+    setPagination(data.doctors);
+    scrollToElement(`.${SELECTORS.anchorScroll}`);
   }
 
   /**

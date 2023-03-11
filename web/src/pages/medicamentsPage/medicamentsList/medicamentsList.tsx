@@ -1,22 +1,21 @@
-import { useParams } from "react-router-dom";
+import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
+import CustomPagination from "../../../components/paginationComponents/customPagination";
+import MedicamentsLogic from "../medicamentsLogic";
+import MedicamentsTable from "../../../components/medicamentComponents/medicamentsTable/medicamentsTable";
+
 import { useTranslation } from 'react-i18next';
 import { scrollToElement } from '../../../utils/utils';
 import { SELECTORS } from '../../../constants/selectors';
 import { useState, useEffect } from "react";
 import { PaginationType } from "../../../ts/types";
 
-import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
-import CustomPagination from "../../../components/paginationComponents/customPagination";
-import MedicamentsLogic from "../medicamentsLogic";
-import MedicamentsTable from "../../../components/medicamentComponents/medicamentsTable/medicamentsTable";
-
 const MedicamentsList = () => {
   const [medicaments, setMedicaments] = useState<any>([]);
   const [pagination, setPagination] = useState<PaginationType>();
 
-  const { t } = useTranslation();
-
   const logic = MedicamentsLogic();
+
+  const { t } = useTranslation();
 
   /**
    * Save loaded data 
@@ -24,11 +23,11 @@ const MedicamentsList = () => {
    * @param data API paginated response
    */
   const onDataLoad = (data: any) => {
-    if (data?.medicaments?.data) {
-      setMedicaments(data.medicaments.data);
-      setPagination(data.medicaments);
-      scrollToElement(`.${SELECTORS.anchorScroll}`);
-    }
+    if (!data?.medicaments?.data) return;
+
+    setMedicaments(data.medicaments.data);
+    setPagination(data.medicaments);
+    scrollToElement(`.${SELECTORS.anchorScroll}`);
   }
 
   /**

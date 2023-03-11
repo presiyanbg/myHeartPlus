@@ -1,3 +1,7 @@
+import DoctorsLogic from "../doctorsLogic";
+import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
+import DoctorView from "../../../components/doctorComponents/doctorView/doctorView";
+
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { LoadingContext } from "../../../context/loadingContext/loadingContextProvider";
@@ -5,10 +9,6 @@ import { useTranslation } from 'react-i18next';
 import { DoctorType } from "../../../ts/types";
 import { SELECTORS } from "../../../constants/selectors";
 import { scrollToElement } from "../../../utils/utils";
-
-import DoctorsLogic from "../doctorsLogic";
-import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
-import DoctorView from "../../../components/doctorComponents/doctorView/doctorView";
 
 const DoctorsProfile = () => {
   const [doctor, setDoctor] = useState<any | DoctorType>({});
@@ -19,15 +19,21 @@ const DoctorsProfile = () => {
   const { id } = useParams();
   const { t } = useTranslation();
 
+  /**
+   * Load doctor data on init
+   */
   useEffect(() => {
-    if (id != undefined) {
-      logic.loadDoctor(id).then(doctorData => {
-        setDoctor(doctorData.doctor);
-        scrollToElement(`.${SELECTORS.anchorScroll}`);
-      });
-    }
+    if (!id) return;
+
+    logic.loadDoctor(id).then(doctorData => {
+      setDoctor(doctorData.doctor);
+      scrollToElement(`.${SELECTORS.anchorScroll}`);
+    });
   }, [id]);
 
+  /**
+   * Return 404 Not found
+   */
   if ((!doctor || !doctor.user_id) && !isLoading) {
     return (<>No results found</>)
   }

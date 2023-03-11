@@ -38,9 +38,11 @@ const Login = ({ }: Props) => {
       case 'email':
         setEmail(event.currentTarget.value);
         break;
+
       case 'password':
         setPassword(event.currentTarget.value);
         break;
+
       default:
         break
     }

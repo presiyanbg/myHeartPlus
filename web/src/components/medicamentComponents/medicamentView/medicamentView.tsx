@@ -1,11 +1,10 @@
-import Moment from "react-moment";
-import ImageLoader from "../../loadersComponents/imageLoader/imageLoader";
 import MedicamentCard from "../medicamentCard/medicamentCard";
 
 import { useTranslation } from 'react-i18next';
+import { MedicamentType } from "../../../ts/types";
 
 type Props = {
-  medicament: any,
+  medicament: MedicamentType | any,
 }
 
 const MedicamentView = (props: Props) => {
@@ -34,7 +33,6 @@ const MedicamentView = (props: Props) => {
           </div>
         </div>
       </div>
-
     </div>
   )
 

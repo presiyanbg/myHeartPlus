@@ -3,7 +3,6 @@ import ArticleServices from "../../services/articlesServices/articlesServices";
 const ArticleLogic = () => {
   const articlesServices = ArticleServices();
 
-
   /**
    * Load article data
    * 

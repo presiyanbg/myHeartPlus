@@ -1,12 +1,13 @@
+import MedicamentLink from "../medicamentLink/medicamentLink";
+
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnUp } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
-
-import MedicamentLink from "../medicamentLink/medicamentLink";
+import { MedicamentsType } from '../../../ts/types';
 
 type Props = {
-  medicaments: any[]
+  medicaments: MedicamentsType | any[]
 }
 
 const MedicamentsFromPrescription = (props: Props) => {

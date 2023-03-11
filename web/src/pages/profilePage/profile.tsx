@@ -1,3 +1,8 @@
+import PageTitle from "../../components/commonComponents/pageTitle/pageTitle";
+import ProfileLogic from "./profileLogic";
+import DoctorCard from "../../components/doctorComponents/doctorCard/doctorCard";
+import ImageLoader from "../../components/loadersComponents/imageLoader/imageLoader";
+
 import { useState, useEffect, useContext } from "react";
 import { SERVER_URL } from "../../constants/api";
 import { SELECTORS } from "../../constants/selectors";
@@ -7,45 +12,39 @@ import { UserContext } from "../../context/userContext/userContextProvider";
 import { Nav, Tab } from "react-bootstrap";
 import { UserType } from "../../ts/types";
 
-import PageTitle from "../../components/commonComponents/pageTitle/pageTitle";
-import ProfileLogic from "./profileLogic";
-import DoctorCard from "../../components/doctorComponents/doctorCard/doctorCard";
-import ImageLoader from "../../components/loadersComponents/imageLoader/imageLoader";
-
 const Profile = () => {
   const [profile, setProfile] = useState<UserType>();
   const [patientProfile, setPatientProfile] = useState<UserType>();
   const [doctorProfile, setDoctorProfile] = useState<UserType>();
 
+  const logic = ProfileLogic();
+
   const { t } = useTranslation();
   const { user } = useContext(UserContext);
 
-  const logic = ProfileLogic();
-
-
   useEffect(() => {
-    if (user != undefined && user.id) {
-      logic.loadUser(user).then(userData => {
-        if (!userData) return;
+    if (!user?.id) return;
 
-        // Save main user profile data
-        if (userData.user) {
-          setProfile(userData.user);
-        }
+    logic.loadUser(user).then(userData => {
+      if (!userData) return;
 
-        // Save user doctor profile data
-        if (userData.medical_profiles?.doctor) {
-          setDoctorProfile(userData.medical_profiles.doctor)
-        }
+      // Save main user profile data
+      if (userData.user) {
+        setProfile(userData.user);
+      }
 
-        // Save user patient profile data
-        if (userData.medical_profiles?.patient) {
-          setPatientProfile(userData.medical_profiles.patient)
-        }
+      // Save user doctor profile data
+      if (userData.medical_profiles?.doctor) {
+        setDoctorProfile(userData.medical_profiles.doctor)
+      }
 
-        scrollToElement(`.${SELECTORS.anchorScroll}`);
-      });
-    }
+      // Save user patient profile data
+      if (userData.medical_profiles?.patient) {
+        setPatientProfile(userData.medical_profiles.patient)
+      }
+
+      scrollToElement(`.${SELECTORS.anchorScroll}`);
+    });
   }, [user]);
 
   return (

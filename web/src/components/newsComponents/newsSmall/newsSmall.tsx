@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
-import { SERVER_URL } from '../../../constants/api';
+import Moment from 'react-moment';
+import ImageLoader from '../../loadersComponents/imageLoader/imageLoader';
+
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
 import { ArticlesType } from '../../../ts/types';
 import NewsLogic from '../newsLogic';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
-import ImageLoader from '../../loadersComponents/imageLoader/imageLoader';
 
 type Props = {
   articles?: ArticlesType,

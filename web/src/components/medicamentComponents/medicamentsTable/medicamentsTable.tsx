@@ -1,9 +1,11 @@
 
-import { v4 as uuid } from 'uuid';
 import MedicamentLink from '../medicamentLink/medicamentLink';
 
+import { v4 as uuid } from 'uuid';
+import { MedicamentsType } from '../../../ts/types';
+
 type Props = {
-  medicaments: any
+  medicaments: MedicamentsType | any[]
 }
 
 const MedicamentsTable = (props: Props) => {

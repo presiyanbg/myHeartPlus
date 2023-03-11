@@ -1,10 +1,11 @@
+import Moment from 'react-moment';
+import ImageLoader from '../../loadersComponents/imageLoader/imageLoader';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
 import { ArticlesType } from '../../../ts/types';
 import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
-import ImageLoader from '../../loadersComponents/imageLoader/imageLoader';
 
 type Props = {
   articles?: ArticlesType;

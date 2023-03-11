@@ -1,3 +1,5 @@
+import HealthTestViewLogic from "./healthTestViewLogic"
+
 import { useEffect, useState } from "react"
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
@@ -6,9 +8,6 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { HealthTestAnswerType, HealthTestAnswersType, HealthTestQuestionType, HealthTestQuestionsType } from "../../../ts/types";
 import { calculatePercentage, copyObject } from "../../../utils/utils";
 import { ProgressBar } from "react-bootstrap";
-
-import HealthTestViewLogic from "./healthTestViewLogic"
-import HealthTestsLogic from "../healthTestsLogic";
 
 type Props = {
   testID: number | string,
@@ -23,10 +22,15 @@ const HealthTestView = (props: Props) => {
   const [displayPreview, setDisplayPreview] = useState<boolean>(false);
 
   const { t } = useTranslation();
-  const logic = HealthTestsLogic();
   const viewLogic = HealthTestViewLogic();
 
+  /**
+   * Submit answer
+   * 
+   * @param answer HealthTestAnswerType
+   */
   const submitAnswer = (answer: HealthTestAnswerType) => {
+    // Save final answer and display all answers
     if (currentQuestion.is_final_question) {
       setAnswers((prev: HealthTestAnswersType) => {
         const finalAnswers = viewLogic.saveAnswer(answers, answer)
@@ -38,10 +42,10 @@ const HealthTestView = (props: Props) => {
         return finalAnswers;
       });
 
-
       return;
     }
 
+    // Save answer
     if (answer?.next_question_order_number) {
       setAnswers((prev: HealthTestAnswersType) => viewLogic.saveAnswer(prev, answer));
       setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, answer.next_question_order_number));
@@ -49,6 +53,9 @@ const HealthTestView = (props: Props) => {
     }
   }
 
+  /**
+   * Display previous question
+   */
   const displayPreviousQuestion = () => {
     // Display final question 
     if (displayPreview) {
@@ -66,6 +73,9 @@ const HealthTestView = (props: Props) => {
     });
   }
 
+  /**
+   * Submit test result
+   */
   const submitTestResult = () => {
     if (!props?.submitTest || !finalQA?.length) return;
 
@@ -76,9 +86,9 @@ const HealthTestView = (props: Props) => {
 
   // Load initial question
   useEffect(() => {
-    if (props?.testQA) {
-      setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, 0));
-    }
+    if (!props?.testQA) return;
+
+    setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, 0));
   }, [props.testQA]);
 
   // Return 404 error
@@ -167,7 +177,6 @@ const HealthTestView = (props: Props) => {
           </>
         )
       }
-
 
       {/* Pagination */}
       <div className="custom-pagination row">

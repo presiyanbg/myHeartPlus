@@ -1,9 +1,11 @@
 
 import PrescriptionLink from '../prescriptionLink/prescriptionLink';
+
+import { PrescriptionsType } from '../../../ts/types';
 import { v4 as uuid } from 'uuid';
 
 type Props = {
-  prescriptions: any
+  prescriptions: PrescriptionsType | any,
 }
 
 const PrescriptionsTable = (props: Props) => {

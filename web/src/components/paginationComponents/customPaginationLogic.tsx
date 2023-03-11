@@ -1,5 +1,6 @@
-import { PaginationType } from "../../ts/types";
 import PaginationServices from "../../services/paginationServices/paginationServices";
+
+import { PaginationType } from "../../ts/types";
 import { copyObject } from "../../utils/utils";
 
 const CustomPaginationLogic = () => {

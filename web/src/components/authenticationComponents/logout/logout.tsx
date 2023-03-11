@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import LogoutLogic from "./logoutLogic";
+
 import { useTranslation } from 'react-i18next';
 
 const Logout = () => {

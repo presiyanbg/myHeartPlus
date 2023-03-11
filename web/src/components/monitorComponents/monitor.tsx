@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Router from '../../router/router';
+
 import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
 import { CommonContext } from '../../context/commonContext/commonContextProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +10,7 @@ type Props = {};
 
 const Monitor = ({ }: Props) => {
   const [displayPageLoader, setDisplayPageLoader] = useState(false);
+
   const { isLoading } = useContext(LoadingContext);
   const { monitorExpanded, toggleMonitorExpanded } = useContext(CommonContext);
 
@@ -38,7 +40,6 @@ const Monitor = ({ }: Props) => {
           </div> */}
         </div>
       }
-
     </>
   )
 }

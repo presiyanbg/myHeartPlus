@@ -3,8 +3,9 @@ import ArticlesSlideshow from '../../components/articlesSlideshowComponents/arti
 import NewsLarge from '../../components/newsComponents/newsLarge/newsLarge';
 import NewsSmall from '../../components/newsComponents/newsSmall/newsSmall';
 import HomeLogic from './homeLogic';
-import { ArticlesType, PaginationType } from '../../ts/types';
 import CustomPagination from '../../components/paginationComponents/customPagination';
+
+import { ArticlesType, PaginationType } from '../../ts/types';
 import { scrollToElement } from '../../utils/utils';
 import { SELECTORS } from '../../constants/selectors';
 
@@ -22,13 +23,11 @@ const Home = ({ }: Props) => {
    * @param autoScroll boolean -- Used on page change 
    */
   const onDataLoad = (data: any, autoScroll: boolean = false): void => {
-    if (data.articles && data.articles.data) {
-      setArticles(data.articles.data);
+    if (!data?.articles?.data) return;
 
-      setPagination(data.articles);
-
-      autoScroll && scrollToElement(`.${SELECTORS.anchorScroll}`);
-    }
+    setArticles(data.articles.data);
+    setPagination(data.articles);
+    autoScroll && scrollToElement(`.${SELECTORS.anchorScroll}`);
   }
 
   /**

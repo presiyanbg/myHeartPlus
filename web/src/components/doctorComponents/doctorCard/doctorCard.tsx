@@ -1,9 +1,9 @@
-import { DoctorType } from "../../../ts/types";
-import { useTranslation } from 'react-i18next';
-
 import ImageLoader from "../../loadersComponents/imageLoader/imageLoader";
 import DoctorLogic from "../doctorLogic";
 import StarsRating from "../../commonComponents/starsRatingComponent/starsRating";
+
+import { DoctorType } from "../../../ts/types";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   doctor: DoctorType | any
@@ -17,6 +17,7 @@ const DoctorCard = (props: Props) => {
 
   if (!props.doctor) return (<></>);
 
+  // Build address 
   doctor.address = logic.buildDoctorAddress(doctor);
 
   return (

@@ -4,6 +4,15 @@ import { arrayOrderByProp, copyObject } from "../../../utils/utils"
 
 const HealthTestViewLogic = () => {
 
+  /**
+   * Save answer
+   * 
+   * Used when viewing next question.
+   * 
+   * @param answers HealthTestAnswersType
+   * @param answer HealthTestAnswerType
+   * @returns HealthTestAnswersType
+   */
   const saveAnswer = (answers: HealthTestAnswersType, answer: HealthTestAnswerType): HealthTestAnswersType | any => {
     if (!answers?.length) return [answer];
 
@@ -27,6 +36,15 @@ const HealthTestViewLogic = () => {
     return answers;
   }
 
+  /**
+   * Remove answer 
+   * 
+   * Used when viewing previous question.
+   * 
+   * @param answers HealthTestAnswersType
+   * @param question HealthTestQuestionType
+   * @returns HealthTestAnswersType
+   */
   const removeAnswer = (answers: HealthTestAnswersType, question: HealthTestQuestionType): HealthTestAnswersType | any => {
     if (!answers?.length) return [];
     if (!question) return answers;
@@ -37,6 +55,13 @@ const HealthTestViewLogic = () => {
     });
   }
 
+  /**
+   * Get next question 
+   * 
+   * @param questions HealthTestQuestionsType
+   * @param next_question_order_number number
+   * @returns HealthTestQuestionType
+   */
   const getNextQuestion = (questions: HealthTestQuestionsType, next_question_order_number: number): HealthTestQuestionType | any => {
     if (!questions?.length) return {};
 
@@ -49,6 +74,13 @@ const HealthTestViewLogic = () => {
     });
   }
 
+  /**
+   * Get previous question
+   * 
+   * @param questions HealthTestQuestionsType
+   * @param answers HealthTestAnswersType
+   * @returns HealthTestQuestionType
+   */
   const getPrevQuestion = (questions: HealthTestQuestionsType, answers: HealthTestAnswersType): HealthTestQuestionType | any => {
     if (!questions?.length) return {};
 
@@ -59,6 +91,12 @@ const HealthTestViewLogic = () => {
     return questions.find((question: HealthTestQuestionType) => question.id == lastAnswer[0].question_id)
   }
 
+  /**
+   * Calculate test result from answer points
+   * 
+   * @param answers HealthTestAnswersType
+   * @returns number
+   */
   const calculateResult = (answers: HealthTestAnswersType) => {
     if (!answers?.length) return 0;
 

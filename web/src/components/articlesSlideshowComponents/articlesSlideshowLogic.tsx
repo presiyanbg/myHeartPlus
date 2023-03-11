@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Moment from 'react-moment';
+import PaginationServices from '../../services/paginationServices/paginationServices';
+import ImageLoader from '../loadersComponents/imageLoader/imageLoader';
+
 import { v4 as uuid } from 'uuid';
-import { SERVER_URL } from '../../constants/api';
 import { Link } from 'react-router-dom';
 import { ArticlesType, ArticleType, PaginationType } from '../../ts/types';
-import Moment from 'react-moment';
 import { scrollToElement, checkElementCanScroll, arrayFilterUnique } from '../../utils/utils';
 import { SELECTORS } from '../../constants/selectors';
 import { LoadingContext } from '../../context/loadingContext/loadingContextProvider';
-import PaginationServices from '../../services/paginationServices/paginationServices';
-import ImageLoader from '../loadersComponents/imageLoader/imageLoader';
 
 const ARTICLES_PER_SLIDE = 5;
 
@@ -21,7 +21,9 @@ const ArticlesSlideshowLogic = () => {
   const [articles, setArticles] = useState<ArticlesType>();
   const [pagination, setPagination] = useState<PaginationType>();
   const [slideLoaded, setSlideLoaded] = useState<boolean>(false);
+
   const { isLoading, displayLoader } = useContext(LoadingContext);
+
   const slideRef = React.createRef<HTMLDivElement>();
   const paginationServices = PaginationServices();
 

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import RegistrationLogic from './registrationLogic';
 import UserForm from '../../userComponents/userForm/userForm';
+
 import { UserFormType } from '../../../ts/types';
 
-type Props = {};
-
-const Registration = ({ }: Props) => {
+const Registration = () => {
   const [userData, setUserData] = useState<UserFormType>({
     'email': '',
     'first_name': '',
@@ -15,8 +14,15 @@ const Registration = ({ }: Props) => {
     'profile_picture': '',
     'role': false,
   });
+
   const logic = RegistrationLogic();
 
+  /**
+   * Get user fields data 
+   * 
+   * @param key string
+   * @param data any
+   */
   const getUserData = (key: string, data: any) => {
     setUserData((prev: UserFormType) => {
       prev[key] = data;
@@ -50,7 +56,6 @@ const Registration = ({ }: Props) => {
           <button type="submit" className="w-100 btn btn-primary text-white">Register</button>
         </div>
       </div>
-
     </form>
   );
 }

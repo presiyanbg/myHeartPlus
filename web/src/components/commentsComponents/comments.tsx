@@ -1,5 +1,6 @@
-import { useEffect } from "react"
 import CommentsLogic from "./commentsLogic"
+
+import { useEffect } from "react"
 
 type Props = {
   parentUrl: string,

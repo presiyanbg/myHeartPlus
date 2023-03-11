@@ -1,23 +1,27 @@
+import PrescriptionsLogic from "../prescriptionsLogic";
+import PrescriptionLink from "../prescriptionLink/prescriptionLink";
+
 import { useState, useEffect } from "react"
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnUp } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
-
-import PrescriptionsLogic from "../prescriptionsLogic";
-import PrescriptionLink from "../prescriptionLink/prescriptionLink";
+import { PrescriptionType } from "../../../ts/types";
 
 type Props = {
   doctor_id: number
 }
 
 const PrescriptionsFromDoctor = (props: Props) => {
-  const [prescriptions, setPrescriptions] = useState<any>();
+  const [prescriptions, setPrescriptions] = useState<PrescriptionType | any>();
 
   const logic = PrescriptionsLogic();
 
   const { t } = useTranslation();
 
+  /**
+   * Load doctor prescriptions on init
+   */
   useEffect(() => {
     if (!props.doctor_id) return;
 

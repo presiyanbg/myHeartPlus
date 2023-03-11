@@ -1,11 +1,11 @@
-import Moment from "react-moment";
 import ImageLoader from "../../loadersComponents/imageLoader/imageLoader";
 import StarsRating from "../../commonComponents/starsRatingComponent/starsRating";
 
 import { useTranslation } from 'react-i18next';
+import { MedicamentType } from "../../../ts/types";
 
 type Props = {
-  medicament: any,
+  medicament: MedicamentType | any,
 }
 
 const MedicamentCard = (props: Props) => {

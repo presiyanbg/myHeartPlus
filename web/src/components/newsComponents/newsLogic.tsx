@@ -3,6 +3,11 @@ import ArticleServices from "../../services/articlesServices/articlesServices";
 const NewsLogic = () => {
   const articlesServices = ArticleServices();
 
+  /**
+   * Load articles from API
+   * 
+   * @returns Articles array
+   */
   const loadArticles = async () => {
     const response = await articlesServices.articles();
 

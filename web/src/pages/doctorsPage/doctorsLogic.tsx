@@ -15,6 +15,12 @@ const DoctorsLogic = () => {
     return data;
   }
 
+  /**
+   * Load doctor profile
+   * 
+   * @param doctorId number ID of doctor record
+   * @returns API response
+   */
   const loadDoctor = async (doctorId: string | number) => {
     const data = await doctorsServices.doctorShow(doctorId);
 

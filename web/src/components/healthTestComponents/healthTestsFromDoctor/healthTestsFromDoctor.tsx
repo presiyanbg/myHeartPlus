@@ -1,13 +1,12 @@
+import HealthTestsLogic from '../healthTestsLogic';
+import HealthTestLink from '../healthTestLink/healthTestLink';
+
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnUp } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
-import { Link } from 'react-router-dom';
 import { HealthTestsType } from '../../../ts/types';
-
-import HealthTestsLogic from '../healthTestsLogic';
-import HealthTestLink from '../healthTestLink/healthTestLink';
 
 type Props = {
   doctor_id: number
@@ -16,9 +15,9 @@ type Props = {
 const HealthTestsFromDoctor = (props: Props) => {
   const [tests, setTests] = useState<HealthTestsType>();
 
-  const { t } = useTranslation();
-
   const logic = HealthTestsLogic();
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!props.doctor_id) return;

@@ -1,13 +1,13 @@
 import ImageLoader from '../../loadersComponents/imageLoader/imageLoader';
 
-import { v4 as uuid } from 'uuid';
-import { useTranslation } from 'react-i18next';
 import PrescriptionCard from '../prescriptionCard/prescriptionCard';
 import MedicamentsFromPrescription from '../../medicamentComponents/medicamentsFromPrescription/medicamentsFromPrescription';
 
+import { useTranslation } from 'react-i18next';
+import { PrescriptionType } from '../../../ts/types';
 
 type Props = {
-  prescription: any
+  prescription: PrescriptionType | any,
 }
 
 const PrescriptionView = (props: Props) => {

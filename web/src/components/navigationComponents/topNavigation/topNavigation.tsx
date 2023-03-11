@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import TopNavigationLinks from './topNavigationLinks';
 import TopNavigationDropDown from './topNavigationDropdown';
+
 import { UserContext } from '../../../context/userContext/userContextProvider';
 import { CommonContext } from '../../../context/commonContext/commonContextProvider';
 import { NavLink } from "react-router-dom";
 import { NavigationContext } from '../../../context/navigationContext/navigationContextProvider';
 
-type Props = {};
-
-const TopNavigation = ({ }: Props) => {
+const TopNavigation = () => {
   const { isAuth, user } = useContext(UserContext);
   const { monitorExpanded } = useContext(CommonContext);
   const { logoLink } = useContext(NavigationContext);

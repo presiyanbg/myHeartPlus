@@ -1,9 +1,10 @@
+import CustomPaginationLogic from './customPaginationLogic';
+
 import { useEffect, useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { PaginationType } from '../../ts/types';
 import { useTranslation } from 'react-i18next';
-import CustomPaginationLogic from './customPaginationLogic';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 

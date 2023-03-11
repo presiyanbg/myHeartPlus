@@ -1,12 +1,12 @@
-import { v4 as uuid } from 'uuid';
-import { HealthTestType } from "../../../ts/types";
-import { Link } from "react-router-dom";
-
 import StarsRating from "../../commonComponents/starsRatingComponent/starsRating";
 import ImageLoader from '../../loadersComponents/imageLoader/imageLoader';
 
+import { v4 as uuid } from 'uuid';
+import { MedicamentType } from "../../../ts/types";
+import { Link } from "react-router-dom";
+
 type Props = {
-  medicament: any
+  medicament: MedicamentType | any
 }
 
 const MedicamentLink = (props: Props) => {

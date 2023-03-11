@@ -9,18 +9,18 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { scrollToElement } from '../../../utils/utils';
 import { SELECTORS } from '../../../constants/selectors';
-import { HealthTestQuestionsType, HealthTestType } from '../../../ts/types';
+import { HealthTestAdviceType, HealthTestQuestionsType, HealthTestType } from '../../../ts/types';
 
 const HealthTest = () => {
   const [test, setTest] = useState<HealthTestType>();
   const [testQA, setTestQA] = useState<HealthTestQuestionsType>();
-  const [result, setResult] = useState<any>();
+  const [advice, setAdvice] = useState<HealthTestAdviceType>();
   const [showResult, setShowResult] = useState<boolean>(false);
+
+  const logic = HealthTestsLogic();
 
   const { id } = useParams();
   const { t } = useTranslation();
-
-  const logic = HealthTestsLogic();
 
   /**
    * Handle test results submit
@@ -31,7 +31,7 @@ const HealthTest = () => {
     if (!test || !test.id) return;
 
     logic.saveHealthTestResult(test?.id, result, questions_and_answers).then((response: any) => {
-      setResult(response?.resultAdvice);
+      setAdvice(response?.advice);
       setShowResult(true);
 
       scrollToElement(`.${SELECTORS.anchorScroll}`);
@@ -43,7 +43,7 @@ const HealthTest = () => {
     if (!id) return;
 
     // Load test basic data 
-    logic.loadHeathTest(id).then((response: any) => {
+    logic.loadHealthTest(id).then((response: any) => {
       setTest(response?.test);
       setTestQA(response?.testQA);
 
@@ -74,7 +74,7 @@ const HealthTest = () => {
 
         {/* Show test result */}
         {
-          showResult && <HealthTestResult advice={result}></HealthTestResult>
+          showResult && <HealthTestResult advice={advice}></HealthTestResult>
         }
       </div>
     </div>

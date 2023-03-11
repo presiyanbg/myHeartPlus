@@ -1,4 +1,5 @@
 import Dropdown from 'react-bootstrap/Dropdown';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faUser, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { UserClass } from '../../../ts/classes';

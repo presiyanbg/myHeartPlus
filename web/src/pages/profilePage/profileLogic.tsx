@@ -1,10 +1,10 @@
+import UsersServices from "../../services/usersServices/usersServices";
+
 import { Nav } from "react-bootstrap";
 import { UserType } from "../../ts/types";
 import { PROFILE_NAV_ITEMS } from "../../constants/profileNavItems";
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
-
-import UsersServices from "../../services/usersServices/usersServices";
 
 const ProfileLogic = () => {
   const userService = UsersServices();

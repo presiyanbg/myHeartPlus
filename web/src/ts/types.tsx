@@ -98,6 +98,36 @@ type DoctorType = {
 
 type DoctorsType = Array<DoctorType>;
 
+/* Medicament Types */
+type MedicamentType = {
+  id: number,
+  category_id: number,
+  rating: number,
+  title: string,
+  description: string,
+  created_at: string,
+  updated_at: string,
+  category: undefined | HealthCategoryType,
+}
+
+type MedicamentsType = Array<MedicamentType>;
+
+/* Prescription Types */
+type PrescriptionType = {
+  id: number,
+  doctor_id: number,
+  category_id: number,
+  rating: number,
+  title: string,
+  description: string,
+  created_at: string,
+  updated_at: string,
+  medicaments_array: string | MedicamentsType,
+  category: undefined | HealthCategoryType,
+}
+
+type PrescriptionsType = Array<PrescriptionType>;
+
 /* Health Types */
 type HealthCategoryType = {
   id: number,
@@ -155,6 +185,22 @@ type HealthTestSubmitParamsType = {
   questions_and_answers: HealthTestQuestionsType,
 }
 
+type HealthTestAdviceType = {
+  id: number,
+  test_id: number,
+  title: string,
+  content: string,
+  created_at: string,
+  updated_at: string,
+  max_points: number,
+  medicament: undefined | MedicamentType,
+  medicament_id: undefined | number,
+  prescription: undefined | PrescriptionType,
+  prescription_id: undefined | number,
+}
+
+type HealthTestAdvicesType = Array<HealthTestAdviceType>;
+
 /* Cache Types */
 type CacheType = {
   [key: string]: any;
@@ -173,6 +219,12 @@ export type {
   DoctorType,
   DoctorsType,
 
+  MedicamentType,
+  MedicamentsType,
+
+  PrescriptionType,
+  PrescriptionsType,
+
   HealthCategoryType,
   HealthCategoriesType,
 
@@ -186,6 +238,9 @@ export type {
   HealthTestQuestionsType,
 
   HealthTestSubmitParamsType,
+
+  HealthTestAdviceType,
+  HealthTestAdvicesType,
 
   PaginationType,
   CacheType,

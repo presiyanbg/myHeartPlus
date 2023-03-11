@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ArticlesSlideshowLogic from './articlesSlideshowLogic';
+
 import { ArticlesType, PaginationType } from '../../ts/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';

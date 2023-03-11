@@ -1,14 +1,16 @@
 import MedicamentLink from "../../medicamentComponents/medicamentLink/medicamentLink";
 import PrescriptionLink from "../../prescriptionComponents/prescriptionLink/prescriptionLink";
 
+import { HealthTestAdviceType } from "../../../ts/types";
 import { useTranslation } from 'react-i18next';
 
 type Props = {
-  advice: any
+  advice: HealthTestAdviceType | any
 }
 
 const HealthTestResult = (props: Props) => {
   const { t } = useTranslation();
+
   if (!props.advice) return <> No advice based on your results </>;
 
   return (
