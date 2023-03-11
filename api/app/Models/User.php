@@ -58,11 +58,9 @@ class User extends Authenticatable
             $medicalProfiles = [];
 
             // Get patient profile data
-            if ($this->role == 'patient' || $this->role == 'admin') {
-                $profile = Patient::where('user_id', $this->id)->first();
+            $profile = Patient::where('user_id', $this->id)->first();
 
-                !!$profile && $medicalProfiles['patient'] = $profile;
-            }
+            !!$profile && $medicalProfiles['patient'] = $profile;
 
             // Get doctor profile data
             if ($this->role == 'doctor' || $this->role == 'admin') {
