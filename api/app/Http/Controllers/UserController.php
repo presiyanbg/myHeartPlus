@@ -65,6 +65,12 @@ class UserController extends Controller
         ], 200);
     }
 
+    /**
+     * Get users medical profiles
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function getMedicalProfile($user_id)
     {
         try {

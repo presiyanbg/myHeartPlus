@@ -138,21 +138,21 @@ class HealthTestController extends Controller
 
             // Find the best advices based on result points 
             $result = (int)$fields['result'];
-            $resultAdvice = $testAdvices[0];
+            $advice = $testAdvices[0];
 
-            foreach ($testAdvices as $advice) {
-                if ($result >= $advice->min_points && $result <= $advice->max_points) {
-                    $resultAdvice = $advice;
+            foreach ($testAdvices as $testAdvice) {
+                if ($result >= $testAdvice->min_points && $result <= $testAdvice->max_points) {
+                    $advice = $testAdvice;
                 }
             }
 
             // Get medicament and/or prescription 
-            $resultAdvice->medicament = Medicament::where('id', $resultAdvice->medicament_id)->first();
-            $resultAdvice->prescription = Prescription::where('id', $resultAdvice->prescription_id)->first();
+            $advice->medicament = Medicament::where('id', $advice->medicament_id)->first();
+            $advice->prescription = Prescription::where('id', $advice->prescription_id)->first();
 
             return response([
                 'message' => 'Success',
-                'resultAdvice' => $resultAdvice,
+                'advice' => $advice,
             ], 200);
         } catch (Throwable $e) {
             return response([

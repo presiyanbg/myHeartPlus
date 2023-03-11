@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
@@ -96,7 +95,7 @@ class AuthController extends Controller
             ]);
 
             // Get medical profiles 
-            $medical_profiles = $user->getMedicalProfiles();
+            $medical_profiles = $user->createMedicalProfiles();
 
             // Upload image
             if ($request->hasFile('profile_picture')) {
