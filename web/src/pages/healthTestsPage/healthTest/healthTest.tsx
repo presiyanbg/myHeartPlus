@@ -28,23 +28,27 @@ const HealthTest = () => {
    * @param data 
    */
   const handleTestSubmit = (result: number, questions_and_answers: any[]) => {
-    logic.saveHealthTestResult(result, questions_and_answers).then((response: any) => {
-      setResult(response);
+    if (!test || !test.id) return;
+
+    logic.saveHealthTestResult(test?.id, result, questions_and_answers).then((response: any) => {
+      setResult(response?.resultAdvice);
       setShowResult(true);
+
+      scrollToElement(`.${SELECTORS.anchorScroll}`);
     });
   }
 
   // Load test on init
   useEffect(() => {
-    if (id) {
-      // Load test basic data 
-      logic.loadHeathTest(id).then(response => {
-        setTest(response.test);
-        setTestQA(response.testQA);
+    if (!id) return;
 
-        scrollToElement(`.${SELECTORS.anchorScroll}`);
-      });
-    }
+    // Load test basic data 
+    logic.loadHeathTest(id).then((response: any) => {
+      setTest(response?.test);
+      setTestQA(response?.testQA);
+
+      scrollToElement(`.${SELECTORS.anchorScroll}`);
+    });
   }, [id]);
 
   // Return 404 
@@ -70,7 +74,7 @@ const HealthTest = () => {
 
         {/* Show test result */}
         {
-          showResult && <HealthTestResult></HealthTestResult>
+          showResult && <HealthTestResult advice={result}></HealthTestResult>
         }
       </div>
     </div>

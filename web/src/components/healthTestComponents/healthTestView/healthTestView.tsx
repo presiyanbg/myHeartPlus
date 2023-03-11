@@ -66,7 +66,7 @@ const HealthTestView = (props: Props) => {
     });
   }
 
-  const saveTestResult = () => {
+  const submitTestResult = () => {
     if (!props?.submitTest || !finalQA?.length) return;
 
     const result = viewLogic.calculateResult(answers);
@@ -160,7 +160,7 @@ const HealthTestView = (props: Props) => {
 
             {/* Submit test final answers */}
             <div className="row mb-5 justify-content-center">
-              <button className="col-4 btn btn-success text-white" onClick={() => saveTestResult()}>
+              <button className="col-4 btn btn-success text-white" onClick={() => submitTestResult()}>
                 {t('Calculate result')}
               </button>
             </div>

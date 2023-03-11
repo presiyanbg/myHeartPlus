@@ -1,8 +1,12 @@
 import HealthTestsServices from "../../services/healthTestsServices/healthTestsServices";
-import { HealthTestQuestionsType } from "../../ts/types";
+
+import { useContext } from "react";
+import { HealthTestQuestionsType, HealthTestSubmitParamsType } from "../../ts/types";
+import { UserContext } from "../../context/userContext/userContextProvider";
 
 const HealthTestsLogic = () => {
   const healthTestsServices = HealthTestsServices();
+  const { user } = useContext(UserContext);
 
   /**
    * Load health test
@@ -22,10 +26,17 @@ const HealthTestsLogic = () => {
     return data;
   }
 
-  const saveHealthTestResult = async (result: number, questions_and_answers: HealthTestQuestionsType) => {
-    const params = {
+  const saveHealthTestResult = async (test_id: number | string, result: number, questions_and_answers: HealthTestQuestionsType) => {
+    let params: HealthTestSubmitParamsType = {
+      user_id: undefined,
+      test_id,
       result,
       questions_and_answers
+    }
+
+    // Save test result to user profile 
+    if (user && user?.id > 0) {
+      params.user_id = user.id;
     }
 
     const data = await healthTestsServices.healthTestSubmitResult(params);

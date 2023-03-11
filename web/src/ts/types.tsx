@@ -148,6 +148,13 @@ type HealthTestQuestionType = {
 
 type HealthTestQuestionsType = Array<HealthTestQuestionType>;
 
+type HealthTestSubmitParamsType = {
+  user_id: number | string | undefined,
+  test_id: number | string,
+  result: number,
+  questions_and_answers: HealthTestQuestionsType,
+}
+
 /* Cache Types */
 type CacheType = {
   [key: string]: any;
@@ -177,6 +184,8 @@ export type {
 
   HealthTestQuestionType,
   HealthTestQuestionsType,
+
+  HealthTestSubmitParamsType,
 
   PaginationType,
   CacheType,

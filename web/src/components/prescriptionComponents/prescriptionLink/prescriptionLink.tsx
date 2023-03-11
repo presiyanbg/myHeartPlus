@@ -15,7 +15,7 @@ const PrescriptionLink = (props: Props) => {
     <Link to={`/prescriptions/${props.prescription.id}`}
       className="component--link"
       key={uuid()}
-      style={{ "--category-bg-color": props.prescription.category.bg_color } as React.CSSProperties}>
+      style={{ "--category-bg-color": props.prescription?.category?.bg_color } as React.CSSProperties}>
       {/* Prescription title */}
       <div className="link-title">
         <h4>{props.prescription.title}</h4>
@@ -30,13 +30,13 @@ const PrescriptionLink = (props: Props) => {
       <div className="row">
         <div className="col-6">
           {
-            props.prescription.category && (
+            props.prescription?.category && (
               <span className="badge rounded-pill"
                 style={{
                   'color': props.prescription?.category?.font_color,
                   'backgroundColor': props.prescription?.category?.bg_color,
                 }}>
-                {props.prescription.category.title}
+                {props.prescription.category?.title}
               </span>
             )
           }
