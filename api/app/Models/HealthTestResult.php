@@ -19,6 +19,7 @@ class HealthTestResult extends Model
         'patient_id',
         'doctor_id',
         'result',
-        'user_review'
+        'user_review',
+        'advice_id',
     ];
 }

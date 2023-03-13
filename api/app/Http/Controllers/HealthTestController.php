@@ -119,6 +119,15 @@ class HealthTestController extends Controller
                 ], 500);
             }
 
+            // Get all advices for test
+            $advice = HealthTestAdvice::findAdviceByTestResult($test->id, (int)$fields['result']);
+
+            if (!$advice) {
+                return response([
+                    'message' => 'No advices were found'
+                ], 404);
+            }
+
             // Set default user id
             $user_id = $fields['user_id'] ?? 0;
 
@@ -141,31 +150,9 @@ class HealthTestController extends Controller
                     'doctor_id' => $test->doctor_id,
                     'result' => (int)$fields['result'],
                     'user_review' => 0,
+                    'advice_id' => $advice->id,
                 ]);
             }
-
-            // Get all advices for test
-            $testAdvices = HealthTestAdvice::where('test_id', $fields['test_id'])->get();
-
-            if (!$testAdvices || count($testAdvices) == 0) {
-                return response([
-                    'message' => 'No advices were found'
-                ], 404);
-            }
-
-            // Find the best advices based on result points 
-            $result = (int)$fields['result'];
-            $advice = $testAdvices[0];
-
-            foreach ($testAdvices as $testAdvice) {
-                if ($result >= $testAdvice->min_points && $result <= $testAdvice->max_points) {
-                    $advice = $testAdvice;
-                }
-            }
-
-            // Get medicament and/or prescription 
-            $advice->medicament = Medicament::where('id', $advice->medicament_id)->first();
-            $advice->prescription = Prescription::where('id', $advice->prescription_id)->first();
 
             return response([
                 'message' => 'Success',
@@ -272,7 +259,6 @@ class HealthTestController extends Controller
         }
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -298,38 +284,6 @@ class HealthTestController extends Controller
         ], 200);
     }
 
-    /**
-     * Show health test results connected to patient
-     * 
-     * @param App\Models\Patient $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function showResults(Patient $patient)
-    {
-        try {
-            if (!$patient) {
-                return response([
-                    'message' => 'Patient was not found'
-                ], 404);
-            }
-
-            $results = HealthTestResult::where('patient_id', $patient->id)->paginate(10);
-
-            // Load test connected to the result
-            foreach ($results as $result) {
-                $result->test = HealthTest::where('id', $result->test_id)->first();
-            }
-
-            return response([
-                'results' => $results
-            ], 200);
-        } catch (Throwable $e) {
-            return response([
-                'message' => $e
-            ], 500);
-        }
-    }
-
     public function showQuestionAndAnswers(HealthTest $test)
     {
         $questions = HealthTestQuestion::where('test_id', $test->id)->get();
@@ -340,7 +294,6 @@ class HealthTestController extends Controller
 
         return $questions;
     }
-
 
     /**
      * Show the form for editing the specified resource.
