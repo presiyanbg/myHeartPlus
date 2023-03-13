@@ -1,7 +1,10 @@
+import DoctorsServices from "../../services/doctorsServices/doctorsServices";
 import { DoctorType } from "../../ts/types";
 import { buildAddress } from "../../utils/utils";
 
 const DoctorLogic = () => {
+
+  const doctorsServices = DoctorsServices();
 
   /**
    * Build address for 
@@ -18,8 +21,15 @@ const DoctorLogic = () => {
     ]);
   }
 
+  const loadDoctorPatients = async (doctor_id: number | string) => {
+    const data = await doctorsServices.doctorShowPatients(doctor_id);
+
+    return data;
+  }
+
   return {
     buildDoctorAddress,
+    loadDoctorPatients,
   }
 
 }
