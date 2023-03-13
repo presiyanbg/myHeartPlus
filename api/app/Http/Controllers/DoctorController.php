@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateDoctorRequest;
 use App\Models\Doctor;
 use App\Models\HealthCategory;
 use App\Models\HealthTest;
-use App\Models\Medicament;
+use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\User;
 
@@ -20,21 +20,27 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors = Doctor::paginate(10);
+        try {
+            $doctors = Doctor::paginate(10);
 
-        // Get full name of doctor and image 
-        foreach ($doctors as $doctor) {
-            $user = User::where('id', $doctor->user_id)->first();
+            // Get full name of doctor and image 
+            foreach ($doctors as $doctor) {
+                $user = User::where('id', $doctor->user_id)->first();
 
-            if ($user) {
-                $doctor->full_name = $user->full_name;
-                $doctor->image = $user->image;
+                if ($user) {
+                    $doctor->full_name = $user->full_name;
+                    $doctor->image = $user->image;
+                }
             }
-        }
 
-        return response([
-            'doctors' => $doctors
-        ], 200);
+            return response([
+                'doctors' => $doctors
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
@@ -66,20 +72,67 @@ class DoctorController extends Controller
      */
     public function show(int $id)
     {
-        $doctor = Doctor::where('id', $id)->first();
+        try {
+            $doctor = Doctor::where('id', $id)->first();
 
-        if (!$doctor) {
+            if (!$doctor) {
+                return response([
+                    'message' => 'Doctor was not found',
+                ], 404);
+            }
+
+            // Load user data
+            $doctor = Doctor::getUserData($doctor);
+
             return response([
-                'message' => 'Doctor was not found',
-            ], 404);
+                'doctor' => $doctor,
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
         }
+    }
 
-        // Load user data
-        $doctor = Doctor::getUserData($doctor);
+    /**
+     * Display patients connected to doctor
+     * 
+     * @param App\Models\Doctor $doctor
+     */
+    public function showPatients(Doctor $doctor)
+    {
+        try {
+            if (!$doctor) {
+                return response([
+                    'message' => 'Doctor was not found',
+                ], 404);
+            }
 
-        return response([
-            'doctor' => $doctor,
-        ], 200);
+            // Do not display same doctor as patient for himself 
+            $patients = Patient::where('doctor_id', $doctor->id)->whereNot('user_id', $doctor->user_id)->paginate(10);
+
+            if (!$patients) {
+                return response([
+                    'message' => 'No patients found',
+                ], 404);
+            }
+
+            foreach ($patients as $patient) {
+                $patientUser = User::where('id', $patient->user_id)->first();
+
+                $patient->full_name = $patientUser->full_name;
+                $patient->image = $patientUser->image;
+            }
+
+            return response([
+                'doctor' => $doctor,
+                'patients' => $patients,
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
@@ -90,18 +143,24 @@ class DoctorController extends Controller
      */
     public function showHealthTests(int $id)
     {
-        $tests =  HealthTest::where('doctor_id', $id)->orderByDesc('rating')->paginate(3);
+        try {
+            $tests =  HealthTest::where('doctor_id', $id)->orderByDesc('rating')->paginate(3);
 
-        // Get test categories
-        foreach ($tests as $test) {
-            $category = HealthCategory::where('id', $test->category_id)->first();
+            // Get test categories
+            foreach ($tests as $test) {
+                $category = HealthCategory::where('id', $test->category_id)->first();
 
-            if ($category) {
-                $test->category = $category;
+                if ($category) {
+                    $test->category = $category;
+                }
             }
-        }
 
-        return response($tests, 200);
+            return response($tests, 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
