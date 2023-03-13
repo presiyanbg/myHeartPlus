@@ -15,8 +15,12 @@ const HealthTestsServices = () => {
     return api.post(`/health-tests/submit-result`, params, false, true, false);
   }
 
-  const healthTestPatientResults = (id: number | string) => {
-    return api.post(`/health-tests/results/${id}`, {}, false, true, false);
+  const healthTestPatientResults = (patient_id: number | string) => {
+    return api.post(`/health-results/${patient_id}`, {}, false, true, false);
+  }
+
+  const healthTestResultShow = (id: number | string) => {
+    return api.post(`/health-results/view/${id}`);
   }
 
   return {
@@ -24,6 +28,7 @@ const HealthTestsServices = () => {
     healthTestShow,
     healthTestSubmitResult,
     healthTestPatientResults,
+    healthTestResultShow,
   }
 }
 

@@ -31,6 +31,12 @@ const HealthTestsLogic = () => {
     return data;
   }
 
+  const loadHealthTestResult = async (result_id: number | string) => {
+    const data = await healthTestsServices.healthTestResultShow(result_id);
+
+    return data;
+  }
+
   /**
    * Save test result and get advice
    * 
@@ -61,6 +67,7 @@ const HealthTestsLogic = () => {
     loadHealthTest,
     loadHealthTestList,
     saveHealthTestResult,
+    loadHealthTestResult,
   }
 
 }

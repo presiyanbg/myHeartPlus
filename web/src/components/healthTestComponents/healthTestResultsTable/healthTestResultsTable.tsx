@@ -68,7 +68,7 @@ const HealthTestResultsTable = (props: Props) => {
         })}
       </div>
 
-      <CustomPagination url={`health-tests/results/${props.patientID}`} pagination={pagination} onDataLoad={onDataLoad}></CustomPagination>
+      <CustomPagination url={`health-results/${props.patientID}`} pagination={pagination} onDataLoad={onDataLoad}></CustomPagination>
     </div>
   )
 }

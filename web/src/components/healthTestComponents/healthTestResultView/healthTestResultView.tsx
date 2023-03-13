@@ -8,7 +8,7 @@ type Props = {
   advice: HealthTestAdviceType | any
 }
 
-const HealthTestResult = (props: Props) => {
+const HealthTestResultView = (props: Props) => {
   const { t } = useTranslation();
 
   if (!props.advice) return <> No advice based on your results </>;
@@ -58,4 +58,4 @@ const HealthTestResult = (props: Props) => {
   )
 }
 
-export default HealthTestResult;
+export default HealthTestResultView;

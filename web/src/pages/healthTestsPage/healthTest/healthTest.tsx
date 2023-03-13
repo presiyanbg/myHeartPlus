@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PageTitle from "../../../components/commonComponents/pageTitle/pageTitle";
 import HealthTestsLogic from '../healthTestsLogic';
 import HealthTestView from '../../../components/healthTestComponents/healthTestView/healthTestView';
-import HealthTestResult from '../../../components/healthTestComponents/healthTestResult/healthTestResult';
+import HealthTestResultView from '../../../components/healthTestComponents/healthTestResultView/healthTestResultView';
 
 import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
@@ -74,7 +74,7 @@ const HealthTest = () => {
 
         {/* Show test result */}
         {
-          showResult && <HealthTestResult advice={advice}></HealthTestResult>
+          showResult && <HealthTestResultView advice={advice}></HealthTestResultView>
         }
       </div>
     </div>

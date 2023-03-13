@@ -14,6 +14,7 @@ import { UserType } from "../../ts/types";
 import PatientProfile from "../../components/patientComponent/patientProfile/patientProfile";
 import PatientStatistic from "../../components/patientComponent/patientStatistic/patientStatistic";
 import HealthTestResultsTable from "../../components/healthTestComponents/healthTestResultsTable/healthTestResultsTable";
+import DoctorPatients from "../../components/doctorComponents/doctorPatients/doctorPatients";
 
 const Profile = () => {
   const [profile, setProfile] = useState<UserType>();
@@ -23,10 +24,13 @@ const Profile = () => {
   const logic = ProfileLogic();
 
   const { t } = useTranslation();
-  const { user } = useContext(UserContext);
+  const { user, isAuth } = useContext(UserContext);
 
+  /**
+   * Load user data -- only when authenticated 
+   */
   useEffect(() => {
-    if (!user?.id) return;
+    if (!user?.id || !isAuth) return;
 
     logic.loadUser(user).then(userData => {
       if (!userData) return;
@@ -48,7 +52,7 @@ const Profile = () => {
 
       scrollToElement(`.${SELECTORS.anchorScroll}`);
     });
-  }, [user]);
+  }, [user, isAuth]);
 
   return (
     <div className="wrapper">
@@ -79,6 +83,14 @@ const Profile = () => {
                   doctorProfile &&
                   <Tab.Pane eventKey="#doctor-page">
                     <DoctorProfile doctor={doctorProfile}></DoctorProfile>
+                  </Tab.Pane>
+                }
+
+                {/* Doctor patients tab */}
+                {
+                  doctorProfile &&
+                  <Tab.Pane eventKey="#doctor-patients">
+                    <DoctorPatients doctorID={doctorProfile.id}></DoctorPatients>
                   </Tab.Pane>
                 }
 

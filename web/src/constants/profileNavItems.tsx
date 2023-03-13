@@ -11,6 +11,11 @@ export const PROFILE_NAV_ITEMS = [
     require: 'doctor',
   },
   {
+    eventKey: '#doctor-patients',
+    itemTitle: 'My patients',
+    require: 'doctor',
+  },
+  {
     eventKey: '#patient-page',
     itemTitle: 'Patient page',
     require: 'patient',

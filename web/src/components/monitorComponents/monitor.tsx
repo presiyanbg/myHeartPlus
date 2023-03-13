@@ -5,12 +5,14 @@ import { LoadingContext } from '../../context/loadingContext/loadingContextProvi
 import { CommonContext } from '../../context/commonContext/commonContextProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from '../../context/userContext/userContextProvider';
 
 type Props = {};
 
 const Monitor = ({ }: Props) => {
   const [displayPageLoader, setDisplayPageLoader] = useState(false);
 
+  const { user } = useContext(UserContext);
   const { isLoading } = useContext(LoadingContext);
   const { monitorExpanded, toggleMonitorExpanded } = useContext(CommonContext);
 
