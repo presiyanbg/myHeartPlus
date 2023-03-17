@@ -29,23 +29,22 @@ const HealthTestCreateLogic = () => {
     });
   }
 
-
   const getNewQuestion = (orderNumber: number) => {
     return {
       uuid: uuid(),
       order_number: orderNumber,
-      title: 'Question title',
-      description: 'Description',
+      title: '',
+      description: '',
       is_final_question: false,
       answers: [
-        getNewAnswer(orderNumber),
-        getNewAnswer(orderNumber),
-        getNewAnswer(orderNumber)
+        getNewAnswer(orderNumber, 10),
+        getNewAnswer(orderNumber, 50),
+        getNewAnswer(orderNumber, 100)
       ],
     }
   }
 
-  const getNewAnswer = (orderNumber: number) => {
+  const getNewAnswer = (orderNumber: number, points: number = 0) => {
     const prevQuestionOrderNumber = orderNumber > 1 ? orderNumber - 1 : orderNumber;
 
     return {
@@ -53,8 +52,8 @@ const HealthTestCreateLogic = () => {
       question_id: orderNumber,
       next_question_order_number: orderNumber + 1,
       prev_question_order_number: prevQuestionOrderNumber,
-      points: 0,
-      content: 'Answer',
+      points: points,
+      content: '',
     }
   }
 

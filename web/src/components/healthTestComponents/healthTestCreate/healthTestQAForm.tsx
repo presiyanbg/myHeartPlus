@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { HEALTH_TEST_POINTS } from "../../../constants/common";
 
 type Props = {
   submitQA: (data: any) => void
@@ -11,6 +12,7 @@ type Props = {
 
 const HealthTestQAForm = (props: Props) => {
   const [testQA, setTestQA] = useState<any[]>([]);
+
   const logic = HealthTestCreateLogic();
 
   const { t } = useTranslation();
@@ -18,9 +20,10 @@ const HealthTestQAForm = (props: Props) => {
   const handleQuestionChange = (inputType: string, event: React.FormEvent<any>, question: any) => {
     if (!inputType || !event || !question) return;
     event.preventDefault();
+    let value = event?.currentTarget?.value || '';
 
     setTestQA((prev) => {
-      return logic.changeQuestionField(question, prev, inputType, event?.currentTarget?.value);
+      return logic.changeQuestionField(question, prev, inputType, value);
     })
   }
 
@@ -28,15 +31,23 @@ const HealthTestQAForm = (props: Props) => {
     if (!inputType || !event || !question || !answer) return;
     event.preventDefault();
 
-    let value = '';
+    let value: string | number = '';
 
     switch (inputType) {
       case 'next_question_order_number':
         value = logic.getQuestionByUUID(testQA, event?.currentTarget?.value)?.order_number;
         break;
 
+      case 'points':
+        value = parseInt(event?.currentTarget?.value || 0);
+
+        if (value > HEALTH_TEST_POINTS.maxPoints) value = HEALTH_TEST_POINTS.maxPoints;
+        if (value < HEALTH_TEST_POINTS.minPoints) value = HEALTH_TEST_POINTS.minPoints;
+
+        break
+
       default:
-        value = event?.currentTarget?.value;
+        value = event?.currentTarget?.value || '';
         break;
     }
 
@@ -98,6 +109,7 @@ const HealthTestQAForm = (props: Props) => {
           !!testQA?.length && testQA.map((question, questionIndex) => {
             return (
               <div className="col-12 mb-5 card p-3" key={question.uuid}>
+                {/* Question  */}
                 <div className="col-12 mb-3 border-bottom pb-2">
                   <div className="row mb-3">
                     <div className="col-2">
@@ -109,6 +121,7 @@ const HealthTestQAForm = (props: Props) => {
                         <input type="text"
                           className="form-control text-center"
                           id="title"
+                          placeholder={t('Question title') || ''}
                           value={question?.title}
                           onChange={(e) => handleQuestionChange('title', e, question)} />
                       </div>
@@ -124,6 +137,7 @@ const HealthTestQAForm = (props: Props) => {
                       <div className="input-group">
                         <textarea className="form-control"
                           value={question?.description}
+                          placeholder={t('Description') || ''}
                           onChange={(e) => handleQuestionChange('description', e, question)}
                           id="floatingTextarea"></textarea>
                       </div>
@@ -131,6 +145,7 @@ const HealthTestQAForm = (props: Props) => {
                   </div>
                 </div>
 
+                {/* Answers */}
                 <div className="col-12 d-flex flex-wrap">
                   {
                     !!question?.answers?.length && (
@@ -161,6 +176,7 @@ const HealthTestQAForm = (props: Props) => {
                                   <input type="text"
                                     className="form-control"
                                     id="title"
+                                    placeholder={t('Answer content') || ''}
                                     value={answer?.content}
                                     onChange={(e) => handleAnswerChange('content', e, question, answer)} />
                                 </div>
@@ -214,6 +230,7 @@ const HealthTestQAForm = (props: Props) => {
                   }
                 </div>
 
+                {/* Add answer button */}
                 <div className="col-12 row justify-content-end p-3">
                   <div className="col-3">
                     <div className="btn btn-primary text-white"

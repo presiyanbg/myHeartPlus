@@ -45,5 +45,10 @@
   "Description": "Описание",
   "Medicaments": "Лекарства",
   "Category": "Категория",
-  "Current page": "Страница"
+  "Current page": "Страница",
+  "Question title": "Заглавие на въпроса",
+  "Answer": "Отговор",
+  "Answer content": "Съдържание на отговора",
+  "Points": "Точки",
+  "Text": "Текст"
 }
