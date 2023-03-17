@@ -17,8 +17,6 @@ const DoctorPatients = (props: Props) => {
   const logic = DoctorLogic();
 
   const onDataLoad = (data: any) => {
-    console.log(data);
-
     if (!data?.doctor || !data?.patients) return;
 
     setDoctor(data.doctor)
@@ -43,8 +41,6 @@ const DoctorPatients = (props: Props) => {
       </div>
     </div>
   )
-
-  return (<></>);
 }
 
 export default DoctorPatients;

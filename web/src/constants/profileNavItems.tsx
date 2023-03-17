@@ -26,6 +26,11 @@ export const PROFILE_NAV_ITEMS = [
     require: 'patient',
   },
   {
+    eventKey: '#health-test-create',
+    itemTitle: 'Create health check',
+    require: 'doctor',
+  },
+  {
     eventKey: '#health-test-results',
     itemTitle: 'Test results',
     require: 'patient',

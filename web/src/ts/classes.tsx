@@ -1,3 +1,5 @@
+import { HealthCategoryType } from "./types";
+
 class UserClass {
   id: number = 0;
   first_name: string = '';
@@ -29,6 +31,34 @@ class UserClass {
   }
 }
 
+class HealthTestClass {
+  id: number = 0;
+  category_id: number = 0;
+  doctor_id: number = 0;
+  rating: number = 0;
+  description: string = '';
+  title: string = '';
+  created_at: string = '';
+  updated_at: string = '';
+  category: HealthCategoryType | any;
+
+  constructor() {
+  }
+
+  setHealthTest(test: any) {
+    this.id = test.id;
+    this.category_id = test.category_id;
+    this.doctor_id = test.doctor_id;
+    this.rating = test.rating;
+    this.description = test.description;
+    this.title = test.title;
+    this.created_at = test.created_at;
+    this.updated_at = test.updated_at;
+    this.category = test.category;
+  }
+}
+
 export {
-  UserClass
+  UserClass,
+  HealthTestClass,
 }

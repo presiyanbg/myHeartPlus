@@ -16,11 +16,11 @@ const HealthTestsServices = () => {
   }
 
   const healthTestPatientResults = (patient_id: number | string) => {
-    return api.post(`/health-results/${patient_id}`, {}, false, true, false);
+    return api.post(`/health-results/${patient_id}`, undefined, false, true, false);
   }
 
   const healthTestResultShow = (id: number | string) => {
-    return api.post(`/health-results/view/${id}`);
+    return api.post(`/health-results/view/${id}`, undefined, false);
   }
 
   return {

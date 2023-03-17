@@ -23,8 +23,6 @@ const HealthTestResultsTable = (props: Props) => {
 
     setResults(response.results.data);
     setPagination(response.results);
-
-    console.log(response.results.data)
   }
 
   useEffect(() => {

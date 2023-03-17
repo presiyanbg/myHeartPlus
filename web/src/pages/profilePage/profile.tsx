@@ -10,16 +10,17 @@ import { useTranslation } from 'react-i18next';
 import { scrollToElement } from '../../utils/utils';
 import { UserContext } from "../../context/userContext/userContextProvider";
 import { Nav, Tab } from "react-bootstrap";
-import { UserType } from "../../ts/types";
+import { DoctorType, UserType } from "../../ts/types";
 import PatientProfile from "../../components/patientComponent/patientProfile/patientProfile";
 import PatientStatistic from "../../components/patientComponent/patientStatistic/patientStatistic";
 import HealthTestResultsTable from "../../components/healthTestComponents/healthTestResultsTable/healthTestResultsTable";
 import DoctorPatients from "../../components/doctorComponents/doctorPatients/doctorPatients";
+import HealthTestCreate from "../../components/healthTestComponents/healthTestCreate/healthTestCreate";
 
 const Profile = () => {
   const [profile, setProfile] = useState<UserType>();
   const [patientProfile, setPatientProfile] = useState<UserType>();
-  const [doctorProfile, setDoctorProfile] = useState<UserType>();
+  const [doctorProfile, setDoctorProfile] = useState<DoctorType>();
 
   const logic = ProfileLogic();
 
@@ -108,6 +109,15 @@ const Profile = () => {
                   patientProfile &&
                   <Tab.Pane eventKey="#patient-statistics">
                     <PatientStatistic patient={patientProfile}></PatientStatistic>
+                  </Tab.Pane>
+                }
+
+
+                {/* Doctor create health test */}
+                {
+                  doctorProfile &&
+                  <Tab.Pane eventKey="#health-test-create">
+                    <HealthTestCreate doctorID={doctorProfile?.id}></HealthTestCreate>
                   </Tab.Pane>
                 }
 
