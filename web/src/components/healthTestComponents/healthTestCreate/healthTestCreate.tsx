@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HealthTestCreateLogic from "./healthTestCreateLogic";
 import { HealthTestType } from "../../../ts/types";
 import { HealthTestClass } from "../../../ts/classes";
@@ -6,6 +6,7 @@ import { Nav, Tab, Tabs } from "react-bootstrap";
 import HealthTestDataForm from "./healthTestDataForm";
 import { useTranslation } from "react-i18next";
 import HealthTestQAForm from "./healthTestQAForm";
+import HealthTestResultsForm from "./healthTestResultsForm";
 
 type Props = {
   doctorID: number
@@ -13,16 +14,24 @@ type Props = {
 
 const HealthTestCreate = (props: Props) => {
   const [test, setTest] = useState<HealthTestType>(new HealthTestClass());
+  const [testQA, setTestQA] = useState<any>([]);
 
   const logic = HealthTestCreateLogic();
 
   const { t } = useTranslation();
 
   const getTestData = (data: any) => {
+    if (!data) return;
 
+    setTest(data);
   }
 
   const getQAData = (data: any) => {
+    if (!data) return;
+
+    setTestQA(data);
+
+    logic.calculateResults(data);
   }
 
   // Update doctor id from props 
@@ -99,7 +108,9 @@ const HealthTestCreate = (props: Props) => {
                 </Tab.Pane>
 
                 <Tab.Pane eventKey="#test-results">
-                  {t('Suggestion')}
+                  <div className="mb-3 p-3">
+                    <HealthTestResultsForm results={logic?.results}></HealthTestResultsForm>
+                  </div>
                 </Tab.Pane>
 
                 <Tab.Pane eventKey="#test-finalize">

@@ -188,3 +188,32 @@ export const calculatePercentage = (total: number | any, current: number | any) 
 
   return Number(((current / total) * 100).toFixed(2));
 }
+
+export const arraySimpleUnique = (array: any[], sort: boolean = false) => {
+  if (!array || !array.length) return [];
+
+  array = array.filter((value: any, index: number) => {
+    return array.indexOf(value) === index;
+  });
+
+  if (sort) {
+    return array.sort(arraySimpleSort);
+  }
+
+  return array;
+}
+
+/** Sort simple array */
+export const arraySimpleSort = (a: any, b: any) => {
+  if (a < b) {
+    return -1;
+  }
+  if (a > b) {
+    return 1;
+  }
+  return 0;
+}
+
+export const generateColor = () => {
+  return '#' + Math.random().toString(16).substr(-6);
+}

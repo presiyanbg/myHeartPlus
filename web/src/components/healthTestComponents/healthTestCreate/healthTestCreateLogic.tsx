@@ -1,15 +1,28 @@
 
+import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { arrayOrderByProp, arraySimpleSort, arraySimpleUnique, generateColor } from '../../../utils/utils';
 
 const HealthTestCreateLogic = () => {
+  const [results, setResults] = useState<any>([]);
 
+  // # START: Questions and answers 
   const addNewQuestion = (questionsAndAnswers: any) => {
     if (!questionsAndAnswers) {
       questionsAndAnswers = [];
     }
 
+    // Remove final question flag from all questions
+    // New question is final
+    questionsAndAnswers = questionsAndAnswers.map((question: any) => {
+      question.is_final_question = false;
+
+      return question;
+    });
+
+    // Add new question
     return questionsAndAnswers.concat([
-      getNewQuestion(questionsAndAnswers?.length + 1)
+      getNewQuestion(questionsAndAnswers.length + 1)
     ]);
   }
 
@@ -35,11 +48,11 @@ const HealthTestCreateLogic = () => {
       order_number: orderNumber,
       title: '',
       description: '',
-      is_final_question: false,
+      is_final_question: true,
       answers: [
         getNewAnswer(orderNumber, 10),
-        getNewAnswer(orderNumber, 50),
-        getNewAnswer(orderNumber, 100)
+        getNewAnswer(orderNumber, 25),
+        getNewAnswer(orderNumber, 50)
       ],
     }
   }
@@ -101,12 +114,16 @@ const HealthTestCreateLogic = () => {
 
   const removeQuestion = (selectedQuestion: any, allQuestions: any) => {
     if (!allQuestions) return [];
-    if (allQuestions.length <= 1) return allQuestions;
     if (!selectedQuestion) return allQuestions;
+    if (allQuestions.length <= 1) return allQuestions;
 
-    return allQuestions.filter((question: any) => {
+    allQuestions = allQuestions.filter((question: any) => {
       return question?.uuid != selectedQuestion?.uuid;
-    })
+    });
+
+    allQuestions = fixQuestionsAndAnswersOrder(allQuestions);
+
+    return allQuestions;
   }
 
   const removeAnswer = (selectedQuestion: any, selectedAnswer: any, allQuestions: any) => {
@@ -123,11 +140,123 @@ const HealthTestCreateLogic = () => {
     });
   }
 
-  const calculateResults = () => {
+  const fixQuestionsAndAnswersOrder = (allQuestions: any) => {
+    if (!allQuestions?.length) return [];
 
+    allQuestions = arrayOrderByProp(allQuestions, 'order_number');
+
+    return allQuestions.map((question: any, index: number) => {
+      question.order_number = index + 1;
+
+      if (question?.answers?.length) {
+        const prevQuestionOrderNumber = question.order_number > 1 ? question.order_number - 1 : question.order_number;
+
+        // Reset answer questions ids
+        question.answers = question.answers.map((answer: any) => {
+          answer.question_id = question.order_number;
+          answer.next_question_order_number = question.order_number + 1;
+          answer.prev_question_order_number = prevQuestionOrderNumber;
+
+          return answer;
+        });
+      }
+
+      return question;
+    });
+  }
+  // # END: Questions and answers 
+
+
+  // # START: Results 
+  const calculateResults = (questionsAndAnswers: any) => {
+    if (!questionsAndAnswers || !questionsAndAnswers[0]) return;
+
+    // Reset results when new data is passed 
+    setResults([]);
+
+    // Calculate result options starting with first answers
+    questionsAndAnswers[0]?.answers.forEach((answer: any) => {
+      calculateResultsGroup(answer, questionsAndAnswers);
+    });
   }
 
+  const calculateResultsGroup = (answer: any, questionsAndAnswers: any, currentPoints: number = 0) => {
+    if (!answer || !questionsAndAnswers) return;
+
+    currentPoints = currentPoints + answer.points;
+
+    questionsAndAnswers.forEach((question: any, index: number) => {
+      // Check if wrong question
+      if (question.order_number != answer.next_question_order_number) return;
+
+      // If final question => add total points to results array
+      if (question.is_final_question || (index + 1) == questionsAndAnswers.length) {
+        let results: number[] = [];
+
+        // Calculate result points 
+        question?.answers.forEach((qAnswer: any) => {
+          if (qAnswer.uuid == answer.uuid) return;
+
+          results.push(currentPoints + qAnswer?.points);
+        });
+
+        setResults((prev: number[]) => {
+          return arraySimpleUnique(prev.concat(results), true);
+        });
+
+        return;
+      }
+
+      // Calculate with next questions and answers  
+      if (question.order_number == answer.next_question_order_number) {
+
+        question?.answers.forEach((qAnswer: any) => {
+          if (qAnswer.uuid == answer.uuid) return;
+
+          // Loop function until final question 
+          calculateResultsGroup(qAnswer, questionsAndAnswers, currentPoints);
+        });
+
+        return;
+      }
+    });
+  }
+  // # END: Results 
+
+
+  // # START: Advices
+  const addNewAdvice = (advices: any[], minPoints: number = 0, maxPoints: number = 100) => {
+    if (!advices) {
+      advices = [];
+    }
+
+    // Add new advice
+    return advices.concat([
+      getNewAdvice(minPoints, maxPoints)
+    ]);
+  }
+
+  const getNewAdvice = (minPoints: number = 0, maxPoints: number = 100) => {
+    return {
+      uuid: uuid(),
+
+      title: '',
+      content: '',
+
+      medicament_id: '',
+      prescription_id: '',
+
+      min_points: minPoints,
+      max_points: maxPoints >= minPoints ? maxPoints : minPoints,
+
+      color: generateColor(),
+    }
+  }
+  // # END: Advices 
+
   return {
+    results,
+
     addNewQuestion,
     addNewAnswer,
     changeQuestionField,
@@ -135,7 +264,10 @@ const HealthTestCreateLogic = () => {
     getQuestionByUUID,
     removeQuestion,
     removeAnswer,
+
     calculateResults,
+
+    addNewAdvice,
   }
 }
 

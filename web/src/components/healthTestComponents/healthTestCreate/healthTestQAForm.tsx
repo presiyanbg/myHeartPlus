@@ -1,6 +1,5 @@
-import { Component, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import HealthTestCreateLogic from "./healthTestCreateLogic"
-import { v4 as uuid } from 'uuid';
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -230,7 +229,7 @@ const HealthTestQAForm = (props: Props) => {
                   }
                 </div>
 
-                {/* Add answer button */}
+                {/* Add new answer button */}
                 <div className="col-12 row justify-content-end p-3">
                   <div className="col-3">
                     <div className="btn btn-primary text-white"
@@ -245,6 +244,7 @@ const HealthTestQAForm = (props: Props) => {
         }
       </div >
 
+      {/* Add new question button */}
       <div className="row mb-3 justify-content-end p-3">
         <div className="col-3">
           <div className="btn btn-primary text-white" onClick={handleAddNewQuestion}>
