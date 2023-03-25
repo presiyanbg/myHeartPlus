@@ -5,26 +5,18 @@ import HealthTestCreateLogic from "./healthTestCreateLogic";
 
 type Props = {
   results: any[],
+  submitAdvices: (data: any) => void
 }
 
 const RESULTS_PER_ROL = 12;
-const BACKGROUND_OPACITY = '15';
 
 const HealthTestResultsForm = (props: Props) => {
-  const [resultGroups, setResultGroups] = useState<any[]>([]);
   const [advices, setAdvices] = useState<any[]>([]);
+  const [resultGroups, setResultGroups] = useState<any[]>([]);
 
   const { t } = useTranslation();
 
   const logic = HealthTestCreateLogic();
-
-  const handleAdviceChange = (inputType: string, event: React.FormEvent<any>, question: any) => {
-    if (!inputType || !event || !question) return;
-  }
-
-  const handleRemoveAdvice = (question: any) => {
-    if (!question) return;
-  }
 
   const handleAddNewAdvice = () => {
     setAdvices((prev: any) => {
@@ -32,22 +24,40 @@ const HealthTestResultsForm = (props: Props) => {
     });
   }
 
-  const getResultStyle = (result: any) => {
-    if (!advices?.length) return {};
+  const handleAdviceChange = (inputType: string, event: React.FormEvent<any>, advice: any) => {
+    if (!inputType || !event || !advice) return;
 
-    let styleObject: any = {};
+    if (!inputType || !event || !advice) return;
+    event.preventDefault();
+
+    setAdvices((prev) => {
+      return logic.changeAdviceField(advice, prev, inputType, event?.currentTarget?.value);
+    });
+  }
+
+  const handleRemoveAdvice = (advice: any) => {
+    if (!advice) return;
+
+    setAdvices((prev: any) => {
+      return logic.removeAdvice(advice, prev);
+    });
+  }
+
+  const checkResultHasAdvice = (result: number): boolean => {
+    if (!advices?.length) return false;
+
+    let check = false;
 
     advices.forEach((advice: any) => {
-      if (!styleObject.backgroundColor && advice.min_points <= result && result <= advice.max_points) {
-        styleObject = {
-          backgroundColor: advice.color + BACKGROUND_OPACITY,
-        }
+      if (parseInt(advice.min_points) <= result && result <= parseInt(advice.max_points)) {
+        check = true;
       }
     });
 
-    return styleObject;
+    return check
   }
 
+  // Get parent data 
   useEffect(() => {
     if (!props.results.length) return;
 
@@ -77,6 +87,13 @@ const HealthTestResultsForm = (props: Props) => {
     });
   }, []);
 
+  // Send advices data to parent component 
+  useEffect(() => {
+    if (!props?.submitAdvices) return;
+
+    props.submitAdvices(advices);
+  }, [advices])
+
   if (!props?.results?.length) return (<></>);
 
   return (
@@ -95,11 +112,11 @@ const HealthTestResultsForm = (props: Props) => {
                   return (
                     <tr key={uuid()}>
                       {
-                        !!group?.length && group.map((result: any) => {
-                          const resultStyle = getResultStyle(result);
+                        !!group?.length && group.map((result: number) => {
+                          const resultClass = checkResultHasAdvice(result) ? "text-center p-1" : "text-center p-1 text-danger";
 
                           return (
-                            <td style={resultStyle} className="text-center p-1" key={uuid()}>
+                            <td className={resultClass} key={uuid()}>
                               {result}
                             </td>
                           )
@@ -119,10 +136,6 @@ const HealthTestResultsForm = (props: Props) => {
         <div className="row">
           {
             !!advices?.length && advices.map((advice: any, index: number) => {
-              const adviceStyle = {
-                backgroundColor: advice.color + BACKGROUND_OPACITY,
-              }
-
               return (
                 <div className="col-12 mb-5 card p-3" key={advice.uuid}>
                   {/* Title and content */}
@@ -132,6 +145,7 @@ const HealthTestResultsForm = (props: Props) => {
                         #{index + 1}
                       </div>
 
+                      {/* Advice title */}
                       <div className="col-8">
                         <div className="input-group input-group-sm mb-2">
                           <input type="text"
@@ -148,13 +162,14 @@ const HealthTestResultsForm = (props: Props) => {
                       </div>
                     </div>
 
+                    {/* Advice content */}
                     <div className="row justify-content-center mb-3">
                       <div className="col-10">
                         <div className="input-group">
                           <textarea className="form-control"
                             value={advice?.content}
                             placeholder={t('Content') || ''}
-                            onChange={(e) => handleAdviceChange('description', e, advice)}
+                            onChange={(e) => handleAdviceChange('content', e, advice)}
                             id="floatingTextarea"></textarea>
                         </div>
                       </div>
@@ -168,9 +183,8 @@ const HealthTestResultsForm = (props: Props) => {
                         <div className="input-group input-group-sm mb-2">
                           <span className="input-group-text w-25">{t('Min')}</span>
 
-                          <input type="text"
+                          <input type="number"
                             className="form-control text-center"
-                            style={adviceStyle}
                             id="min_points"
                             placeholder={t('Minimal points') || ''}
                             value={advice?.min_points}
@@ -184,7 +198,6 @@ const HealthTestResultsForm = (props: Props) => {
 
                           <input type="number"
                             className="form-control text-center"
-                            style={adviceStyle}
                             id="max_points"
                             placeholder={t('Maximum Points') || ''}
                             value={advice?.max_points}

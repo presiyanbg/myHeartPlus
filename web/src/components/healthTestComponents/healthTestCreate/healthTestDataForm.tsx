@@ -1,5 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next";
+import CustomSelect from "../../commonComponents/customSelect/customSelect";
+import { v4 as uuid } from "uuid";
+import { HealthCategoryType } from "../../../ts/types";
 
 type Props = {
   submitTest: (data: any) => void
@@ -14,29 +17,38 @@ const HealthTestDataForm = (props: Props) => {
 
   const { t } = useTranslation();
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
-    if (!props.submitTest || !testFormData) return;
-
-    props.submitTest(testFormData);
-  }
-
-  const handleInputChange = (inputType: string, event: React.FormEvent<HTMLInputElement>) => {
+  const handleInputChange = (inputType: string, event: React.FormEvent<any>) => {
     if (!inputType || !event?.currentTarget?.value) return;
 
     setTestFormData((prev: any) => {
       prev[inputType] = event?.currentTarget?.value;
 
-      // Update parent data
-      props.submitTest(prev);
+      return prev;
+    });
+
+    // Send test data to parent component 
+    if (!props.submitTest) return;
+
+    props.submitTest(testFormData);
+  }
+
+  const handleCategoryChange = (category: HealthCategoryType) => {
+    if (!category?.id) return;
+
+    setTestFormData((prev: any) => {
+      prev.category = category;
 
       return prev;
     });
+
+    // Send test data to parent component 
+    if (!props.submitTest) return;
+
+    props.submitTest(testFormData);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div className="row justify-content-center mb-4">
         <div className="col-6">
           <div className="form-floating">
@@ -53,17 +65,12 @@ const HealthTestDataForm = (props: Props) => {
 
       <div className="row justify-content-center mb-4">
         <div className="col-6">
-          <div className="form-floating">
-            <select id="doctor_id"
-              className="form-select form-select-lg"
-              aria-label="doctor_id">
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-
-            <label htmlFor="doctor_id">{t('Category')}</label>
-          </div>
+          <CustomSelect
+            id={uuid()}
+            url={'health-category'}
+            displayKey="title"
+            label={t('Category')}
+            submitData={handleCategoryChange}></CustomSelect>
         </div>
       </div>
 
@@ -74,6 +81,7 @@ const HealthTestDataForm = (props: Props) => {
               className="form-control"
               id="description"
               placeholder="Description"
+              onChange={(e) => handleInputChange('description', e)}
               maxLength={2024}
             />
 

@@ -359,3 +359,43 @@ $degrees: 45, 90, 135;
     padding-top: 1rem;
   }
 }
+
+
+// Custom select
+.custom-select {
+  position: relative;
+
+  .custom-select--input {
+    position: relative;
+
+    .custom-select--input-icon {
+      position: absolute;
+      right: 5%;
+      bottom: 30%;
+      cursor: pointer;
+    }
+  }
+
+  .custom-select--list {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    width: 100%;
+    box-shadow: $shadowBorder;
+    border-radius: $defaultRadius;
+    overflow: hidden;
+    z-index: 3000;
+
+    .list-group {
+      max-height: 300px;
+      width: 100%;
+      overflow-y: auto;
+
+      .list-group-item:hover {
+        background-color: $main;
+        color: $white;
+        cursor: pointer;
+      }
+    }
+  }
+}

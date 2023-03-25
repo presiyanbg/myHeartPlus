@@ -2,9 +2,12 @@
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { arrayOrderByProp, arraySimpleSort, arraySimpleUnique, generateColor } from '../../../utils/utils';
+import CommonServices from '../../../services/commonServices/commonServices';
 
 const HealthTestCreateLogic = () => {
   const [results, setResults] = useState<any>([]);
+
+  const commonServices = CommonServices();
 
   // # START: Questions and answers 
   const addNewQuestion = (questionsAndAnswers: any) => {
@@ -252,7 +255,38 @@ const HealthTestCreateLogic = () => {
       color: generateColor(),
     }
   }
+
+  const changeAdviceField = (selectedAdvice: any, allAdvices: any[], fieldKey: string, value: any) => {
+    if (!allAdvices) return [];
+    if (!selectedAdvice || !fieldKey) return allAdvices;
+
+    return allAdvices.map((advice: any) => {
+      if (advice.uuid === selectedAdvice.uuid) {
+        advice[fieldKey] = value;
+      }
+
+      return advice;
+    });
+  }
+
+  const removeAdvice = (selectedAdvice: any, allAdvices: any[]) => {
+    if (!allAdvices) return [];
+    if (!selectedAdvice) return allAdvices;
+    if (allAdvices.length <= 1) return allAdvices;
+
+    return allAdvices.filter((advice: any) => {
+      return advice?.uuid != selectedAdvice?.uuid;
+    });
+  }
   // # END: Advices 
+
+  // # START: Common
+  const loadCategory = async (categoryID: number | string) => {
+    const data = await commonServices.healthCategoryShow(categoryID);
+
+    return data;
+  }
+  // # END: Common
 
   return {
     results,
@@ -268,6 +302,10 @@ const HealthTestCreateLogic = () => {
     calculateResults,
 
     addNewAdvice,
+    changeAdviceField,
+    removeAdvice,
+
+    loadCategory,
   }
 }
 

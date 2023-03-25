@@ -15,9 +15,17 @@ class HealthCategoryController extends Controller
      */
     public function index()
     {
-        return response([
-            'categories' => HealthCategory::all(),
-        ], 200);
+        try {
+            $categories = HealthCategory::paginate(10);
+
+            return response([
+                'categories' => $categories
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
@@ -66,12 +74,29 @@ class HealthCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\HealthCategory  $healthCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(HealthCategory $healthCategory)
+    public function show($id)
     {
-        //
+        try {
+            if ($id == 0) {
+                $healthCategory = HealthCategory::take(1)->first();
+            }
+
+            if ($id > 0) {
+                $healthCategory = HealthCategory::where('id', $id)->first();
+            }
+
+            return response([
+                'category' => $healthCategory,
+                'message' => 'Success'
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
