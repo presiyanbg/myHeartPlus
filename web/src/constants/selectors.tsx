@@ -1,6 +1,6 @@
 export const SELECTORS = {
-  articlesScroll: 'articles-scroll',
-  articleSlide: 'articles-scroll',
-  articleTitle: 'article--title',
-  anchorScroll: 'anchor--scroll',
+    articlesScroll: 'articles__scroll',
+    articleSlide: 'articles__scroll',
+    articleTitle: 'article--title',
+    anchorScroll: 'anchor--scroll',
 }

@@ -10,199 +10,199 @@ import { calculatePercentage, copyObject } from "../../../utils/utils";
 import { ProgressBar } from "react-bootstrap";
 
 type Props = {
-  testID: number | string,
-  testQA: HealthTestQuestionsType,
-  submitTest: (result: number, questions_and_answers: any[]) => void
+    testID: number | string,
+    testQA: HealthTestQuestionsType,
+    submitTest: (result: number, questions_and_answers: any[]) => void
 }
 
 const HealthTestView = (props: Props) => {
-  const [currentQuestion, setCurrentQuestion] = useState<HealthTestQuestionsType | any>({});
-  const [answers, setAnswers] = useState<HealthTestAnswersType | any>([]);
-  const [finalQA, setFinalQA] = useState<any[]>([]);
-  const [displayPreview, setDisplayPreview] = useState<boolean>(false);
+    const [currentQuestion, setCurrentQuestion] = useState<HealthTestQuestionsType | any>({});
+    const [answers, setAnswers] = useState<HealthTestAnswersType | any>([]);
+    const [finalQA, setFinalQA] = useState<any[]>([]);
+    const [displayPreview, setDisplayPreview] = useState<boolean>(false);
 
-  const { t } = useTranslation();
-  const viewLogic = HealthTestViewLogic();
+    const { t } = useTranslation();
+    const viewLogic = HealthTestViewLogic();
 
-  /**
-   * Submit answer
-   * 
-   * @param answer HealthTestAnswerType
-   */
-  const submitAnswer = (answer: HealthTestAnswerType) => {
-    // Save final answer and display all answers
-    if (currentQuestion.is_final_question) {
-      setAnswers((prev: HealthTestAnswersType) => {
-        const finalAnswers = viewLogic.saveAnswer(answers, answer)
+    /**
+     * Submit answer
+     * 
+     * @param answer HealthTestAnswerType
+     */
+    const submitAnswer = (answer: HealthTestAnswerType) => {
+        // Save final answer and display all answers
+        if (currentQuestion.is_final_question) {
+            setAnswers((prev: HealthTestAnswersType) => {
+                const finalAnswers = viewLogic.saveAnswer(answers, answer)
 
-        setAnswers((prev: HealthTestAnswersType) => finalAnswers);
-        setFinalQA(() => viewLogic.getFinalQuestionsAndAnswers(finalAnswers, props.testQA));
-        setDisplayPreview(true);
+                setAnswers((prev: HealthTestAnswersType) => finalAnswers);
+                setFinalQA(() => viewLogic.getFinalQuestionsAndAnswers(finalAnswers, props.testQA));
+                setDisplayPreview(true);
 
-        return finalAnswers;
-      });
+                return finalAnswers;
+            });
 
-      return;
+            return;
+        }
+
+        // Save answer
+        if (answer?.next_question_order_number) {
+            setAnswers((prev: HealthTestAnswersType) => viewLogic.saveAnswer(prev, answer));
+            setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, answer.next_question_order_number));
+            return;
+        }
     }
 
-    // Save answer
-    if (answer?.next_question_order_number) {
-      setAnswers((prev: HealthTestAnswersType) => viewLogic.saveAnswer(prev, answer));
-      setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, answer.next_question_order_number));
-      return;
+    /**
+     * Display previous question
+     */
+    const displayPreviousQuestion = () => {
+        // Display final question 
+        if (displayPreview) {
+            setDisplayPreview(false);
+
+            return;
+        }
+
+        // Display regular questions 
+        setAnswers((prev: HealthTestAnswersType) => {
+            const newAnswers = viewLogic.removeAnswer(prev, currentQuestion);
+            setCurrentQuestion(viewLogic.getPrevQuestion(props.testQA, newAnswers));
+
+            return newAnswers;
+        });
     }
-  }
 
-  /**
-   * Display previous question
-   */
-  const displayPreviousQuestion = () => {
-    // Display final question 
-    if (displayPreview) {
-      setDisplayPreview(false);
+    /**
+     * Submit test result
+     */
+    const submitTestResult = () => {
+        if (!props?.submitTest || !finalQA?.length) return;
 
-      return;
+        const result = viewLogic.calculateResult(answers);
+
+        props.submitTest(result, finalQA);
     }
 
-    // Display regular questions 
-    setAnswers((prev: HealthTestAnswersType) => {
-      const newAnswers = viewLogic.removeAnswer(prev, currentQuestion);
-      setCurrentQuestion(viewLogic.getPrevQuestion(props.testQA, newAnswers));
+    // Load initial question
+    useEffect(() => {
+        if (!props?.testQA) return;
 
-      return newAnswers;
-    });
-  }
+        setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, 0));
+    }, [props.testQA]);
 
-  /**
-   * Submit test result
-   */
-  const submitTestResult = () => {
-    if (!props?.submitTest || !finalQA?.length) return;
+    // Return 404 error
+    if (!currentQuestion?.answers?.length) {
+        return (<>404</>)
+    }
 
-    const result = viewLogic.calculateResult(answers);
+    return (
+        <div className="row col-12 p-5 health-test--view">
+            {/* Questions and answers */}
+            {
+                !displayPreview && (
+                    <>
+                        {/* Title and description */}
+                        <div className="row col-12 question--wrapper">
+                            <div className="col-12 mb-2">
+                                <h5>{currentQuestion?.title}</h5>
+                            </div>
 
-    props.submitTest(result, finalQA);
-  }
+                            <div className="col-12">
+                                <p>{currentQuestion.description}</p>
+                            </div>
+                        </div>
 
-  // Load initial question
-  useEffect(() => {
-    if (!props?.testQA) return;
+                        {/* Answers buttons */}
+                        <div className="row answers--wrapper">
+                            {
+                                currentQuestion?.answers?.map((answer: HealthTestAnswerType) => {
+                                    return (
+                                        <div className="btn btn-answer"
+                                            onClick={() => submitAnswer(answer)}
+                                            key={uuid()}>
+                                            {answer.content}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
 
-    setCurrentQuestion(viewLogic.getNextQuestion(props.testQA, 0));
-  }, [props.testQA]);
+                        {/* Questions progress bar */}
+                        <div className="row mb-5">
+                            <div className="col-12">
+                                <ProgressBar now={calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)}
+                                    label={`${calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)}%`} />
+                            </div>
+                        </div>
+                    </>
+                )
+            }
 
-  // Return 404 error
-  if (!currentQuestion?.answers?.length) {
-    return (<>404</>)
-  }
+            {/* Preview */}
+            {
+                displayPreview && (
+                    <>
+                        <div className="row mb-4">
+                            <div className="col-12">
+                                <h5>{t('Answers preview')}</h5>
+                            </div>
+                        </div>
 
-  return (
-    <div className="row col-12 p-5 health-test--view">
-      {/* Questions and answers */}
-      {
-        !displayPreview && (
-          <>
-            {/* Title and description */}
-            <div className="row col-12 question--wrapper">
-              <div className="col-12 mb-2">
-                <h5>{currentQuestion?.title}</h5>
-              </div>
+                        <div className="row mb-5">
+                            <ul className="custom-select__list__group">
+                                {
+                                    !!finalQA?.length && finalQA.map((question: HealthTestQuestionType) => {
+                                        return (
+                                            <li className="custom-select__list__group__item d-flex px-3" key={uuid()}>
+                                                <div className="col-6">
+                                                    {question.title}
+                                                </div>
+                                                <div className="col-6 text-end">
+                                                    {question.final_answer?.content}
+                                                </div>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
 
-              <div className="col-12">
-                <p>{currentQuestion.description}</p>
-              </div>
-            </div>
+                        {/* Submit test final answers */}
+                        <div className="row mb-5 justify-content-center">
+                            <button className="col-4 btn btn-success text-white" onClick={() => submitTestResult()}>
+                                {t('Calculate result')}
+                            </button>
+                        </div>
+                    </>
+                )
+            }
 
-            {/* Answers buttons */}
-            <div className="row answers--wrapper">
-              {
-                currentQuestion?.answers?.map((answer: HealthTestAnswerType) => {
-                  return (
-                    <div className="btn btn-answer"
-                      onClick={() => submitAnswer(answer)}
-                      key={uuid()}>
-                      {answer.content}
-                    </div>
-                  )
-                })
-              }
-            </div>
-
-            {/* Questions progress bar */}
-            <div className="row mb-5">
-              <div className="col-12">
-                <ProgressBar now={calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)}
-                  label={`${calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)}%`} />
-              </div>
-            </div>
-          </>
-        )
-      }
-
-      {/* Preview */}
-      {
-        displayPreview && (
-          <>
-            <div className="row mb-4">
-              <div className="col-12">
-                <h5>{t('Answers preview')}</h5>
-              </div>
-            </div>
-
-            <div className="row mb-5">
-              <ul className="list-group">
+            {/* Pagination */}
+            <div className="custom-pagination row">
+                {/* Check to display previous button  */}
                 {
-                  !!finalQA?.length && finalQA.map((question: HealthTestQuestionType) => {
-                    return (
-                      <li className="list-group-item d-flex px-3" key={uuid()}>
-                        <div className="col-6">
-                          {question.title}
+                    !!(currentQuestion?.id > 1) && (
+                        <div className="pagination--left col-4 m-0"
+                            onClick={() => displayPreviousQuestion()}>
+                            <span>
+                                <FontAwesomeIcon icon={faArrowLeft} />
+                            </span>
+
+                            <span className="ms-2">
+                                {t('Previous question')}
+                            </span>
                         </div>
-                        <div className="col-6 text-end">
-                          {question.final_answer?.content}
-                        </div>
-                      </li>
                     )
-                  })
                 }
-              </ul>
+                {
+                    !(currentQuestion?.id > 1) && (<div className="col-4"></div>)
+                }
+
+                <div className="col-8"></div>
             </div>
-
-            {/* Submit test final answers */}
-            <div className="row mb-5 justify-content-center">
-              <button className="col-4 btn btn-success text-white" onClick={() => submitTestResult()}>
-                {t('Calculate result')}
-              </button>
-            </div>
-          </>
-        )
-      }
-
-      {/* Pagination */}
-      <div className="custom-pagination row">
-        {/* Check to display previous button  */}
-        {
-          !!(currentQuestion?.id > 1) && (
-            <div className="pagination--left col-4 m-0"
-              onClick={() => displayPreviousQuestion()}>
-              <span>
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </span>
-
-              <span className="ms-2">
-                {t('Previous question')}
-              </span>
-            </div>
-          )
-        }
-        {
-          !(currentQuestion?.id > 1) && (<div className="col-4"></div>)
-        }
-
-        <div className="col-8"></div>
-      </div>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default HealthTestView;

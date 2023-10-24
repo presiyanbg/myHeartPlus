@@ -1,3 +1,42 @@
+// Custom select
+.custom-select {
+    position: relative;
+
+    .custom-select__input {
+        position: relative;
+
+        .custom-select__input__icon {
+            position: absolute;
+            right: 5%;
+            bottom: 30%;
+            cursor: pointer;
+        }
+    }
+
+    .custom-select__list {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        width: 100%;
+        box-shadow: $shadow-normal;
+        border-radius: $radius-default;
+        overflow: hidden;
+        z-index: 3000;
+
+        .custom-select__list__group {
+            max-height: 300px;
+            width: 100%;
+            overflow-y: auto;
+
+            .custom-select__list__group__item:hover {
+                background-color: $main;
+                color: $white;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
 // .form-control {
 // 	animation: none !important;
 // 	border-radius: 0 !important;

@@ -3,33 +3,33 @@ import CommentsLogic from "./commentsLogic"
 import { useEffect } from "react"
 
 type Props = {
-  parentUrl: string,
-  parentId?: string | number
+    parentUrl: string,
+    parentId?: string | number
 }
 
 const Comments = (props: Props) => {
-  const logic = CommentsLogic();
+    const logic = CommentsLogic();
 
-  useEffect(() => {
-    logic.loadComments()
-  }, [])
+    useEffect(() => {
+        logic.loadComments()
+    }, [])
 
-  return (
-    <div className="box-wrapper">
-      <div className="box">
-        <div className="box--head">
-          <div className="box--title">
-            <h3>
-              Comments
-            </h3>
-          </div>
+    return (
+        <div className="box-wrapper">
+            <div className="box">
+                <div className="box__head">
+                    <div className="box__title">
+                        <h3>
+                            Comments
+                        </h3>
+                    </div>
+                </div>
+                <div className="box__body">
+                    {logic.getComments()}
+                </div>
+            </div>
         </div>
-        <div className="box--body">
-          {logic.getComments()}
-        </div>
-      </div>
-    </div>
-  )
+    )
 
 }
 

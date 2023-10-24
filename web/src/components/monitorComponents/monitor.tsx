@@ -10,40 +10,40 @@ import { UserContext } from '../../context/userContext/userContextProvider';
 type Props = {};
 
 const Monitor = ({ }: Props) => {
-  const [displayPageLoader, setDisplayPageLoader] = useState(false);
+    const [displayPageLoader, setDisplayPageLoader] = useState(false);
 
-  const { user } = useContext(UserContext);
-  const { isLoading } = useContext(LoadingContext);
-  const { monitorExpanded, toggleMonitorExpanded } = useContext(CommonContext);
+    const { user } = useContext(UserContext);
+    const { isLoading } = useContext(LoadingContext);
+    const { monitorExpanded, toggleMonitorExpanded } = useContext(CommonContext);
 
-  return (
-    <>
-      {/* Page loader */}
-      {isLoading &&
+    return (
         <>
-          <div className="page--loader">
-            <div className="loader--icon">
-              <FontAwesomeIcon icon={faSpinner} spin size="6x" />
-            </div>
-          </div>
-        </>
-      }
+            {/* Page loader */}
+            {isLoading &&
+                <>
+                    <div className="page-loader">
+                        <div className="page-loader__icon">
+                            <FontAwesomeIcon icon={faSpinner} spin size="6x" />
+                        </div>
+                    </div>
+                </>
+            }
 
-      {/* Pages */}
-      <Router></Router>
+            {/* Pages */}
+            <Router></Router>
 
-      {/* Background */}
-      {
-        (!monitorExpanded || displayPageLoader) &&
-        <div className="hero--background">
-          <div className="hero--background-gradient"></div>
-          {/* <div className="hero--background-image img-shadow img-shadow--left">
+            {/* Background */}
+            {
+                (!monitorExpanded || displayPageLoader) &&
+                <div className="hero--background">
+                    <div className="hero--background-gradient"></div>
+                    {/* <div className="hero--background-image img-shadow img-shadow--left">
             <img src={SERVER_URL + 'images/hero/hero.jpg'} alt="Medicine wallpaper" />
           </div> */}
-        </div>
-      }
-    </>
-  )
+                </div>
+            }
+        </>
+    )
 }
 
 export default Monitor;

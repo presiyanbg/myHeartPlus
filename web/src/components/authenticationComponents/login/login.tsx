@@ -5,87 +5,87 @@ import LoginLogic from './loginLogic';
 type Props = {};
 
 const Login = ({ }: Props) => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
-  const logic = LoginLogic();
+    const logic = LoginLogic();
 
-  /**
-   * Handle form submit
-   * 
-   * @param event HTML Form submit event
-   */
-  const handleSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
+    /**
+     * Handle form submit
+     * 
+     * @param event HTML Form submit event
+     */
+    const handleSubmit = (event: React.SyntheticEvent) => {
+        event.preventDefault();
 
-    // Validate credentials
-    // if (email.length <= 10 || password.length <= 8) return;
+        // Validate credentials
+        // if (email.length <= 10 || password.length <= 8) return;
 
-    logic.login({
-      email: email,
-      password: password
-    });
-  }
-
-  /**
-   * Handle input change
-   * 
-   * @param inputType string
-   * @param event HTML input element event
-   */
-  const handleInputChange = (inputType: string, event: React.FormEvent<HTMLInputElement>) => {
-    switch (inputType) {
-      case 'email':
-        setEmail(event.currentTarget.value);
-        break;
-
-      case 'password':
-        setPassword(event.currentTarget.value);
-        break;
-
-      default:
-        break
+        logic.login({
+            email: email,
+            password: password
+        });
     }
-  }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="row mb-4 mt-2 logo logo--lg">
-        <img src={Logo} className="" alt="..." />
-      </div>
+    /**
+     * Handle input change
+     * 
+     * @param inputType string
+     * @param event HTML input element event
+     */
+    const handleInputChange = (inputType: string, event: React.FormEvent<HTMLInputElement>) => {
+        switch (inputType) {
+            case 'email':
+                setEmail(event.currentTarget.value);
+                break;
 
-      {/* Email */}
-      <div className="form-floating mb-3">
-        <input type="email"
-          className="form-control"
-          id="email"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          onChange={(e) => handleInputChange('email', e)} />
-        <label htmlFor="email">Email address</label>
-      </div>
+            case 'password':
+                setPassword(event.currentTarget.value);
+                break;
 
-      {/* Password */}
-      <div className="form-floating mb-4">
-        <input type="password"
-          className="form-control"
-          id="exampleInputPassword1"
-          placeholder="Password"
-          onChange={(e) => handleInputChange('password', e)} />
-        <label htmlFor="exampleInputPassword1">Password</label>
-        <div id="emailHelp" className="form-text text-end cursor-pointer text-primary-hover">Forgotten password</div>
-      </div>
+            default:
+                break
+        }
+    }
 
-      <br />
+    return (
+        <form onSubmit={handleSubmit}>
+            <div className="row mb-4 mt-2 logo logo--lg">
+                <img src={Logo} className="" alt="..." />
+            </div>
 
-      {/* Button submit */}
-      <div className="row justify-content-start">
-        <div className="col-4">
-          <button type="submit" className="w-100  btn btn-primary text-white">Login</button>
-        </div>
-      </div>
-    </form>
-  );
+            {/* Email */}
+            <div className="form-floating mb-3">
+                <input type="email"
+                    className="form-control"
+                    id="email"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email"
+                    onChange={(e) => handleInputChange('email', e)} />
+                <label htmlFor="email">Email address</label>
+            </div>
+
+            {/* Password */}
+            <div className="form-floating mb-4">
+                <input type="password"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Password"
+                    onChange={(e) => handleInputChange('password', e)} />
+                <label htmlFor="exampleInputPassword1">Password</label>
+                <div id="emailHelp" className="form-text text-end cursor--pointer text--primary--hover">Forgotten password</div>
+            </div>
+
+            <br />
+
+            {/* Button submit */}
+            <div className="row justify-content-start">
+                <div className="col-4">
+                    <button type="submit" className="w-100  btn btn-primary text-white">Login</button>
+                </div>
+            </div>
+        </form>
+    );
 }
 
 export default Login;
