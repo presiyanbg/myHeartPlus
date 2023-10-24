@@ -58,7 +58,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: $softGray;
+            background-color: $gray--soft;
             z-index: 1000;
             box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
           }
@@ -92,7 +92,7 @@
 
           .slide-subtitle {
             display: none;
-            color: $softLight;
+            color: $light--soft;
             text-shadow: $shadow-text--border;
           }
         }
@@ -199,7 +199,7 @@
       }
 
       &:active {
-        color: $darkGray;
+        color: $gray--dark;
         filter: drop-shadow(0 0 3rem $white);
       }
     }

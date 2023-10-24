@@ -24,8 +24,8 @@
     height: $news-box--small;
     max-height: $news-box--small;
     overflow: hidden;
-    color: $darkGray;
-    border-bottom: 1px solid $softLight;
+    color: $gray--dark;
+    border-bottom: 1px solid $light--soft;
 
     .box--head {
       flex: 0 0 30%;
@@ -68,7 +68,7 @@
     }
 
     .box--footer {
-      color: $lightGray;
+      color: $gray--light;
       font-size: 15px;
     }
 

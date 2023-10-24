@@ -5,57 +5,57 @@
 **/
 
 $main: #2e86de;
-$darkMain: #024384;
+$main--dark: #024384;
 $black: #000;
 $white: #fff;
 $light: #c8d6e5;
+$light--soft: #eee;
 $gray: #576574;
-$lightGray: #8395a7;
-$darkGray: #222f3e;
+$gray--light: #8395a7;
+$gray--dark: #222f3e;
+$gray--soft: #d5d5d5;
 $green: #1dd1a1;
-$darkGreen: #10ac84;
-$softBlue: #48dbfb;
-$softBlueDark: #0abde3;
+$green--dark: #10ac84;
+$blue: #54a0ff;
+$blue--light: #a4cce4;
+$blue--soft: #48dbfb;
+$blue--dark: #2e86de;
 $purple: #5f27cd;
-$darkPurple: #341f97;
+$purple--dark: #341f97;
 $red: #ff6b6b;
-$darkRed: #ee5253;
-$blur: #54a0ff;
-$darkBlue: #2e86de;
+$red--dark: #ee5253;
 $yellow: #feca57;
-$darkYellow: #ff9f43;
+$yellow--dark: #ff9f43;
 $aqua: #00d2d3;
-$darkAqua: #01a3a4;
+$aqua--dark: #01a3a4;
 $pink: #ff9ff3;
-$darkPing: #f368e0;
-$lightBlue: #a4cce4;
-$softLight: #eee;
-$softGray: #d5d5d5;
+$pink--dark: #f368e0;
+
 
 /* 
     Overwrite Bootstrap
 */
-$blue: $softBlue;
-$indigo: $darkPurple;
+$blue: $blue--soft;
+$indigo: $purple--dark;
 $purple: $purple;
 $pink: $pink;
 $red: $red;
-$orange: $darkYellow;
+$orange: $yellow--dark;
 $yellow: $yellow;
-$green: $darkGreen;
+$green: $green--dark;
 $teal: $green;
-$cyan: $darkAqua;
+$cyan: $aqua--dark;
 $white: #fff;
 $gray: $gray;
-$gray-dark: $darkGray;
+$gray-dark: $gray--dark;
 $primary: $main;
-$secondary: $lightGray;
+$secondary: $gray--light;
 $success: $green;
-$info: $softBlue;
-$warning: $darkYellow;
-$danger: $darkRed;
+$info: $blue--soft;
+$warning: $yellow--dark;
+$danger: $red--dark;
 $light: $light;
-$dark: $darkGray;
+$dark: $gray--dark;
 
 /* 
     RGB Colors

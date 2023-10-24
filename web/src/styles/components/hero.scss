@@ -11,10 +11,10 @@
   .hero--background-gradient {
     height: 100%;
     width: 100%;
-    background-color: $softLight;
+    background-color: $light--soft;
     box-shadow: $shadow-page--inset;
     // background: rgb(218, 218, 218);
-    // background: linear-gradient(-45deg, $lightBlue, $softBlue, $purple, $main);
+    // background: linear-gradient(-45deg, $blue--light, $blue--soft, $purple, $main);
     // background-size: 400% 400%;
     // animation: backgroundPosition 15s ease infinite;
   }
