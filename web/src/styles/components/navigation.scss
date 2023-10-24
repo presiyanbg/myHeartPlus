@@ -6,13 +6,13 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: $navigationHeight;
+  height: $navigation-height;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: $white;
   z-index: 1000;
-  box-shadow: $pageShadow;
+  box-shadow: $shadow-page;
 
   .navigation__links-wrapper {
     display: flex;
@@ -120,8 +120,8 @@
         min-width: 250px;
         padding: 1rem 1rem 0;
         border-color: $softLight;
-        border-radius: $defaultRadius;
-        box-shadow: $shadowBorder;
+        border-radius: $radius-default;
+        box-shadow: $shadow-normal;
         text-align: left;
 
         .dropdown-link {
@@ -167,7 +167,7 @@
       width: 100%;
       margin-bottom: 1rem;
       background-color: $white;
-      border-radius: $defaultRadius;
+      border-radius: $radius-default;
       box-shadow: inset 0 0 0.5rem rgba(0, 0, 0, 0.1);
       transition: ease-in-out 250ms all;
       cursor: pointer;

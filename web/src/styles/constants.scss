@@ -1,37 +1,30 @@
-/* Borders */
-$borderLight: 1px solid rgba(0, 0, 0, 0.1);
-
-/* Shadows */
-$shadowBorder: 0 0 3px rgba(0, 0, 0, 0.1);
-
-$defaultShadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
-
-$pageShadow: 0 0 2rem rgb(0, 0, 0, 0.2);
-$pageShadowInset: inset $pageShadow;
-
 /* Main page width */
 $pageWidth: 1200px;
 
-/* Shadow on hover */
-$hoverShadow: 0 0 1rem rgba(0, 0, 0, 0.8);
+/* Borders */
+$border-light: 1px solid rgba(0, 0, 0, 0.1);
 
-/* Text shadows */
-$titleTextShadow: 0 0 1rem rgba(0, 0, 0, 0.8);
-$textBorder: 0 0 5px rgba(0, 0, 0, 1);
+/* Shadows */
+$shadow-normal: 0 0 3px rgba(0, 0, 0, 0.1);
+$shadow-default: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+$shadow-page: 0 0 2rem rgb(0, 0, 0, 0.2);
+$shadow-page--inset: inset $shadow-page;
+$shadow-hover: 0 0 1rem rgba(0, 0, 0, 0.8);
+$shadow-text--border: 0 0 5px rgba(0, 0, 0, 1);
 
 /* Small news box size */
-$smallNewsBox: 100px;
+$news-box--small: 100px;
 
 /* Border radius */
-$defaultRadius: 0.5rem;
+$radius-default: 0.5rem;
 
 /* Image sizes */
-$mediumImageHeight: 300px;
-$expandedMediumImageHeight: 400px;
-$bigImageHeight: 500px;
+$image-height--medium: 300px;
+$image-height--medium--expanded: 400px;
+$image-height--large: 500px;
 
 /* Transitions */
-$defaultTransition: all ease-in-out 200ms;
+$transition-default: all ease-in-out 200ms;
 
 /* Navigation */
-$navigationHeight: 80px;
+$navigation-height: 80px;

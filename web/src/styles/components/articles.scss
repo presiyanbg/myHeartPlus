@@ -34,7 +34,7 @@
         cursor: pointer;
         transition: all ease-in-out 100ms;
         overflow: hidden;
-        border-radius: $defaultRadius;
+        border-radius: $radius-default;
         z-index: 100;
 
         .slide--head {
@@ -42,7 +42,7 @@
           height: 100%;
 
           img {
-            transition: $defaultTransition;
+            transition: $transition-default;
           }
         }
 
@@ -85,7 +85,7 @@
           .slide-title {
             h5 {
               color: $white;
-              text-shadow: $textBorder;
+              text-shadow: $shadow-text--border;
               transition: all ease-in-out 250ms;
             }
           }
@@ -93,7 +93,7 @@
           .slide-subtitle {
             display: none;
             color: $softLight;
-            text-shadow: $textBorder;
+            text-shadow: $shadow-text--border;
           }
         }
 
@@ -187,7 +187,7 @@
       cursor: pointer;
       padding: 0 3rem;
       color: rgba(255, 255, 255, 0.8);
-      transition: $defaultTransition;
+      transition: $transition-default;
 
       svg {
         filter: drop-shadow(0 1rem 1rem rgba(0, 0, 0, 0.5));
@@ -219,7 +219,7 @@
   margin-bottom: 1rem;
   padding: 1rem;
   background-color: $white;
-  border-radius: $defaultRadius;
+  border-radius: $radius-default;
 }
 
 .article--image {
@@ -227,7 +227,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
-  border-radius: $defaultRadius;
-  height: $bigImageHeight;
+  border-radius: $radius-default;
+  height: $image-height--large;
   overflow: hidden;
 }

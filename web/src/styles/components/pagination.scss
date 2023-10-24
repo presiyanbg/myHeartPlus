@@ -12,7 +12,7 @@
     margin-left: 1rem;
     cursor: pointer;
     color: $darkGray;
-    transition: $defaultTransition;
+    transition: $transition-default;
 
     &:hover {
       color: $main;

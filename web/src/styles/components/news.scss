@@ -21,17 +21,17 @@
     margin-bottom: 1rem;
     padding-bottom: 1rem;
     cursor: pointer;
-    height: $smallNewsBox;
-    max-height: $smallNewsBox;
+    height: $news-box--small;
+    max-height: $news-box--small;
     overflow: hidden;
     color: $darkGray;
     border-bottom: 1px solid $softLight;
 
     .box--head {
       flex: 0 0 30%;
-      max-height: $smallNewsBox;
+      max-height: $news-box--small;
       overflow: hidden;
-      border-radius: $defaultRadius;
+      border-radius: $radius-default;
     }
 
     .box--body {
@@ -40,7 +40,7 @@
       padding: 0.5rem;
 
       .box--title {
-        transition: $defaultTransition;
+        transition: $transition-default;
         margin-bottom: 0.5rem;
 
         h6 {
