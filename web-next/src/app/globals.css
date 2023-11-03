@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+/* 
+  Resets  
+*/
+
+* {
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+    width: 0.45rem;
+    height: 0.45rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-image: -webkit-gradient(linear, 0 0, 0 100%,
+            color-stop(.5, rgba(255, 255, 255, .2)),
+            color-stop(.5, transparent), to(transparent));
+}
+
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* Base */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'SalmaPro', sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+h1 {
+    font-family: 'SalmaPro', sans-serif;
+    font-size: 61px;
+    line-height: 1.3em;
+    font-weight: 100;
+}
+
+h2 {
+    font-size: 26px;
+    line-height: 1em;
+    font-weight: 600;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-size: 23px;
+    line-height: 1.3em;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+h5 {
+    font-size: 15px;
+    line-height: 1.5em;
+}
+
+h6 {
+    font-size: 10px;
+    line-height: 1.5em;
+}
+
+a {
+    color: inherit;
+    text-decoration: none !important;
+}
+
+input {
+    font-family: inherit;
+}
+
+select {
+    letter-spacing: inherit;
+    font-weight: inherit;
+    appearance: none;
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    text-transform: uppercase;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    background: rgb(2, 8, 26);
+}
