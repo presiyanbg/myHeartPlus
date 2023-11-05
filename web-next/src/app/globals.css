@@ -137,6 +137,9 @@ li {
     list-style: none;
 }
 
-body {
+/* body {
     background: rgb(2, 8, 26);
-}
+} */
+
+@import '../styles/common.css';
+@import '../styles/components.css';

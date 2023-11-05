@@ -1,6 +1,9 @@
 import ArticleServices from "@/services/articlesServices/articlesServices"
 import ArticlesList from '../../components/articles/articlesList/articlesList';
 import { ArticlesType, PaginationType } from '../../ts/types';
+import PageLayout from "@/components/layouts/pageLayout/pageLayout";
+import ArticlesSlider from "@/components/articles/articlesSlider/articlesSlider";
+import ArticlesTop from "@/components/articles/articlesTop/articlesTop";
 
 const Home = async () => {
     const data: any = await ArticleServices().articlesList();
@@ -8,9 +11,13 @@ const Home = async () => {
     const pagination: PaginationType = await data?.articles || [];
 
     return (
-        <div>
-            <ArticlesList articles={articles} pagination={pagination}></ArticlesList>
-        </div>
+        <>
+            <ArticlesTop articles={articles}></ArticlesTop>
+
+            <PageLayout>
+                <ArticlesList articles={articles} pagination={pagination}></ArticlesList>
+            </PageLayout>
+        </>
     )
 }
 

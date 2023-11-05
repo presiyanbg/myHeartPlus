@@ -1,3 +1,4 @@
+import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import PageTitle from "@/components/layouts/pageTitle/pageTitle";
 import ArticleServices from "@/services/articlesServices/articlesServices";
 import { ArticleType } from "@/ts/types";
@@ -19,13 +20,14 @@ const ArticlePage = async (props: Props) => {
     }
 
     return (
-        <>
+        <PageLayout>
             <PageTitle title={article.title}
                 breadCrumbs={[
                     { url: "/", title: t('Home') }
                 ]}
             ></PageTitle>
 
+            {/* Article content */}
             <div className="row mb-3">
                 <div className="col-8">
                     <div className="col-12">
@@ -58,7 +60,7 @@ const ArticlePage = async (props: Props) => {
                     {/* <Comments parentUrl="article" parentId={id}></Comments> */}
                 </div>
             </div>
-        </>
+        </PageLayout>
     )
 }
 

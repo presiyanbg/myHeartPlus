@@ -1,6 +1,10 @@
+import PageLayout from "@/components/layouts/pageLayout/pageLayout";
+
 const ArticlesPage = () => {
     return (
-        <div className="test"></div>
+        <PageLayout>
+            <div className="test"></div>
+        </PageLayout>
     )
 }
 

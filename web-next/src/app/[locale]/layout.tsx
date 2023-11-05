@@ -12,6 +12,8 @@ import ErrorHandler from '@/components/error/errorHandler';
 
 // Font awesome
 import { config } from "@fortawesome/fontawesome-svg-core";
+import BackgroundLayout from '@/components/layouts/background/background';
+import Footer from '@/components/footer/footer';
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ['latin'] })
@@ -42,15 +44,17 @@ export default async function RootLayout({
 
     return (
         <html lang="en">
-            <body className="relative  ">
+            <body className="relative gradient-bg">
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <Navigation />
 
-                    <div className="md:w-34 bg-white w-screen lg:w-10/12 xl:w-8/12 mx-auto mt-10 mb-7 lg:rounded-lg p-3 ">
-                        <ErrorBoundary errorComponent={ErrorHandler}>
-                            {children}
-                        </ErrorBoundary>
-                    </div>
+                    <ErrorBoundary errorComponent={ErrorHandler}>
+                        {children}
+                    </ErrorBoundary>
+
+                    <Footer></Footer>
+
+                    <BackgroundLayout></BackgroundLayout>
                 </NextIntlClientProvider>
             </body>
         </html>

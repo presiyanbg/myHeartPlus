@@ -228,9 +228,30 @@ export const generateColor = (): string => {
  * Parse date from database 
  * 
  * @param dateString string
+ * @param format string | undefined : D - Date, T - Time, DT - Date and time
  * @returns string
  */
-export const parseDateAndTime = (dateString: string): string => {
+export const parseDateAndTime = (dateString: string, format?: string): string => {
+    const dateObj = new Date(dateString);
+    let parsedDate = '';
 
-    return '';
+    if (!(dateObj instanceof Date)) return '';
+
+    switch (format) {
+        case 'D':
+            parsedDate = '' + dateObj?.toLocaleDateString();
+            break;
+        case 'T':
+            parsedDate = '' + dateObj?.toLocaleTimeString();
+            break;
+        case 'DT':
+            parsedDate = '' + dateObj?.toLocaleDateString() + ' ' + dateObj?.toLocaleTimeString();
+            break;
+
+        default:
+            parsedDate = '' + dateObj?.toLocaleDateString();
+            break;
+    }
+
+    return parsedDate;
 }
