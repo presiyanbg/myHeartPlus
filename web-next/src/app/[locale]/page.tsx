@@ -1,6 +1,6 @@
 import ArticleServices from "@/services/articlesServices/articlesServices"
-import ArticlesList from '../components/articles/articlesList/articlesList';
-import { ArticlesType, PaginationType } from '../ts/types';
+import ArticlesList from '../../components/articles/articlesList/articlesList';
+import { ArticlesType, PaginationType } from '../../ts/types';
 
 const Home = async () => {
     const data: any = await ArticleServices().articlesList();
