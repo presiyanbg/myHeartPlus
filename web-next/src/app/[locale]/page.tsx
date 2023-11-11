@@ -2,7 +2,6 @@ import ArticleServices from "@/services/articlesServices/articlesServices"
 import ArticlesList from '../../components/articles/articlesList/articlesList';
 import { ArticlesType, PaginationType } from '../../ts/types';
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
-import ArticlesSlider from "@/components/articles/articlesSlider/articlesSlider";
 import ArticlesTop from "@/components/articles/articlesTop/articlesTop";
 
 const Home = async () => {

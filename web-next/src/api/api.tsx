@@ -18,7 +18,7 @@ const Api = () => {
         const cache = loadCache ? { revalidate: 3600 } : 'no-store';
 
         console.log(`${apiUrl}/api${url}`)
-
+        //next: { revalidate: 3600 }
         const response = await fetch(`${apiUrl}/api${url}`, {
             method: 'post',
             headers: {
@@ -27,7 +27,8 @@ const Api = () => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: JSON.stringify(data),
-            next: { revalidate: 3600 }
+            cache: 'no-cache',
+
         });
 
         return await response?.json();

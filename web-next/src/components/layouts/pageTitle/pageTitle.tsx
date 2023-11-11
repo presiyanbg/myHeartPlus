@@ -1,8 +1,9 @@
+'use client';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { v4 as uuid } from 'uuid';
 
 type Props = {
-
     // Main title of page
     title: string,
 
@@ -18,6 +19,7 @@ type Props = {
 }
 
 const PageTitle = (props: Props) => {
+    const t = useTranslations();
     let breadCrumbs;
     let search;
 
@@ -26,7 +28,7 @@ const PageTitle = (props: Props) => {
         breadCrumbs = props.breadCrumbs.map(crumb => {
             return (
                 <Link href={crumb.url} key={uuid()}>
-                    {crumb.title}
+                    {t(crumb.title)}
                     <span className="me-1 ms-1 font-bold">/</span>
                 </Link >
             )
@@ -37,7 +39,7 @@ const PageTitle = (props: Props) => {
     if (props.search && typeof props.searchFunction == 'function') {
         search = (
             <div className="col-sm-12 col-md-6">
-                Search
+                {t('Search')}
             </div>
         )
     }
