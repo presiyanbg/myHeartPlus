@@ -20,13 +20,13 @@ const ArticlesSlider = (props: Props) => {
     const [articles, setArticles] = useState<ArticlesType>(props?.articles || []);
     const logic = ArticlesSlideshowLogic();
 
-    if (!articles?.length) return (<></>);
-
     useEffect(() => {
         if (props.pagination) {
             logic.init(props, true);
         }
     }, [props]);
+
+    if (!articles?.length) return (<></>);
 
     return (
         <div className="articles__wrapper scroll--hide">
