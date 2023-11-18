@@ -1,11 +1,10 @@
+'use client';
 import { useEffect, useState } from "react";
 import CustomSelectLogic from "./customSelectLogic";
 import { v4 as uuid } from "uuid";
-import { Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { PaginationType } from "../../../ts/types";
-import { useTranslation } from "react-i18next";
 import { arrayFilterUnique } from "../../../utils/utils";
 
 type Props = {
@@ -23,7 +22,7 @@ const CustomSelect = (props: Props) => {
     const [listData, setListData] = useState<any>([]);
     const [paginatedData, setPaginatedData] = useState<PaginationType>();
 
-    const { t } = useTranslation();
+    const t = (test: string) => { }
 
     const logic = CustomSelectLogic();
 
