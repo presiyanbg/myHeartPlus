@@ -1,8 +1,9 @@
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import PageTitle from "@/components/layouts/pageTitle/pageTitle";
+import SidePanel from "@/components/sidePanel/sidePanel";
 import ArticleServices from "@/services/articlesServices/articlesServices";
 import { ArticleType } from "@/ts/types";
-import Image from "next/image";
+import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 
 type Props = {
     params: {
@@ -21,43 +22,43 @@ const ArticlePage = async (props: Props) => {
 
     return (
         <PageLayout>
-            <PageTitle title={article.title}
-                breadCrumbs={[
-                    { url: "/", title: t('Home') }
-                ]}
-            ></PageTitle>
+            <div className="gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0">
+                <div className="lg:col-span-4">
+                    <Card>
+                        <CardHeader className="pb-0">
+                            <PageTitle title={article.title}
+                                breadCrumbs={[
+                                    { url: "/", title: t('Home') }
+                                ]}
+                            ></PageTitle>
+                        </CardHeader>
 
-            {/* Article content */}
-            <div className="row mb-3">
-                <div className="col-8">
-                    <div className="col-12">
-                        {/* Article image */}
-                        <div className="article__image">
+                        <CardBody className="pt-0">
+                            {/* Article image */}
                             <Image
-                                className="h-96"
+                                isZoomed
+                                width={1200}
+                                className="h-96 w-full"
                                 src={`${process.env.NEXT_PUBLIC_API_URL}/${article?.image}`}
-                                alt={article.title}
-                                width={500}
-                                height={100} />
-                        </div>
+                                alt={article.title} />
 
-                        {/* Article content */}
-                        <div className="col-12">
-                            <div dangerouslySetInnerHTML={{ __html: articleHTML }}></div>
-                        </div>
-                    </div>
+                            {/* Article content */}
+                            <div className="py-3">
+                                <div dangerouslySetInnerHTML={{ __html: articleHTML }}></div>
+                            </div>
+
+                            {/* Article comments */}
+                            <div className="row mb-3">
+                                <div className="col-sm-12">
+                                    {/* <Comments parentUrl="article" parentId={id}></Comments> */}
+                                </div>
+                            </div>
+                        </CardBody>
+                    </Card>
                 </div>
 
-                {/* Small side news */}
-                <div className="col-4">
-                    {/* <NewsSmall singleComponent={true}></NewsSmall> */}
-                </div>
-            </div>
-
-            {/* Article comments */}
-            <div className="row mb-3">
-                <div className="col-sm-12">
-                    {/* <Comments parentUrl="article" parentId={id}></Comments> */}
+                <div className="lg:col-span-2">
+                    <SidePanel></SidePanel>
                 </div>
             </div>
         </PageLayout>

@@ -21,8 +21,8 @@ const NavigationLinks = () => {
 
                     if (link.topLink === true) {
                         return (
-                            <NavbarItem>
-                                <Link href={link.url} key={uuid()}>
+                            <NavbarItem key={uuid()}>
+                                <Link href={link.url}>
                                     <span className="text-gray-900">
                                         <span>{t(link.title)}</span>
                                     </span>

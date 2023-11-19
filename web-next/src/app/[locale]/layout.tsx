@@ -1,5 +1,4 @@
 import '../globals.css'
-import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -10,11 +9,13 @@ import { notFound } from 'next/navigation';
 import Navigation from '@/components/navigation/navigation';
 import ErrorHandler from '@/components/error/errorHandler';
 
-// Font awesome
-import { config } from "@fortawesome/fontawesome-svg-core";
 import BackgroundLayout from '@/components/layouts/background/background';
 import Footer from '@/components/footer/footer';
 import Providers from './providers';
+
+// Font awesome
+import "@fortawesome/fontawesome-svg-core/styles.css"
+import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ['latin'] })

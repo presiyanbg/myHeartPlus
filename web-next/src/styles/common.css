@@ -1,12 +1,12 @@
 /* Gradient Background  */
 :root {
-    --color-bg1: rgb(108, 0, 162);
-    --color-bg2: rgb(0, 17, 82);
-    --color1: 18, 113, 255;
-    --color2: 221, 74, 255;
-    --color3: 100, 220, 255;
-    --color4: 200, 50, 50;
-    --color5: 180, 180, 50;
+    --color-bg1: #03002e;
+    --color-bg2: #010048;
+    --color1: 1, 0, 87;
+    --color2: 2, 0, 108;
+    --color3: 9, 0, 136;
+    --color4: 3, 0, 46;
+    --color5: 1, 0, 72;
     --color-interactive: 140, 100, 255;
     --circle-size: 80%;
     --blending: hard-light;
@@ -71,10 +71,6 @@
     left: 0;
 }
 
-.gradient-bg svg {
-    display: none;
-}
-
 .gradients-container {
     filter: url(#goo) blur(40px);
     width: 100%;
@@ -124,7 +120,7 @@
     left: calc(50% - var(--circle-size) / 2 - 500px);
 
     transform-origin: calc(50% + 400px);
-    animation: moveInCircle 40s linear infinite;
+    animation: moveInCircle 20s linear infinite;
 
     opacity: 1;
 }
@@ -140,7 +136,7 @@
     left: calc(50% - var(--circle-size) / 2);
 
     transform-origin: calc(50% - 200px);
-    animation: moveHorizontal 40s ease infinite;
+    animation: moveHorizontal 20s ease infinite;
 
     opacity: 0.7;
 }
@@ -172,4 +168,16 @@
     left: -50%;
 
     opacity: 0.7;
+}
+
+.more-blur {
+    transition: all ease-in-out 250ms;
+}
+
+.more-blur:hover {
+    --tw-backdrop-blur: blur(32px);
+}
+
+.more-blur:focus {
+    --tw-backdrop-blur: blur(32px);
 }
