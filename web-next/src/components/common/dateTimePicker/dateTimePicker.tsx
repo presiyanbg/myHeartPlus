@@ -1,61 +1,59 @@
-import moment from "moment";
-
+'use client';
 import { useEffect, useState } from "react";
-import { FORMATS } from "../../../constants/formats";
 
 type Props = {
-  title: string,
-  selectedDate?: string,
-  handleDateChange: (date: string) => void
+    title: string,
+    selectedDate?: string,
+    handleDateChange: (date: string) => void
 }
 
 const DateTimePicker = (props: Props) => {
-  const [selectedDate, setSelectedDate] = useState<string>('');
+    const [selectedDate, setSelectedDate] = useState<string>('');
 
-  /**
-   * Handle change
-   * 
-   * @param event Input change event
-   * @returns void
-   */
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    // Save changed date
-    if (!event?.currentTarget?.value) return;
+    /**
+     * Handle change
+     * 
+     * @param event Input change event
+     * @returns void
+     */
+    const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+        // Save changed date
+        if (!event?.currentTarget?.value) return;
 
-    setSelectedDate(event.currentTarget.value);
+        setSelectedDate(event.currentTarget.value);
 
-    // Return changed date
-    if (!props?.handleDateChange) return;
+        // Return changed date
+        if (!props?.handleDateChange) return;
 
-    props.handleDateChange(selectedDate);
-  }
+        props.handleDateChange(selectedDate);
+    }
 
-  /**
-   * Format date on props change
-   */
-  useEffect(() => {
-    if (!props.selectedDate) return;
+    // /**
+    //  * Format date on props change
+    //  */
+    // useEffect(() => {
+    //     if (!props.selectedDate) return;
 
-    setSelectedDate(() => {
-      return moment(props.selectedDate).format(FORMATS.inputDate);
-    });
-  }, [props]);
+    //     setSelectedDate(() => {
+    //         return moment(props.selectedDate).format(FORMATS.inputDate);
+    //     });
+    // }, [props]);
 
-  return (
-    <div className="form-group">
-      <div className="form-floating">
-        <input
-          className="form-control"
-          type="date"
-          value={selectedDate}
-          onChange={(event) => handleChange(event)}
-          name='date_of_birth'
-        />
+    return (
+        <div className="form-group">
+            <div className="form-floating">
+                <input
+                    className="form-control"
+                    type="date"
+                    value={selectedDate}
+                    onChange={(event) => handleChange(event)}
+                    name='date_of_birth'
+                />
 
-        <label htmlFor="date">{props.title}</label>
-      </div>
-    </div>
-  )
+                <label htmlFor="date">{props.title}</label>
+            </div>
+        </div>
+    )
 
 }
 

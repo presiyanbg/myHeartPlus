@@ -214,6 +214,7 @@ const ArticlesSlideshowLogic = () => {
             total_views: 0,
             created_at: '2023-01-18T20:03:46.000000Z',
             updated_at: '2023-01-18T20:03:46.000000Z',
+            text_color: 'text-black'
         }
 
         const emptyArticles: ArticlesType = [...Array(10).fill(0).map(x => (emptyArticle))];
