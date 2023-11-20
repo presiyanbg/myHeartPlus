@@ -7,19 +7,12 @@ const Api = () => {
      * 
      * @param url string - API url that data is sended to
      * @param data object - Data for the API
-     * @param notification boolean - Flag if notifications should be visible 
-     * @param displayLoading boolean - Flag if visual loaders should be visible 
      * @param loadCache boolean - Flag if data can be cached 
-     * @param formData boolean - Flag if data send should be send as json of Form data
      * 
      * @returns object - Api response data
      */
-    const post = async (url: string, data?: {}, notification: boolean = true, displayLoading: boolean = true, loadCache: boolean = true, formData: boolean = false) => {
-        const cache = loadCache ? { revalidate: 3600 } : 'no-store';
-
-        console.log(`${apiUrl}/api${url}`)
-        //next: { revalidate: 3600 }
-        const response = await fetch(`${apiUrl}/api${url}`, {
+    const post = async (url: string, data?: {}, loadCache: boolean = true) => {
+        const config = {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
@@ -27,9 +20,19 @@ const Api = () => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: JSON.stringify(data),
-            cache: 'no-cache',
+        } as RequestInit;
 
-        });
+        // Load cached data
+        if (loadCache) {
+            config.next = { revalidate: 3600 };
+        }
+
+        // Load new data
+        if (!loadCache) {
+            config.cache = 'no-store';
+        }
+
+        const response = await fetch(`${apiUrl}/api${url}`, config);
 
         return await response?.json();
     }

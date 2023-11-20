@@ -4,35 +4,28 @@ import {
     Dropdown,
     DropdownTrigger,
     DropdownMenu,
-    DropdownSection,
     DropdownItem,
-    Button
+    Button,
+    Avatar
 } from "@nextui-org/react";
 import Link from 'next/link';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faUser, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { UserClass } from '../../ts/classes';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useTranslations } from 'next-intl';
+import { useContext, useEffect } from "react";
+import { UserContext } from "@/context/userContext/userContextProvider";
+import { v4 as uuid } from 'uuid';
 
-type Props = {
-    user: UserClass
-};
-
-const TopNavigationDropDown = (props: Props) => {
+const TopNavigationDropDown = () => {
     // Translations
     const t = useTranslations();
 
     // User data
-    const user = props.user;
+    const { isAuth, user } = useContext(UserContext);
 
     // Dropdown links
-    const dropDownItems = [
-        {
-            key: "profilePage",
-            label: t('Profile page'),
-            link: '/users/profile',
-        },
+    let dropDownItems = [
         {
             key: "themeSwitch",
             label: t('Dark mode'),
@@ -40,28 +33,41 @@ const TopNavigationDropDown = (props: Props) => {
         },
         {
             key: "authentication",
-            label: t('Logout'),
+            label: isAuth ? t('Logout') : t('Login'),
             link: '/authentication',
         },
     ];
 
+    // Add profile page link when auth
+    useEffect(() => {
+        dropDownItems.push({
+            key: "profilePage",
+            label: t('Profile page'),
+            link: '/users/profile',
+        });
+    }, [isAuth]);
+
     return (
         <Dropdown>
             <DropdownTrigger>
-                <Button variant="bordered">
-                    <div className="image">
-                        <img src={process.env.NEXT_PUBLIC_API_URL + user?.image} alt="User photo" />
-                    </div>
+                <Button color="default" isIconOnly aria-label="user-menu" variant="bordered">
+                    {
+                        isAuth && (<Avatar src={process.env.NEXT_PUBLIC_API_URL + user?.image} alt="User photo" />)
+                    }
+
+                    {
+                        !isAuth && (<FontAwesomeIcon icon={faUser} />)
+                    }
                 </Button>
             </DropdownTrigger>
 
             <DropdownMenu aria-label="Dynamic Actions" items={dropDownItems}>
                 {(item) => (
                     <DropdownItem
-                        key={item.key}
-                        color={item.key === "delete" ? "danger" : "default"}
-                        className={item.key === "delete" ? "text-danger" : ""}>
-                        <Link href={item.link}>
+                        key={uuid()}
+                        textValue={item.label}>
+                        <Link href={item.link}
+                            className="text-gray-800">
                             {item.label}
                         </Link>
                     </DropdownItem>

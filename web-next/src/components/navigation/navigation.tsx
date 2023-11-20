@@ -5,13 +5,11 @@ import NavigationLinks from './navigationLinks';
 import NavigationDropDown from './navigationDropdown';
 
 import { v4 as uuid } from 'uuid';
-import { UserContext } from '../../context/userContext/userContextProvider';
 import { LOGO_LINK } from "../../constants/links";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link } from '@nextui-org/react';
+import { Navbar, NavbarContent, NavbarItem, Link } from '@nextui-org/react';
+import NavigationLinksMenu from './navigationLinksMenu';
 
 const Navigation = () => {
-    const { isAuth, user } = useContext(UserContext);
-
     return (
         <Navbar className="bg-white" shouldHideOnScroll>
             {/* Logo */}
@@ -24,13 +22,18 @@ const Navigation = () => {
             </NavbarContent>
 
             {/* Default Links */}
-            <NavbarContent className="hidden sm:flex">
+            <NavbarContent className="hidden md:flex">
                 <NavigationLinks></NavigationLinks>
             </NavbarContent>
 
-            {/* User Panel */}
             <NavbarContent justify="end">
-                <NavigationDropDown user={user}></NavigationDropDown>
+                {/* Link menu */}
+                <NavbarContent className="md:hidden" justify="end">
+                    <NavigationLinksMenu></NavigationLinksMenu>
+                </NavbarContent>
+
+                {/* User Panel */}
+                <NavigationDropDown></NavigationDropDown>
             </NavbarContent>
         </Navbar >
     )
