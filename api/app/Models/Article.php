@@ -22,5 +22,6 @@ class Article extends Model
         'total_views',
         'content',
         'slug',
+        'text_color',
     ];
 }
