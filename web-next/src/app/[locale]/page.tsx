@@ -1,9 +1,10 @@
 import ArticleServices from "@/services/articlesServices/articlesServices"
 import ArticlesList from '../../components/articles/articlesList/articlesList';
-import { ArticlesType, PaginationType } from '../../ts/types';
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import ArticlesTop from "@/components/articles/articlesTop/articlesTop";
 import SidePanel from "@/components/sidePanel/sidePanel";
+
+import { ArticlesType, PaginationType } from '../../ts/types';
 
 const Home = async () => {
     const data: any = await ArticleServices().articlesList();

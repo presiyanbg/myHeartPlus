@@ -3,9 +3,8 @@ import Link from 'next/link';
 
 import { v4 as uuid } from 'uuid';
 import { ArticleType, ArticlesType } from '../../../ts/types';
-import { Image, Spinner } from '@nextui-org/react';
+import { Image } from '@nextui-org/react';
 import { useTranslations } from 'next-intl';
-import { Suspense } from 'react';
 
 type Props = {
     articles?: ArticlesType,

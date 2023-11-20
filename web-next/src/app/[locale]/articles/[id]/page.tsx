@@ -2,6 +2,7 @@ import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import PageTitle from "@/components/layouts/pageTitle/pageTitle";
 import SidePanel from "@/components/sidePanel/sidePanel";
 import ArticleServices from "@/services/articlesServices/articlesServices";
+
 import { ArticleType } from "@/ts/types";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 

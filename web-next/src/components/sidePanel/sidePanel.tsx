@@ -1,14 +1,11 @@
-import { Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
 import UserDailyStatistics from "../user/userDailyStatistics/userDailyStatistics";
 import ArticlesListSmall from "../articles/articlesList/articlesListSmall";
 import ArticleServices from "@/services/articlesServices/articlesServices";
+
+import { Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
 import { ArticlesType } from "@/ts/types";
 
-type Props = {
-
-}
-
-const SidePanel = async (props: Props) => {
+const SidePanel = async () => {
     const data: any = await ArticleServices().articlesList();
     const articles: ArticlesType = await data?.articles?.data || [];
 
