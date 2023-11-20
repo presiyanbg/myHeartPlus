@@ -1,26 +1,26 @@
 
-import Api from "../../api/api";
+import ClientSideApi from "../../api/clientApi";
 
 const AuthenticationServices = () => {
-  const api = Api();
+    const api = ClientSideApi();
 
-  const login = (params: {}) => {
-    return api.post('/users/login', params, true, true, false);
-  }
+    const login = (params: {}) => {
+        return api.post('/users/login', params, false);
+    }
 
-  const logout = () => {
-    return api.post('/users/logout', true, true, false);
-  }
+    const logout = () => {
+        return api.post('/users/logout', false, true);
+    }
 
-  const register = (params: {}) => {
-    return api.post('/users/register', params, true, true, false, true);
-  }
+    const register = (params: {}) => {
+        return api.post('/users/register', params, false);
+    }
 
-  return {
-    login,
-    logout,
-    register
-  }
+    return {
+        login,
+        logout,
+        register
+    }
 
 }
 

@@ -1,4 +1,5 @@
-const Api = () => {
+
+const ServerSideApi = () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const token = '';
 
@@ -13,7 +14,7 @@ const Api = () => {
      */
     const post = async (url: string, data?: {}, loadCache: boolean = true) => {
         const config = {
-            method: 'post',
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${token}`,
@@ -42,4 +43,4 @@ const Api = () => {
     }
 }
 
-export default Api;
+export default ServerSideApi;

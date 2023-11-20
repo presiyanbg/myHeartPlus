@@ -1,4 +1,4 @@
-import Api from "../../api/api";
+import Api from "../../api/serverApi";
 
 const ArticleServices = () => {
     const api = Api();

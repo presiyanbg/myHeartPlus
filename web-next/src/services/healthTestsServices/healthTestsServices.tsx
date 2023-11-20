@@ -1,7 +1,7 @@
-import Api from "../../api/api";
+import ServerSideApi from "../../api/serverApi";
 
 const HealthTestsServices = () => {
-    const api = Api();
+    const api = ServerSideApi();
 
     const healthTestsList = (page: number = 1) => {
         return api.post(`/health-tests?page=${page}`, undefined, false);
@@ -12,11 +12,11 @@ const HealthTestsServices = () => {
     }
 
     const healthTestSubmitResult = (params: any) => {
-        return api.post(`/health-tests/submit-result`, params, false, true, false);
+        return api.post(`/health-tests/submit-result`, params, false);
     }
 
     const healthTestPatientResults = (patient_id: number | string) => {
-        return api.post(`/health-results/${patient_id}`, undefined, false, true, false);
+        return api.post(`/health-results/${patient_id}`, undefined, false);
     }
 
     const healthTestResultShow = (id: number | string) => {

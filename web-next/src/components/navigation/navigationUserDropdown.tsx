@@ -40,7 +40,9 @@ const NavigationUserDropdown = () => {
 
     // Add profile page link when auth
     useEffect(() => {
-        dropDownItems.push({
+        if (!isAuth) return;
+
+        dropDownItems.unshift({
             key: "profilePage",
             label: t('Profile page'),
             link: '/users/profile',
@@ -52,7 +54,7 @@ const NavigationUserDropdown = () => {
             <DropdownTrigger>
                 <Button color="default" isIconOnly aria-label="user-menu" variant="bordered">
                     {
-                        isAuth && (<Avatar src={process.env.NEXT_PUBLIC_API_URL + user?.image} alt="User photo" />)
+                        isAuth && (<Avatar src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`} alt="User photo" />)
                     }
 
                     {

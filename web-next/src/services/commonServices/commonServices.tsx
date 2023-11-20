@@ -1,16 +1,16 @@
 
-import Api from "../../api/api";
+import ServerSideApi from "../../api/serverApi";
 
 const CommonServices = () => {
-  const api = Api();
+    const api = ServerSideApi();
 
-  const healthCategoryShow = (id: number | string) => {
-    return api.post(`/health-category/view/${id}`, undefined, false);
-  }
+    const healthCategoryShow = (id: number | string) => {
+        return api.post(`/health-category/view/${id}`, undefined, false);
+    }
 
-  return {
-    healthCategoryShow,
-  }
+    return {
+        healthCategoryShow,
+    }
 }
 
 export default CommonServices;

@@ -27,7 +27,7 @@ const PageTitle = (props: Props) => {
             return (
                 <Link href={crumb.url} key={uuid()}>
                     {crumb.title}
-                    <span className="me-1 ms-1">/</span>
+                    <span className="me-1 ms-1 text-2xl font-light">/</span>
                 </Link >
             )
         })
@@ -47,7 +47,7 @@ const PageTitle = (props: Props) => {
             <div className="row w-100">
                 {/* Page title and breadcrumbs */}
                 <div className="col-sm-12 col-md-6">
-                    <h4>
+                    <h4 className="text-2xl font-light">
                         {breadCrumbs}
                         {props.title}
                     </h4>
