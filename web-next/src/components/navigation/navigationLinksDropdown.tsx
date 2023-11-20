@@ -13,7 +13,7 @@ import {
     Button,
 } from "@nextui-org/react";
 
-const NavigationLinksMenu = () => {
+const NavigationLinksDropdown = () => {
     const t = useTranslations();
 
     /**
@@ -43,4 +43,4 @@ const NavigationLinksMenu = () => {
     );
 }
 
-export default NavigationLinksMenu;
+export default NavigationLinksDropdown;

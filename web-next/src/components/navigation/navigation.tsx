@@ -1,13 +1,13 @@
 'use client';
-import React, { useContext } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import NavigationLinks from './navigationLinks';
-import NavigationDropDown from './navigationDropdown';
+import NavigationUserDropdown from './navigationUserDropdown';
+import NavigationLinksDropdown from './navigationLinksDropdown';
 
 import { v4 as uuid } from 'uuid';
 import { LOGO_LINK } from "../../constants/links";
 import { Navbar, NavbarContent, NavbarItem, Link } from '@nextui-org/react';
-import NavigationLinksMenu from './navigationLinksMenu';
 
 const Navigation = () => {
     return (
@@ -29,11 +29,11 @@ const Navigation = () => {
             <NavbarContent justify="end">
                 {/* Link menu */}
                 <NavbarContent className="md:hidden" justify="end">
-                    <NavigationLinksMenu></NavigationLinksMenu>
+                    <NavigationLinksDropdown></NavigationLinksDropdown>
                 </NavbarContent>
 
                 {/* User Panel */}
-                <NavigationDropDown></NavigationDropDown>
+                <NavigationUserDropdown></NavigationUserDropdown>
             </NavbarContent>
         </Navbar >
     )

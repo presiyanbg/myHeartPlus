@@ -17,7 +17,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "@/context/userContext/userContextProvider";
 import { v4 as uuid } from 'uuid';
 
-const TopNavigationDropDown = () => {
+const NavigationUserDropdown = () => {
     // Translations
     const t = useTranslations();
 
@@ -77,4 +77,4 @@ const TopNavigationDropDown = () => {
     );
 }
 
-export default TopNavigationDropDown;
+export default NavigationUserDropdown;
