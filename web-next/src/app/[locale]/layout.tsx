@@ -16,6 +16,8 @@ import Providers from './providers';
 // Font awesome
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { Suspense } from 'react';
+import Loading from '@/components/loading/loading';
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ['latin'] })
@@ -51,9 +53,11 @@ export default async function RootLayout({
                     <NextIntlClientProvider locale={locale} messages={messages}>
                         <Navigation />
 
-                        <ErrorBoundary errorComponent={ErrorHandler}>
-                            {children}
-                        </ErrorBoundary>
+                        <Suspense fallback={<Loading />}>
+                            <ErrorBoundary errorComponent={ErrorHandler}>
+                                {children}
+                            </ErrorBoundary>
+                        </Suspense>
 
                         <Footer></Footer>
 

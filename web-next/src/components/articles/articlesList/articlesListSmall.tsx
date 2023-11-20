@@ -3,8 +3,9 @@ import Link from 'next/link';
 
 import { v4 as uuid } from 'uuid';
 import { ArticleType, ArticlesType } from '../../../ts/types';
-import { Image } from '@nextui-org/react';
+import { Image, Spinner } from '@nextui-org/react';
 import { useTranslations } from 'next-intl';
+import { Suspense } from 'react';
 
 type Props = {
     articles?: ArticlesType,
@@ -15,15 +16,12 @@ const ArticlesListSmall = (props: Props) => {
 
     if (!props?.articles?.length) return (<></>);
 
-    // Display top 5 news articles
-    const articles = props?.articles?.splice(0, 5);
-
     return (
         <>
             <strong className="font-bold pb-2">{t('Top news')}:</strong>
 
             {
-                articles?.map((article: ArticleType) => {
+                props?.articles?.map((article: ArticleType) => {
                     return (
                         <Link href={`/articles/${article?.id}`}
                             key={uuid()}
@@ -32,7 +30,9 @@ const ArticlesListSmall = (props: Props) => {
                                 src={`${process.env.NEXT_PUBLIC_API_URL}/${article?.image}`}
                                 alt={article.title}
                                 width={75}
-                                height={150} />
+                                height={150}
+                                loading='lazy'
+                            />
 
                             <div className="flex flex-col w-2/3 pl-3">
                                 <span className="truncate">

@@ -2,7 +2,7 @@
 import { Chip, Progress, User } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faEye, faMedal, faPersonRunning, faShare, faUser, faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { faMedal, faPersonRunning, faUtensils } from '@fortawesome/free-solid-svg-icons';
 
 const UserDailyStatistics = () => {
     const t = useTranslations();
@@ -19,15 +19,14 @@ const UserDailyStatistics = () => {
                 />
             </div>
 
-            <div className="grid grid-cols-2 pb-2">
-                <div className="">
-                    <Chip
-                        startContent={<FontAwesomeIcon icon={faUtensils} />}
-                        color="warning"
-                        variant="light">
-                        {t('Calories intake')}:
-                    </Chip>
-                </div>
+            <div className="grid grid-cols-3 pb-2">
+                <Chip
+                    className="whitespace-pre-wrap col-span-2"
+                    startContent={<FontAwesomeIcon icon={faUtensils} />}
+                    color="warning"
+                    variant="light">
+                    {t('Calories intake')}:
+                </Chip>
 
                 <div className="pl-2 w-full">
                     <Progress
@@ -36,20 +35,19 @@ const UserDailyStatistics = () => {
                         value={60}
                         showValueLabel={true}
                         aria-label="Loading..."
-                        className="flex-1"
+                        className="text-right"
                     />
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 pb-2">
-                <div className="">
-                    <Chip
-                        startContent={<FontAwesomeIcon icon={faPersonRunning} />}
-                        color="danger"
-                        variant="light">
-                        {t('Calories burned')}:
-                    </Chip>
-                </div>
+            <div className="grid grid-cols-3 pb-2">
+                <Chip
+                    className="whitespace-pre-wrap col-span-2"
+                    startContent={<FontAwesomeIcon icon={faPersonRunning} />}
+                    color="danger"
+                    variant="light">
+                    {t('Calories burned')}:
+                </Chip>
 
                 <div className="pl-2 w-full">
                     <Progress
@@ -63,15 +61,14 @@ const UserDailyStatistics = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 pb-2">
-                <div className="">
-                    <Chip
-                        startContent={<FontAwesomeIcon icon={faMedal} />}
-                        color="success"
-                        variant="light">
-                        {t('Goal status')}:
-                    </Chip>
-                </div>
+            <div className="grid grid-cols-3 pb-2">
+                <Chip
+                    className="whitespace-pre-wrap col-span-2"
+                    startContent={<FontAwesomeIcon icon={faMedal} />}
+                    color="success"
+                    variant="light">
+                    {t('Goal status')}:
+                </Chip>
 
                 <div className="pl-2 w-full">
                     <Progress
