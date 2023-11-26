@@ -61,5 +61,11 @@
     "Calories intake": "Calories intake",
     "Calories burned": "Calories burned",
     "Goal status": "Goal status",
-    "Loading": "Loading"
+    "Loading": "Loading",
+    "smallpox": "Smallpox",
+    "Very bad": "Very bad",
+    "Poor": "Poor",
+    "Ok": "Ok",
+    "Good": "Good",
+    "Perfect": "Perfect"
 }

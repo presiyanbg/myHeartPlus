@@ -1,51 +1,67 @@
+'use client';
 import StarsRating from "../../common/starsRating/starsRating";
+import Link from "next/link";
 import { v4 as uuid } from 'uuid';
 import { HealthTestType } from "../../../ts/types";
-import Link from "next/link";
+import { Card, CardBody, CardHeader, Divider, ScrollShadow } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
+import { parseDateAndTime } from "@/utils/utils";
 
 type Props = {
     test: HealthTestType
 }
 
 const HealthTestLink = (props: Props) => {
+    const t = useTranslations();
+
     if (!props?.test) return (<></>);
 
     return (
-        <Link href={`/health-tests/${props.test.id}`}
-            className="component-link"
-            key={uuid()}
-            style={{ "--category-bg-color": props.test?.category?.bg_color } as React.CSSProperties}>
-            {/* Test title */}
-            <div className="component-link__title">
-                <h4>{props.test.title}</h4>
-            </div>
+        <div className="pb-7">
+            <Link href={`/health-tests/${props.test.id}`} key={uuid()}>
+                <Card>
+                    <CardHeader className="flex justify-between">
+                        {/* Test title */}
+                        <div className="font-bold">
+                            <h4>{props.test.title}</h4>
+                        </div>
 
-            {/* Test description */}
-            <div className="component-link__description text--ellipsis--2 mb-2">
-                <p>{props.test.description}</p>
-            </div>
+                        <StarsRating
+                            rating={props.test.rating}
+                            format={{ starsCol: 'flex justify-end' }}></StarsRating>
+                    </CardHeader>
 
-            {/* Test category and rating */}
-            <div className="row">
-                <div className="col-6">
-                    {
-                        props.test.category && (
-                            <span className="badge rounded-pill"
-                                style={{
-                                    'color': props.test.category.font_color,
-                                    'backgroundColor': props.test.category.bg_color,
-                                }}>
-                                {props.test.category.title}
-                            </span>
-                        )
-                    }
-                </div>
+                    <Divider></Divider>
 
-                <div className="col-6 text-end">
-                    <StarsRating rating={props.test.rating} format={{ starsCol: 'col-12 text-end' }}></StarsRating>
-                </div>
-            </div>
-        </Link>
+                    <CardBody>
+                        {/* Test description */}
+                        <ScrollShadow className="h-[150px]">
+                            <p>{props.test.description}</p>
+                        </ScrollShadow>
+
+                        {/* Test category and rating */}
+                        <div className="flex pt-2">
+                            <div className="w-1/2">
+                                {
+                                    props.test.category && (
+                                        <span className="px-2 py-1 rounded-3xl mr-2"
+                                            style={{
+                                                'color': props.test.category.font_color,
+                                                'backgroundColor': props.test.category.bg_color,
+                                            }}>
+
+                                            {t(props.test.category.title)}
+                                        </span>
+                                    )
+                                }
+
+                                <span>{parseDateAndTime(props.test.created_at)}</span>
+                            </div>
+                        </div>
+                    </CardBody>
+                </Card>
+            </Link>
+        </div>
     )
 }
 

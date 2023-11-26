@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
 import { useTranslations } from 'next-intl';
+import { Tooltip } from "@nextui-org/react";
 
 type Props = {
     rating: number,
@@ -22,31 +23,35 @@ const StarsRating = (props: Props) => {
     // Format stars based on rating 
     useEffect(() => {
         setRatingStars(() => {
-            return RATING_SYSTEM.map(rating => {
-                let className = '';
-                if (rating.order <= props.rating) {
-                    className = 'text-warning';
+            return RATING_SYSTEM.map((rating, index) => {
+                let className = 'text-gray-300';
+
+                if (!props.rating && index == 0) {
+                    className = 'text-red-500';
                 }
 
-                if (rating.order > props.rating) {
-                    className = 'text-secondary';
+                if (rating.order <= props.rating && props.rating > 0) {
+                    className = 'text-yellow-500';
+                }
+
+                if (rating.order <= props.rating && props.rating >= 4) {
+                    className = 'text-green-500';
                 }
 
                 return (
-                    <div key={uuid()}>
+                    <Tooltip content={t(rating?.title)} key={uuid()}>
                         <FontAwesomeIcon icon={faStar} className={className} />
-                    </div>
+                    </Tooltip>
                 );
             });
         });
     }, [props.rating]);
 
-
     // Table format
     // Only start
     if (props.format && !props.title) {
         return (
-            <div className="row" >
+            <>
                 {
                     props.format?.starsCol?.length && (
                         <div className={props.format.starsCol}>
@@ -54,7 +59,7 @@ const StarsRating = (props: Props) => {
                         </div>
                     )
                 }
-            </div>
+            </>
         )
     }
 
@@ -62,7 +67,7 @@ const StarsRating = (props: Props) => {
     // Title is required
     if (props.format && props.title) {
         return (
-            <div className="row" >
+            <div className="flex" >
                 {
                     props.format?.titleCol?.length && (
                         <div className={props.format.titleCol}>
@@ -84,7 +89,7 @@ const StarsRating = (props: Props) => {
 
     // Default format
     return (
-        <div className="stars-rating--wrapper">
+        <>
             {/* Display title */}
             {
                 props.title?.length && (
@@ -95,10 +100,10 @@ const StarsRating = (props: Props) => {
             }
 
             {/* Rating stars */}
-            <div className="stars-rating--content">
+            <div className="flex">
                 {ratingStars}
             </div>
-        </div>
+        </>
     )
 }
 

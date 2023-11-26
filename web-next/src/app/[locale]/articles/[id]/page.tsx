@@ -20,10 +20,6 @@ const ArticlePage = async (props: Props) => {
     const sidePanelData: any = await ArticleServices().articlesList();
     const articles: ArticlesType = await sidePanelData?.articles?.data || [];
 
-    const t = (text: string) => {
-        return text;
-    }
-
     return (
         <PageLayout>
             <div className="gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0">
@@ -32,7 +28,7 @@ const ArticlePage = async (props: Props) => {
                         <CardHeader className="pb-0">
                             <PageTitle title={article.title}
                                 breadCrumbs={[
-                                    { url: "/", title: t('Home') }
+                                    { url: "/", title: 'Home' }
                                 ]}
                             ></PageTitle>
                         </CardHeader>

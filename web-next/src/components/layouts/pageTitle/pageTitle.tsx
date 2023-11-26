@@ -13,6 +13,9 @@ type Props = {
         url: string
     }[]
 
+    // When not to try to translate a word  
+    toTranslation?: boolean,
+
     // Search
     search?: boolean,
     searchFunction?: (data: string) => {}
@@ -28,7 +31,7 @@ const PageTitle = (props: Props) => {
         breadCrumbs = props.breadCrumbs.map(crumb => {
             return (
                 <Link href={crumb.url} key={uuid()}>
-                    {t(crumb.title)}
+                    {!props?.toTranslation ? t(crumb.title) : crumb.title}
                     <span className="me-1 ms-1 font-bold">/</span>
                 </Link >
             )
