@@ -3,7 +3,7 @@ import PageTitle from "@/components/layouts/pageTitle/pageTitle";
 import SidePanel from "@/components/sidePanel/sidePanel";
 import ArticleServices from "@/services/articlesServices/articlesServices";
 
-import { ArticleType } from "@/ts/types";
+import { ArticleType, ArticlesType } from "@/ts/types";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 
 type Props = {
@@ -16,6 +16,9 @@ const ArticlePage = async (props: Props) => {
     const data: any = await ArticleServices().articleSelect(props?.params?.id);
     const article: ArticleType = await data?.article || {};
     const articleHTML: any = await data?.page || {};
+
+    const sidePanelData: any = await ArticleServices().articlesList();
+    const articles: ArticlesType = await sidePanelData?.articles?.data || [];
 
     const t = (text: string) => {
         return text;
@@ -59,7 +62,7 @@ const ArticlePage = async (props: Props) => {
                 </div>
 
                 <div className="lg:col-span-2">
-                    <SidePanel></SidePanel>
+                    <SidePanel bodyData={articles} bodyDataType={'articles'}></SidePanel>
                 </div>
             </div>
         </PageLayout>

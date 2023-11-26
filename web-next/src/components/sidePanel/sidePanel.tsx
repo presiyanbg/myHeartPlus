@@ -1,14 +1,16 @@
+'use client';
 import UserDailyStatistics from "../user/userDailyStatistics/userDailyStatistics";
 import ArticlesListSmall from "../articles/articlesList/articlesListSmall";
-import ArticleServices from "@/services/articlesServices/articlesServices";
 
 import { Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
-import { ArticlesType } from "@/ts/types";
+import { ArticlesType, DoctorsType } from "@/ts/types";
 
-const SidePanel = async () => {
-    const data: any = await ArticleServices().articlesList();
-    const articles: ArticlesType = await data?.articles?.data || [];
+type Props = {
+    bodyData?: ArticlesType | DoctorsType,
+    bodyDataType?: 'articles' | 'doctors'
+}
 
+const SidePanel = async (props: Props) => {
     return (
         <Card className="w-full">
             <CardHeader className="w-full">
@@ -18,7 +20,12 @@ const SidePanel = async () => {
             <Divider />
 
             <CardBody>
-                <ArticlesListSmall articles={articles} />
+                {/* Articles */}
+                {
+                    props?.bodyDataType == 'articles' &&
+                    props?.bodyData != undefined &&
+                    <ArticlesListSmall articles={props?.bodyData as ArticlesType} />
+                }
             </CardBody>
 
             <Divider />

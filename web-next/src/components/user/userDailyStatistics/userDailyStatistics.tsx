@@ -1,20 +1,34 @@
 'use client';
-import { Chip, Progress, User } from "@nextui-org/react";
+import { Button, Chip, Progress, User } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMedal, faPersonRunning, faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from "react";
+import { UserContext } from "@/context/userContext/userContextProvider";
+import Link from "next/link";
 
 const UserDailyStatistics = () => {
+    const { isAuth, user } = useContext(UserContext);
     const t = useTranslations();
+
+    if (!isAuth) {
+        return (
+            <div className="p-2 text-center w-full">
+                <Link href={'/authentication'}>
+                    <Button>{t('Login')}</Button>
+                </Link>
+            </div>
+        )
+    }
 
     return (
         <div className="flex flex-col w-full gap-1">
             <div className="pb-2">
                 <User
-                    name="Presiyan Tsonevski"
-                    description="Doctor"
+                    name={user?.full_name}
+                    description={user?.role?.toLocaleLowerCase()}
                     avatarProps={{
-                        src: "https://i.pravatar.cc/150"
+                        src: `${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`
                     }}
                 />
             </div>

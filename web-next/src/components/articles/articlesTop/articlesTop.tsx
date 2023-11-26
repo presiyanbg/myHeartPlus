@@ -81,14 +81,16 @@ const ArticlesTop = (props: Props) => {
                 {
                     articles?.map((article: ArticleType, index: number) => {
                         const backgroundUrl = `url(${process.env.NEXT_PUBLIC_API_URL}/${article?.image})`;
-                        let articlesClass = 'relative bg-cover bg-no-repeat bg-center overflow-hidden';
+                        let articlesClass = 'relative bg-cover bg-no-repeat bg-center overflow-hidden transition duration-500 cursor-pointer hover:z-10 hover:shadow-lg';
+                        let articleTitleClass = 'absolute bg-black p-3 w-full bottom-0 bg-opacity-25 flex justify-between';
 
                         if (index == 0) {
-                            articlesClass += ' h-auto overflow-hidden row-span-2 col-span-3';
+                            articlesClass += ' h-auto overflow-hidden row-span-2 col-span-3 hover:scale-105';
                         }
 
                         if (index != 0) {
-                            articlesClass += ' h-56';
+                            articlesClass += ' h-56 hover:scale-110';
+                            articleTitleClass += ' flex-col '
                         }
 
                         return (
@@ -96,13 +98,19 @@ const ArticlesTop = (props: Props) => {
                                 className={articlesClass}
                                 style={{ backgroundImage: backgroundUrl }}
                                 key={uuid()}>
-                                <div className="absolute bg-white p-3 w-full bottom-0 bg-opacity-25 flex justify-between">
+                                <div className={articleTitleClass}>
                                     <div className="text-white font-black">
                                         {article?.title}
                                     </div>
 
-                                    <div className="text-white font-italic">
-                                        {article?.writer} / {parseDateAndTime(article?.created_at)}
+                                    <div className="text-white text-small flex flex-col">
+                                        <span className='pr-2'>
+                                            {article?.writer}
+                                        </span>
+
+                                        <span>
+                                            {parseDateAndTime(article?.created_at)}
+                                        </span>
                                     </div>
                                 </div>
                             </Link>

@@ -1,3 +1,4 @@
+'use client';
 import React, { useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 import { UserContext } from '../../context/userContext/userContextProvider';
@@ -6,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { NavbarItem, Link } from '@nextui-org/react';
 
 const NavigationLinks = () => {
-    const { isAuth } = useContext(UserContext)
+    const { isAuth } = useContext(UserContext);
     const t = useTranslations();
 
     /**

@@ -22,7 +22,7 @@ const Home = async () => {
                     </div>
 
                     <div className="lg:col-span-2">
-                        <SidePanel></SidePanel>
+                        <SidePanel bodyData={articles} bodyDataType={'articles'}></SidePanel>
                     </div>
                 </div>
             </PageLayout>

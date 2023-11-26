@@ -48,15 +48,14 @@ const ArticlesList = (props: Props) => {
                                 className="border-none">
                                 <Link href={`articles/${article?.id}`}>
                                     <Image
-                                        isZoomed
-                                        className="h-96"
+                                        className="h-96 hover:scale-125 transition duration-500 cursor-pointer"
                                         src={`${process.env.NEXT_PUBLIC_API_URL}/${article?.image}`}
                                         alt={article.title}
                                         width={1500}
                                         height={100} />
                                 </Link>
 
-                                <CardFooter className="more-blur ustify-between before:bg-white/10 border-white/30 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                                <CardFooter className="more-blur justify-between before:bg-white/10 border-white/30 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                                     <Accordion className={article.text_color || 'text-black'}>
                                         <AccordionItem key={uuid()}
                                             aria-label={article?.title}
