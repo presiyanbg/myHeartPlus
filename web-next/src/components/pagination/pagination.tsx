@@ -49,7 +49,7 @@ const Pagination = (props: Props) => {
     }, [props]);
 
     // Check for missing data
-    if (!pagination) {
+    if (!pagination || !pagination?.current_page) {
         return (<></>);
     }
 

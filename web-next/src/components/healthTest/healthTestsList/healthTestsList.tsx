@@ -36,15 +36,13 @@ const HealthTestsList = (props: Props) => {
 
     return (
         <>
-            <div className="health-test--table">
-                {
-                    tests.map((test: HealthTestType) => {
-                        return (<HealthTestLink test={test} key={uuid()}></HealthTestLink>);
-                    })
-                }
+            {
+                tests.map((test: HealthTestType) => {
+                    return (<HealthTestLink test={test} key={uuid()}></HealthTestLink>);
+                })
+            }
 
-                <Pagination pagination={pagination} url='health-tests' onDataLoad={onDataLoad}></Pagination>
-            </div>
+            <Pagination pagination={pagination} url='health-tests' onDataLoad={onDataLoad}></Pagination>
         </>
     )
 }

@@ -6,8 +6,8 @@ import { Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/rea
 import { ArticlesType, DoctorsType, HealthTestsType } from "@/ts/types";
 
 type Props = {
-    bodyData?: ArticlesType | DoctorsType | HealthTestsType,
-    bodyDataType?: 'articles' | 'doctors' | 'healthTests',
+    bodyData?: ArticlesType | DoctorsType | HealthTestsType | any,
+    bodyDataType?: 'articles' | 'doctors' | 'healthTests' | 'prescriptions',
 }
 
 const SidePanel = async (props: Props) => {
