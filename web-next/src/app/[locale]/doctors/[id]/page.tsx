@@ -1,7 +1,7 @@
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import PageTitle from "@/components/layouts/pageTitle/pageTitle";
-import PrescriptionsServices from "@/services/prescriptionsServices/prescriptionsServices";
-import { PrescriptionType } from "@/ts/types";
+import DoctorsServices from "@/services/doctorsServices/doctorsServices";
+import { DoctorType } from "@/ts/types";
 import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 
 type Props = {
@@ -10,18 +10,18 @@ type Props = {
     }
 }
 
-const PrescriptionPage = async (props: Props) => {
-    const data: any = await PrescriptionsServices().prescriptionShow(props?.params?.id);
-    const prescription: PrescriptionType = await data?.prescription || {};
+const DoctorPage = async (props: Props) => {
+    const data: any = await DoctorsServices().doctorShow(props?.params?.id);
+    const doctor: DoctorType = await data?.doctor || {};
 
     return (
         <PageLayout>
             <Card>
                 <CardHeader>
                     <PageTitle
-                        title={prescription.title}
+                        title={doctor.full_name}
                         breadCrumbs={[
-                            { url: "/prescriptions", title: 'Тreatments' }
+                            { url: "/doctors", title: 'Doctors' }
                         ]}
                     ></PageTitle>
                 </CardHeader>
@@ -29,11 +29,11 @@ const PrescriptionPage = async (props: Props) => {
                 <Divider></Divider>
 
                 <CardBody>
-                    {prescription?.description}
+                    {doctor?.description}
                 </CardBody>
             </Card>
         </PageLayout>
     )
 }
 
-export default PrescriptionPage;
+export default DoctorPage;

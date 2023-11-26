@@ -7,7 +7,7 @@ import { ArticlesType, DoctorsType, HealthTestsType } from "@/ts/types";
 
 type Props = {
     bodyData?: ArticlesType | DoctorsType | HealthTestsType | any,
-    bodyDataType?: 'articles' | 'doctors' | 'healthTests' | 'prescriptions',
+    bodyDataType?: 'articles' | 'doctors' | 'healthTests' | 'prescriptions' | 'medicaments',
 }
 
 const SidePanel = async (props: Props) => {

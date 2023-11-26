@@ -3,7 +3,7 @@ import ServerSideApi from "../../api/serverApi";
 const DoctorsServices = () => {
     const api = ServerSideApi();
 
-    const doctors = (page: number = 1) => {
+    const doctorsList = (page: number = 1) => {
         return api.post(`/doctors?page=${page}`, undefined, false);
     }
 
@@ -24,7 +24,7 @@ const DoctorsServices = () => {
     }
 
     return {
-        doctors,
+        doctorsList,
         doctorShow,
         doctorShowHealthTests,
         doctorShowPrescriptions,

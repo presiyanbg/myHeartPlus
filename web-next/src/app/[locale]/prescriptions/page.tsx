@@ -1,8 +1,8 @@
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import PrescriptionsList from "@/components/prescriptions/prescriptionsList/prescriptionsList";
 import SidePanel from "@/components/sidePanel/sidePanel";
-import { SELECTORS } from "@/constants/selectors";
 import PrescriptionsServices from "@/services/prescriptionsServices/prescriptionsServices";
+import { SELECTORS } from "@/constants/selectors";
 import { PaginationType, PrescriptionsType } from "@/ts/types";
 
 const PrescriptionsPage = async () => {

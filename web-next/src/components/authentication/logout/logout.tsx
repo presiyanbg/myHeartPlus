@@ -1,4 +1,5 @@
 'use client';
+import { Button } from "@nextui-org/react";
 import LogoutLogic from "./logoutLogic";
 
 import { useTranslations } from "next-intl";
@@ -22,11 +23,15 @@ const Logout = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="row">
-                <div className="col-12 text-center">
-                    <button type="submit" className="btn bg-primary btn-lg text-white">
+            <div className="flex flex-col p-2">
+                <div className="w-full pb-2">
+                    <p>Saying goodbye is not the end, it's a new beginning filled with the promise of new adventures and opportunities. Farewell, and may our paths cross again on this journey called life!</p>
+                </div>
+
+                <div className="w-full text-right pb-2">
+                    <Button color="primary" onClick={e => handleSubmit(e)}>
                         {t('Logout')}
-                    </button>
+                    </Button>
                 </div>
             </div>
         </form>

@@ -3,7 +3,7 @@ import ServerSideApi from "../../api/serverApi";
 const MedicamentsServices = () => {
     const api = ServerSideApi();
 
-    const medicaments = (page: number = 1) => {
+    const medicamentsList = (page: number = 1) => {
         return api.post(`/medicaments?page=${page}`, undefined, false);
     }
 
@@ -12,7 +12,7 @@ const MedicamentsServices = () => {
     }
 
     return {
-        medicaments,
+        medicamentsList,
         medicamentShow
     }
 }
