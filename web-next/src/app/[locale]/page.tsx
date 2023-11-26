@@ -5,6 +5,7 @@ import ArticlesTop from "@/components/articles/articlesTop/articlesTop";
 import SidePanel from "@/components/sidePanel/sidePanel";
 
 import { ArticlesType, PaginationType } from '../../ts/types';
+import { SELECTORS } from "@/constants/selectors";
 
 const Home = async () => {
     const data: any = await ArticleServices().articlesList();
@@ -16,7 +17,7 @@ const Home = async () => {
             <ArticlesTop articles={articles}></ArticlesTop>
 
             <PageLayout>
-                <div className="gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0">
+                <div className={'gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0 ' + SELECTORS.anchorScroll} >
                     <div className="lg:col-span-4">
                         <ArticlesList articles={articles} pagination={pagination}></ArticlesList>
                     </div>

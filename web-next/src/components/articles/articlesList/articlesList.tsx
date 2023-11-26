@@ -40,7 +40,6 @@ const ArticlesList = (props: Props) => {
         <>
             {
                 articles?.map(article => {
-
                     return (
                         <div className="pb-4" key={uuid()}>
                             <Card isFooterBlurred

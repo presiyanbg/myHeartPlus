@@ -3,11 +3,11 @@ import UserDailyStatistics from "../user/userDailyStatistics/userDailyStatistics
 import ArticlesListSmall from "../articles/articlesList/articlesListSmall";
 
 import { Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
-import { ArticlesType, DoctorsType } from "@/ts/types";
+import { ArticlesType, DoctorsType, HealthTestsType } from "@/ts/types";
 
 type Props = {
-    bodyData?: ArticlesType | DoctorsType,
-    bodyDataType?: 'articles' | 'doctors'
+    bodyData?: ArticlesType | DoctorsType | HealthTestsType,
+    bodyDataType?: 'articles' | 'doctors' | 'healthTests',
 }
 
 const SidePanel = async (props: Props) => {

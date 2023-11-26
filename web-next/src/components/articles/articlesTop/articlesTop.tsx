@@ -1,83 +1,63 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image'
-import Pagination from '@/components/pagination/pagination';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
 import { ArticleType, ArticlesType, PaginationType } from '../../../ts/types';
 import { parseDateAndTime, scrollToElement } from '../../../utils/utils';
-import { useState } from 'react';
-import { SELECTORS } from '@/constants/selectors';
-import { PaginationClass } from '../../../ts/classes';
+import { Card, CardFooter, CardHeader, Image } from '@nextui-org/react';
 
 type Props = {
     articles?: ArticlesType,
 };
 
 const ArticlesTop = (props: Props) => {
-    let articles: ArticlesType = props?.articles || [];
+    if (!props?.articles?.length) return (<></>);
 
-    if (!articles?.length) return (<></>);
+    const articles: ArticlesType = props?.articles || [];
+    const firstArticle: ArticleType = articles[0];
 
-    // Display 1 article
-    if (articles?.length <= 2) {
-        return (
-            <>
-                2
-            </>
-        )
-    }
+    return (
+        <>
+            {/* Small text   */}
+            <div className="lg:hidden">
+                <Link href={`/articles/${firstArticle?.id}`}
+                    key={uuid()}>
 
-    // Display 3 article
-    if (articles?.length <= 5) {
-        articles = articles.slice(0, 3);
+                    <Card className="col-span-12 sm:col-span-4 h-full-dynamic relative rounded-none">
+                        <Image
+                            removeWrapper
+                            alt={firstArticle?.title}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/${firstArticle?.image}`}
+                            className="z-0 w-full h-full object-cover rounded-none"
+                        />
 
-        return (
-            <div className="grid grid-rows-2 grid-flow-col gap-4 bg-white pb-3">
-                {
-                    articles?.map((article: ArticleType, index: number) => {
-                        const backgroundUrl = `url(${process.env.NEXT_PUBLIC_API_URL}/${article?.image})`;
-                        let articlesClass = 'relative bg-cover bg-no-repeat bg-center overflow-hidden';
+                        <CardHeader className="absolute bottom-0 z-10 flex-col !items-start bg--shadow-gradient">
+                            <h1 className="text-white font-medium pb-2">
+                                {firstArticle?.title}
+                            </h1>
 
-                        if (index == 0) {
-                            articlesClass += ' h-auto overflow-hidden row-span-2';
-                        }
-
-                        if (index != 0) {
-                            articlesClass += ' h-80';
-                        }
-
-                        return (
-                            <Link href={`/articles/${article?.id}`}
-                                className={articlesClass}
-                                style={{ backgroundImage: backgroundUrl }}
-                                key={uuid()}>
-                                <div className="absolute bg-white p-3 w-full bottom-0 bg-opacity-25 flex justify-between">
-                                    <div className="text-white font-black">
-                                        {article?.title}
-                                    </div>
-
-                                    <div className="text-white font-italic">
-                                        {article?.writer} / {parseDateAndTime(article?.created_at)}
-                                    </div>
+                            <div className=" pb-2">
+                                <div className="text-tiny text-white/60 uppercase font-bold text--3-lies">
+                                    {firstArticle?.content}
                                 </div>
-                            </Link>
-                        )
+                            </div>
 
-                    })
-                }
-            </div >
-        )
-    }
+                            <p className="text-tiny text-white/60 uppercase">
+                                <span className='pr-2'>
+                                    {firstArticle?.writer}
+                                </span>
 
-    // Display 10 article
-    if (articles?.length > 5) {
-        articles = articles.slice(0, 10);
+                                <span>
+                                    {parseDateAndTime(firstArticle?.created_at)}
+                                </span>
+                            </p>
+                        </CardHeader>
+                    </Card>
+                </Link>
+            </div>
 
-        return (
-            <div className="grid grid-rows-3 grid-flow-col  pb-3">
+            {/* Large screen */}
+            <div className="hidden lg:grid grid-rows-3 grid-flow-col pb-3">
                 {
                     articles?.map((article: ArticleType, index: number) => {
                         const backgroundUrl = `url(${process.env.NEXT_PUBLIC_API_URL}/${article?.image})`;
@@ -118,8 +98,8 @@ const ArticlesTop = (props: Props) => {
                     })
                 }
             </div >
-        )
-    }
+        </>
+    )
 }
 
 export default ArticlesTop;

@@ -1,12 +1,13 @@
 'use client';
 import PaginationLogic from './paginationLogic';
 
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { PaginationType } from '../../ts/types';
-// import { useTranslation } from 'react-i18next';
-import { v4 as uuid } from 'uuid';
+import { Button, Tooltip } from '@nextui-org/react';
+import { useTranslations } from 'next-intl';
+import { copyObject } from "../../utils/utils";
 
 type Props = {
     url: string,
@@ -15,13 +16,9 @@ type Props = {
 }
 
 const Pagination = (props: Props) => {
-    const [pagination, setPagination] = useState<PaginationType>();
+    const [pagination, setPagination] = useState<PaginationType>(props?.pagination as PaginationType);
     const logic = PaginationLogic();
-    // const { t } = useTranslation();
-
-    const t = (text: string) => {
-        return text;
-    }
+    const t = useTranslations();
 
     /**
      * Handle click
@@ -48,40 +45,48 @@ const Pagination = (props: Props) => {
      * Load pagination
      */
     useEffect(() => {
-        props.pagination && setPagination(props.pagination)
+        props.pagination && setPagination(copyObject(props.pagination));
     }, [props]);
 
+    // Check for missing data
+    if (!pagination) {
+        return (<></>);
+    }
+
     return (
-        <div className="custom-pagination">
+        <div className="flex pb-7">
             {/* Back button */}
             {/* Show back button only when current page is not the first one */}
-            {
-                !!(pagination?.current_page && pagination.current_page > 1) &&
-                <div className="pagination--left" onClick={() => handleClick('changePage', '<')}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
-
-                    <span className="ms-2">{t('Back')}</span>
-                </div>
-            }
+            <Button
+                isDisabled={!(pagination?.current_page > 1)}
+                size="sm"
+                color="secondary"
+                variant="bordered"
+                onClick={() => handleClick('changePage', '<')}>
+                <Tooltip content={t('Back')}>
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                </Tooltip>
+            </Button>
 
             {/* Current page */}
-            <div
-                key={uuid()}
-            >
-                <div className="pagination--current-page">
-                    {!!pagination?.current_page && pagination.current_page}
-                </div>
+            <div className="px-3">
+                <Button color="secondary" size="sm">
+                    {pagination?.current_page}
+                </Button>
             </div>
 
             {/* Next button */}
-            {
-                !!(pagination?.current_page && pagination.current_page != pagination.last_page) &&
-                <div className="pagination--right" onClick={() => handleClick('changePage', '>')}>
-                    <span className="me-2">{t('Next+Page')}</span>
+            <Button
+                isDisabled={!pagination?.next_page_url}
+                color="secondary"
+                variant="bordered"
+                size="sm"
+                onClick={() => handleClick('changePage', '>')}>
 
-                    <FontAwesomeIcon icon={faArrowRight} />
-                </div>
-            }
+                <Tooltip content={t('Next+Page')}>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                </Tooltip>
+            </Button>
         </div>
     )
 }

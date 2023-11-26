@@ -181,3 +181,23 @@
 .more-blur:focus {
     --tw-backdrop-blur: blur(32px);
 }
+
+.h-full-dynamic {
+    height: 100dvh;
+    height: calc(100vh - 65px);
+}
+
+.bg--shadow-gradient {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.text--3-lies {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* number of lines to show */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
