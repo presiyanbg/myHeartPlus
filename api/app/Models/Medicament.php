@@ -42,6 +42,8 @@ class Medicament extends Model
             // Load medicament 
             $medicament = Medicament::where('id', $medId)->first();
 
+            if (is_null($medicament)) continue;
+
             // Load category 
             $medicament->category = HealthCategory::where('id', $medicament->category_id)->first();
 
