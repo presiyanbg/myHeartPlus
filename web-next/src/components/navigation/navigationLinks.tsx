@@ -26,7 +26,7 @@ const NavigationLinks = () => {
                         return (
                             <NavbarItem key={uuid()}>
                                 <Link href={link.url}>
-                                    <span className={pathname == link?.url ? 'text-blue-500' : 'text-gray-900'}>
+                                    <span className={pathname == link?.url ? 'text-blue-500' : 'text-gray-500'}>
                                         <span>{t(link.title)}</span>
                                     </span>
                                 </Link>

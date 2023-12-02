@@ -8,39 +8,26 @@ import {
     Button,
     Avatar,
     Image,
-    Spinner
+    Spinner,
+    Switch
 } from "@nextui-org/react";
-import Link from 'next/link';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useTranslations } from 'next-intl';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext/userContextProvider";
 import { v4 as uuid } from 'uuid';
 import { LoadingContext } from "@/context/loadingContext/loadingContextProvider";
 import { useRouter } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavigationUserDropdown = () => {
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
+    const [darkMode, setDarkMode] = useState<boolean>(false);
     const { isAuth, user } = useContext(UserContext);
     const { isLoading } = useContext(LoadingContext);
     const t = useTranslations();
     const router = useRouter();
-
-    // Dropdown links
-    let dropDownItems = [
-        {
-            key: "themeSwitch",
-            label: t('Dark mode'),
-            link: '/themeSwitch',
-        },
-        {
-            key: "authentication",
-            label: isAuth ? t('Logout') : t('Login'),
-            link: '/authentication',
-        },
-    ];
 
     // Change page
     const handleClick = (e: any, link: string) => {
@@ -48,27 +35,31 @@ const NavigationUserDropdown = () => {
         router.push(link);
     }
 
-    // Add profile page link when auth
-    useEffect(() => {
-        if (!isAuth) return;
-
-        dropDownItems.unshift({
-            key: "profilePage",
-            label: t('Profile page'),
-            link: '/users/profile',
-        });
-    }, [isAuth]);
-
     // Check loading
     useEffect(() => {
         setIsLoaded(!isLoading);
     }, [isLoading])
 
+    // Toggle dark mode 
+    useEffect(() => {
+        const body = document.querySelector('body');
+
+        if (!body) return;
+
+        if (darkMode) {
+            body?.classList?.add('dark');
+        }
+
+        if (!darkMode) {
+            body?.classList?.remove('dark');
+        }
+    }, [darkMode])
+
     return (
         <>
             {
                 isLoaded ? (
-                    <Dropdown>
+                    <Dropdown closeOnSelect={false}>
                         <DropdownTrigger>
                             <Button color="default" isIconOnly aria-label="user-menu" variant="bordered">
                                 {
@@ -86,17 +77,55 @@ const NavigationUserDropdown = () => {
                             </Button>
                         </DropdownTrigger>
 
-                        <DropdownMenu aria-label="User Actions" items={dropDownItems}>
-                            {(item) => (
-                                <DropdownItem
-                                    key={uuid()}
-                                    textValue={item.label}
-                                    onClick={e => handleClick(e, item.link)}>
-                                    <span className="text-gray-800" >
-                                        {item.label}
-                                    </span>
-                                </DropdownItem>
-                            )}
+                        <DropdownMenu aria-label="User Actions">
+                            {/* Profile page link */}
+                            {
+                                isAuth ? (
+                                    <DropdownItem
+                                        key={uuid()}
+                                        textValue={'profilePage'}
+                                        onClick={(e) => handleClick(e, '/users/profile')}>
+                                        <span>
+                                            {t('Profile page')}
+                                        </span>
+                                    </DropdownItem>
+                                ) : (
+                                    <></>
+                                )
+                            }
+
+                            {/* Theme switch */}
+                            <DropdownItem
+                                key={uuid()}
+                                textValue={'themeSwitch'}>
+                                <Switch
+                                    defaultSelected
+                                    className="hover:outline-none focus:outline-none"
+                                    size="sm"
+                                    color="secondary"
+                                    isSelected={darkMode}
+                                    onValueChange={(e) => setDarkMode(e)}
+                                    thumbIcon={({ isSelected, className }) =>
+                                        isSelected ? (
+                                            <FontAwesomeIcon icon={faMoon} className="hover:outline-none text-secondary focus:outline-none" />
+                                        ) : (
+                                            <FontAwesomeIcon icon={faSun} className="hover:outline-none focus:outline-none" />
+                                        )
+                                    }
+                                >
+                                    Dark mode
+                                </Switch>
+                            </DropdownItem>
+
+                            {/* Login/Logout link */}
+                            <DropdownItem
+                                key={uuid()}
+                                textValue={'authentication'}
+                                onClick={(e) => handleClick(e, '/authentication')}>
+                                <span>
+                                    {isAuth ? t('Logout') : t('Login')}
+                                </span>
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                 ) : (

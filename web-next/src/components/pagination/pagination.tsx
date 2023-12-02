@@ -60,7 +60,7 @@ const Pagination = (props: Props) => {
             <Button
                 isDisabled={!(pagination?.current_page > 1)}
                 size="sm"
-                color="secondary"
+                color="primary"
                 variant="bordered"
                 onClick={() => handleClick('changePage', '<')}>
                 <Tooltip content={t('Back')}>
@@ -70,7 +70,7 @@ const Pagination = (props: Props) => {
 
             {/* Current page */}
             <div className="px-3">
-                <Button color="secondary" size="sm">
+                <Button color="primary" size="sm">
                     {pagination?.current_page}
                 </Button>
             </div>
@@ -78,7 +78,7 @@ const Pagination = (props: Props) => {
             {/* Next button */}
             <Button
                 isDisabled={!pagination?.next_page_url}
-                color="secondary"
+                color="primary"
                 variant="bordered"
                 size="sm"
                 onClick={() => handleClick('changePage', '>')}>

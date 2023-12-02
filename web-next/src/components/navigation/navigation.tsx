@@ -10,7 +10,7 @@ import { Navbar, NavbarContent, NavbarItem, Link } from '@nextui-org/react';
 
 const Navigation = () => {
     return (
-        <Navbar className="bg-white" shouldHideOnScroll>
+        <Navbar shouldHideOnScroll isBordered>
             {/* Logo */}
             <NavbarContent justify="start">
                 <NavbarItem key={uuid()} className="block w-10 pl-3 lg:pl-0">

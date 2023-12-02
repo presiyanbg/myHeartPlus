@@ -48,7 +48,7 @@ export default async function RootLayout({
 
     return (
         <html lang="en" className="overflow-x-hidden">
-            <body className="relative gradient-bg">
+            <body className="relative text-foreground bg-background">
                 <Providers>
                     <NextIntlClientProvider locale={locale} messages={messages}>
                         <Navigation />
@@ -61,7 +61,7 @@ export default async function RootLayout({
 
                         <Footer></Footer>
 
-                        <BackgroundLayout></BackgroundLayout>
+                        {/* <BackgroundLayout></BackgroundLayout> */}
                     </NextIntlClientProvider>
                 </Providers>
             </body>

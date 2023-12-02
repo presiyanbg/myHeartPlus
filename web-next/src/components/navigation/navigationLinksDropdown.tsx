@@ -41,7 +41,7 @@ const NavigationLinksDropdown = () => {
                         key={uuid()}
                         textValue={item.title}
                         onClick={e => handleClick(e, item.url)}>
-                        <span className="text-gray-800" >
+                        <span>
                             {t(item.title)}
                         </span>
                     </DropdownItem>

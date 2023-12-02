@@ -6,10 +6,10 @@ const Loading = () => {
     const t = useTranslations();
 
     return (
-        <div className="w-full flex flex-col items-center justify-center h-screen gap-4 bg-gray-900">
+        <div className="w-full flex flex-col items-center justify-center h-screen gap-4">
             <Spinner color="default" />
 
-            <span className="text-gray-300">{t('Loading')}...</span>
+            <span className="text-gray-800">{t('Loading')}...</span>
         </div>
     )
 }

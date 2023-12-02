@@ -2,7 +2,7 @@
 const Footer = () => {
 
     return (
-        <div className="w-full bg-white ">
+        <div className="w-full">
             <div className="md:w-34 w-screen lg:w-10/12 xl:w-8/12 mx-auto mt-lg p-3 flex">
                 <div className="px-3">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non modi delectus inventore ipsam ea quaerat voluptatem tempore esse? Suscipit nihil dolorem ut architecto nobis ea. Harum sequi nostrum voluptatibus libero.</p>
