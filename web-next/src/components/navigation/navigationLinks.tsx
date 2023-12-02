@@ -5,10 +5,12 @@ import { UserContext } from '../../context/userContext/userContextProvider';
 import { LINKS } from "../../constants/links";
 import { useTranslations } from 'next-intl';
 import { NavbarItem, Link } from '@nextui-org/react';
+import { usePathname } from "next/navigation";
 
 const NavigationLinks = () => {
     const { isAuth } = useContext(UserContext);
     const t = useTranslations();
+    const pathname = usePathname();
 
     /**
      * Display only links marked with topLink flag
@@ -24,7 +26,7 @@ const NavigationLinks = () => {
                         return (
                             <NavbarItem key={uuid()}>
                                 <Link href={link.url}>
-                                    <span className="text-gray-900">
+                                    <span className={pathname == link?.url ? 'text-blue-500' : 'text-gray-900'}>
                                         <span>{t(link.title)}</span>
                                     </span>
                                 </Link>

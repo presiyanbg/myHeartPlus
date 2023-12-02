@@ -2,7 +2,6 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { LINKS } from "../../constants/links";
-import { Link } from '@nextui-org/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useTranslations } from 'next-intl';
@@ -13,9 +12,17 @@ import {
     DropdownItem,
     Button,
 } from "@nextui-org/react";
+import { useRouter } from 'next/navigation';
 
 const NavigationLinksDropdown = () => {
     const t = useTranslations();
+    const router = useRouter();
+
+    // Change page
+    const handleClick = (e: any, link: string) => {
+        e.preventDefault();
+        router.push(link);
+    }
 
     /**
      * Display only links marked with topLink flag
@@ -28,15 +35,15 @@ const NavigationLinksDropdown = () => {
                 </Button>
             </DropdownTrigger>
 
-            <DropdownMenu aria-label="Dynamic Actions" items={LINKS}>
+            <DropdownMenu aria-label="User dropdown" items={LINKS}>
                 {(item) => (
                     <DropdownItem
                         key={uuid()}
-                        textValue={item.title}>
-                        <Link href={item.url}
-                            className="text-gray-800">
+                        textValue={item.title}
+                        onClick={e => handleClick(e, item.url)}>
+                        <span className="text-gray-800" >
                             {t(item.title)}
-                        </Link>
+                        </span>
                     </DropdownItem>
                 )}
             </DropdownMenu>

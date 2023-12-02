@@ -8,15 +8,12 @@ interface LoadingProviderProps {
 export const LoadingContext = createContext({
     isLoading: false,
     setLoading: (active: boolean) => { },
-    urlIsLoading: {},
-    setUrlLoading: (url: string, loading: boolean) => { },
     displayLoader: false,
     setDisplayLoader: (active: boolean) => { },
 });
 
 export const LoadingContextProvider = ({ children }: LoadingProviderProps) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [urlIsLoading, setUrlIsLoading] = useState({});
     const [displayLoader, setDisplayLoader] = useState(false);
 
     /**
@@ -28,22 +25,23 @@ export const LoadingContextProvider = ({ children }: LoadingProviderProps) => {
         setIsLoading(loading);
     }
 
-    /**
-     * Set url as being loaded or not
-     * 
-     * @param url string
-     * @param loading boolean
-     */
-    const setUrlLoading = (url: string, loading: boolean) => {
+    // Check for fully loaded page
+    useEffect(() => {
+        setTimeout(() => {
+            if (document?.readyState != 'complete') {
+                setLoading(true);
+            }
 
-    }
+            if (document?.readyState == 'complete') {
+                setLoading(false);
+            }
+        }, 10)
+    }, [])
 
     return (
         <LoadingContext.Provider value={{
             isLoading,
             setLoading,
-            urlIsLoading,
-            setUrlLoading,
             displayLoader,
             setDisplayLoader,
         }}>
