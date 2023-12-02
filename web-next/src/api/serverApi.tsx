@@ -21,6 +21,7 @@ const ServerSideApi = () => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: JSON.stringify(data),
+            next: { revalidate: 3600 }
         } as RequestInit;
 
         // Load cached data
