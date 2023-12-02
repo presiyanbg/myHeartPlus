@@ -3,9 +3,8 @@ import StarsRating from "../../common/starsRating/starsRating";
 import Link from "next/link";
 import { v4 as uuid } from 'uuid';
 import { DoctorType } from "../../../ts/types";
-import { Card, CardBody, CardHeader, Divider, ScrollShadow } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, CardHeader, Chip, Divider, Image, ScrollShadow } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import { parseDateAndTime } from "@/utils/utils";
 
 type Props = {
     doctor: DoctorType
@@ -20,39 +19,42 @@ const DoctorLink = (props: Props) => {
         <div className="pb-7">
             <Link href={`/doctors/${props.doctor.id}`} key={uuid()}>
                 <Card>
-                    <CardHeader className="flex justify-between">
-                        {/* Doctor title */}
-                        <div className="font-bold">
-                            <h4>{props.doctor.full_name}</h4>
-                        </div>
+                    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                        <div className="flex w-full pb-2 flex-wrap">
+                            {/* Doctor full name */}
+                            <div className="w-2/4 md:w-2/4">
+                                <h4>{props.doctor.full_name}</h4>
+                            </div>
 
-                        <StarsRating
-                            rating={props.doctor.rating}
-                            format={{ starsCol: 'flex justify-end' }}></StarsRating>
-                    </CardHeader>
-
-                    <Divider></Divider>
-
-                    <CardBody>
-                        {/* Doctor description */}
-                        <ScrollShadow className="h-[150px]">
-                            <p>{props.doctor.description}</p>
-                        </ScrollShadow>
-
-                        {/* Doctor category and rating */}
-                        <div className="flex pt-2">
-                            <div className="w-1/2">
+                            {/* Doctor category */}
+                            <div className="w-2/4 text-right">
                                 {
                                     props.doctor.specialty && (
-                                        <span className="px-2 py-1 rounded-3xl mr-2">
+                                        <Chip
+                                            color="primary"
+                                            size="sm"
+                                            variant="solid">
                                             {t(props.doctor.specialty)}
-                                        </span>
+                                        </Chip>
                                     )
                                 }
+                            </div>
 
-                                <span>{parseDateAndTime(props.doctor.created_at)}</span>
+                            {/* Doctor rating */}
+                            <div className="w-2/4 pt-1">
+                                <StarsRating rating={props.doctor.rating}></StarsRating>
                             </div>
                         </div>
+                    </CardHeader>
+
+                    <CardBody>
+                        {/* Doctor picture */}
+                        <Image
+                            alt="Doctor profile picture"
+                            className="object-cover"
+                            height={200}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/${props?.doctor?.image}`}
+                        />
                     </CardBody>
                 </Card>
             </Link>

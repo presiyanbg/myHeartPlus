@@ -48,7 +48,7 @@ const PageTitle = (props: Props) => {
     }
 
     return (
-        <div className="mb-3">
+        <div>
             <div className="row w-100">
                 {/* Page title and breadcrumbs */}
                 <div>

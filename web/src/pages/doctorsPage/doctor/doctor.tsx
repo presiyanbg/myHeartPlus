@@ -11,50 +11,48 @@ import { SELECTORS } from "../../../constants/selectors";
 import { scrollToElement } from "../../../utils/utils";
 
 const Doctor = () => {
-  const [doctor, setDoctor] = useState<any | DoctorType>({});
+    const [doctor, setDoctor] = useState<any | DoctorType>({});
 
-  const logic = DoctorsLogic();
+    const logic = DoctorsLogic();
 
-  const { isLoading } = useContext(LoadingContext);
-  const { id } = useParams();
-  const { t } = useTranslation();
+    const { isLoading } = useContext(LoadingContext);
+    const { id } = useParams();
+    const { t } = useTranslation();
 
-  /**
-   * Load doctor data on init
-   */
-  useEffect(() => {
-    if (!id) return;
+    /**
+     * Load doctor data on init
+     */
+    useEffect(() => {
+        if (!id) return;
 
-    logic.loadDoctor(id).then(doctorData => {
-      setDoctor(doctorData.doctor);
-      scrollToElement(`.${SELECTORS.anchorScroll}`);
-    });
-  }, [id]);
+        logic.loadDoctor(id).then(doctorData => {
+            setDoctor(doctorData.doctor);
+            scrollToElement(`.${SELECTORS.anchorScroll}`);
+        });
+    }, [id]);
 
-  /**
-   * Return 404 Not found
-   */
-  if ((!doctor || !doctor.user_id) && !isLoading) {
-    return (<>No results found</>)
-  }
+    /**
+     * Return 404 Not found
+     */
+    if ((!doctor || !doctor.user_id) && !isLoading) return (<>No results found</>);
 
-  return (
-    <div className="wrapper">
-      <div className="page">
-        {/* Empty element used for auto scroll on page change */}
-        <div className={`${SELECTORS.anchorScroll} t-nav`}></div>
+    return (
+        <div className="wrapper">
+            <div className="page">
+                {/* Empty element used for auto scroll on page change */}
+                <div className={`${SELECTORS.anchorScroll} t-nav`}></div>
 
-        <PageTitle title={t('Dr.') + ' ' + doctor.full_name}
-          breadCrumbs={[
-            { url: "/doctors", title: t('Find your doctor') }
-          ]}></PageTitle>
+                <PageTitle title={t('Dr.') + ' ' + doctor.full_name}
+                    breadCrumbs={[
+                        { url: "/doctors", title: t('Find your doctor') }
+                    ]}></PageTitle>
 
-        <div className="page--content doctor-profile--page">
-          <DoctorView doctor={doctor}></DoctorView>
+                <div className="page--content doctor-profile--page">
+                    <DoctorView doctor={doctor}></DoctorView>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  )
+    )
 }
 
 export default Doctor;

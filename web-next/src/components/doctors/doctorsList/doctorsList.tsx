@@ -35,13 +35,15 @@ const DoctorsList = (props: Props) => {
 
     return (
         <>
-            {
-                doctors?.map((doctor: DoctorType) => {
-                    return (
-                        <DoctorLink doctor={doctor} key={uuid()}></DoctorLink>
-                    )
-                })
-            }
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {
+                    doctors?.map((doctor: DoctorType) => {
+                        return (
+                            <DoctorLink doctor={doctor} key={uuid()}></DoctorLink>
+                        )
+                    })
+                }
+            </div>
 
             <Pagination pagination={pagination} url='health-tests' onDataLoad={onDataLoad} />
         </>
