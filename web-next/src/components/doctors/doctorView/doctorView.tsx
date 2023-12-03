@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import { Suspense, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCheckCircle, faFileLines, faMapLocationDot, faStaffSnake, faStar, faUserCircle, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
+import { faFileLines, faMapLocationDot, faStaffSnake, faStar, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
     doctor: DoctorType,

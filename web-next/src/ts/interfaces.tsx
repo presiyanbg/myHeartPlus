@@ -13,8 +13,8 @@ interface UserContextInterface {
 }
 
 interface CommonContextInterface {
-    monitorExpanded: boolean,
-    toggleMonitorExpanded: (toggle: boolean | undefined) => void,
+    darkMode: boolean,
+    toggleDarkMode: (toggle: boolean | undefined) => void,
     cache: CacheType,
     setCache: (data: CacheType) => void
 }

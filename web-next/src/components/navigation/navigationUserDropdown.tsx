@@ -20,40 +20,70 @@ import { v4 as uuid } from 'uuid';
 import { LoadingContext } from "@/context/loadingContext/loadingContextProvider";
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTheme } from "next-themes";
+import { CommonContext } from "@/context/commonContext/commonContextProvider";
 
 const NavigationUserDropdown = () => {
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
-    const [darkMode, setDarkMode] = useState<boolean>(false);
+    const [mounted, setMounted] = useState(false)
     const { isAuth, user } = useContext(UserContext);
     const { isLoading } = useContext(LoadingContext);
+    const { darkMode } = useContext(CommonContext);
+    const { toggleDarkMode } = useContext(CommonContext);
+    const { theme, setTheme } = useTheme();
     const t = useTranslations();
     const router = useRouter();
 
-    // Change page
-    const handleClick = (e: any, link: string) => {
+    /**
+     * Handle click
+     * 
+     * @param e Click event
+     * @param link string - Link to open
+     */
+    const handleLinkClick = (e: any, link: string) => {
         e.preventDefault();
         router.push(link);
+    }
+
+    /**
+     * Toggle dark mode
+     * 
+     * @param mode boolean - Flag if dark mode is enabled 
+     */
+    const handleDarkModeSwitch = (mode: boolean) => {
+        if (mode) {
+            setTheme('dark');
+            toggleDarkMode(mode);
+        }
+
+        if (!mode) {
+            setTheme('light');
+            toggleDarkMode(mode);
+        }
+
+        localStorage.setItem('darkMode', JSON.stringify({ darkMode: mode }));
     }
 
     // Check loading
     useEffect(() => {
         setIsLoaded(!isLoading);
-    }, [isLoading])
+    }, [isLoading]);
 
-    // Toggle dark mode 
+    // Initial checks 
     useEffect(() => {
-        const body = document.querySelector('body');
+        setMounted(true);
 
-        if (!body) return;
+        const storageDarkMode = JSON.parse(localStorage.getItem('darkMode') || '{}');
 
-        if (darkMode) {
-            body?.classList?.add('dark');
+        if (storageDarkMode == null || storageDarkMode == undefined) {
+            toggleDarkMode(false);
+            return;
         }
 
-        if (!darkMode) {
-            body?.classList?.remove('dark');
-        }
-    }, [darkMode])
+        toggleDarkMode(!!storageDarkMode?.darkMode);
+    }, []);
+
+    if (!mounted) return null
 
     return (
         <>
@@ -84,7 +114,7 @@ const NavigationUserDropdown = () => {
                                     <DropdownItem
                                         key={uuid()}
                                         textValue={'profilePage'}
-                                        onClick={(e) => handleClick(e, '/users/profile')}>
+                                        onClick={(e) => handleLinkClick(e, '/users/profile')}>
                                         <span>
                                             {t('Profile page')}
                                         </span>
@@ -104,7 +134,7 @@ const NavigationUserDropdown = () => {
                                     size="sm"
                                     color="secondary"
                                     isSelected={darkMode}
-                                    onValueChange={(e) => setDarkMode(e)}
+                                    onValueChange={(e) => handleDarkModeSwitch(e)}
                                     thumbIcon={({ isSelected, className }) =>
                                         isSelected ? (
                                             <FontAwesomeIcon icon={faMoon} className="hover:outline-none text-secondary focus:outline-none" />
@@ -113,7 +143,9 @@ const NavigationUserDropdown = () => {
                                         )
                                     }
                                 >
-                                    Dark mode
+                                    {
+                                        darkMode ? t('Dark mode') : t('Light mode')
+                                    }
                                 </Switch>
                             </DropdownItem>
 
@@ -121,7 +153,7 @@ const NavigationUserDropdown = () => {
                             <DropdownItem
                                 key={uuid()}
                                 textValue={'authentication'}
-                                onClick={(e) => handleClick(e, '/authentication')}>
+                                onClick={(e) => handleLinkClick(e, '/authentication')}>
                                 <span>
                                     {isAuth ? t('Logout') : t('Login')}
                                 </span>

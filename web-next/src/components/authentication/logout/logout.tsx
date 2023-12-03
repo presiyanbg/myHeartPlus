@@ -25,7 +25,7 @@ const Logout = () => {
         <form onSubmit={handleSubmit}>
             <div className="flex flex-col p-2">
                 <div className="w-full pb-2">
-                    <p>Saying goodbye is not the end, it's a new beginning filled with the promise of new adventures and opportunities. Farewell, and may our paths cross again on this journey called life!</p>
+                    <p>{`Saying goodbye is not the end, it's a new beginning filled with the promise of new adventures and opportunities. Farewell, and may our paths cross again on this journey called life!`}</p>
                 </div>
 
                 <div className="w-full text-right pb-2">

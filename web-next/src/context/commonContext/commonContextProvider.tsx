@@ -7,14 +7,14 @@ interface CommonProviderProps {
 }
 
 export const CommonContext = createContext<CommonContextInterface>({
-    monitorExpanded: false,
-    toggleMonitorExpanded: (toggle: boolean | undefined) => { },
+    darkMode: false,
+    toggleDarkMode: (toggle: boolean | undefined) => { },
     cache: {},
-    setCache: (data: CacheType) => { }
+    setCache: (data: CacheType) => { },
 });
 
 export const CommonContextProvider = ({ children }: CommonProviderProps) => {
-    const [monitorExpanded, setMonitorExpanded] = useState(false);
+    const [darkMode, setDarkMode] = useState(false);
     const [cache, setCache] = useState<CacheType>({});
 
     /**
@@ -23,15 +23,15 @@ export const CommonContextProvider = ({ children }: CommonProviderProps) => {
      * @param toggle boolean | undefined
      * @returns void
      */
-    const toggleMonitorExpanded = (toggle: boolean | undefined) => {
+    const toggleDarkMode = (toggle: boolean | undefined) => {
         if (typeof toggle === 'boolean') {
-            setMonitorExpanded(toggle);
+            setDarkMode(toggle);
 
             return;
         }
 
         if (toggle === undefined) {
-            setMonitorExpanded(prev => !prev);
+            setDarkMode(prev => !prev);
 
             return;
         }
@@ -39,8 +39,8 @@ export const CommonContextProvider = ({ children }: CommonProviderProps) => {
 
     return (
         <CommonContext.Provider value={{
-            monitorExpanded,
-            toggleMonitorExpanded,
+            darkMode,
+            toggleDarkMode,
             cache,
             setCache
         }}>

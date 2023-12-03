@@ -40,11 +40,7 @@ const DoctorPage = async (props: Props) => {
 
             <div className="gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0">
                 <div className="lg:col-span-4 pb-4 lg:pb-0">
-                    <DoctorView
-                        doctor={doctor}
-                        prescriptions={prescriptions}
-                        healthTests={tests}>
-                    </DoctorView>
+                    <DoctorView doctor={doctor} prescriptions={prescriptions} healthTests={tests} />
                 </div>
 
                 <div className="lg:col-span-2">

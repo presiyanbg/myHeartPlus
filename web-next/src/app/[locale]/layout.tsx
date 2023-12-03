@@ -1,23 +1,21 @@
-import '../globals.css'
+import '../globals.css';
 
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { ErrorBoundary } from 'next/dist/client/components/error-boundary'
-import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
-
+// import BackgroundLayout from '@/components/layouts/background/background';
+import Loading from '@/components/loading/loading';
 import Navigation from '@/components/navigation/navigation';
 import ErrorHandler from '@/components/error/errorHandler';
-
-import BackgroundLayout from '@/components/layouts/background/background';
 import Footer from '@/components/footer/footer';
 import Providers from './providers';
 
-// Font awesome
-import "@fortawesome/fontawesome-svg-core/styles.css"
-import { config } from "@fortawesome/fontawesome-svg-core";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import Loading from '@/components/loading/loading';
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ['latin'] })
@@ -47,7 +45,7 @@ export default async function RootLayout({
     }
 
     return (
-        <html lang="en" className="overflow-x-hidden">
+        <html lang="en" suppressHydrationWarning>
             <body className="relative text-foreground bg-background">
                 <Providers>
                     <NextIntlClientProvider locale={locale} messages={messages}>
@@ -55,13 +53,13 @@ export default async function RootLayout({
 
                         <Suspense fallback={<Loading />}>
                             <ErrorBoundary errorComponent={ErrorHandler}>
-                                {children}
+                                <main className="min-h-screen">
+                                    {children}
+                                </main>
                             </ErrorBoundary>
                         </Suspense>
 
                         <Footer></Footer>
-
-                        {/* <BackgroundLayout></BackgroundLayout> */}
                     </NextIntlClientProvider>
                 </Providers>
             </body>
