@@ -45,7 +45,7 @@ const DoctorsList = (props: Props) => {
                 }
             </div>
 
-            <Pagination pagination={pagination} url='health-tests' onDataLoad={onDataLoad} />
+            <Pagination pagination={pagination} url='doctors' onDataLoad={onDataLoad} />
         </>
     )
 }
