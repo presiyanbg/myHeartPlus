@@ -5,26 +5,10 @@ import { UserContext } from '../../context/userContext/userContextProvider';
 import { LINKS } from "../../constants/links";
 import { useTranslations } from 'next-intl';
 import { NavbarItem, Link } from '@nextui-org/react';
-import { usePathname } from "next/navigation";
-import { CommonContext } from '@/context/commonContext/commonContextProvider';
 
 const NavigationLinks = () => {
-    const [linkColor, setLinkColor] = useState<string>('text-gray-500')
     const { isAuth } = useContext(UserContext);
-    const { darkMode } = useContext(CommonContext);
     const t = useTranslations();
-    const pathname = usePathname();
-
-    useEffect(() => {
-        if (darkMode == true) {
-            setLinkColor('text-gray-300');
-        }
-
-        if (darkMode == false) {
-            setLinkColor('text-gray-900');
-        }
-
-    }, [darkMode]);
 
     /**
      * Display only links marked with topLink flag
@@ -39,10 +23,8 @@ const NavigationLinks = () => {
                     if (link.topLink === true) {
                         return (
                             <NavbarItem key={uuid()}>
-                                <Link href={link.url}>
-                                    <span className={pathname == link?.url ? 'text-blue-500' : linkColor}>
-                                        {t(link.title)}
-                                    </span>
+                                <Link href={link.url} color="foreground">
+                                    {t(link.title)}
                                 </Link>
                             </NavbarItem>
                         )

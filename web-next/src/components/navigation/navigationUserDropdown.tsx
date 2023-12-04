@@ -6,20 +6,19 @@ import {
     DropdownMenu,
     DropdownItem,
     Button,
-    Avatar,
-    Image,
     Spinner,
-    Switch
+    Switch,
+    Avatar
 } from "@nextui-org/react";
 
 import { faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslations } from 'next-intl';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext/userContextProvider";
 import { v4 as uuid } from 'uuid';
 import { LoadingContext } from "@/context/loadingContext/loadingContextProvider";
 import { useRouter } from 'next/navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTheme } from "next-themes";
 import { CommonContext } from "@/context/commonContext/commonContextProvider";
 
@@ -89,7 +88,7 @@ const NavigationUserDropdown = () => {
                             <Button color="default" isIconOnly aria-label="user-menu" variant="bordered">
                                 {
                                     isAuth && (
-                                        <Image
+                                        <Avatar
                                             className="rounded-none"
                                             src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`}
                                             alt="User photo" />

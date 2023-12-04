@@ -7,9 +7,9 @@ const Loading = () => {
 
     return (
         <div className="w-full flex flex-col items-center justify-center h-screen gap-4">
-            <Spinner color="default" />
+            <Spinner color="primary" />
 
-            <span className="text-gray-800">{t('Loading')}...</span>
+            <span className="text-foreground">{t('Loading')}...</span>
         </div>
     )
 }

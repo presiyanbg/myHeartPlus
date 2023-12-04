@@ -53,8 +53,8 @@ const Login = ({ }: Props) => {
 
     return (
         <form onSubmit={handleSubmit} className="w-1/2 m-auto">
-            <div className="w-full flex justify-center pt-4 pb-9">
-                <Image src={Logo} className="h-32 w-32" alt="..." width={100} height={100} />
+            <div className="w-full pt-4 pb-9">
+                <Image src={Logo} className="h-32 w-32 m-auto" alt="myHeartPlus logo" height={1000} width={1000} />
             </div>
 
             {/* Email */}

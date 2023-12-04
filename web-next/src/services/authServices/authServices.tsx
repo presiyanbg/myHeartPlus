@@ -13,7 +13,7 @@ const AuthenticationServices = () => {
     }
 
     const register = (params: {}) => {
-        return api.post('/users/register', params, false);
+        return api.post('/users/register', params, true);
     }
 
     return {

@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import RegistrationLogic from './registrationLogic';
 import UserForm from '../../user/userForm/userForm';
-
 import { UserFormType } from '../../../ts/types';
+import { useTranslations } from 'next-intl';
 
 const Registration = () => {
     const [userData, setUserData] = useState<UserFormType>({
@@ -17,6 +17,7 @@ const Registration = () => {
     });
 
     const logic = RegistrationLogic();
+    const t = useTranslations();
 
     /**
      * Get user fields data 
@@ -27,6 +28,7 @@ const Registration = () => {
     const getUserData = (key: string, data: any) => {
         setUserData((prev: UserFormType) => {
             prev[key] = data;
+
             return prev;
         });
     }
@@ -39,24 +41,12 @@ const Registration = () => {
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
 
-        // Validate credentials
-        // if (email.length <= 10 || password.length <= 8) return;
-
         logic.register(userData);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <UserForm passData={getUserData}></UserForm>
-
-            <br />
-
-            <div className="row justify-content-start">
-                {/* Button submit */}
-                <div className="col-4">
-                    <button type="submit" className="w-100 btn btn-primary text-white">Register</button>
-                </div>
-            </div>
+        <form onSubmit={handleSubmit} className="w-2/3 m-auto">
+            <UserForm passData={getUserData} mode='registration' submitData={handleSubmit}></UserForm>
         </form>
     );
 }
