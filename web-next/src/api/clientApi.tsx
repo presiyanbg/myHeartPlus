@@ -3,11 +3,13 @@ import axios from "axios";
 import { useContext } from 'react';
 import { UserContext } from '../context/userContext/userContextProvider';
 import { LoadingContext } from "@/context/loadingContext/loadingContextProvider";
+import { NotificationContext } from "@/context/notificationContext/notificationContextProvider";
 
 const ClientSideApi = () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL + '/api';
     const { token } = useContext(UserContext);
     const { setLoading } = useContext(LoadingContext);
+    const { notify } = useContext(NotificationContext);
 
     /**
      * Post data to API
@@ -42,12 +44,13 @@ const ClientSideApi = () => {
         return axios(config)
             .then(function (response: any) {
                 setLoading(false);
+                notify(response?.data?.message, response?.status);
 
                 return response.data;
             })
             .catch(function (error: any) {
                 setLoading(false);
-                console.error(error);
+                notify(error?.response?.data?.message, error?.response?.status);
 
                 return {};
             });

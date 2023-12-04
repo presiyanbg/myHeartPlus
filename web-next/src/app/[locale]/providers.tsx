@@ -4,6 +4,7 @@ import CommonContextProvider from '@/context/commonContext/commonContextProvider
 import LoadingContextProvider from '@/context/loadingContext/loadingContextProvider';
 import NavigationContextProvider from '@/context/navigationContext/navigationContextProvider';
 import UserContextProvider from '@/context/userContext/userContextProvider';
+import NotificationContextProvider from '@/context/notificationContext/notificationContextProvider';
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { NextUIProvider } from '@nextui-org/react';
@@ -16,7 +17,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                     <LoadingContextProvider>
                         <UserContextProvider>
                             <NavigationContextProvider>
-                                {children}
+                                <NotificationContextProvider>
+                                    {children}
+                                </NotificationContextProvider>
                             </NavigationContextProvider>
                         </UserContextProvider>
                     </LoadingContextProvider>

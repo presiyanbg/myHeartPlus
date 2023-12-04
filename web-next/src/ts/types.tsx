@@ -222,6 +222,15 @@ type CacheType = {
     [key: string]: any;
 }
 
+/* Notifications Types */
+type NotificationType = {
+    message: string,
+    color: NextUIColorsType,
+}
+
+/* Next UI Types  */
+type NextUIColorsType = "success" | "default" | "primary" | "secondary" | "warning" | "danger" | undefined
+
 export type {
     NavLinkType,
     NavLinksType,
@@ -263,4 +272,8 @@ export type {
 
     PaginationType,
     CacheType,
+
+    NotificationType,
+
+    NextUIColorsType,
 }

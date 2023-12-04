@@ -6,6 +6,7 @@ import Navigation from '@/components/navigation/navigation';
 import ErrorHandler from '@/components/error/errorHandler';
 import Footer from '@/components/footer/footer';
 import Providers from './providers';
+import Notifications from '@/components/notifications/notificatins';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -50,6 +51,7 @@ export default async function RootLayout({
                 <Providers>
                     <NextIntlClientProvider locale={locale} messages={messages}>
                         <Navigation />
+                        <Notifications></Notifications>
 
                         <Suspense fallback={<Loading />}>
                             <ErrorBoundary errorComponent={ErrorHandler}>
