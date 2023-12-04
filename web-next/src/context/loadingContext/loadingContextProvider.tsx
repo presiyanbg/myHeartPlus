@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, createContext, useContext, useEffect } from "react";
+import Router from "next/navigation";
 
 interface LoadingProviderProps {
     children: React.ReactNode
@@ -26,17 +27,17 @@ export const LoadingContextProvider = ({ children }: LoadingProviderProps) => {
     }
 
     // Check for fully loaded page
-    useEffect(() => {
-        setTimeout(() => {
-            if (document?.readyState != 'complete') {
-                setLoading(true);
-            }
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         if (document?.readyState != 'complete') {
+    //             setLoading(true);
+    //         }
 
-            if (document?.readyState == 'complete') {
-                setLoading(false);
-            }
-        }, 10)
-    }, [])
+    //         if (document?.readyState == 'complete') {
+    //             setLoading(false);
+    //         }
+    //     }, 10)
+    // }, [])
 
     return (
         <LoadingContext.Provider value={{

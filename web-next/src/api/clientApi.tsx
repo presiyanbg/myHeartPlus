@@ -2,10 +2,12 @@
 import axios from "axios";
 import { useContext } from 'react';
 import { UserContext } from '../context/userContext/userContextProvider';
+import { LoadingContext } from "@/context/loadingContext/loadingContextProvider";
 
 const ClientSideApi = () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL + '/api';
     const { token } = useContext(UserContext);
+    const { setLoading } = useContext(LoadingContext);
 
     /**
      * Post data to API
@@ -17,6 +19,8 @@ const ClientSideApi = () => {
      * @returns object - Api response data
      */
     const post = async (url: string, data?: {}, formData: boolean = false) => {
+        setLoading(true);
+
         // Format data as json 
         if (!formData) {
             const qs = require('qs');
@@ -37,10 +41,15 @@ const ClientSideApi = () => {
 
         return axios(config)
             .then(function (response: any) {
+                setLoading(false);
+
                 return response.data;
             })
             .catch(function (error: any) {
+                setLoading(false);
                 console.error(error);
+
+                return {};
             });
     }
 

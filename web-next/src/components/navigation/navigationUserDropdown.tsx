@@ -25,12 +25,11 @@ import { CommonContext } from "@/context/commonContext/commonContextProvider";
 
 const NavigationUserDropdown = () => {
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
-    const [mounted, setMounted] = useState(false)
     const { isAuth, user } = useContext(UserContext);
     const { isLoading } = useContext(LoadingContext);
     const { darkMode } = useContext(CommonContext);
     const { toggleDarkMode } = useContext(CommonContext);
-    const { theme, setTheme } = useTheme();
+    const { setTheme } = useTheme();
     const t = useTranslations();
     const router = useRouter();
 
@@ -71,8 +70,6 @@ const NavigationUserDropdown = () => {
 
     // Initial checks 
     useEffect(() => {
-        setMounted(true);
-
         const storageDarkMode = JSON.parse(localStorage.getItem('darkMode') || '{}');
 
         if (storageDarkMode == null || storageDarkMode == undefined) {
@@ -82,8 +79,6 @@ const NavigationUserDropdown = () => {
 
         toggleDarkMode(!!storageDarkMode?.darkMode);
     }, []);
-
-    if (!mounted) return null
 
     return (
         <>
@@ -109,20 +104,15 @@ const NavigationUserDropdown = () => {
 
                         <DropdownMenu aria-label="User Actions">
                             {/* Profile page link */}
-                            {
-                                isAuth ? (
-                                    <DropdownItem
-                                        key={uuid()}
-                                        textValue={'profilePage'}
-                                        onClick={(e) => handleLinkClick(e, '/users/profile')}>
-                                        <span>
-                                            {t('Profile page')}
-                                        </span>
-                                    </DropdownItem>
-                                ) : (
-                                    <></>
-                                )
-                            }
+                            <DropdownItem
+                                key={uuid()}
+                                className={!isAuth ? 'hidden' : ''}
+                                textValue={'profilePage'}
+                                onClick={(e) => handleLinkClick(e, '/users/profile')}>
+                                <span>
+                                    {t('Profile page')}
+                                </span>
+                            </DropdownItem>
 
                             {/* Theme switch */}
                             <DropdownItem
