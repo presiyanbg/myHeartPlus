@@ -39,7 +39,9 @@ Route::post('image', [ImageController::class, 'uploadImage']);
 
 // Articles
 Route::post('articles', [ArticleController::class, 'index']);
+Route::post('articles/top', [ArticleController::class, 'indexTop']);
 Route::post('articles/view/{id}', [ArticleController::class, 'show']);
+Route::post('articles/updateViews/{id}', [ArticleController::class, 'updateViews']);
 
 // Doctors 
 Route::post('doctors', [DoctorController::class, 'index']);

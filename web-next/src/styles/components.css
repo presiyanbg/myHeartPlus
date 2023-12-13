@@ -185,3 +185,21 @@
         flex: 0 0 100%;
     }
 }
+
+.article-content * {
+    padding-bottom: 1rem;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6,
+.article-content h7 {
+    padding-bottom: 0.5rem;
+}
+
+.article-content p {
+    padding-bottom: 1rem;
+}

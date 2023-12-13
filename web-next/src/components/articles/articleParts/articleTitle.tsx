@@ -3,8 +3,8 @@ import { useTranslations } from 'next-intl';
 import { Tooltip } from "@nextui-org/react";
 import { ArticleType } from '@/ts/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faEye, faShare, faUser } from '@fortawesome/free-solid-svg-icons';
-import { parseDateAndTime } from '../../../utils/utils';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import ArticleStatistics from './articleStatistics';
 
 type Props = {
     article: ArticleType
@@ -33,25 +33,7 @@ const ArticleTitle = (props: Props) => {
 
                 {/* Article statistics */}
                 <p className={"text-small flex gap-4 pt-3 " + (props?.article?.text_color || 'text-black')}>
-                    {/* Current number of viewers */}
-                    <Tooltip content={t('Current readers') + ': ' + props?.article?.moment_views || '0'}>
-                        <FontAwesomeIcon icon={faEye} />
-                    </Tooltip>
-
-                    {/* Total views */}
-                    <Tooltip content={t('Total readers') + ': ' + props?.article?.total_views || '0'}>
-                        <FontAwesomeIcon icon={faUser} />
-                    </Tooltip>
-
-                    {/* Total shares */}
-                    <Tooltip content={t('Total shares') + ': ' + props?.article?.shares || '0'}>
-                        <FontAwesomeIcon icon={faShare} />
-                    </Tooltip>
-
-                    {/* Date created */}
-                    <Tooltip content={t('Date published') + ': ' + parseDateAndTime(props?.article?.created_at)}>
-                        <FontAwesomeIcon icon={faCalendar} />
-                    </Tooltip>
+                    <ArticleStatistics article={props?.article}></ArticleStatistics>
                 </p>
             </div>
         </div>

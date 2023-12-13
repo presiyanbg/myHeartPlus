@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Pagination from '@/components/pagination/pagination';
-import ArticleTitle from './articleTitle';
+import ArticleTitle from '../articleParts/articleTitle';
 
 import { v4 as uuid } from 'uuid';
 import { ArticlesType, PaginationType } from '../../../ts/types';
