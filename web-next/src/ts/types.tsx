@@ -198,7 +198,7 @@ type HealthTestSubmitParamsType = {
     user_id: number | string | undefined,
     test_id: number | string,
     result: number,
-    questions_and_answers: HealthTestQuestionsType,
+    questions_and_answers: string,
 }
 
 type HealthTestAdviceType = {
