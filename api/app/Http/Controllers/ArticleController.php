@@ -16,6 +16,33 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $articles = Article::orderByDesc('created_at')->paginate(10);
+
+        // Get name of article writer
+        foreach ($articles as $article) {
+            $writer = User::where('id', $article->writer_id)->first();
+
+            if ($writer) {
+                $article->writer = $writer->full_name;
+            }
+
+            if (!$writer) {
+                $article->writer = 'Presiyan Tsonevski';
+            }
+        }
+
+        return response([
+            'articles' => $articles
+        ], 200);
+    }
+
+    /**
+     * Get top articles ordered by views.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexTop()
+    {
         $articles = Article::orderByDesc('total_views')->paginate(10);
 
         // Get name of article writer
@@ -120,8 +147,11 @@ class ArticleController extends Controller
                 $page = Storage::disk('articles')->get($fileName);
             }
 
+            $writer = User::where('id', $article->writer_id)->first();
+
             return response([
                 'article' => $article,
+                'writer' => $writer,
                 'page' => $page,
             ], 200);
         }
@@ -154,6 +184,35 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         //
+    }
+
+    /**
+     * Update article moment and total views.
+     *
+     * @param  int  $id
+     * @param  int  $prev_id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateViews($id)
+    {
+        try {
+            $article = Article::where('id', $id)->first();
+
+            // Update articles views
+            Article::where('id', $article->id)
+                ->update([
+                    'total_views' => intval($article->total_views + 1),
+                    'moment_views' => intval($article->moment_views + 1),
+                ]);
+
+            return response([
+                'article' => $article,
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => 'Article was not found',
+            ], 404);
+        }
     }
 
     /**
