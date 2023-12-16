@@ -21,11 +21,7 @@ class MedicamentController extends Controller
 
         // Get category for medicament
         foreach ($medicaments as $medicament) {
-            $category = HealthCategory::where('id', $medicament->category_id)->first();
-
-            if ($category) {
-                $medicament->category = $category;
-            }
+            $medicament->category = HealthCategory::where('id', $medicament->category_id)->first();
         }
 
         return response([

@@ -278,6 +278,11 @@ class HealthTestController extends Controller
         // Load test questions and answers 
         $testQA = $this->showQuestionAndAnswers($test);
 
+        // Add category
+        if ($test->category_id > 0) {
+            $test->category = HealthCategory::where('id', $test->category_id)->first();
+        }
+
         return response([
             'test' => $test,
             'testQA' => $testQA,
