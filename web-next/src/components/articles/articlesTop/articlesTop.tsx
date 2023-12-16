@@ -37,7 +37,7 @@ const ArticlesTop = (props: Props) => {
                             </h1>
 
                             <div className=" pb-2">
-                                <div className="text-tiny text-white/60 uppercase font-bold text--3-lies">
+                                <div className="text-tiny text-white/60 uppercase font-bold text--3-lines">
                                     {firstArticle?.content}
                                 </div>
                             </div>

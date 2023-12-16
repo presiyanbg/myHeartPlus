@@ -8,6 +8,8 @@ import { HealthTestType, HealthTestsType, PaginationType } from "../../../ts/typ
 import { useState } from "react";
 import { scrollToElement } from "@/utils/utils";
 import { SELECTORS } from "@/constants/selectors";
+import { useTranslations } from "next-intl";
+import Filter from "@/components/common/filter/filter";
 
 type Props = {
     healthTests?: HealthTestsType,
@@ -17,6 +19,7 @@ type Props = {
 const HealthTestsList = (props: Props) => {
     const [tests, setTests] = useState<HealthTestsType>(props?.healthTests || []);
     const [pagination, setPagination] = useState<PaginationType>(props?.pagination as PaginationType);
+    const t = useTranslations();
 
     if (!tests) return (<></>);
 
@@ -36,11 +39,15 @@ const HealthTestsList = (props: Props) => {
 
     return (
         <>
-            {
-                tests.map((test: HealthTestType) => {
-                    return (<HealthTestLink test={test} key={uuid()}></HealthTestLink>);
-                })
-            }
+            <Filter title={t('Health checks')}></Filter>
+
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 pb-5">
+                {
+                    tests.map((test: HealthTestType) => {
+                        return (<HealthTestLink test={test} key={uuid()}></HealthTestLink>);
+                    })
+                }
+            </div>
 
             <Pagination pagination={pagination} url='health-tests' onDataLoad={onDataLoad}></Pagination>
         </>

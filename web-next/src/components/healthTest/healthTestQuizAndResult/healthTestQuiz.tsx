@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { HealthTestAnswerType, HealthTestAnswersType, HealthTestQuestionType, HealthTestQuestionsType } from "../../../ts/types";
 import { calculatePercentage } from "../../../utils/utils";
-import { Button, Progress, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
+import { Button, Card, CardBody, Progress, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
 
 type Props = {
     testID: number | string,
@@ -96,100 +96,104 @@ const HealthTestQuiz = (props: Props) => {
     if (!currentQuestion?.answers?.length) return (<></>);
 
     return (
-        <div className="row col-12 p-5 health-test--view">
-            {/* Questions and answers */}
-            {
-                !displayPreview && (
-                    <>
-                        {/* Title */}
-                        <div className="w-full pb-2 text-center">
-                            <h3>{currentQuestion?.title}</h3>
-                        </div>
+        <Card>
+            <CardBody>
+                <div className="p-5">
+                    {/* Questions and answers */}
+                    {
+                        !displayPreview && (
+                            <>
+                                {/* Title */}
+                                <div className="w-full pb-2 text-center">
+                                    <h3>{currentQuestion?.title}</h3>
+                                </div>
 
-                        {/* Description */}
-                        <div className="w-full pb-3 text-center">
-                            <p>{currentQuestion.description}</p>
-                        </div>
+                                {/* Description */}
+                                <div className="w-full pb-3 text-center">
+                                    <p>{currentQuestion.description}</p>
+                                </div>
 
-                        {/* Answers buttons */}
-                        <div className="flex gap-4 justify-center pt-2 pb-3">
-                            {
-                                currentQuestion?.answers?.map((answer: HealthTestAnswerType) => {
-                                    return (
-                                        <Button color="primary"
-                                            variant="bordered"
-                                            onClick={() => submitAnswer(answer)}
-                                            key={uuid()}>
-                                            {answer.content}
-                                        </Button>
-                                    )
-                                })
-                            }
-                        </div>
+                                {/* Answers buttons */}
+                                <div className="flex gap-4 justify-center pt-2 pb-3">
+                                    {
+                                        currentQuestion?.answers?.map((answer: HealthTestAnswerType) => {
+                                            return (
+                                                <Button color="primary"
+                                                    variant="bordered"
+                                                    onClick={() => submitAnswer(answer)}
+                                                    key={uuid()}>
+                                                    {answer.content}
+                                                </Button>
+                                            )
+                                        })
+                                    }
+                                </div>
 
-                        {/* Questions progress bar */}
-                        <div className="py-5">
-                            <Progress value={calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)}
-                                aria-label={`${calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)}%`} />
-                        </div>
-                    </>
-                )
-            }
+                                {/* Questions progress bar */}
+                                <div className="py-5">
+                                    <Progress value={calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)}
+                                        aria-label={`${calculatePercentage(props.testQA.length, currentQuestion.order_number - 1)}%`} />
+                                </div>
+                            </>
+                        )
+                    }
 
-            {/* Preview */}
-            {
-                displayPreview && (
-                    <>
-                        <div className="py-3 text-center">
-                            <h3>{t('Answers preview')}</h3>
-                        </div>
+                    {/* Preview */}
+                    {
+                        displayPreview && (
+                            <>
+                                <div className="py-3 text-center">
+                                    <h3>{t('Answers preview')}</h3>
+                                </div>
 
-                        <div className="py-2">
-                            <Table removeWrapper aria-labelledby="Table with final answers">
-                                <TableHeader>
-                                    <TableColumn>{t('Question')}</TableColumn>
-                                    <TableColumn>{t('Answer')}</TableColumn>
-                                </TableHeader>
+                                <div className="py-2">
+                                    <Table removeWrapper aria-labelledby="Table with final answers">
+                                        <TableHeader>
+                                            <TableColumn>{t('Question')}</TableColumn>
+                                            <TableColumn>{t('Answer')}</TableColumn>
+                                        </TableHeader>
 
-                                <TableBody items={finalQA}>
-                                    {(item) => (
-                                        <TableRow key={uuid()}>
-                                            <TableCell>{item?.title}</TableCell>
-                                            <TableCell>{item?.final_answer?.content}</TableCell>
-                                        </TableRow>
-                                    )}
-                                </TableBody>
-                            </Table>
-                        </div>
+                                        <TableBody items={finalQA}>
+                                            {(item) => (
+                                                <TableRow key={uuid()}>
+                                                    <TableCell>{item?.title}</TableCell>
+                                                    <TableCell>{item?.final_answer?.content}</TableCell>
+                                                </TableRow>
+                                            )}
+                                        </TableBody>
+                                    </Table>
+                                </div>
 
-                        {/* Submit test final answers */}
-                        <div className="flex w-full justify-center">
-                            <Button color="primary"
-                                variant="shadow"
-                                onClick={() => submitTestResult()}>
-                                {t('Calculate result')}
-                            </Button>
-                        </div>
-                    </>
-                )
-            }
+                                {/* Submit test final answers */}
+                                <div className="flex w-full justify-center">
+                                    <Button color="primary"
+                                        variant="shadow"
+                                        onClick={() => submitTestResult()}>
+                                        {t('Calculate result')}
+                                    </Button>
+                                </div>
+                            </>
+                        )
+                    }
 
-            {/* Pagination */}
-            <div className="flex w-full pt-3">
-                {/* Check to display previous button  */}
-                {
-                    !!(currentQuestion?.id > 1) && (
-                        <Button color="primary" variant="light"
-                            startContent={<FontAwesomeIcon icon={faArrowLeft} />}
-                            onClick={() => displayPreviousQuestion()}>
-                            {t('Previous question')}
-                        </Button>
+                    {/* Pagination */}
+                    <div className="flex w-full pt-3">
+                        {/* Check to display previous button  */}
+                        {
+                            !!(currentQuestion?.id > 1) && (
+                                <Button color="primary" variant="light"
+                                    startContent={<FontAwesomeIcon icon={faArrowLeft} />}
+                                    onClick={() => displayPreviousQuestion()}>
+                                    {t('Previous question')}
+                                </Button>
 
-                    )
-                }
-            </div>
-        </div>
-    )
+                            )
+                        }
+                    </div>
+                </div>
+            </CardBody>
+        </Card>
+    );
 }
 
 export default HealthTestQuiz;

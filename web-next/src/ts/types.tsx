@@ -121,6 +121,7 @@ type MedicamentType = {
     rating: number,
     title: string,
     description: string,
+    image: string,
     created_at: string,
     updated_at: string,
     category: undefined | HealthCategoryType,

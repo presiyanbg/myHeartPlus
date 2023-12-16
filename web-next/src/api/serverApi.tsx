@@ -25,7 +25,7 @@ const ServerSideApi = () => {
 
         // Load cached data
         if (loadCache) {
-            config.next = { revalidate: 3600 };
+            config.next = { revalidate: 0 };
         }
 
         // Load new data

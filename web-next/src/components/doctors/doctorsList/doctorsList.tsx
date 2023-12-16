@@ -7,6 +7,8 @@ import { scrollToElement } from "@/utils/utils";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import DoctorLink from "../doctorLink/doctorLink";
+import Filter from "@/components/common/filter/filter";
+import { useTranslations } from "next-intl";
 
 type Props = {
     doctors: DoctorsType,
@@ -16,6 +18,7 @@ type Props = {
 const DoctorsList = (props: Props) => {
     const [doctors, setDoctors] = useState<DoctorsType>(props?.doctors || []);
     const [pagination, setPagination] = useState<PaginationType>(props?.pagination as PaginationType);
+    const t = useTranslations();
 
     if (!doctors) return (<></>);
 
@@ -35,7 +38,9 @@ const DoctorsList = (props: Props) => {
 
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Filter title={t('Doctors')}></Filter>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 gap-4 pb-5">
                 {
                     doctors?.map((doctor: DoctorType) => {
                         return (

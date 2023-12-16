@@ -4,6 +4,9 @@ import MedicamentLink from "@/components/medicaments/medicamentLink/medicamentsL
 
 import { HealthTestAdviceType } from "../../../ts/types";
 import { useTranslations } from "next-intl";
+import { Card, CardBody, ScrollShadow } from "@nextui-org/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
     advice: HealthTestAdviceType | undefined
@@ -12,32 +15,40 @@ type Props = {
 const HealthTestResult = (props: Props) => {
     const t = useTranslations();
 
-    if (!props.advice) return <> No advice based on your results </>;
+    if (!props.advice) return (<Card>
+        <CardBody>
+            {t('No advice based on your results')}
+        </CardBody>
+    </Card>);
 
     return (
-        <div className="row">
-            <div className="row pb-5">
-                <div className="col-12 pb-2">
-                    <h3>{props.advice?.title}</h3>
-                </div>
+        <>
+            <span className="text-2xl pb-2">{props.advice?.title}:</span>
 
-                <div className="col-12">
-                    <p>{props.advice.content}</p>
-                </div>
-            </div>
+            <Card>
+                <CardBody>
+                    <ScrollShadow className="h-[200px]">
+                        <p>{props.advice.content}</p>
+                    </ScrollShadow>
+                </CardBody>
+            </Card>
+
+            <div className="py-3"></div>
 
             {/* Prescriptions */}
             {
                 props.advice.prescription && (
-                    <div className="row">
-                        <div className="col-12">
-                            <h4 className="pb-3">{t('Suggested treatment based on your result')}</h4>
-                        </div>
+                    <>
+                        <span className="text-2xl">
+                            {t('Suggested treatment based on your result')}:
+                        </span>
 
-                        <div className="col-12">
-                            <PrescriptionLink prescription={props.advice.prescription}></PrescriptionLink>
-                        </div>
-                    </div>
+                        <div className="py-1"></div>
+
+                        <PrescriptionLink prescription={props.advice.prescription}></PrescriptionLink>
+
+                        <div className="py-3"></div>
+                    </>
                 )
             }
 
@@ -45,9 +56,11 @@ const HealthTestResult = (props: Props) => {
             {
                 props.advice.medicament && (
                     <div className="row">
-                        <div className="col-12">
-                            <h4 className="pb-3">{t('Suggested medicament based on your result')}</h4>
-                        </div>
+                        <span className="text-2xl">
+                            {t('Suggested medicament based on your result')}:
+                        </span>
+
+                        <div className="py-1"></div>
 
                         <div className="col-12">
                             <MedicamentLink medicament={props.advice.medicament}></MedicamentLink>
@@ -55,7 +68,7 @@ const HealthTestResult = (props: Props) => {
                     </div>
                 )
             }
-        </div>
+        </>
     )
 }
 

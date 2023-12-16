@@ -1,14 +1,15 @@
 'use client';
 
 import Pagination from "@/components/pagination/pagination";
+import Filter from "@/components/common/filter/filter";
+import PrescriptionLink from "../prescriptionLink/prescriptionLink";
+
 import { SELECTORS } from "@/constants/selectors";
 import { PaginationType, PrescriptionType, PrescriptionsType } from "@/ts/types";
 import { scrollToElement } from "@/utils/utils";
-import { Card, CardHeader } from "@nextui-org/react";
-import Link from "next/link";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import PrescriptionLink from "../prescriptionLink/prescriptionLink";
+import { useTranslations } from "next-intl";
 
 type Props = {
     prescriptions: PrescriptionsType,
@@ -18,6 +19,7 @@ type Props = {
 const PrescriptionsList = (props: Props) => {
     const [prescriptions, setPrescriptions] = useState<PrescriptionsType>(props?.prescriptions || []);
     const [pagination, setPagination] = useState<PaginationType>(props?.pagination as PaginationType);
+    const t = useTranslations();
 
     if (!prescriptions) return (<></>);
 
@@ -37,13 +39,18 @@ const PrescriptionsList = (props: Props) => {
 
     return (
         <>
-            {
-                prescriptions?.map((prescription: PrescriptionType) => {
-                    return (
-                        <PrescriptionLink prescription={prescription} key={uuid()}></PrescriptionLink>
-                    )
-                })
-            }
+            <Filter title={t('Тreatments')}></Filter>
+
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 pb-5">
+                {
+                    prescriptions?.map((prescription: PrescriptionType) => {
+                        return (
+                            <PrescriptionLink prescription={prescription} key={uuid()}></PrescriptionLink>
+                        )
+                    })
+                }
+            </div>
+
 
             <Pagination pagination={pagination} url='health-tests' onDataLoad={onDataLoad} />
         </>

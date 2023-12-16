@@ -43,24 +43,20 @@ const HealthTestQuizAndResult = (props: Props) => {
     if (!test || !testQA) return (<></>);
 
     return (
-        <div className="wrapper">
-            <div className="page article-page">
-                <Suspense fallback={<Spinner />}>
-                    {/* Empty element used for auto scroll on page change */}
-                    <div className={`${SELECTORS.anchorScroll} t-nav`}></div>
+        <Suspense fallback={<Spinner />}>
+            {/* Empty element used for auto scroll on page change */}
+            <div className={`${SELECTORS.anchorScroll} t-nav`}></div>
 
-                    {/* Show test view */}
-                    {
-                        !showResult && <HealthTestQuiz testID={test?.id} testQA={testQA} submitTest={handleTestSubmit}></HealthTestQuiz>
-                    }
+            {/* Show test view */}
+            {
+                !showResult && <HealthTestQuiz testID={test?.id} testQA={testQA} submitTest={handleTestSubmit}></HealthTestQuiz>
+            }
 
-                    {/* Show test result */}
-                    {
-                        showResult && <HealthTestResult advice={advice}></HealthTestResult>
-                    }
-                </Suspense>
-            </div>
-        </div>
+            {/* Show test result */}
+            {
+                showResult && <HealthTestResult advice={advice}></HealthTestResult>
+            }
+        </Suspense>
     )
 }
 

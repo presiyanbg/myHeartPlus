@@ -1,3 +1,4 @@
+import HealthTestDescription from "@/components/healthTest/healthTestDescription/healthTestDescription";
 import HealthTestQuizAndResult from "@/components/healthTest/healthTestQuizAndResult/healthTestQuizAndResult";
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import PageTitle from "@/components/layouts/pageTitle/pageTitle";
@@ -31,21 +32,17 @@ const HealthTestPage = async (props: Props) => {
                 <Divider></Divider>
 
                 <CardBody>
-                    {test?.description}
+                    <HealthTestDescription test={test}></HealthTestDescription>
                 </CardBody>
             </Card>
 
             <div className="py-3"></div>
 
-            <Card>
-                <CardBody>
-                    {
-                        !!(testQA?.length) && (
-                            <HealthTestQuizAndResult test={test} testQA={testQA}></HealthTestQuizAndResult>
-                        )
-                    }
-                </CardBody>
-            </Card>
+            {
+                !!(testQA?.length) && (
+                    <HealthTestQuizAndResult test={test} testQA={testQA}></HealthTestQuizAndResult>
+                )
+            }
         </PageLayout>
     )
 }

@@ -5,6 +5,7 @@ import SidePanel from "@/components/sidePanel/sidePanel";
 import ArticleServices from "@/services/articlesServices/articlesServices";
 
 import { ArticleType, ArticlesType, UserType } from "@/ts/types";
+import { parseDateAndTime } from "@/utils/utils";
 import { Avatar, Card, CardBody, CardHeader, Divider, Image } from "@nextui-org/react";
 import Link from "next/link";
 
@@ -30,29 +31,54 @@ const ArticlePage = async (props: Props) => {
 
     return (
         <PageLayout>
-            <div className="gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0">
+            <div className="gap-4 flex-col lg:grid lg:grid-cols-6 px-3 lg:px-0 pt-10">
                 <div className="lg:col-span-4">
                     <Card>
-                        <CardHeader>
+                        <CardBody>
                             <PageTitle title={article.title}
                                 breadCrumbs={[
                                     { url: "/", title: 'Home' }
                                 ]}
                             ></PageTitle>
+                        </CardBody>
+                    </Card>
+
+                    <div className="py-3"></div>
+
+                    <Card>
+                        <CardHeader>
+                            <div className="flex flex-col w-full">
+                                {/* Title */}
+                                <h1 className="text-3xl pb-3">{article?.title}</h1>
+
+                                <div className="flex flex-wrap justify-between items-center text-gray-600">
+                                    {/* Author */}
+                                    <span className="pr-2">
+                                        <Link href={`/users/${writer?.id}`}
+                                            className="flex gap-4 items-center hover:text-blue-500">
+                                            <Avatar src={`${process.env.NEXT_PUBLIC_API_URL}/${writer?.image}`} size="sm" />
+
+                                            {writer?.full_name}
+                                        </Link>
+                                    </span>
+
+
+                                    {/* Date created */}
+                                    <span>
+                                        {parseDateAndTime(article.created_at)}
+                                    </span>
+
+                                    {/* Statistics */}
+                                    <span className="w-full sm:w-auto text-small flex gap-4 pt-4 sm:pt-0">
+                                        <ArticleStatistics article={article}></ArticleStatistics>
+                                    </span>
+                                </div>
+                            </div>
                         </CardHeader>
 
                         <Divider></Divider>
 
                         <CardBody>
-                            {/* Title */}
-                            <h1>{article?.title}</h1>
-
-                            {/* Statistics */}
-                            <div className="text-gray-600 px-1 pb-5 text-small flex gap-4 justify-end">
-                                <ArticleStatistics article={article}></ArticleStatistics>
-                            </div>
-
-
                             {/* Article image */}
                             <Image
                                 isZoomed
@@ -73,12 +99,7 @@ const ArticlePage = async (props: Props) => {
                                     <>
                                         <Divider></Divider>
 
-                                        <Link href={`/users/${writer?.id}`}
-                                            className="w-1/2 flex gap-4 pt-4 items-center hover:text-blue-500">
-                                            <Avatar src={`${process.env.NEXT_PUBLIC_API_URL}/${writer?.image}`} size="sm" />
 
-                                            {writer?.full_name}
-                                        </Link>
                                     </>
                                 )
                             }
