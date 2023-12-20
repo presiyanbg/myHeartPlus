@@ -232,6 +232,16 @@ type NotificationType = {
 /* Next UI Types  */
 type NextUIColorsType = "success" | "default" | "primary" | "secondary" | "warning" | "danger" | undefined
 
+/* Side Panel Types */
+type SidePanelItemType = {
+    id: number,
+    title: string,
+    content: string,
+    image?: string,
+}
+
+type SidePanelListType = Array<SidePanelItemType>;
+
 export type {
     NavLinkType,
     NavLinksType,
@@ -277,4 +287,7 @@ export type {
     NotificationType,
 
     NextUIColorsType,
+
+    SidePanelItemType,
+    SidePanelListType,
 }

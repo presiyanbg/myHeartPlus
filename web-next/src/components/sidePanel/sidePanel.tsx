@@ -1,9 +1,10 @@
 'use client';
 import UserDailyStatistics from "../user/userDailyStatistics/userDailyStatistics";
-import ArticlesListSmall from "../articles/articlesList/articlesListSmall";
 
 import { Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
-import { ArticlesType, DoctorsType, HealthTestsType } from "@/ts/types";
+import { ArticleType, ArticlesType, DoctorsType, HealthTestType, HealthTestsType } from "@/ts/types";
+import SidePanelSmallList from "./sidePanelSmallList";
+import SidePanelLogic from "./sidePanelLogic";
 
 type Props = {
     bodyData?: ArticlesType | DoctorsType | HealthTestsType | any,
@@ -11,6 +12,9 @@ type Props = {
 }
 
 const SidePanel = async (props: Props) => {
+    const logic = SidePanelLogic();
+    const data = logic.formatBodyData(props.bodyDataType || '', props.bodyData);
+
     return (
         <Card className="w-full">
             <CardHeader className="w-full">
@@ -20,12 +24,8 @@ const SidePanel = async (props: Props) => {
             <Divider />
 
             <CardBody>
-                {/* Articles */}
-                {
-                    props?.bodyDataType == 'articles' &&
-                    props?.bodyData != undefined &&
-                    <ArticlesListSmall articles={props?.bodyData as ArticlesType} />
-                }
+                {/* Data list */}
+                <SidePanelSmallList title={data?.title} data={data?.content} url={data?.url} />
             </CardBody>
 
             <Divider />

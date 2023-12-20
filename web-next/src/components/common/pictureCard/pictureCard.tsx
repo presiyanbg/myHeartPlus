@@ -54,7 +54,7 @@ const PictureCard = (props: Props) => {
                         <div>
                             {/* Title and rating */}
                             <div className="pr-2 flex flex-col md:flex-row justify-between pb-2">
-                                <h4 className="pb-2 md:pb-0">{props.title}</h4>
+                                <h4 className="pb-2 md:pb-0 text-foreground">{props.title}</h4>
 
                                 {
                                     !!(props.rating != undefined && props.rating != null) && (
@@ -66,7 +66,7 @@ const PictureCard = (props: Props) => {
 
                             {/* Content */}
                             <div className="py-2 pb-4">
-                                <p className="text-black text-tiny text--5-lines">
+                                <p className="text-foreground-500 text-tiny text--5-lines">
                                     {props.content}
                                 </p>
                             </div>

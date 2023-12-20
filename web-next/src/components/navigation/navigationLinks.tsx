@@ -1,14 +1,30 @@
 'use client';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 import { UserContext } from '../../context/userContext/userContextProvider';
 import { LINKS } from "../../constants/links";
 import { useTranslations } from 'next-intl';
 import { NavbarItem, Link } from '@nextui-org/react';
+import { usePathname } from 'next/navigation';
 
 const NavigationLinks = () => {
     const { isAuth } = useContext(UserContext);
     const t = useTranslations();
+
+    // Get active link
+    const pathnamesArray = usePathname()?.split('/') || [];
+    const localePaths = ['bg', 'en'];
+    let mainPath = '/';
+
+    // Get active link when default localization  
+    if (pathnamesArray?.length > 0 && !localePaths.includes(pathnamesArray[1])) {
+        mainPath = '/' + pathnamesArray[1];
+    }
+
+    // Get active link when localization is active
+    if (pathnamesArray?.length > 0 && localePaths.includes(pathnamesArray[1])) {
+        mainPath = '/' + pathnamesArray[2];
+    }
 
     /**
      * Display only links marked with topLink flag
@@ -23,7 +39,7 @@ const NavigationLinks = () => {
                     if (link.topLink === true) {
                         return (
                             <NavbarItem key={uuid()}>
-                                <Link href={link.url} color="foreground">
+                                <Link href={link.url} color={(mainPath == link.url) ? 'primary' : 'foreground'}>
                                     {t(link.title)}
                                 </Link>
                             </NavbarItem>

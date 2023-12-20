@@ -31,7 +31,7 @@ const ArticlePage = async (props: Props) => {
 
     return (
         <PageLayout>
-            <div className="gap-4 flex-col lg:grid lg:grid-cols-6 px-3 lg:px-0 pt-10">
+            <div className="gap-4 flex-col lg:grid lg:grid-cols-6 px-3 lg:px-0">
                 <div className="lg:col-span-4">
                     <Card>
                         <CardBody>
