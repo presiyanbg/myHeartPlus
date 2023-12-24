@@ -1,4 +1,4 @@
-import HealthTestDescription from "@/components/healthTest/healthTestDescription/healthTestDescription";
+import PageDescription from "@/components/common/pageDescription/pageDescription";
 import HealthTestQuizAndResult from "@/components/healthTest/healthTestQuizAndResult/healthTestQuizAndResult";
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import PageTitle from "@/components/layouts/pageTitle/pageTitle";
@@ -32,7 +32,12 @@ const HealthTestPage = async (props: Props) => {
                 <Divider></Divider>
 
                 <CardBody>
-                    <HealthTestDescription test={test}></HealthTestDescription>
+                    <PageDescription title={test?.title}
+                        description={test?.description}
+                        rating={test?.rating}
+                        created_at={test?.created_at}
+                        category={test?.category}>
+                    </PageDescription>
                 </CardBody>
             </Card>
 

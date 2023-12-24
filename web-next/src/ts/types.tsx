@@ -141,6 +141,7 @@ type PrescriptionType = {
     updated_at: string,
     medicaments_array: string | MedicamentsType,
     category: undefined | HealthCategoryType,
+    doctor: undefined | DoctorType
 }
 
 type PrescriptionsType = Array<PrescriptionType>;

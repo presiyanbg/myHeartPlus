@@ -28,7 +28,7 @@ class Medicament extends Model
      * @param  string array of connected medicaments 
      * @return array App\Models\Medicament
      */
-    public static function shotMedicaments($medicamentsIDs)
+    public static function showMedicaments($medicamentsIDs)
     {
         $medicamentsIDs = json_decode($medicamentsIDs);
         $medicaments = [];

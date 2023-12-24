@@ -1,4 +1,4 @@
-import { ArticleType, HealthTestType, SidePanelListType } from "@/ts/types";
+import { ArticleType, HealthTestType, MedicamentType, PrescriptionType, SidePanelListType } from "@/ts/types";
 
 const SidePanelLogic = () => {
     const formatBodyData = (dataType: string, data: any) => {
@@ -33,6 +33,34 @@ const SidePanelLogic = () => {
                 });
 
                 break;
+
+            case 'prescriptions':
+                title = 'Top prescriptions';
+                url = '/prescriptions';
+                content = data?.map((item: PrescriptionType) => {
+                    return {
+                        id: item.id,
+                        title: item.title,
+                        content: item.description,
+                    };
+                });
+
+                break;
+
+            case 'medicaments':
+                title = 'Top medicaments';
+                url = '/medicaments';
+                content = data?.map((item: MedicamentType) => {
+                    return {
+                        id: item.id,
+                        title: item.title,
+                        content: item.description,
+                        image: item.image
+                    };
+                });
+
+                break;
+
             default:
                 break;
         }

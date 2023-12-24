@@ -109,7 +109,7 @@ class PrescriptionController extends Controller
         }
 
         // Load medicaments
-        $prescription->medicaments_array = Medicament::shotMedicaments($prescription->medicaments_array);
+        $prescription->medicaments_array = Medicament::showMedicaments($prescription->medicaments_array);
 
         // Load category 
         $prescription->category = HealthCategory::where('id', $prescription->category_id)->first();

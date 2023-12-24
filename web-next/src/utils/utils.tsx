@@ -255,3 +255,23 @@ export const parseDateAndTime = (dateString: string, format?: string): string =>
 
     return parsedDate;
 }
+
+/**
+ * Format number to locale price format 
+ * 
+ * @param value string | number - Price to be formatted
+ * @returns string - Formatted price
+ */
+export const formatCurrency = (value: string | number): string => {
+    if (!value) {
+        value = Number(0);
+    }
+
+    if (typeof value == 'string') {
+        value = Number(value);
+    }
+
+    value = (value).toLocaleString("en-US", { style: "currency", currency: "USD" });
+
+    return value;
+}
