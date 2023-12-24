@@ -21,6 +21,8 @@ const MedicamentPage = async (props: Props) => {
     const sidePanelData: any = await MedicamentsServices().medicamentsList();
     const medicaments: MedicamentsType = await sidePanelData?.medicaments?.data || [];
 
+    if (!medicament?.title?.length) return (<></>);
+
     return (
         <PageLayout>
             <div className="gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0">
@@ -61,12 +63,11 @@ const MedicamentPage = async (props: Props) => {
                                 </div>
 
                                 <div className="w-2/3">
-                                    <PageDescription title={medicament?.title}
-                                        description={medicament?.description}
-                                        rating={medicament?.rating}
-                                        created_at={medicament?.created_at}
-                                        category={medicament?.category}>
-                                    </PageDescription>
+                                    <PageDescription title={medicament.title}
+                                        description={medicament.description}
+                                        rating={medicament.rating}
+                                        created_at={medicament.created_at}
+                                        category={medicament.category} />
                                 </div>
                             </div>
                         </CardBody>

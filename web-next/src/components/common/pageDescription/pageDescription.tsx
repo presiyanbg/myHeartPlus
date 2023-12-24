@@ -10,7 +10,7 @@ type Props = {
     description: string,
     rating: number,
     created_at: string,
-    category?: HealthCategoryType,
+    category?: HealthCategoryType | undefined,
 }
 
 const PageDescription = (props: Props) => {

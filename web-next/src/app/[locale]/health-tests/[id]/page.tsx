@@ -17,6 +17,8 @@ const HealthTestPage = async (props: Props) => {
     const test: HealthTestType = await data?.test || {};
     const testQA: HealthTestQuestionsType = await data?.testQA || {};
 
+    if (!test?.title?.length) return (<></>);
+
     return (
         <PageLayout>
             <Card>
@@ -32,12 +34,11 @@ const HealthTestPage = async (props: Props) => {
                 <Divider></Divider>
 
                 <CardBody>
-                    <PageDescription title={test?.title}
-                        description={test?.description}
-                        rating={test?.rating}
-                        created_at={test?.created_at}
-                        category={test?.category}>
-                    </PageDescription>
+                    <PageDescription title={test.title}
+                        description={test.description}
+                        rating={test.rating}
+                        created_at={test.created_at}
+                        category={test.category} />
                 </CardBody>
             </Card>
 

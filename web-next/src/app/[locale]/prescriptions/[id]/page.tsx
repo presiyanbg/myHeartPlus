@@ -4,9 +4,11 @@ import PageTitle from "@/components/layouts/pageTitle/pageTitle";
 import MedicamentLink from "@/components/medicaments/medicamentLink/medicamentsLink";
 import SidePanel from "@/components/sidePanel/sidePanel";
 import PrescriptionsServices from "@/services/prescriptionsServices/prescriptionsServices";
+import Link from "next/link";
+
+import { v4 as uuid } from 'uuid';
 import { MedicamentType, MedicamentsType, PrescriptionType, PrescriptionsType } from "@/ts/types";
 import { Card, CardBody, CardFooter, CardHeader, Divider, User } from "@nextui-org/react";
-import Link from "next/link";
 
 type Props = {
     params: {
@@ -20,6 +22,8 @@ const PrescriptionPage = async (props: Props) => {
 
     const sidePanelData: any = await PrescriptionsServices().prescriptionsList();
     const prescriptions: PrescriptionsType = await sidePanelData?.prescriptions?.data || [];
+
+    if (!prescription?.title?.length) return (<></>);
 
     return (
         <PageLayout>
@@ -38,12 +42,11 @@ const PrescriptionPage = async (props: Props) => {
                         <Divider></Divider>
 
                         <CardBody>
-                            <PageDescription title={prescription?.title}
-                                description={prescription?.description}
-                                rating={prescription?.rating}
-                                created_at={prescription?.created_at}
-                                category={prescription?.category}>
-                            </PageDescription>
+                            <PageDescription title={prescription.title}
+                                description={prescription.description}
+                                rating={prescription.rating}
+                                created_at={prescription.created_at}
+                                category={prescription.category} />
                         </CardBody>
 
                         <Divider></Divider>
@@ -75,7 +78,7 @@ const PrescriptionPage = async (props: Props) => {
                                     {
                                         (prescription?.medicaments_array as MedicamentsType)?.map((medicament: MedicamentType) => {
                                             return (
-                                                <div className="pb-3">
+                                                <div className="pb-3" key={uuid()}>
                                                     <MedicamentLink medicament={medicament}></MedicamentLink>
                                                 </div>
                                             )
