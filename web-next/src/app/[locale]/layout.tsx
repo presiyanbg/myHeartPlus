@@ -46,7 +46,7 @@ export default async function RootLayout({
     }
 
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="bg-BG" suppressHydrationWarning>
             <body className="relative text-foreground bg-background">
                 <Providers>
                     <NextIntlClientProvider locale={locale} messages={messages}>
