@@ -129,10 +129,10 @@ export const arrayOrderByProp = (array: any[], key: string, reverse: boolean = f
 
     /** Compare function */
     const compare = (a: any, b: any) => {
-        if (a[key] < a[key]) {
+        if (a[key] < b[key]) {
             return -1;
         }
-        if (a[key] > a[key]) {
+        if (a[key] > b[key]) {
             return 1;
         }
         return 0;
