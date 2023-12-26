@@ -51,15 +51,16 @@ export default async function RootLayout({
                 <Providers>
                     <NextIntlClientProvider locale={locale} messages={messages}>
                         <Navigation />
+
                         <Notifications></Notifications>
 
-                        <Suspense fallback={<Loading />}>
-                            <ErrorBoundary errorComponent={ErrorHandler}>
+                        <ErrorBoundary errorComponent={ErrorHandler}>
+                            <Suspense fallback={<Loading />}>
                                 <main className="min-h-screen">
                                     {children}
                                 </main>
-                            </ErrorBoundary>
-                        </Suspense>
+                            </Suspense>
+                        </ErrorBoundary>
 
                         <Footer></Footer>
                     </NextIntlClientProvider>
