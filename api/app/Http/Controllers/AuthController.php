@@ -125,7 +125,6 @@ class AuthController extends Controller
                 'token' => $token,
                 'medical_profiles' => $medical_profiles,
                 'message' => 'Welcome!',
-                'test' => $request->hasFile('profile_picture')
             ], 200);
         } catch (Throwable $e) {
             return response([

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -109,7 +110,53 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = User::where('id', $id)->first();
+
+        try {
+            // Validate request 
+            $fields = $request->validate([
+                'first_name' => 'required|string',
+                'last_name' => 'required|string',
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'profile_picture' => 'nullable|file',
+            ]);
+
+            // Update user
+            $user = User::where('id', $id)
+                ->update([
+                    'first_name' => $fields['first_name'],
+                    'last_name' => $fields['last_name'],
+                    'full_name' => $fields['first_name'] . ' ' . $fields['last_name'],
+                    'email' => $fields['email'],
+                    'last_activity' => Carbon::now()->toDateTimeString(),
+                ]);
+
+            $user = User::where('id', $id)->first();
+
+            // Upload image
+            if ($request->hasFile('profile_picture')) {
+                $imageName = $user->id . '-' . time() . '.' . $request->profile_picture->extension();
+                $imagePath = 'images/users/' . $imageName;
+                $request->profile_picture->move(public_path('images/users'), $imageName);
+
+                $user->update(['image' => $imagePath]);
+            }
+
+            // Generate AUTH token
+            $token = $user->createToken('appToken')->plainTextToken;
+
+            return response([
+                'user' => $user,
+                'token' => $token,
+                'message' => 'Success',
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+
+            return false;
+        }
 
         return $user;
     }
