@@ -4,7 +4,7 @@ const ServerSideApi = () => {
     const token = '';
 
     /**
-     * Post data to API
+     * POST data to API
      * 
      * @param url string - API url that data is sended to
      * @param data object - Data for the API
@@ -13,8 +13,35 @@ const ServerSideApi = () => {
      * @returns object - Api response data
      */
     const post = async (url: string, data?: {}, loadCache: boolean = true) => {
+        return await request('POST', url, data, loadCache);
+    }
+
+    /**
+     * GET data from API
+     * 
+     * @param url string - API url that data is sended to
+     * @param data object - Data for the API
+     * @param loadCache boolean - Flag if data can be cached 
+     * 
+     * @returns object - Api response data
+     */
+    const get = async (url: string, data?: {}, loadCache: boolean = true) => {
+        return await request('GET', url, data, loadCache);
+    }
+
+    /**
+     * Request data from API
+     * 
+     * @param url string - API url that data is sended to
+     * @param data object - Data for the API
+     * @param loadCache boolean - Flag if data can be cached 
+     * @param method string - Set method type  
+     * 
+     * @returns object - Api response data
+     */
+    const request = async (method: 'GET' | 'POST', url: string, data?: {}, loadCache: boolean = true) => {
         const config = {
-            method: 'POST',
+            method: method,
             headers: {
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${token}`,
@@ -39,7 +66,8 @@ const ServerSideApi = () => {
     }
 
     return {
-        post
+        post,
+        get,
     }
 }
 

@@ -4,11 +4,11 @@ const PrescriptionsServices = () => {
     const api = ServerSideApi();
 
     const prescriptionsList = (page: number = 1) => {
-        return api.post(`/prescriptions?page=${page}`, undefined, false);
+        return api.get(`/prescriptions?page=${page}`, undefined, false);
     }
 
     const prescriptionShow = (id: number | string) => {
-        return api.post(`/prescriptions/view/${id}`, undefined, false);
+        return api.get(`/prescriptions/view/${id}`, undefined, false);
     }
 
     return {

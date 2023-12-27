@@ -4,11 +4,11 @@ const HealthTestsServices = () => {
     const api = ServerSideApi();
 
     const healthTestsList = (page: number = 1) => {
-        return api.post(`/health-tests?page=${page}`, undefined, false);
+        return api.get(`/health-tests?page=${page}`, undefined, false);
     }
 
     const healthTestShow = (id: number | string) => {
-        return api.post(`/health-tests/view/${id}`, undefined, false);
+        return api.get(`/health-tests/view/${id}`, undefined, false);
     }
 
     const healthTestPatientResults = (patient_id: number | string) => {

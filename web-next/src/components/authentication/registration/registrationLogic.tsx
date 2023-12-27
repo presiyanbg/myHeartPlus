@@ -16,8 +16,8 @@ const RegistrationLogic = () => {
         formData.append('email', params.email);
         formData.append('first_name', params.first_name);
         formData.append('last_name', params.last_name);
-        formData.append('password', params.password);
-        formData.append('password_confirmation', params.password_confirmation);
+        formData.append('password', params.password || '');
+        formData.append('password_confirmation', params.password_confirmation || '');
         formData.append('role', params.role ? 'doctor' : 'patient');
         formData.append('profile_picture', params.profile_picture);
 

@@ -15,7 +15,7 @@ const PaginationServices = () => {
         // Build url to prevent using plain urls that are not to the API
         const buildUrl = `/${url}?page=${page}`;
 
-        return api.post(buildUrl, undefined, false);
+        return api.get(buildUrl, undefined, false);
     }
 
     return {

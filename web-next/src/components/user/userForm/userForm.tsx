@@ -1,15 +1,17 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Checkbox, Input } from '@nextui-org/react';
-import { UserFormType } from '@/ts/types';
+import { UserFormType, UserType } from '@/ts/types';
 import { faCamera, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslations } from 'next-intl';
+import { checkSameObjects, setNativeValue } from '@/utils/utils';
 
 type Props = {
     passData: (key: string, data: any) => void,
     submitData: (event: React.SyntheticEvent) => void,
-    mode?: 'registration' | 'user-update'
+    mode?: 'registration' | 'user-update',
+    user?: UserType,
 }
 
 const UserForm = (props: Props) => {
@@ -104,16 +106,16 @@ const UserForm = (props: Props) => {
      * Enable submit button
      */
     const checkFormValid = () => {
-        const fieldsToCheck = [
-            'email',
-            'first_name',
-            'last_name',
-            'password',
-            'password_confirmation',
-        ];
-
         // Registration check
         if (props?.mode == 'registration') {
+            const fieldsToCheck = [
+                'email',
+                'first_name',
+                'last_name',
+                'password',
+                'password_confirmation',
+            ];
+
             let checkIsValid = true;
 
             fieldsToCheck.forEach(checkKey => {
@@ -130,15 +132,50 @@ const UserForm = (props: Props) => {
         }
 
         // User update check
-        if (props?.mode == 'user-update' && (formData['password'] || formData['password_confirmation'])) {
-            setFormValid(!passwordConfirmInvalid);
+        if (props?.mode == 'user-update') {
+            const formSpecificData = {
+                email: formData.email,
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+            };
+
+            const userSpecificData = {
+                email: props.user?.email,
+                first_name: props.user?.first_name,
+                last_name: props.user?.last_name,
+            }
+
+            const sameProfilePicture = (userProfilePicture == `${process.env.NEXT_PUBLIC_API_URL}/${props.user?.image}`);
+
+            setFormValid(!checkSameObjects(formSpecificData, userSpecificData) || !sameProfilePicture);
         }
     }
 
     // Update form valid on password change
     useEffect(() => {
         checkFormValid();
-    }, [formData, passwordConfirmInvalid]);
+    }, [formData, passwordConfirmInvalid, userProfilePicture]);
+
+    // Get user data on edit
+    useEffect(() => {
+        if (!props?.user?.id) return;
+
+        setFormData({
+            id: props.user.id,
+            email: props.user.email,
+            first_name: props.user.first_name,
+            last_name: props.user.last_name,
+            profile_picture: `${process.env.NEXT_PUBLIC_API_URL}/${props.user.image}`,
+        });
+
+        setUserProfilePicture(`${process.env.NEXT_PUBLIC_API_URL}/${props.user.image}`);
+
+        Object.keys(props.user).forEach(key => {
+            if (!document.getElementById(key) || !props.user) return;
+
+            setNativeValue(document.getElementById(key), props.user[key as keyof UserType]);
+        });
+    }, [props]);
 
     return (
         <>
@@ -148,10 +185,7 @@ const UserForm = (props: Props) => {
                     <Avatar
                         src={userProfilePicture}
                         showFallback
-                        fallback={
-                            <FontAwesomeIcon icon={faCamera} className="text-6xl text-foreground pointer-events-none" />
-
-                        }
+                        fallback={<FontAwesomeIcon icon={faCamera} className="text-6xl text-foreground pointer-events-none" />}
                         isBordered
                         alt="user profile picture"
                         onClick={() => { handleProfilePictureClick() }}
@@ -172,7 +206,7 @@ const UserForm = (props: Props) => {
                 <div className="px-4 w-1/2">
                     <Input type="text"
                         id="first_name"
-                        aria-describedby="first name input"
+                        aria-describedby="First name input"
                         placeholder="First name"
                         color="primary"
                         variant="bordered"
@@ -183,7 +217,7 @@ const UserForm = (props: Props) => {
                 <div className="px-4 w-1/2">
                     <Input type="text"
                         id="last_name"
-                        aria-describedby="last name input"
+                        aria-describedby="Last name input"
                         placeholder="Last name"
                         color="primary"
                         variant="bordered"
@@ -195,75 +229,79 @@ const UserForm = (props: Props) => {
             <div className="flex px-4 pb-4">
                 <Input type="email"
                     id="email"
-                    aria-describedby="email input"
+                    aria-describedby="Email input"
                     placeholder="Email address"
                     color="primary"
                     variant="bordered"
                     onChange={(e) => handleInputChange('email', e)} />
             </div >
 
-            {/* Passwords */}
-            <div className="flex">
-                {/* Password */}
-                <div className="px-4 w-1/2" >
-                    <Input
-                        id="exampleInputPassword1"
-                        placeholder="Password"
-                        aria-describedby="password input"
-                        color="primary"
-                        variant="bordered"
-                        onChange={(e) => handleInputChange('password', e)}
-                        type={passwordVisible ? "text" : "password"}
-                        endContent={
-                            <button className="focus:outline-none" type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
-                                {passwordVisible ? (
-                                    <FontAwesomeIcon icon={faEye} className="text-gray-500 pointer-events-none" />
-                                ) : (
-                                    <FontAwesomeIcon icon={faEyeSlash} className="text-gray-500 pointer-events-none" />
-                                )}
-                            </button>
-                        }
-                    />
-                </div >
 
-                {/* Password confirmation */}
-                <div className="px-4 w-1/2" >
-                    <Input
-                        isInvalid={passwordConfirmInvalid}
-                        id="password_confirmation"
-                        aria-describedby="password confirmation input"
-                        placeholder="Confirm Password"
-                        variant="bordered"
-                        onChange={(e) => handleInputChange('password_confirmation', e)}
-                        type={passwordVisible ? "text" : "password"}
-                        endContent={
-                            <button className="focus:outline-none" type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
-                                {passwordVisible ? (
-                                    <FontAwesomeIcon icon={faEye} className="text-gray-500 pointer-events-none" />
-                                ) : (
-                                    <FontAwesomeIcon icon={faEyeSlash} className="text-gray-500 pointer-events-none" />
-                                )}
-                            </button>
-                        } />
-                </div >
-            </div>
 
             {
                 !!(props?.mode == 'registration') && (
-                    <div className="pb-4 flex pt-4">
-                        {/* Roles */}
-                        <div className="px-4 w-1/2 pt-6">
-                            <Checkbox className="cursor--pointer"
-                                type="checkbox"
-                                value=""
-                                id="role"
-                                color="primary"
-                                aria-describedby="doctor registration check"
-                                onChange={(e) => handleInputChange('role', e)}>
-                                Doctor registration
-                            </Checkbox>
+                    <>
+                        {/* Passwords */}
+                        <div className="flex">
+                            {/* Password */}
+                            <div className="px-4 w-1/2" >
+                                <Input
+                                    id="exampleInputPassword1"
+                                    placeholder="Password"
+                                    aria-describedby="Password input"
+                                    color="primary"
+                                    variant="bordered"
+                                    onChange={(e) => handleInputChange('password', e)}
+                                    type={passwordVisible ? "text" : "password"}
+                                    endContent={
+                                        <button className="focus:outline-none" type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
+                                            {passwordVisible ? (
+                                                <FontAwesomeIcon icon={faEye} className="text-gray-500 pointer-events-none" />
+                                            ) : (
+                                                <FontAwesomeIcon icon={faEyeSlash} className="text-gray-500 pointer-events-none" />
+                                            )}
+                                        </button>
+                                    }
+                                />
+                            </div >
+
+                            {/* Password confirmation */}
+                            <div className="px-4 w-1/2" >
+                                <Input
+                                    isInvalid={passwordConfirmInvalid}
+                                    id="password_confirmation"
+                                    aria-describedby="Password confirmation input"
+                                    placeholder="Confirm Password"
+                                    variant="bordered"
+                                    onChange={(e) => handleInputChange('password_confirmation', e)}
+                                    type={passwordVisible ? "text" : "password"}
+                                    endContent={
+                                        <button className="focus:outline-none" type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
+                                            {passwordVisible ? (
+                                                <FontAwesomeIcon icon={faEye} className="text-gray-500 pointer-events-none" />
+                                            ) : (
+                                                <FontAwesomeIcon icon={faEyeSlash} className="text-gray-500 pointer-events-none" />
+                                            )}
+                                        </button>
+                                    } />
+                            </div >
                         </div>
-                    </div >
+
+                        <div className="pb-4 flex pt-4">
+                            {/* Roles */}
+                            <div className="px-4 w-1/2 pt-6">
+                                <Checkbox className="cursor--pointer"
+                                    type="checkbox"
+                                    value=""
+                                    id="role"
+                                    color="primary"
+                                    aria-describedby="Doctor registration check"
+                                    onChange={(e) => handleInputChange('role', e)}>
+                                    Doctor registration
+                                </Checkbox>
+                            </div>
+                        </div >
+                    </>
                 )
             }
 

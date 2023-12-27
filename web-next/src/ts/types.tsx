@@ -35,10 +35,10 @@ type UserFormType = {
     email: string,
     first_name: string,
     last_name: string,
-    password: string,
-    password_confirmation: string,
-    role: boolean,
     profile_picture: File | string,
+    password?: string,
+    password_confirmation?: string,
+    role?: boolean,
     [key: string]: any;
 }
 

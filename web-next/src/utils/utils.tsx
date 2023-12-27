@@ -2,9 +2,9 @@
  * Get element classes conditionally 
  * 
  * @param args boolean
- * @returns 
+ * @returns string
  */
-export const classNames = (...args: any[]) => {
+export const classNames = (...args: any[]): string => {
     return args.filter(Boolean).join(' ')
 }
 
@@ -16,7 +16,7 @@ export const classNames = (...args: any[]) => {
  * @param mode string -- 'opacity' or 'background'
  * @param maxOpacity number -- Max opacity that will be set on the object
  */
-export const changeOpacityOnScroll = (elem: React.RefObject<HTMLDivElement>, toggle: boolean, mode: 'opacity' | 'background', maxOpacity?: number) => {
+export const changeOpacityOnScroll = (elem: React.RefObject<HTMLDivElement>, toggle: boolean, mode: 'opacity' | 'background', maxOpacity?: number): void => {
     window.addEventListener('scroll', () => {
         if (!elem.current) return;
 
@@ -57,7 +57,7 @@ export const changeOpacityOnScroll = (elem: React.RefObject<HTMLDivElement>, tog
  * @param elemSelector string -- HTML Element selector 
  * @param horizontal number -- Scroll horizontally 
  */
-export const scrollToElement = (elemSelector: string, horizontal?: number) => {
+export const scrollToElement = (elemSelector: string, horizontal?: number): void => {
     const elem = document.querySelector(elemSelector);
 
     if (elem && !horizontal) {
@@ -71,7 +71,6 @@ export const scrollToElement = (elemSelector: string, horizontal?: number) => {
         });
     }
 }
-
 
 /**
  * Check if element can scroll more
@@ -101,7 +100,6 @@ export const checkElementCanScroll = (elemSelector: string): boolean => {
  * 
  * @param array array -- Array with objects to be filtered
  * @param key string -- Key for the object property  
- * 
  * @returns array
  */
 export const arrayFilterUnique = (array: any[], key: string): any[] => {
@@ -122,7 +120,6 @@ export const arrayFilterUnique = (array: any[], key: string): any[] => {
  * 
  * @param array array -- Array with object to be ordered by property
  * @param key string -- Property key
- * 
  * @returns array
  */
 export const arrayOrderByProp = (array: any[], key: string, reverse: boolean = false): any[] => {
@@ -149,10 +146,9 @@ export const arrayOrderByProp = (array: any[], key: string, reverse: boolean = f
  * Copy object and remove reference to main object
  * 
  * @param object object -- Object to make a copy from
- * 
  * @returns object
  */
-export const copyObject = (object: any) => {
+export const copyObject = (object: any): any => {
     return JSON.parse(JSON.stringify(object));
 }
 
@@ -163,7 +159,7 @@ export const copyObject = (object: any) => {
  * @param divider string -- Divider used to join the array of addresses
  * @returns string
  */
-export const buildAddress = (addresses: string[], divider: string = ',') => {
+export const buildAddress = (addresses: string[], divider: string = ','): string => {
     let build = '';
 
     addresses.forEach(address => {
@@ -182,14 +178,21 @@ export const buildAddress = (addresses: string[], divider: string = ',') => {
  * @param current number | any
  * @returns number
  */
-export const calculatePercentage = (total: number | any, current: number | any) => {
+export const calculatePercentage = (total: number | any, current: number | any): number => {
     total = Number(total);
     current = Number(current);
 
     return Number(((current / total) * 100).toFixed(2));
 }
 
-export const arraySimpleUnique = (array: any[], sort: boolean = false) => {
+/**
+ * Filter only unique objects in array
+ * 
+ * @param array any[] 
+ * @param sort boolean - Flag if you want array to be sorted 
+ * @returns any[]
+ */
+export const arraySimpleUnique = (array: any[], sort: boolean = false): any[] => {
     if (!array || !array.length) return [];
 
     array = array.filter((value: any, index: number) => {
@@ -203,8 +206,14 @@ export const arraySimpleUnique = (array: any[], sort: boolean = false) => {
     return array;
 }
 
-/** Sort simple array */
-export const arraySimpleSort = (a: any, b: any) => {
+/**
+ * Sort simple array
+ * 
+ * @param a any
+ * @param b any
+ * @returns number
+ */
+export const arraySimpleSort = (a: any, b: any): number => {
     if (a < b) {
         return -1;
     }
@@ -224,7 +233,6 @@ export const generateColor = (): string => {
 }
 
 /**
- * @TODO - Finish this 
  * Parse date from database 
  * 
  * @param dateString string
@@ -274,4 +282,45 @@ export const formatCurrency = (value: string | number): string => {
     value = (value).toLocaleString("en-US", { style: "currency", currency: "USD" });
 
     return value;
+}
+
+/**
+ * 
+ * @param element Input element
+ * @param value - Value to be inserted into the input
+ */
+export const setNativeValue = (element: any, value: any): void => {
+    const lastValue = element.value;
+    const tracker = element._valueTracker;
+    const event: any = new Event("input", { target: element, bubbles: true } as EventInit);
+
+    element.value = value;
+    event.simulated = true;
+
+    if (tracker) {
+        tracker.setValue(lastValue);
+    }
+
+    element.dispatchEvent(event);
+}
+
+/**
+ * Check if two objects are the same
+ * 
+ * @param objA any - Object A 
+ * @param objB any - Object B
+ * @returns boolean
+ */
+export const checkSameObjects = (objA: any, objB: any): boolean => {
+    if (!objA || !objB) return false;
+
+    let same = true;
+
+    Object.keys(objA).forEach((key: string) => {
+        if (objA[key] != objB[key]) {
+            same = false;
+        }
+    });
+
+    return same;
 }
