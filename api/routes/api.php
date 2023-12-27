@@ -32,40 +32,40 @@ use Illuminate\Support\Facades\Route;
 // Users
 Route::post('users/login', [AuthController::class, 'login']);
 Route::post('users/register', [AuthController::class, 'register']);
-Route::post('users', [UserController::class, 'index']);
-Route::post('users/view/{id}', [UserController::class, 'show']);
+Route::get('users', [UserController::class, 'index']);
+Route::get('users/view/{id}', [UserController::class, 'show']);
 
 // Images
 Route::get('image/{path}', [ImageController::class, 'getImage'])->where('path', '.*');
 Route::post('image', [ImageController::class, 'uploadImage']);
 
 // Articles
-Route::post('articles', [ArticleController::class, 'index']);
-Route::post('articles/top', [ArticleController::class, 'indexTop']);
-Route::post('articles/view/{id}', [ArticleController::class, 'show']);
+Route::get('articles', [ArticleController::class, 'index']);
+Route::get('articles/top', [ArticleController::class, 'indexTop']);
+Route::get('articles/view/{id}', [ArticleController::class, 'show']);
 Route::post('articles/updateViews/{id}', [ArticleController::class, 'updateViews']);
 
 // Doctors 
-Route::post('doctors', [DoctorController::class, 'index']);
-Route::post('doctors/view/{id}', [DoctorController::class, 'show']);
-Route::post('doctors/{id}/health-tests', [DoctorController::class, 'showHealthTests']);
-Route::post('doctors/{id}/prescriptions', [DoctorController::class, 'showPrescriptions']);
+Route::get('doctors', [DoctorController::class, 'index']);
+Route::get('doctors/view/{id}', [DoctorController::class, 'show']);
+Route::get('doctors/{id}/health-tests', [DoctorController::class, 'showHealthTests']);
+Route::get('doctors/{id}/prescriptions', [DoctorController::class, 'showPrescriptions']);
 
 // Health tests
-Route::post('health-tests', [HealthTestController::class, 'index']);
-Route::post('health-tests/view/{id}', [HealthTestController::class, 'show']);
+Route::get('health-tests', [HealthTestController::class, 'index']);
+Route::get('health-tests/view/{id}', [HealthTestController::class, 'show']);
 Route::post('health-tests/submit-result', [HealthTestController::class, 'storeResult']);
 
 // Health categories
-Route::post('health-category', [HealthCategoryController::class, 'index']);
+Route::get('health-category', [HealthCategoryController::class, 'index']);
 
 // Prescription categories
-Route::post('prescriptions', [PrescriptionController::class, 'index']);
-Route::post('prescriptions/view/{id}', [PrescriptionController::class, 'show']);
+Route::get('prescriptions', [PrescriptionController::class, 'index']);
+Route::get('prescriptions/view/{id}', [PrescriptionController::class, 'show']);
 
 // Medicaments categories
-Route::post('medicaments', [MedicamentController::class, 'index']);
-Route::post('medicaments/view/{id}', [MedicamentController::class, 'show']);
+Route::get('medicaments', [MedicamentController::class, 'index']);
+Route::get('medicaments/view/{id}', [MedicamentController::class, 'show']);
 
 /*  
 |
@@ -75,6 +75,7 @@ Route::post('medicaments/view/{id}', [MedicamentController::class, 'show']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // Users
     Route::post('users/logout', [AuthController::class, 'logout']);
+    Route::post('users/update/{id}', [UserController::class, 'update']);
 
     // Articles
     Route::post('articles/store', [ArticleController::class, 'store']);
