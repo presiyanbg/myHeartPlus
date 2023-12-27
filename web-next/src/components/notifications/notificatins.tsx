@@ -20,7 +20,7 @@ const Notifications = () => {
     }, [displayNotification]);
 
     return (
-        <div className={'fixed transition-opacity z-50 ease-in-out w-full lg:w-11/12 xl:w-10/12 mx-auto lg:rounded-lg ' + (visible ? 'opacity-100' : 'opacity-0')}>
+        <div className={'fixed transition-opacity z-50 ease-in-out w-full lg:w-11/12 xl:w-10/12 mx-auto lg:rounded-lg ' + (visible ? 'opacity-100' : ' pointer-events-none opacity-0')}>
             <div className="absolute z-50 top-4 right-4">
                 <Button
                     onClick={() => handleClick()}
