@@ -27,6 +27,12 @@ class AuthController extends Controller
         // Check email
         $user = User::where('email', $fields['email'])->first();
 
+        // Update last activity
+        User::where('id', $user->id)
+            ->update([
+                'last_activity' => Carbon::now(),
+            ]);
+
         // Check password 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([

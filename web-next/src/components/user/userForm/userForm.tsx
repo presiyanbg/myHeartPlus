@@ -12,7 +12,7 @@ type Props = {
     mode?: 'registration' | 'user-update'
 }
 
-const useForm = (props: Props) => {
+const UserForm = (props: Props) => {
     const [formData, setFormData] = useState<UserFormType>({} as UserFormType);
     const [userProfilePicture, setUserProfilePicture] = useState<string | any>();
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -248,20 +248,24 @@ const useForm = (props: Props) => {
                 </div >
             </div>
 
-            <div className="pb-4 flex pt-4">
-                {/* Roles */}
-                <div className="px-4 w-1/2 pt-6">
-                    <Checkbox className="cursor--pointer"
-                        type="checkbox"
-                        value=""
-                        id="role"
-                        color="primary"
-                        aria-describedby="doctor registration check"
-                        onChange={(e) => handleInputChange('role', e)}>
-                        Doctor registration
-                    </Checkbox>
-                </div>
-            </div >
+            {
+                !!(props?.mode == 'registration') && (
+                    <div className="pb-4 flex pt-4">
+                        {/* Roles */}
+                        <div className="px-4 w-1/2 pt-6">
+                            <Checkbox className="cursor--pointer"
+                                type="checkbox"
+                                value=""
+                                id="role"
+                                color="primary"
+                                aria-describedby="doctor registration check"
+                                onChange={(e) => handleInputChange('role', e)}>
+                                Doctor registration
+                            </Checkbox>
+                        </div>
+                    </div >
+                )
+            }
 
             <br />
 
@@ -280,4 +284,4 @@ const useForm = (props: Props) => {
         </>);
 }
 
-export default useForm;
+export default UserForm;

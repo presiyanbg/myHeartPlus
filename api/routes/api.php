@@ -32,6 +32,8 @@ use Illuminate\Support\Facades\Route;
 // Users
 Route::post('users/login', [AuthController::class, 'login']);
 Route::post('users/register', [AuthController::class, 'register']);
+Route::post('users', [UserController::class, 'index']);
+Route::post('users/view/{id}', [UserController::class, 'show']);
 
 // Images
 Route::get('image/{path}', [ImageController::class, 'getImage'])->where('path', '.*');
@@ -72,9 +74,9 @@ Route::post('medicaments/view/{id}', [MedicamentController::class, 'show']);
 */
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // Users
-    Route::post('users', [UserController::class, 'index']);
     Route::post('users/logout', [AuthController::class, 'logout']);
-    Route::post('users/view/{id}', [UserController::class, 'show']);
+
+    // Articles
     Route::post('articles/store', [ArticleController::class, 'store']);
 
     // Patients

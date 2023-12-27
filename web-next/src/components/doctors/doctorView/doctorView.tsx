@@ -57,9 +57,9 @@ const DoctorView = (props: Props) => {
             <div className="pb-4">
                 <Card>
                     <CardHeader>
-                        <div className="flex">
+                        <div className="sm:flex">
                             {/* Image and rating */}
-                            <div className="w-full md:w-1/3">
+                            <div className="w-full md:w-1/3 pb-2 sm:pb-0">
                                 {/* Doctor picture */}
                                 <Suspense fallback={<Spinner></Spinner>}>
                                     <Image
@@ -81,8 +81,8 @@ const DoctorView = (props: Props) => {
                                 {
                                     infoArray?.map(info => {
                                         return (
-                                            <div className="grid grid-cols-4 pb-2" key={uuid()}>
-                                                <div className="col-span-2 text-right pr-2 font-bold">
+                                            <div className="sm:grid grid-cols-4 pb-2" key={uuid()}>
+                                                <div className="col-span-2 sm:text-right pr-2 font-bold">
                                                     {t(info.title)}
                                                 </div>
 
