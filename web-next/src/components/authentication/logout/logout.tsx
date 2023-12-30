@@ -4,7 +4,11 @@ import LogoutLogic from "./logoutLogic";
 
 import { useTranslations } from "next-intl";
 
-const Logout = () => {
+type Props = {
+    displayLogin: () => void
+}
+
+const Logout = (props: Props) => {
     const logic = LogoutLogic();
 
     // Translations
@@ -19,6 +23,8 @@ const Logout = () => {
         event.preventDefault();
 
         logic.logout();
+
+        props.displayLogin();
     }
 
     return (

@@ -63,11 +63,15 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
 
     // Check user session on load
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        const token = localStorage.getItem('token') || '';
-        const medicalProfiles = JSON.parse(localStorage.getItem('medicalProfiles') || '{}');
+        try {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            const token = localStorage.getItem('token') || '';
+            const medicalProfiles = JSON.parse(localStorage.getItem('medicalProfiles') || '{}');
 
-        authenticate(user, token, medicalProfiles);
+            authenticate(user, token, medicalProfiles);
+        } catch (exception) {
+            console.error(exception)
+        }
     }, []);
 
     return (

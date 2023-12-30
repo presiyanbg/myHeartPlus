@@ -25,14 +25,23 @@ const AuthenticationPage = () => {
 
             if (prev == 'login') {
                 return 'register';
-            } else {
-                return 'login';
             }
+
+            return 'login';
         });
+    }
+
+    /**
+     * Display login screen after user has logged out 
+     */
+    const displayLogin = () => {
+        setDisplay('login');
     }
 
     // Check user authentication status
     useEffect(() => {
+        if (!isAuth) return;
+
         toggleDisplay();
     }, [isAuth]);
 
@@ -49,7 +58,7 @@ const AuthenticationPage = () => {
                     <div className="d-flex flex-column justify-content-between h-100">
                         {/* Logout page */}
                         {
-                            isAuth && <Logout></Logout>
+                            isAuth && <Logout displayLogin={displayLogin}></Logout>
                         }
 
                         {/* Login / Registration page */}
@@ -66,7 +75,7 @@ const AuthenticationPage = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <p className="cursor-pointer text-center" onClick={toggleDisplay}>
+                                    <p className="cursor-pointer text-center" onClick={() => toggleDisplay()}>
                                         {/* Login message */}
                                         {display == 'register' && t('Already have a registration?') + ' '}
                                         {display == 'register' && <span className="text-primary text--underline--hover">{t('Login here')}</span>}
