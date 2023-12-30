@@ -75,7 +75,7 @@ Route::get('medicaments/view/{id}', [MedicamentController::class, 'show']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // Users
     Route::post('users/logout', [AuthController::class, 'logout']);
-    Route::post('users/update/{id}', [UserController::class, 'update']);
+    Route::post('users/update/{user}', [UserController::class, 'update']);
 
     // Articles
     Route::post('articles/store', [ArticleController::class, 'store']);
@@ -84,7 +84,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('patients', [PatientController::class, 'index']);
 
     // Doctors 
-    Route::post('doctors/{doctor}/showPatients/', [DoctorController::class, 'showPatients']);
+    Route::post('doctors/update/{user}', [DoctorController::class, 'update']);
+    Route::post('doctors/{doctor}/showPatients', [DoctorController::class, 'showPatients']);
 
     // Health tests
     Route::post('health-tests/store', [HealthTestController::class, 'store']);

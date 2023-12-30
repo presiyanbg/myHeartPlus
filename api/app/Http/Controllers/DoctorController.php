@@ -10,6 +10,7 @@ use App\Models\HealthTest;
 use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -199,13 +200,61 @@ class DoctorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateDoctorRequest  $request
-     * @param  \App\Models\Doctor  $doctor
+     * @param  User $user
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDoctorRequest $request, Doctor $doctor)
+    public function update(User $user, Request $request)
     {
-        //
+        try {
+            $doctor = Doctor::where('user_id', $user->id)->first();
+
+            if (!$doctor) {
+                return response([
+                    'message' => 'Doctor was not found',
+                ], 404);
+            }
+
+            // Validate request 
+            $fields = $request->validate([
+                'specialty' => 'required|string',
+                'mobile_number' => 'required|string',
+                'office_number' => 'string',
+                'address_1' => 'required|string',
+                'address_2' => 'required|string',
+                'address_3' => 'required|string',
+                'address_4' => 'string',
+                'address_5' => 'string',
+                'description' => 'string',
+            ]);
+
+            // Update doctor
+            Doctor::where('user_id', $user->id)
+                ->update([
+                    'specialty' => $fields['specialty'],
+                    'mobile_number' => $fields['mobile_number'],
+                    'office_number' => $fields['office_number'],
+                    'address_1' => $fields['address_1'],
+                    'address_2' => $fields['address_2'],
+                    'address_3' => $fields['address_3'],
+                    'address_4' => $fields['address_4'],
+                    'address_5' => $fields['address_5'],
+                    'description' => $fields['description'],
+                ]);
+
+            $doctor = Doctor::where('user_id', $user->id)->first();
+
+            return response([
+                'doctor' => $doctor,
+                'message' => 'Success',
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+
+            return false;
+        }
     }
 
     /**

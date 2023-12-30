@@ -108,10 +108,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user, Request $request)
     {
-        $user = User::where('id', $id)->first();
-
         try {
             // Validate request 
             $fields = $request->validate([
@@ -122,7 +120,7 @@ class UserController extends Controller
             ]);
 
             // Update user
-            $user = User::where('id', $id)
+            User::where('id', $user->id)
                 ->update([
                     'first_name' => $fields['first_name'],
                     'last_name' => $fields['last_name'],
@@ -131,7 +129,7 @@ class UserController extends Controller
                     'last_activity' => Carbon::now()->toDateTimeString(),
                 ]);
 
-            $user = User::where('id', $id)->first();
+            $user = User::where('id', $user->id)->first();
 
             // Upload image
             if ($request->hasFile('profile_picture')) {
@@ -157,8 +155,6 @@ class UserController extends Controller
 
             return false;
         }
-
-        return $user;
     }
 
     /**
