@@ -219,13 +219,13 @@ class DoctorController extends Controller
             $fields = $request->validate([
                 'specialty' => 'required|string',
                 'mobile_number' => 'required|string',
-                'office_number' => 'string',
+                'office_number' => 'nullable|string',
                 'address_1' => 'required|string',
                 'address_2' => 'required|string',
                 'address_3' => 'required|string',
-                'address_4' => 'string',
-                'address_5' => 'string',
-                'description' => 'string',
+                'address_4' => 'nullable|string',
+                'address_5' => 'nullable|string',
+                'description' => 'required|string',
             ]);
 
             // Update doctor

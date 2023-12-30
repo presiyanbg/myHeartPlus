@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
+use stdClass;
 
 class AuthController extends Controller
 {
@@ -27,12 +30,6 @@ class AuthController extends Controller
         // Check email
         $user = User::where('email', $fields['email'])->first();
 
-        // Update last activity
-        User::where('id', $user->id)
-            ->update([
-                'last_activity' => Carbon::now(),
-            ]);
-
         // Check password 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
@@ -40,12 +37,30 @@ class AuthController extends Controller
             ], 401);
         }
 
+        // Update last activity
+        User::where('id', $user->id)
+            ->update([
+                'last_activity' => Carbon::now(),
+            ]);
+
         // Create token if credentials are correct 
         $token = $user->createToken('appToken')->plainTextToken;
+
+        // Get user medical profiles
+        $medical_profiles = new stdClass();
+
+        // Patient
+        $medical_profiles->patient = Patient::where('user_id', $user->id)->first();
+
+        // Doctor
+        if ($user->role == 'doctor' || $user->role == 'admin') {
+            $medical_profiles->doctor = Doctor::where('user_id', $user->id)->first();
+        }
 
         return response([
             'user' => $user,
             'token' => $token,
+            'medical_profiles' => $medical_profiles,
             'message' => 'Welcome!'
         ], 200);
     }
