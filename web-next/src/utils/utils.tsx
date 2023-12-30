@@ -290,6 +290,12 @@ export const formatCurrency = (value: string | number): string => {
  * @param value - Value to be inserted into the input
  */
 export const setNativeValue = (element: any, value: any): void => {
+    if (!element?.dispatchEvent) return;
+
+    if (!value || value == undefined || value == null) {
+        value = '';
+    }
+
     const lastValue = element.value;
     const tracker = element._valueTracker;
     const event: any = new Event("input", { target: element, bubbles: true } as EventInit);

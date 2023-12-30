@@ -16,7 +16,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     const locales = ['en-US', 'bg-BG'];
     const defaultLocale = 'bg-BG';
 
-    match(languages, locales, defaultLocale)
+    match(languages, locales, defaultLocale);
 
     return (
         <NextUIProvider>

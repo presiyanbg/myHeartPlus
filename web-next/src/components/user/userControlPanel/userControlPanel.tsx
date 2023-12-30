@@ -1,7 +1,7 @@
 'use client';
 import UserStatistics from "../userStatistics/userStatistics";
 
-import { UserType } from "@/ts/types";
+import { DoctorType, UserType } from "@/ts/types";
 import { Button, Card, CardBody } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { v4 as uuid } from "uuid";
@@ -12,6 +12,7 @@ import DoctorForm from "@/components/doctors/doctorForm/doctorForm";
 
 type Props = {
     user: UserType,
+    doctor?: DoctorType,
 }
 
 const UserControlPanel = (props: Props) => {
@@ -22,7 +23,7 @@ const UserControlPanel = (props: Props) => {
             id: "doctorInfo",
             order: 0,
             label: t("Work info"),
-            content: (<><DoctorForm></DoctorForm></>),
+            content: (<><DoctorForm doctorId={props.doctor?.id || 0} userId={props.user?.id}></DoctorForm></>),
             icon: <FontAwesomeIcon icon={faUserDoctor}></FontAwesomeIcon>,
             selected: true,
         },

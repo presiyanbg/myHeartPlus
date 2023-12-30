@@ -1,5 +1,5 @@
 import { UserClass } from './classes';
-import { CacheType } from './types';
+import { CacheType, MedicalProfilesType } from './types';
 
 /* Context */
 interface UserContextInterface {
@@ -10,6 +10,7 @@ interface UserContextInterface {
     token: string,
     authenticate: Function,
     renounce: Function,
+    medicalProfiles: MedicalProfilesType,
 }
 
 interface CommonContextInterface {

@@ -20,7 +20,7 @@ const LoginLogic = () => {
 
         if (data.token && data.user) {
             // Save data to provider
-            authenticate(data.user, data.token)
+            authenticate(data.user, data.token, data.medical_profiles);
 
             // Navigate to home page
             router.push('/');

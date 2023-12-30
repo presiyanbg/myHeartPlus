@@ -41,7 +41,9 @@ const ArticlesList = (props: Props) => {
             {
                 articles?.map(article => {
                     return (
-                        <div className="pb-4" key={uuid()}>
+                        <div className="pb-4"
+                            key={uuid()}
+                            suppressHydrationWarning>
                             <Card isFooterBlurred
                                 radius="lg"
                                 className="border-none">

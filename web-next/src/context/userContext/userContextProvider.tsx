@@ -2,7 +2,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import { ReactNoteInterface, UserContextInterface } from "../../ts/interfaces";
 import { UserClass } from "../../ts/classes";
-import { UserType } from "../../ts/types";
+import { MedicalProfilesType, UserType } from "../../ts/types";
 
 export const UserContext = createContext<UserContextInterface>({
     user: new UserClass(),
@@ -12,10 +12,12 @@ export const UserContext = createContext<UserContextInterface>({
     token: '',
     authenticate: (userData: UserType, token: string) => { },
     renounce: () => { },
+    medicalProfiles: {},
 });
 
 export const UserContextProvider = ({ children }: ReactNoteInterface) => {
     const [user, setUser] = useState(new UserClass());
+    const [medicalProfiles, setMedicalProfiles] = useState<MedicalProfilesType>({});
     const [isAuth, setIsAuth] = useState(false);
     const [token, setToken] = useState('');
 
@@ -25,7 +27,7 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
      * @param userData UserType 
      * @param token string
      */
-    const authenticate = (userData: UserType, token: string) => {
+    const authenticate = (userData: UserType, token: string, medicalProfiles: MedicalProfilesType) => {
         const user = new UserClass();
         user.setUser(userData);
 
@@ -33,11 +35,13 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
             // Save data to local storage
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('token', token);
+            localStorage.setItem('medicalProfiles', JSON.stringify(medicalProfiles));
 
             // Save state
             setUser(user);
             setToken(token);
             setIsAuth(true);
+            setMedicalProfiles(medicalProfiles);
 
             return;
         }
@@ -49,6 +53,7 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
         // Remove data from local storage
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('medicalProfiles');
 
         // Clear states
         setUser(new UserClass());
@@ -60,12 +65,13 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user') || '{}');
         const token = localStorage.getItem('token') || '';
+        const medicalProfiles = JSON.parse(localStorage.getItem('medicalProfiles') || '{}');
 
-        authenticate(user, token);
+        authenticate(user, token, medicalProfiles);
     }, []);
 
     return (
-        <UserContext.Provider value={{ user, setUser, isAuth, setIsAuth, token, authenticate, renounce }}>
+        <UserContext.Provider value={{ user, setUser, isAuth, setIsAuth, token, authenticate, renounce, medicalProfiles, }}>
             {children}
         </UserContext.Provider>
     );

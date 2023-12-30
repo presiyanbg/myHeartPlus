@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import { useContext } from "react";
 
 const UserProfile = () => {
-    const { user } = useContext(UserContext);
+    const { user, medicalProfiles } = useContext(UserContext);
     const t = useTranslations();
 
     // Default tabs
@@ -43,7 +43,7 @@ const UserProfile = () => {
                 id: "controlPanel",
                 order: 0,
                 label: t("Control panel"),
-                content: (<UserControlPanel user={user}></UserControlPanel>),
+                content: (<UserControlPanel user={user} doctor={medicalProfiles.doctor}></UserControlPanel>),
             }
         );
     }

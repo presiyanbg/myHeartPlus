@@ -19,7 +19,7 @@ const ArticlesTop = (props: Props) => {
     return (
         <>
             {/* Small text   */}
-            <div className="lg:hidden">
+            <div className="lg:hidden" suppressHydrationWarning>
                 <Link href={`/articles/${firstArticle?.id}`}
                     key={uuid()}>
 
@@ -47,7 +47,7 @@ const ArticlesTop = (props: Props) => {
                                     {firstArticle?.writer}
                                 </span>
 
-                                <span>
+                                <span suppressHydrationWarning>
                                     {parseDateAndTime(firstArticle?.created_at)}
                                 </span>
                             </p>

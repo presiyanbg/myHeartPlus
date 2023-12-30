@@ -33,7 +33,7 @@ const ArticleStatistics = (props: Props) => {
             </Tooltip>
 
             {/* Date created */}
-            <Tooltip content={t('Date published') + ': ' + parseDateAndTime(props?.article?.created_at)}>
+            <Tooltip suppressHydrationWarning content={t('Date published') + ': ' + parseDateAndTime(props?.article?.created_at)}>
                 <FontAwesomeIcon icon={faCalendar} />
             </Tooltip>
         </>

@@ -19,7 +19,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 
 config.autoAddCss = false;
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'myHearthPlus',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 }
 
 export function generateStaticParams() {
-    return [{ locale: 'en' }, { locale: 'bg' }];
+    return [{ locale: 'bg' }, { locale: 'en' }];
 }
 
 export default async function RootLayout({

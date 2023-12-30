@@ -119,7 +119,7 @@ const UserForm = (props: Props) => {
             let checkIsValid = true;
 
             fieldsToCheck.forEach(checkKey => {
-                if (formData[checkKey] == null || formData[checkKey] == undefined || !formData[checkKey]?.length) {
+                if (formData[checkKey] == null || formData[checkKey] == undefined || !formData[checkKey]?.trim()?.length) {
                     checkIsValid = false;
                 }
             });
@@ -195,7 +195,6 @@ const UserForm = (props: Props) => {
                         className="hidden"
                         id="profile_picture"
                         aria-describedby="profile picture input"
-                        placeholder="Profile picture"
                         onChange={(e) => handleInputChange('profile_picture', e)} />
                 </div>
             </div>
@@ -205,10 +204,11 @@ const UserForm = (props: Props) => {
                 {/* First name */}
                 <div className="px-4 w-1/2">
                     <Input type="text"
+                        isRequired
                         id="first_name"
                         aria-describedby="First name input"
-                        placeholder="First name"
-                        color="primary"
+                        label="First name"
+                        color="default"
                         variant="bordered"
                         onChange={(e) => handleInputChange('first_name', e)} />
                 </div>
@@ -216,10 +216,11 @@ const UserForm = (props: Props) => {
                 {/* Last name */}
                 <div className="px-4 w-1/2">
                     <Input type="text"
+                        isRequired
                         id="last_name"
                         aria-describedby="Last name input"
-                        placeholder="Last name"
-                        color="primary"
+                        label="Last name"
+                        color="default"
                         variant="bordered"
                         onChange={(e) => handleInputChange('last_name', e)} />
                 </div>
@@ -228,15 +229,14 @@ const UserForm = (props: Props) => {
             {/* Email */}
             <div className="flex px-4 pb-4">
                 <Input type="email"
+                    isRequired
                     id="email"
                     aria-describedby="Email input"
-                    placeholder="Email address"
-                    color="primary"
+                    label="Email address"
+                    color="default"
                     variant="bordered"
                     onChange={(e) => handleInputChange('email', e)} />
             </div >
-
-
 
             {
                 !!(props?.mode == 'registration') && (
@@ -246,10 +246,11 @@ const UserForm = (props: Props) => {
                             {/* Password */}
                             <div className="px-4 w-1/2" >
                                 <Input
+                                    isRequired
                                     id="exampleInputPassword1"
-                                    placeholder="Password"
+                                    label="Password"
                                     aria-describedby="Password input"
-                                    color="primary"
+                                    color="default"
                                     variant="bordered"
                                     onChange={(e) => handleInputChange('password', e)}
                                     type={passwordVisible ? "text" : "password"}
@@ -268,10 +269,11 @@ const UserForm = (props: Props) => {
                             {/* Password confirmation */}
                             <div className="px-4 w-1/2" >
                                 <Input
+                                    isRequired
                                     isInvalid={passwordConfirmInvalid}
                                     id="password_confirmation"
                                     aria-describedby="Password confirmation input"
-                                    placeholder="Confirm Password"
+                                    label="Confirm Password"
                                     variant="bordered"
                                     onChange={(e) => handleInputChange('password_confirmation', e)}
                                     type={passwordVisible ? "text" : "password"}
@@ -292,7 +294,6 @@ const UserForm = (props: Props) => {
                             <div className="px-4 w-1/2 pt-6">
                                 <Checkbox className="cursor--pointer"
                                     type="checkbox"
-                                    value=""
                                     id="role"
                                     color="primary"
                                     aria-describedby="Doctor registration check"

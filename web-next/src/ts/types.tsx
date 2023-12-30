@@ -99,6 +99,19 @@ type DoctorType = {
 
 type DoctorsType = Array<DoctorType>;
 
+type DoctorFormType = {
+    specialty: string,
+    mobile_number: string,
+    office_number?: string,
+    address_1: string,
+    address_2: string,
+    address_3: string,
+    address_4: string,
+    address_5: string,
+    description: string,
+    [key: string]: any;
+}
+
 /* Patient Types */
 type PatientType = {
     id: number,
@@ -243,6 +256,11 @@ type SidePanelItemType = {
 
 type SidePanelListType = Array<SidePanelItemType>;
 
+type MedicalProfilesType = {
+    patient?: PatientType,
+    doctor?: DoctorType,
+}
+
 export type {
     NavLinkType,
     NavLinksType,
@@ -255,6 +273,7 @@ export type {
 
     DoctorType,
     DoctorsType,
+    DoctorFormType,
 
     PatientType,
     PatientsType,
@@ -291,4 +310,6 @@ export type {
 
     SidePanelItemType,
     SidePanelListType,
+
+    MedicalProfilesType,
 }

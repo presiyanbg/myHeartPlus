@@ -60,20 +60,22 @@ const Login = ({ }: Props) => {
             {/* Email */}
             <div className="pt-1 pb-2 flex w-full flex-wrap md:flex-nowrap gap-4">
                 <Input type="email"
+                    isRequired
                     id="email"
-                    color="primary"
+                    color="default"
                     variant="bordered"
-                    placeholder="Enter your email"
+                    label="Enter your email"
                     onChange={(e) => handleInputChange('email', e)} />
             </div>
 
             {/* Password */}
             <div className="pt-1 pb-2">
                 <Input type="password"
+                    isRequired
                     id="exampleInputPassword1"
-                    color="primary"
+                    color="default"
                     variant="bordered"
-                    placeholder="Password"
+                    label="Password"
                     onChange={(e) => handleInputChange('password', e)} />
                 <div id="emailHelp" className="pt-2 text-end text-small cursor-pointer hover:text-blue-600">Forgotten password</div>
             </div>
