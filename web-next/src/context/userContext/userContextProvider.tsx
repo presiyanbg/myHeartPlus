@@ -35,13 +35,18 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
             // Save data to local storage
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('token', token);
-            localStorage.setItem('medicalProfiles', JSON.stringify(medicalProfiles));
 
             // Save state
             setUser(user);
             setToken(token);
             setIsAuth(true);
-            setMedicalProfiles(medicalProfiles);
+
+            // Update medical profile
+            if (medicalProfiles?.doctor != null || medicalProfiles?.patient != null) {
+                localStorage.setItem('medicalProfiles', JSON.stringify(medicalProfiles));
+
+                setMedicalProfiles(medicalProfiles);
+            }
 
             return;
         }
