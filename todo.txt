@@ -3,56 +3,37 @@
 #										TODO 
 # *********************************************************************************
 
-<Web>
-		- Animation on scroll
-		- Form validation
-		- Hamburger navigation
-		- Save common context to local storage 
-		- Calendar with switch for Personal tracking / News, change date color depending on data
-		- Articles infinity scroll
-		- Comments
-		- Doctor test 
-		- Doctor page / list / select 
-</Web>
-
-<API>
-		- Save preferences as json
-		- Comments real time
-		- Collect data from doctor test table 
-		- Doctor table
-</API>
-
 <Ideas>
-	Check 
+	Health
+        - Add default health categories  
 		- At least 3 free test 
 			- Patient answers questions (A, B, C, D) and gets answer - You are fine or Go see a doctor 
 
-	Get users height, weight, etc and show them where their are on graph with data 
+    Users (Patient)
+        - Get users height, weight, etc and show them where their are on graph with data 
+
+    Doctors
+        - Add doctor categories from (https://blsbg.eu/bg/medics/search)
+        - Add new column that marks doctor profile as activated when he is verified 
+
+    Articles
+        - Add search 
+        - Add page in user control panel for adding/updating articles -> if user is admin he has access to all articles, writer can be selected as other user 
+		- Infinity scroll
+
+    Comments
+        - Add comments that can work for each component
+
+    Others
+		- Save common context to local storage 
+        - BMI calculator + save to profile
+		- Calendar personal tracking 
+        - Save preferences as json
+		- Comments real time
+		- Collect data from doctor test table 
 </Ideas>
-
-
 
 # *********************************************************************************
 #										Ready 
 # *********************************************************************************
 
-<Web>
-		- White background for navigation -- Ready 16.11.22
-		- Show logo in navigation  -- Ready 16.11.22
-		- Login and register page -- Ready 04.12.22
-		- Install router -- Ready 21.11.22
-		- Install i18 translations -- Ready 21.11.22 
-		- Install uuidv4 for elements keys -- Ready 21.11.22
-		- Small control panel accessible from top navigation -- Ready 06.12.22
-		- Notification -- Ready 04.12.22
-		- Start using translations -- Ready 18.12.22
-		- Design i like -- Ready 15.01.22
-		- Add caching service -- Ready 25.01.2023
-</Web>
-
-<API>
-		- Migration -- Ready 20.11.22
-		- Register, login, logout -- Ready 20.11.22
-		- User profile picture -- Ready 25.1.22
-</API>
-	
