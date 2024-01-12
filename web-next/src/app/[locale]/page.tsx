@@ -1,32 +1,98 @@
-import ArticleServices from "@/services/articlesServices/articlesServices"
-import ArticlesList from '../../components/articles/articlesList/articlesList';
-import PageLayout from "@/components/layouts/pageLayout/pageLayout";
-import ArticlesTop from "@/components/articles/articlesTop/articlesTop";
-import SidePanel from "@/components/sidePanel/sidePanel";
+import { Button, Card, CardBody, CardFooter, CardHeader, Image } from "@nextui-org/react";
 
-import { ArticlesType, PaginationType } from '../../ts/types';
-import { SELECTORS } from "@/constants/selectors";
 
 const Home = async () => {
-    const data: any = await ArticleServices().articlesList();
-    const articles: ArticlesType = await data?.articles?.data || [];
-    const pagination: PaginationType = await data?.articles || [];
+
 
     return (
         <>
-            <ArticlesTop articles={articles}></ArticlesTop>
+            <div className="text-center py-8">
+                <h1>FIT 4 HEALTH</h1>
+            </div>
 
-            <PageLayout>
-                <div className={'gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0 ' + SELECTORS.anchorScroll} >
-                    <div className="lg:col-span-4">
-                        <ArticlesList articles={articles} pagination={pagination}></ArticlesList>
-                    </div>
-
-                    <div className="lg:col-span-2">
-                        <SidePanel bodyData={articles} bodyDataType={'articles'}></SidePanel>
-                    </div>
+            <div className="grid grid-cols-6 gap-8">
+                <div></div>
+                <div className=" col-span-4 ">
+                    <hr />
                 </div>
-            </PageLayout>
+                <div></div>
+
+                <div></div>
+
+                <div className="hover:cursor-pointer hover:scale-110 transition duration-500 cursor-pointer hover:z-50">
+                    <Card isFooterBlurred className="w-full h-[400px] col-span-12 sm:col-span-5">
+                        <div className="flex items-center justify-items-center h-full">
+                            <span className="text-center w-full">
+                                Person image
+                            </span>
+                        </div>
+
+                        <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                            <div className="text-center">
+                                <h5 className="font-bold">Д-р Анна Карафилоска</h5>
+                                <p className="text-tiny uppercase font-bold text-white">Кардиолог</p>
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </div>
+
+                <div className="hover:cursor-pointer hover:scale-110 transition duration-500 cursor-pointer hover:z-50">
+                    <Card isFooterBlurred className="w-full h-[400px] col-span-12 sm:col-span-5">
+                        <div className="flex items-center justify-items-center h-full">
+                            <span className="text-center w-full">
+                                Person image
+                            </span>
+                        </div>
+
+                        <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                            <div className="text-center">
+                                <h5 className="font-bold">Д-р Анна Карафилоска</h5>
+                                <p className="text-tiny uppercase font-bold text-white">Кардиолог</p>
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </div>
+
+                <div className="hover:cursor-pointer hover:scale-110 transition duration-500 cursor-pointer hover:z-50">
+                    <Card isFooterBlurred className="w-full h-[400px] col-span-12 sm:col-span-5">
+                        <div className="flex items-center justify-items-center h-full">
+                            <span className="text-center w-full">
+                                Person image
+                            </span>
+                        </div>
+
+                        <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                            <div className="text-center">
+                                <h5 className="font-bold">Д-р Анна Карафилоска</h5>
+                                <p className="text-tiny uppercase font-bold text-white">Кардиолог</p>
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </div>
+
+                <div className="hover:cursor-pointer hover:scale-110 transition duration-500 cursor-pointer hover:z-50">
+                    <Card isFooterBlurred className="w-full h-[400px] col-span-12 sm:col-span-5">
+                        <div className="flex items-center justify-items-center h-full">
+                            <span className="text-center w-full">
+                                Person image
+                            </span>
+                        </div>
+
+                        <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                            <div className="text-center">
+                                <h5 className="font-bold">Д-р Анна Карафилоска</h5>
+                                <p className="text-tiny uppercase font-bold text-white">Кардиолог</p>
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </div>
+
+                <div></div>
+            </div>
+
+            <div className=" py-16">
+
+            </div>
         </>
     )
 }

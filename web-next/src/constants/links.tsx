@@ -1,4 +1,4 @@
-import { faHeart, faFileCircleCheck, faUserDoctor, faStaffSnake, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faFileCircleCheck, faUserDoctor, faStaffSnake, faUser, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../assets/images/logo.png';
 
 export const LINKS = [
@@ -7,6 +7,15 @@ export const LINKS = [
         url: '/',
         selected: true,
         icon: faHeart,
+        context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
+        topLink: true,
+        onClick: () => { },
+    },
+    {
+        title: 'Articles',
+        url: '/articles',
+        selected: true,
+        icon: faNewspaper,
         context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
         topLink: true,
         onClick: () => { },
