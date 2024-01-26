@@ -11,23 +11,24 @@ import Link from "next/link";
 
 type Props = {
     params: {
-        id: number
-    }
+        id: number,
+        locale: any,
+    },
 }
 
 const ArticlePage = async (props: Props) => {
     // Load main article data
-    const data: any = await ArticleServices().articleSelect(props?.params?.id);
+    const data: any = await ArticleServices().articleSelect(props?.params?.locale, props?.params?.id);
     const article: ArticleType = await data?.article || {};
-    const articleHTML: any = await data?.page || {};
+    const articleHTML: any = await data?.page;
     const writer: UserType = await data?.writer || {};
 
-    // Update main article views
-    const updateViews: any = await ArticleServices().articlesUpdateViews(props?.params?.id);
-
     // Load top articles for side panel
-    const sidePanelData: any = await ArticleServices().articlesListTopViews();
+    const sidePanelData: any = await ArticleServices().articlesListTopViews(props?.params?.locale);
     const articles: ArticlesType = await sidePanelData?.articles?.data || [];
+
+    // Update main article views
+    ArticleServices().articlesUpdateViews(props?.params?.id);
 
     return (
         <PageLayout>
@@ -88,10 +89,13 @@ const ArticlePage = async (props: Props) => {
                                 alt={article.title} />
 
                             {/* Article content */}
-                            <div className="pt-6 py-3 article-content">
-                                <div dangerouslySetInnerHTML={{ __html: articleHTML }}></div>
-                            </div>
-
+                            {
+                                !!articleHTML && (
+                                    <div className="pt-6 py-3 article-content">
+                                        <div dangerouslySetInnerHTML={{ __html: articleHTML }}></div>
+                                    </div>
+                                )
+                            }
 
                             {/* Writer */}
                             {
