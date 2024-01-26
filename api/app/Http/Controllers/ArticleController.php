@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\ArticleTranslation;
+use App\Models\Language;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+
+use function PHPUnit\Framework\isNull;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $articles = Article::orderByDesc('created_at')->paginate(10);
 
@@ -39,10 +45,12 @@ class ArticleController extends Controller
     /**
      * Get top articles ordered by views.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function indexTop()
+    public function indexTop(Request  $request)
     {
+        return $request;
         $articles = Article::orderByDesc('total_views')->paginate(10);
 
         // Get name of article writer
@@ -54,7 +62,7 @@ class ArticleController extends Controller
             }
 
             if (!$writer) {
-                $article->writer = 'Presiyan Tsonevski';
+                $article->writer = 'Admin';
             }
         }
 
@@ -114,7 +122,13 @@ class ArticleController extends Controller
             // Create article HTML
             $fileName = $article->id . '.html';
 
-            Storage::disk('articles')->put($fileName, $article->title);
+            $language = Language::where('locale', App::getLocale())->first();
+
+            if (!Storage::disk('articles')->exists($language->locale)) {
+                Storage::disk('articles')->makeDirectory($language->locale, 0775, true, true);
+            }
+
+            Storage::disk('articles')->put($language->locale . '/' . $fileName, $article->title . ' ' . $article->content);
 
             return response([
                 'article' => $article,
@@ -132,19 +146,33 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Article $article
+     * @param  string $locale
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article, string $locale = '')
     {
-        $article = Article::where('id', $id)->first();
+        try {
+            $language = Language::where('locale', $locale)->first();
 
-        if ($article) {
+            // Get translations 
+            if ($language != null) {
+                $articleTranslated = ArticleTranslation::where('article_id', $article->id)->first() ?? $article;
+
+                $article->title = $articleTranslated->title;
+                $article->content = $articleTranslated->content;
+            }
+
+            if ($language == null) {
+                $locale = App::getLocale();
+            }
+
             $fileName = $article->id . '.html';
+            $path = $locale . '/' . $fileName;
             $page = null;
 
-            if (Storage::disk('articles')->exists($fileName)) {
-                $page = Storage::disk('articles')->get($fileName);
+            if (Storage::disk('articles')->exists($path)) {
+                $page = Storage::disk('articles')->get($path);
             }
 
             $writer = User::where('id', $article->writer_id)->first();
@@ -154,11 +182,9 @@ class ArticleController extends Controller
                 'writer' => $writer,
                 'page' => $page,
             ], 200);
-        }
-
-        if (!$article) {
+        } catch (Throwable $e) {
             return response([
-                'message' => 'Article was not found',
+                'message' => 'Unhandled  exception',
             ], 404);
         }
     }
@@ -181,7 +207,7 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Article $article, Request  $request)
     {
         //
     }

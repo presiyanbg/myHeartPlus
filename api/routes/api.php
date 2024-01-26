@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticleTranslationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HealthCategoryController;
@@ -42,7 +43,7 @@ Route::post('image', [ImageController::class, 'uploadImage']);
 // Articles
 Route::get('articles', [ArticleController::class, 'index']);
 Route::get('articles/top', [ArticleController::class, 'indexTop']);
-Route::get('articles/view/{id}', [ArticleController::class, 'show']);
+Route::get('articles/view/{article}/{locale?}', [ArticleController::class, 'show']);
 Route::post('articles/updateViews/{id}', [ArticleController::class, 'updateViews']);
 
 // Doctors 
@@ -79,6 +80,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Articles
     Route::post('articles/store', [ArticleController::class, 'store']);
+    Route::post('articles/update/{article}', [ArticleController::class, 'update']);
+    Route::post('articles/update/{language}/{article}', [ArticleTranslationController::class, 'update']);
 
     // Patients
     Route::post('patients', [PatientController::class, 'index']);
