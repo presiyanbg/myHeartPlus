@@ -23,37 +23,42 @@ const ClientSideApi = () => {
     const post = async (url: string, data?: {}, formData: boolean = false) => {
         setLoading(true);
 
-        // Format data as json 
-        if (!formData) {
-            const qs = require('qs');
-            data = qs.stringify(data);
+        try {
+            // Format data as json 
+            if (!formData) {
+                const qs = require('qs');
+                data = qs.stringify(data);
+            }
+
+            // Request data from API
+            const config = {
+                method: 'post',
+                url: `${apiUrl}${url}`,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: data,
+            };
+
+            return axios(config)
+                .then(function (response: any) {
+                    setLoading(false);
+                    notify(response?.data?.message, response?.status);
+
+                    return response.data;
+                })
+                .catch(function (error: any) {
+                    setLoading(false);
+                    notify(error?.response?.data?.message, error?.response?.status);
+
+                    return {};
+                });
+        } catch (ex) {
+            setLoading(false);
+            return {};
         }
-
-        // Request data from API
-        const config = {
-            method: 'post',
-            url: `${apiUrl}${url}`,
-            headers: {
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data: data,
-        };
-
-        return axios(config)
-            .then(function (response: any) {
-                setLoading(false);
-                notify(response?.data?.message, response?.status);
-
-                return response.data;
-            })
-            .catch(function (error: any) {
-                setLoading(false);
-                notify(error?.response?.data?.message, error?.response?.status);
-
-                return {};
-            });
     }
 
     return {

@@ -40,29 +40,34 @@ const ServerSideApi = () => {
      * @returns object - Api response data
      */
     const request = async (method: 'GET' | 'POST', url: string, data?: {}, loadCache: boolean = true) => {
-        const config = {
-            method: method,
-            headers: {
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: JSON.stringify(data),
-        } as RequestInit;
+        try {
+            const config = {
+                method: method,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: JSON.stringify(data),
+            } as RequestInit;
 
-        // Load cached data
-        if (loadCache) {
-            config.next = { revalidate: 3600 };
+            // Load cached data
+            if (loadCache) {
+                config.next = { revalidate: 3600 };
+            }
+
+            // Load new data
+            if (!loadCache) {
+                config.cache = 'no-store';
+            }
+
+            const response = await fetch(`${apiUrl}/api${url}`, config);
+
+            return await response?.json();
+        } catch (ex) {
+            console.error(ex);
+            return {};
         }
-
-        // Load new data
-        if (!loadCache) {
-            config.cache = 'no-store';
-        }
-
-        const response = await fetch(`${apiUrl}/api${url}`, config);
-
-        return await response?.json();
     }
 
     return {
