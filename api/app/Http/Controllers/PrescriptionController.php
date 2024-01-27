@@ -52,32 +52,33 @@ class PrescriptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(int $id, Request $request)
     {
         try {
             $fields = $request->validate([
-                'doctor_id' => 'required|exists:doctors,id',
                 'category_id' => 'required|exists:health_categories,id',
                 'title' => 'required|string',
                 'description' => 'required|string',
                 'medicaments_array' => 'json',
             ]);
 
+            $doctor = Doctor::where('id', $id)->first();
+
+            // Check if prescription was created 
+            if (!$doctor) {
+                return response([
+                    'message' => 'Doctor was not found'
+                ], 404);
+            }
+
             // Save prescription to DB
             $prescription = Prescription::create([
-                'doctor_id' => $fields['doctor_id'],
+                'doctor_id' => $doctor->id,
                 'category_id' => $fields['category_id'],
                 'title' => $fields['title'],
                 'description' => $fields['description'],
                 'medicaments_array' => $fields['medicaments_array'],
             ]);
-
-            // Check if prescription was created 
-            if (!$prescription) {
-                return response([
-                    'message' => 'Internal error'
-                ], 500);
-            }
 
             return response([
                 'prescription' => $prescription,
@@ -87,8 +88,6 @@ class PrescriptionController extends Controller
             return response([
                 'message' => $e
             ], 500);
-
-            return false;
         }
     }
 
@@ -100,27 +99,33 @@ class PrescriptionController extends Controller
      */
     public function show($id)
     {
-        $prescription = Prescription::where('id', $id)->first();
+        try {
+            $prescription = Prescription::where('id', $id)->first();
 
-        if (!$prescription) {
+            if (!$prescription) {
+                return response([
+                    'message' => 'Prescription was not found',
+                ], 404);
+            }
+
+            // Load medicaments
+            $prescription->medicaments_array = Medicament::showMedicaments($prescription->medicaments_array);
+
+            // Load category 
+            $prescription->category = HealthCategory::where('id', $prescription->category_id)->first();
+
+            // Load doctor
+            $prescription->doctor = Doctor::where('id', $prescription->doctor_id)->first();
+            $prescription->doctor = Doctor::getUserData($prescription->doctor);
+
             return response([
-                'message' => 'Prescription was not found',
-            ], 404);
+                'prescription' => $prescription,
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => 'Unhandled  exception',
+            ], 500);
         }
-
-        // Load medicaments
-        $prescription->medicaments_array = Medicament::showMedicaments($prescription->medicaments_array);
-
-        // Load category 
-        $prescription->category = HealthCategory::where('id', $prescription->category_id)->first();
-
-        // Load doctor
-        $prescription->doctor = Doctor::where('id', $prescription->doctor_id)->first();
-        $prescription->doctor = Doctor::getUserData($prescription->doctor);
-
-        return response([
-            'prescription' => $prescription,
-        ], 200);
     }
 
     /**

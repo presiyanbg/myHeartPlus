@@ -99,20 +99,26 @@ class MedicamentController extends Controller
      */
     public function show($id)
     {
-        $medicament = Medicament::where('id', $id)->first();
+        try {
+            $medicament = Medicament::where('id', $id)->first();
 
-        if (!$medicament) {
+            if (!$medicament) {
+                return response([
+                    'message' => 'Medicament was not found',
+                ], 404);
+            }
+
+            // Load category 
+            $medicament->category = HealthCategory::where('id', $medicament->category_id)->first();
+
             return response([
-                'message' => 'Medicament was not found',
-            ], 404);
+                'medicament' => $medicament,
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => 'Unhandled  exception',
+            ], 500);
         }
-
-        // Load category 
-        $medicament->category = HealthCategory::where('id', $medicament->category_id)->first();
-
-        return response([
-            'medicament' => $medicament,
-        ], 200);
     }
 
     /**

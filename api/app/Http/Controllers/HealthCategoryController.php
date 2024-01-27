@@ -77,16 +77,10 @@ class HealthCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         try {
-            if ($id == 0) {
-                $healthCategory = HealthCategory::take(1)->first();
-            }
-
-            if ($id > 0) {
-                $healthCategory = HealthCategory::where('id', $id)->first();
-            }
+            $healthCategory = HealthCategory::where('id', $id)->first();
 
             return response([
                 'category' => $healthCategory,

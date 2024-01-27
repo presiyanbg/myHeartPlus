@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
+use App\Models\HealthTest;
+use App\Models\HealthTestResult;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
@@ -17,7 +19,7 @@ class PatientController extends Controller
     public function index()
     {
         return response([
-            'patients' => Patient::all(),
+            'patients' => Patient::paginate(10),
         ], 200);
     }
 
@@ -51,6 +53,40 @@ class PatientController extends Controller
     public function show(Patient $patient)
     {
         //
+    }
+
+    /**
+     * Show health test results connected to patient
+     * 
+     * @param int $id patient
+     * @return \Illuminate\Http\Response
+     */
+    public function showHealthTestResults(int $id)
+    {
+        try {
+            $patient = Patient::where('id', $id)->first();
+
+            if (!$patient) {
+                return response([
+                    'message' => 'Patient was not found'
+                ], 404);
+            }
+
+            $results = HealthTestResult::where('patient_id', $patient->id)->orderByDesc('created_at',)->paginate(10);
+
+            // Load test connected to the result
+            foreach ($results as $result) {
+                $result->test = HealthTest::where('id', $result->test_id)->first();
+            }
+
+            return response([
+                'results' => $results
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**

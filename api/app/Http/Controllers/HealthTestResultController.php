@@ -48,12 +48,14 @@ class HealthTestResultController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\HealthTestResult  $healthTestResult
+     * @param  int $id result
      * @return \Illuminate\Http\Response
      */
-    public function show(HealthTestResult $result)
+    public function show(int $id)
     {
         try {
+            $result = HealthTestResult::where('id', $id)->first();
+
             if (!$result) {
                 return response([
                     'message' => 'Health test result was not found'
@@ -81,41 +83,8 @@ class HealthTestResultController extends Controller
                 $result->advice->prescription = Prescription::where('id', $result->advice->prescription_id)->first();
             }
 
-
             return response([
                 'result' => $result
-            ], 200);
-        } catch (Throwable $e) {
-            return response([
-                'message' => $e
-            ], 500);
-        }
-    }
-
-    /**
-     * Show health test results connected to patient
-     * 
-     * @param App\Models\Patient $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function showResults(Patient $patient)
-    {
-        try {
-            if (!$patient) {
-                return response([
-                    'message' => 'Patient was not found'
-                ], 404);
-            }
-
-            $results = HealthTestResult::where('patient_id', $patient->id)->orderByDesc('created_at',)->paginate(10);
-
-            // Load test connected to the result
-            foreach ($results as $result) {
-                $result->test = HealthTest::where('id', $result->test_id)->first();
-            }
-
-            return response([
-                'results' => $results
             ], 200);
         } catch (Throwable $e) {
             return response([

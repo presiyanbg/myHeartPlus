@@ -98,11 +98,14 @@ class DoctorController extends Controller
     /**
      * Display patients connected to doctor
      * 
-     * @param App\Models\Doctor $doctor
+     * @param  int $id doctor
+     * @return \Illuminate\Http\Response
      */
-    public function showPatients(Doctor $doctor)
+    public function showPatients($id)
     {
         try {
+            $doctor = Doctor::where('id', $id)->first();
+
             if (!$doctor) {
                 return response([
                     'message' => 'Doctor was not found',
@@ -112,12 +115,6 @@ class DoctorController extends Controller
             // Do not display same doctor as patient for himself 
             $patients = Patient::where('doctor_id', $doctor->id)->whereNot('user_id', $doctor->user_id)->paginate(10);
 
-            if (!$patients) {
-                return response([
-                    'message' => 'No patients found',
-                ], 404);
-            }
-
             foreach ($patients as $patient) {
                 $patientUser = User::where('id', $patient->user_id)->first();
 
@@ -125,10 +122,7 @@ class DoctorController extends Controller
                 $patient->image = $patientUser->image;
             }
 
-            return response([
-                'doctor' => $doctor,
-                'patients' => $patients,
-            ], 200);
+            return response($patients, 200);
         } catch (Throwable $e) {
             return response([
                 'message' => $e
@@ -200,21 +194,13 @@ class DoctorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  User $user
+     * @param  int $id doctor 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user, Request $request)
+    public function update(int $id, Request $request)
     {
         try {
-            $doctor = Doctor::where('user_id', $user->id)->first();
-
-            if (!$doctor) {
-                return response([
-                    'message' => 'Doctor was not found',
-                ], 404);
-            }
-
             // Validate request 
             $fields = $request->validate([
                 'specialty' => 'required|string',
@@ -228,8 +214,16 @@ class DoctorController extends Controller
                 'description' => 'required|string',
             ]);
 
+            $doctor = Doctor::where('id', $id)->first();
+
+            if (!$doctor) {
+                return response([
+                    'message' => 'Doctor was not found',
+                ], 404);
+            }
+
             // Update doctor
-            Doctor::where('user_id', $user->id)
+            Doctor::where('id', $id)
                 ->update([
                     'specialty' => $fields['specialty'],
                     'mobile_number' => $fields['mobile_number'],
@@ -242,7 +236,7 @@ class DoctorController extends Controller
                     'description' => $fields['description'],
                 ]);
 
-            $doctor = Doctor::where('user_id', $user->id)->first();
+            $doctor = Doctor::where('id', $id)->first();
 
             return response([
                 'doctor' => $doctor,

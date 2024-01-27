@@ -22,10 +22,27 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $articles = Article::orderByDesc('created_at')->paginate(10);
+        $articles = [];
+        $locale = App::getLocale();
 
-        // Get name of article writer
+        // Validate locale 
+        if ($request->has('locale')) {
+            $locale = Language::getValidLocale($request->input('locale'));
+        }
+
+        // Default order by date created 
+        if (!$request->has('top')) {
+            $articles = Article::orderByDesc('created_at')->paginate(10);
+        }
+
+        // Order by total views
+        if ($request->has('top')) {
+            $articles = Article::orderByDesc('total_views')->paginate(10);
+        }
+
+        // Get writer name and translation 
         foreach ($articles as $article) {
+            $article = ArticleTranslation::translate($article, $locale);
             $writer = User::where('id', $article->writer_id)->first();
 
             if ($writer) {
@@ -34,35 +51,6 @@ class ArticleController extends Controller
 
             if (!$writer) {
                 $article->writer = 'Presiyan Tsonevski';
-            }
-        }
-
-        return response([
-            'articles' => $articles
-        ], 200);
-    }
-
-    /**
-     * Get top articles ordered by views.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function indexTop(Request  $request)
-    {
-        return $request;
-        $articles = Article::orderByDesc('total_views')->paginate(10);
-
-        // Get name of article writer
-        foreach ($articles as $article) {
-            $writer = User::where('id', $article->writer_id)->first();
-
-            if ($writer) {
-                $article->writer = $writer->full_name;
-            }
-
-            if (!$writer) {
-                $article->writer = 'Admin';
             }
         }
 
@@ -121,14 +109,13 @@ class ArticleController extends Controller
 
             // Create article HTML
             $fileName = $article->id . '.html';
+            $locale = App::getLocale();
 
-            $language = Language::where('locale', App::getLocale())->first();
-
-            if (!Storage::disk('articles')->exists($language->locale)) {
-                Storage::disk('articles')->makeDirectory($language->locale, 0775, true, true);
+            if (!Storage::disk('articles')->exists($locale)) {
+                Storage::disk('articles')->makeDirectory($locale, 0775, true, true);
             }
 
-            Storage::disk('articles')->put($language->locale . '/' . $fileName, $article->title . ' ' . $article->content);
+            Storage::disk('articles')->put($locale . '/' . $fileName, $article->title . ' ' . $article->content);
 
             return response([
                 'article' => $article,
@@ -146,27 +133,31 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Article $article
-     * @param  string $locale
+     * @param  int $id article id 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article, string $locale = '')
+    public function show(int $id, Request $request)
     {
         try {
-            $language = Language::where('locale', $locale)->first();
+            $article = Article::where('id', $id)->first();
+            $locale = App::getLocale();
 
-            // Get translations 
-            if ($language != null) {
-                $articleTranslated = ArticleTranslation::where('article_id', $article->id)->first() ?? $article;
-
-                $article->title = $articleTranslated->title;
-                $article->content = $articleTranslated->content;
+            // Validate locale 
+            if ($request->has('locale')) {
+                $locale = Language::getValidLocale($request->input('locale'));
             }
 
-            if ($language == null) {
-                $locale = App::getLocale();
+            if ($article == null) {
+                return response([
+                    'message' => 'Article was not found',
+                ], 404);
             }
 
+            // Translate
+            $article = ArticleTranslation::translate($article, $locale);
+
+            // Get html file
             $fileName = $article->id . '.html';
             $path = $locale . '/' . $fileName;
             $page = null;
@@ -224,6 +215,12 @@ class ArticleController extends Controller
         try {
             $article = Article::where('id', $id)->first();
 
+            if (!$article) {
+                return response([
+                    'message' => 'Article was not found',
+                ], 404);
+            }
+
             // Update articles views
             Article::where('id', $article->id)
                 ->update([
@@ -236,8 +233,8 @@ class ArticleController extends Controller
             ], 200);
         } catch (Throwable $e) {
             return response([
-                'message' => 'Article was not found',
-            ], 404);
+                'message' => 'Internal error',
+            ], 505);
         }
     }
 

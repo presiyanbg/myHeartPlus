@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return "Test Create";
+        //
     }
 
     /**
@@ -50,20 +50,26 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id', $id)->first();
+        try {
+            $user = User::where('id', $id)->first();
 
-        if (!$user) {
+            if (!$user) {
+                return response([
+                    'message' => 'User was not found',
+                ], 404);
+            }
+
+            $medical_profiles = $user->getMedicalProfiles();
+
             return response([
-                'message' => 'User was not found',
-            ], 404);
+                'user' => $user,
+                'medical_profiles' => $medical_profiles,
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
         }
-
-        $medical_profiles = $user->getMedicalProfiles();
-
-        return response([
-            'user' => $user,
-            'medical_profiles' => $medical_profiles,
-        ], 200);
     }
 
     /**
@@ -104,13 +110,22 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  int $id user
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user, Request $request)
+    public function update(int $id, Request $request)
     {
         try {
+            $user = User::where('id', $id)->first();
+
+            // Check if article was created 
+            if (!$user) {
+                return response([
+                    'message' => 'User was not found'
+                ], 404);
+            }
+
             // Validate request 
             $fields = $request->validate([
                 'first_name' => 'required|string',
@@ -152,8 +167,6 @@ class UserController extends Controller
             return response([
                 'message' => $e
             ], 500);
-
-            return false;
         }
     }
 

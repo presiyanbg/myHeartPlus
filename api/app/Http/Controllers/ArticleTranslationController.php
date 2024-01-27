@@ -68,36 +68,55 @@ class ArticleTranslationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\Languages  $language
-     * @param  \App\Models\Article  $article
+     * @param int id article 
+     * @param string locale 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Language $language, Article $article, Request $request)
+    public function update(int $id, string $locale, Request $request)
     {
         try {
+            // Validate fields
             $fields = $request->validate([
                 'title' => 'required|string',
                 'content' => 'required|string',
             ]);
 
+            $article = Article::where('id', $id)->first();
+            $locale = Language::getValidLocale($locale);
+
+            if ($article == null) {
+                return response([
+                    'message' => 'Article was not found',
+                ], 404);
+            }
+
+            // Update or create a new record
             $articleTranslated = ArticleTranslation::updateOrCreate([
                 'article_id' => $article->id,
-                'locale' => $language->locale,
+                'locale' => $locale,
+            ]);
+
+            $articleTranslated = ArticleTranslation::where('id', $articleTranslated->id)->update([
                 'title' => $fields['title'],
                 'content' => $fields['content'],
             ]);
 
+            $articleTranslated = ArticleTranslation::where('article_id', $article->id)->first();
+
             // Create article HTML
             $fileName = $article->id . '.html';
 
-            if (!Storage::disk('articles')->exists($language->locale)) {
-                Storage::disk('articles')->makeDirectory($language->locale, 0775, true, true);
+            if (!Storage::disk('articles')->exists($locale)) {
+                Storage::disk('articles')->makeDirectory($locale, 0775, true, true);
             }
 
-            Storage::disk('articles')->put($language->locale . '/' . $fileName, $article->title . ' ' . $article->content);
+            Storage::disk('articles')->put($locale . '/' . $fileName, $articleTranslated->title . ' ' . $articleTranslated->content);
 
-            return [$articleTranslated, $article, $language, $request];
+            return response([
+                'articleTranslated' => $articleTranslated,
+                'article' => $article,
+            ], 200);
         } catch (Throwable $e) {
             return response([
                 'message' => 'Unhandled  exception',

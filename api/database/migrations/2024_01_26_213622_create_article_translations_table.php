@@ -18,8 +18,8 @@ return new class extends Migration
 
             $table->integer('article_id');
             $table->string('locale');
-            $table->string('title');
-            $table->longText('content');
+            $table->string('title')->nullable();
+            $table->longText('content')->nullable();
 
             $table->timestamps();
         });
