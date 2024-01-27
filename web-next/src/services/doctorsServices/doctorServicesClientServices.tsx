@@ -3,8 +3,8 @@ import ClientSideApi from "../../api/clientApi";
 const DoctorServicesClientServices = () => {
     const api = ClientSideApi();
 
-    const update = (userId: number, params: {}) => {
-        return api.post(`/doctors/update/${userId}`, params, true);
+    const update = (doctorId: number, params: {}) => {
+        return api.post(`/doctors/${doctorId}/update`, params, true);
     }
 
     return {

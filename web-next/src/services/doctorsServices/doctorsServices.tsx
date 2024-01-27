@@ -8,7 +8,7 @@ const DoctorsServices = () => {
     }
 
     const doctorShow = (doctor_id: number | string) => {
-        return api.get(`/doctors/view/${doctor_id}`, undefined, false);
+        return api.get(`/doctors/${doctor_id}`, undefined, false);
     }
 
     const doctorShowHealthTests = (doctor_id: number | string) => {

@@ -8,7 +8,7 @@ const UsersServices = () => {
     }
 
     const userShow = (id: number) => {
-        return api.get(`/users/view/${id}`, undefined, false);
+        return api.get(`/users/${id}`, undefined, false);
     }
 
     return {

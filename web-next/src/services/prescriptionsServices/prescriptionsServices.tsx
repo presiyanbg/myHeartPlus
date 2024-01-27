@@ -8,7 +8,7 @@ const PrescriptionsServices = () => {
     }
 
     const prescriptionShow = (id: number | string) => {
-        return api.get(`/prescriptions/view/${id}`, undefined, false);
+        return api.get(`/prescriptions/${id}`, undefined, false);
     }
 
     return {

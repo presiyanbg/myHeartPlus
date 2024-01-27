@@ -8,7 +8,7 @@ const MedicamentsServices = () => {
     }
 
     const medicamentShow = (id: number | string) => {
-        return api.get(`/medicaments/view/${id}`, undefined, false);
+        return api.get(`/medicaments/${id}`, undefined, false);
     }
 
     return {

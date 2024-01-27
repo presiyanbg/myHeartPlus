@@ -38,7 +38,7 @@ const ArticlePage = async (props: Props) => {
                         <CardBody>
                             <PageTitle title={article.title}
                                 breadCrumbs={[
-                                    { url: "/", title: 'Home' }
+                                    { url: "/articles", title: 'Articles' }
                                 ]}
                             ></PageTitle>
                         </CardBody>

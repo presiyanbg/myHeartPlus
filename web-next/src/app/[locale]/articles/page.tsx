@@ -12,17 +12,23 @@ const ArticlesPage = async ({ params: { locale } }: { params: { locale: any } })
     let articles: ArticlesType = [] as ArticlesType;
     let pagination: PaginationType = {} as PaginationType;
 
+    let dataTopArticles: any;
+    let topArticles: any;
+
     try {
         data = await ArticleServices().articlesList(locale);
         articles = await data?.articles?.data || [];
         pagination = await data?.articles || [];
+
+        dataTopArticles = await ArticleServices().articlesListTopViews(locale);
+        topArticles = await dataTopArticles?.articles?.data || [];
     } catch (ex) {
         console.error(ex);
     }
 
     return (
         <>
-            <ArticlesTop articles={articles}></ArticlesTop>
+            <ArticlesTop articles={topArticles}></ArticlesTop>
 
             <PageLayout>
                 <div className={'gap-4 flex-col lg:grid lg:grid-cols-6 p-3 lg:p-0 ' + SELECTORS.anchorScroll} >

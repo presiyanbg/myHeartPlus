@@ -8,11 +8,11 @@ const ArticleServices = () => {
     }
 
     const articleSelect = async (locale: string = '', id: number,) => {
-        return api.get(`/articles/view/${id}/${locale}`, undefined, true);
+        return api.get(`/articles/${id}?locale=${locale}`, undefined, true);
     }
 
     const articlesListTopViews = async (locale: string, page: number = 1) => {
-        return api.get(`/articles/top?page=${page}&locale=${locale}`, undefined, true);
+        return api.get(`/articles?page=${page}&top=true&locale=${locale}`, undefined, true);
     }
 
     const articlesUpdateViews = async (id: number) => {

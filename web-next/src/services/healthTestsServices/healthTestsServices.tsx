@@ -8,7 +8,7 @@ const HealthTestsServices = () => {
     }
 
     const healthTestShow = (id: number | string) => {
-        return api.get(`/health-tests/view/${id}`, undefined, false);
+        return api.get(`/health-tests/${id}`, undefined, false);
     }
 
     const healthTestPatientResults = (patient_id: number | string) => {
@@ -16,7 +16,7 @@ const HealthTestsServices = () => {
     }
 
     const healthTestResultShow = (id: number | string) => {
-        return api.post(`/health-results/view/${id}`, undefined, false);
+        return api.post(`/health-results/${id}`, undefined, false);
     }
 
     return {

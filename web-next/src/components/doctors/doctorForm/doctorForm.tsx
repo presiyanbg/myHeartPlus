@@ -48,7 +48,7 @@ const DoctorForm = (props: Props) => {
     const handleSubmit = (event: React.SyntheticEvent): void => {
         setDoctor({} as DoctorType);
 
-        logic.doctorUpdate(props.userId, formData).then(response => {
+        logic.doctorUpdate(props.doctorId, formData).then(response => {
             updateFormData(response?.doctor);
         });
     }

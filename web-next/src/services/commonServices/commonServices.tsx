@@ -5,7 +5,7 @@ const CommonServices = () => {
     const api = ServerSideApi();
 
     const healthCategoryShow = (id: number | string) => {
-        return api.get(`/health-category/view/${id}`, undefined, false);
+        return api.get(`/health-category/${id}`, undefined, false);
     }
 
     return {

@@ -21,11 +21,11 @@ const DoctorFormLogic = () => {
     /**
      * Update doctor information
      * 
-     * @param userId number - Id of user
+     * @param doctorId number - Id of doctor
      * @param params DoctorFormType - Data for update
      * @returns API response
      */
-    const doctorUpdate = async (userId: number, params: DoctorFormType) => {
+    const doctorUpdate = async (doctorId: number, params: DoctorFormType) => {
         let formData = new FormData();
 
         formData.append('specialty', params.specialty);
@@ -38,7 +38,7 @@ const DoctorFormLogic = () => {
         formData.append('address_5', params.address_5 || '');
         formData.append('description', params.description);
 
-        return await doctorClientServices.update(userId, formData);
+        return await doctorClientServices.update(doctorId, formData);
     }
 
     return {
