@@ -1,0 +1,2064 @@
+{
+	"info": {
+		"_postman_id": "331f27d6-83cc-4138-9b57-7b9000e1bfca",
+		"name": "myHeartPlus API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24526622"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@abv.asdasd",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "profile_picture",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "doctor",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/users/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|lJewDickQAMKOQ7HDWNaJuIn7XsormBX6doSXkGB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Photos/Profile Pictures/E0i_jjFXoAM-Gx4.jpg"
+								},
+								{
+									"key": "first_name",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "doctor@mhp.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "doctor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Article List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Photos/Wallpapers/3703280.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Example Article ",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/articles?locale=bg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles"
+							],
+							"query": [
+								{
+									"key": "locale",
+									"value": "bg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Article Top",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Photos/Wallpapers/3703280.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Example Article ",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/articles?page=1&top=true&locale=bg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "top",
+									"value": "true"
+								},
+								{
+									"key": "locale",
+									"value": "bg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Article View",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/Projects/myHeartPlus/web-next/src/assets/images/logo.png"
+								},
+								{
+									"key": "title",
+									"value": "Filler article",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/articles/53?locale=bg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"53"
+							],
+							"query": [
+								{
+									"key": "locale",
+									"value": "bg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Article Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/Projects/StockImages/medium-shot-couple-training-together.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Translated article",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Article that was translated",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/articles/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Article Update Views",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/Projects/myHeartPlus/web-next/src/assets/images/logo.png"
+								},
+								{
+									"key": "title",
+									"value": "Filler article",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/articles/51/updateViews",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"51",
+								"updateViews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Article Update Locale",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Преведено заглавие",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Тази статия беше преведена",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/articles/28/update/bg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"28",
+								"update",
+								"bg"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "Health Category List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/run/user/1000/doc/e1d7d189/new2.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "TEst4",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/health-category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"health-category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Category View",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/run/user/1000/doc/e1d7d189/new2.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Cat 1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/health-category/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"health-category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Test View",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "72|V1kplvBd7GnabxnLMYGuNFTOVkQIkM2itU48skXP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Грип\n",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/health-tests/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"health-tests",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Category Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/run/user/1000/doc/e1d7d189/new2.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Cat  2",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/health-category/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"health-category",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Test Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/run/user/1000/doc/e1d7d189/new2.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Инфекции на дихателните пътища (грип и студ)",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "    Избягвайте близки контакти с хора, страдащи от дихателни инфекции.\n    Поддържайте добра лична хигиена, често мийте ръцете си.",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "3\n",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "doctor_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "questions_and_answers",
+									"value": "{\n  \"questions\": [\n    {\n      \"order_number\": 1,\n      \"title\": \"Как се чувствате ?\",\n      \"is_final_question\": false,\n      \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\n      \"answers\": [\n        {\n          \"id\": 1,\n          \"question_id\": 1,\n          \"next_question_order_number\": 3,\n          \"prev_question_order_number\": 0,\n          \"content\": \"Добре\",\n          \"points\": 10\n        },\n        {\n          \"id\": 2,\n          \"question_id\": 1,\n          \"next_question_order_number\": 2,\n          \"prev_question_order_number\": 0,\n          \"content\": \"Зле\",\n          \"points\": 0\n        },\n        {\n          \"id\": 3,\n          \"question_id\": 1,\n          \"next_question_order_number\": 2,\n          \"prev_question_order_number\": 0,\n          \"content\": \"Средно\",\n          \"points\": 5\n        }\n      ]\n    },\n    {\n      \"order_number\": 2,\n      \"title\": \"Как се чувствате 2 ?\",\n      \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\n      \"is_final_question\": false,\n      \"answers\": [\n        {\n          \"id\": 1,\n          \"question_id\": 2,\n          \"next_question_order_number\": 3,\n          \"prev_question_order_number\": 1,\n          \"content\": \"Добре\",\n          \"points\": 10\n        },\n        {\n          \"id\": 2,\n          \"question_id\": 2,\n          \"next_question_order_number\": 3,\n          \"prev_question_order_number\": 1,\n          \"content\": \"Зле\",\n          \"points\": 0\n        },\n        {\n          \"id\": 3,\n          \"question_id\": 2,\n          \"next_question_order_number\": 3,\n          \"prev_question_order_number\": 1,\n          \"content\": \"Средно\",\n          \"points\": 5\n        }\n      ]\n    },\n    {\n      \"order_number\": 3,\n      \"title\": \"Как се чувствате 3 ?\",\n      \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\n      \"is_final_question\": true,\n      \"answers\": [\n        {\n          \"id\": 1,\n          \"question_id\": 3,\n          \"next_question_order_number\": 4,\n          \"prev_question_order_number\": 2,\n          \"content\": \"Добре\",\n          \"points\": 10\n        },\n        {\n          \"id\": 2,\n          \"question_id\": 3,\n          \"next_question_order_number\": 4,\n          \"prev_question_order_number\": 2,\n          \"content\": \"Зле\",\n          \"points\": 0\n        },\n        {\n          \"id\": 3,\n          \"question_id\": 3,\n          \"next_question_order_number\": 4,\n          \"prev_question_order_number\": 2,\n          \"content\": \"Средно\",\n          \"points\": 5\n        }\n      ]\n    }\n  ]\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/health-tests/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"health-tests",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Advice Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "test_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "medicament_id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "prescription_id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Test Advice",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n",
+									"type": "text"
+								},
+								{
+									"key": "max_points",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "min_points",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/health-advice/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"health-advice",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Test Submit Result",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "questions_and_answers",
+									"value": "[{\"id\":1,\"test_id\":1,\"order_number\":1,\"title\":\"Как се чувствате ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":1,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":3,\"prev_question_order_number\":0,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":2,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":3,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":2,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}},{\"id\":2,\"test_id\":1,\"order_number\":2,\"title\":\"Как се чувствате 2 ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":4,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":5,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":6,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":5,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}},{\"id\":3,\"test_id\":1,\"order_number\":3,\"title\":\"Как се чувствате 3 ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":1,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":7,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":8,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":9,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":8,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}}]",
+									"type": "text"
+								},
+								{
+									"key": "result",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "test_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/health-tests/submit-result",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"health-tests",
+								"submit-result"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Result View",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "questions_and_answers",
+									"value": "[{\"id\":1,\"test_id\":1,\"order_number\":1,\"title\":\"Как се чувствате ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":1,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":3,\"prev_question_order_number\":0,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":2,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":3,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":2,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}},{\"id\":2,\"test_id\":1,\"order_number\":2,\"title\":\"Как се чувствате 2 ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":4,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":5,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":6,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":5,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}},{\"id\":3,\"test_id\":1,\"order_number\":3,\"title\":\"Как се чувствате 3 ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":1,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":7,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":8,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":9,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":8,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}}]",
+									"type": "text"
+								},
+								{
+									"key": "result",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "test_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/health-results/11",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"health-results",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Prescriptions",
+			"item": [
+				{
+					"name": "Prescription List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/run/user/1000/doc/455edbab/i-love-my-job-so-much.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Среда рецепта",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "medicaments_array",
+									"value": "[1, 3]",
+									"type": "text"
+								},
+								{
+									"key": "doctor_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/prescriptions/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"prescriptions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prescription View",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/run/user/1000/doc/455edbab/i-love-my-job-so-much.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Среда рецепта",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "medicaments_array",
+									"value": "[1, 3]",
+									"type": "text"
+								},
+								{
+									"key": "doctor_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/prescriptions/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"prescriptions",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medicaments",
+			"item": [
+				{
+					"name": "Medicament List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/Projects/Images/31tIZh0b3uL.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Хапче за глава ",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/medicaments/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"medicaments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Medicament View",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/Projects/Images/31tIZh0b3uL.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Хапче за глава ",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/medicaments/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"medicaments",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Medicament Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/Projects/StockImages/31tIZh0b3uL.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Хапче за глава ",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/medicaments/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"medicaments",
+								"store"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "Doctors List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Photos/Profile Pictures/E0i_jjFXoAM-Gx4.jpg"
+								},
+								{
+									"key": "first_name",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "1.test.1@abv.bg",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "doctor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/doctors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Doctors View",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Photos/Profile Pictures/E0i_jjFXoAM-Gx4.jpg"
+								},
+								{
+									"key": "first_name",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "1.test.1@abv.bg",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "doctor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/doctors/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Doctors Prescriptions List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/run/user/1000/doc/e1d7d189/new2.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Грип\n",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/doctors/2/prescriptions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								"2",
+								"prescriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Doctors Pacients List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "specialty",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "mobile_number",
+									"value": "0898558220",
+									"type": "text"
+								},
+								{
+									"key": "office_number",
+									"value": "061001234",
+									"type": "text"
+								},
+								{
+									"key": "address_1",
+									"value": "address_1",
+									"type": "text"
+								},
+								{
+									"key": "address_2",
+									"value": "address_2",
+									"type": "text"
+								},
+								{
+									"key": "address_3",
+									"value": "address_3",
+									"type": "text"
+								},
+								{
+									"key": "address_4",
+									"value": "address_4",
+									"type": "text"
+								},
+								{
+									"key": "address_5",
+									"value": "address_5",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/doctors/1/patients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								"1",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Doctors Health Tests List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "specialty",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "mobile_number",
+									"value": "0898558220",
+									"type": "text"
+								},
+								{
+									"key": "office_number",
+									"value": "061001234",
+									"type": "text"
+								},
+								{
+									"key": "address_1",
+									"value": "address_1",
+									"type": "text"
+								},
+								{
+									"key": "address_2",
+									"value": "address_2",
+									"type": "text"
+								},
+								{
+									"key": "address_3",
+									"value": "address_3",
+									"type": "text"
+								},
+								{
+									"key": "address_4",
+									"value": "address_4",
+									"type": "text"
+								},
+								{
+									"key": "address_5",
+									"value": "address_5",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/doctors/1/health-tests",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								"1",
+								"health-tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Doctors Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "specialty",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "mobile_number",
+									"value": "0898558220",
+									"type": "text"
+								},
+								{
+									"key": "office_number",
+									"value": "061001234",
+									"type": "text"
+								},
+								{
+									"key": "address_1",
+									"value": "address_1",
+									"type": "text"
+								},
+								{
+									"key": "address_2",
+									"value": "address_2",
+									"type": "text"
+								},
+								{
+									"key": "address_3",
+									"value": "address_3",
+									"type": "text"
+								},
+								{
+									"key": "address_4",
+									"value": "address_4",
+									"type": "text"
+								},
+								{
+									"key": "address_5",
+									"value": "address_5",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/doctors/1/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								"1",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Doctor Prescriptions Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/Projects/Images/31tIZh0b3uL.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Грип\n",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis varius mauris sit amet rutrum. Sed eu augue eget massa vulputate consectetur eu vel felis. Nullam faucibus ornare augue, ac fermentum sapien elementum eu. Sed ut tincidunt libero, id feugiat dolor. Maecenas leo mi, tempor vitae urna id, interdum pharetra lectus. Nunc vel purus vel ante dignissim scelerisque. Nam ornare lorem a mi convallis condimentum. Fusce ultrices vehicula justo quis egestas. Proin dictum tincidunt tristique. Etiam luctus ligula nec augue euismod, vitae tincidunt lectus dignissim. Morbi ac mi malesuada quam vestibulum tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan risus quis congue facilisis. Phasellus vitae varius orci.",
+									"type": "text"
+								},
+								{
+									"key": "doctor_id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "medicaments_array",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/doctors/4/prescriptions/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								"4",
+								"prescriptions",
+								"store"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "Patients List",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "questions_and_answers",
+									"value": "[{\"id\":1,\"test_id\":1,\"order_number\":1,\"title\":\"Как се чувствате ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":1,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":3,\"prev_question_order_number\":0,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":2,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":3,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":2,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}},{\"id\":2,\"test_id\":1,\"order_number\":2,\"title\":\"Как се чувствате 2 ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":4,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":5,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":6,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":5,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}},{\"id\":3,\"test_id\":1,\"order_number\":3,\"title\":\"Как се чувствате 3 ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":1,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":7,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":8,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":9,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":8,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}}]",
+									"type": "text"
+								},
+								{
+									"key": "result",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "test_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/patients/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patients Health Result List Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "questions_and_answers",
+									"value": "[{\"id\":1,\"test_id\":1,\"order_number\":1,\"title\":\"Как се чувствате ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":1,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":3,\"prev_question_order_number\":0,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":2,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":3,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":2,\"test_id\":1,\"question_id\":1,\"next_question_order_number\":2,\"prev_question_order_number\":0,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}},{\"id\":2,\"test_id\":1,\"order_number\":2,\"title\":\"Как се чувствате 2 ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":4,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":5,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":6,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":5,\"test_id\":1,\"question_id\":2,\"next_question_order_number\":3,\"prev_question_order_number\":1,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}},{\"id\":3,\"test_id\":1,\"order_number\":3,\"title\":\"Как се чувствате 3 ?\",\"description\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma\",\"is_final_question\":1,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\",\"answers\":[{\"id\":7,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Добре\",\"points\":10,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":8,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"},{\"id\":9,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Средно\",\"points\":5,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}],\"final_answer\":{\"id\":8,\"test_id\":1,\"question_id\":3,\"next_question_order_number\":4,\"prev_question_order_number\":2,\"content\":\"Зле\",\"points\":0,\"created_at\":\"2023-11-10T20:35:36.000000Z\",\"updated_at\":\"2023-11-10T20:35:36.000000Z\"}}]",
+									"type": "text"
+								},
+								{
+									"key": "result",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "test_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/patients/1/health-results",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"1",
+								"health-results"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Photos/Profile Pictures/E0i_jjFXoAM-Gx4.jpg"
+								},
+								{
+									"key": "first_name",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "1.test.1@abv.bg",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "doctor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users View",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Photos/Profile Pictures/E0i_jjFXoAM-Gx4.jpg"
+								},
+								{
+									"key": "first_name",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "1.test.1@abv.bg",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "doctor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_picture",
+									"type": "file",
+									"src": "/D:/Photos/Profile Pictures/E0i_jjFXoAM-Gx4.jpg"
+								},
+								{
+									"key": "first_name",
+									"value": "Presiyan",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Tsonevski",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "presiyan@mhp.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password_confirmation",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "doctor",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/users/1/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "107|SASgTa4VCzPImAJTspt3V3y7uiNv9aKXZodvdLbY",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://192.168.0.105:8081",
+			"type": "string"
+		},
+		{
+			"key": "serverURL",
+			"value": "http://192.168.0.105:8081",
+			"type": "string"
+		},
+		{
+			"key": "localURL",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}
