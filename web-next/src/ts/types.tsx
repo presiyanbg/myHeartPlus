@@ -256,10 +256,22 @@ type SidePanelItemType = {
 
 type SidePanelListType = Array<SidePanelItemType>;
 
+/* Medical Profile Types */
 type MedicalProfilesType = {
     patient?: PatientType,
     doctor?: DoctorType,
 }
+
+/* Organization Types */
+type OrganizationType = {
+    id: number,
+    title: string,
+    logo: string,
+    created_at: string,
+    updated_at: string,
+}
+
+type OrganizationsType = Array<OrganizationType>;
 
 export type {
     NavLinkType,
@@ -312,4 +324,7 @@ export type {
     SidePanelListType,
 
     MedicalProfilesType,
+
+    OrganizationType,
+    OrganizationsType,
 }

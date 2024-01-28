@@ -28,7 +28,9 @@ const DoctorFormLogic = () => {
     const doctorUpdate = async (doctorId: number, params: DoctorFormType) => {
         let formData = new FormData();
 
+        formData.append('organization_id', params.organization_id || '');
         formData.append('specialty', params.specialty);
+        formData.append('contact_email', params.contact_email || '');
         formData.append('mobile_number', params.mobile_number);
         formData.append('office_number', params.office_number || '');
         formData.append('address_1', params.address_1);
