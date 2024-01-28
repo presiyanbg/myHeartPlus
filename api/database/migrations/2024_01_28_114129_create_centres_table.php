@@ -13,20 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('doctors', function (Blueprint $table) {
+        Schema::create('centres', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
 
-            $table->string('specialty')->nullable();
+            $table->unsignedBigInteger('organization_id');
+
+            $table->string('title')->nullable();
+            $table->string('email')->nullable();
             $table->string('mobile_number')->nullable();
-            $table->string('office_number')->nullable();
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
             $table->string('address_3')->nullable();
             $table->string('address_4')->nullable();
             $table->string('address_5')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -38,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctors');
+        Schema::dropIfExists('centres');
     }
 };

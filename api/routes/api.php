@@ -9,6 +9,7 @@ use App\Http\Controllers\HealthTestAdviceController;
 use App\Http\Controllers\HealthTestController;
 use App\Http\Controllers\HealthTestResultController;
 use App\Http\Controllers\MedicamentController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\UserController;
@@ -68,6 +69,11 @@ Route::get('prescriptions/{id}', [PrescriptionController::class, 'show']);
 // Medicaments categories
 Route::get('medicaments', [MedicamentController::class, 'index']);
 Route::get('medicaments/{id}', [MedicamentController::class, 'show']);
+
+// Organizations 
+Route::get('organizations', [OrganizationController::class, 'index']);
+Route::get('organizations/{id}/centres', [OrganizationController::class, 'showCentres']);
+Route::get('organizations/{id}/doctors', [OrganizationController::class, 'showDoctors']);
 
 /*  
 |

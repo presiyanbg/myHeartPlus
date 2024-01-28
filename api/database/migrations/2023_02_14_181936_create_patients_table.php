@@ -18,12 +18,10 @@ return new class extends Migration
 
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('doctor_id')->nullable();
-
             $table->string('gender')->nullable();
             $table->integer('weight')->default(0);
             $table->integer('height')->default(0);
             $table->date('date_of_birth')->nullable();
-
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

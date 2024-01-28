@@ -16,10 +16,8 @@ class HealthCategoryController extends Controller
     public function index()
     {
         try {
-            $categories = HealthCategory::paginate(10);
-
             return response([
-                'categories' => $categories
+                'categories' => HealthCategory::all(),
             ], 200);
         } catch (Throwable $e) {
             return response([

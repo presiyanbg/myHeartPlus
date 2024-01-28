@@ -15,8 +15,10 @@ class Doctor extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'organization_id',
         'user_id',
         'specialty',
+        'contact_email',
         'mobile_number',
         'office_number',
         'address_1',
@@ -26,7 +28,7 @@ class Doctor extends Model
         'address_5',
         'description',
         'rating',
-
+        'rating',
     ];
 
     /**

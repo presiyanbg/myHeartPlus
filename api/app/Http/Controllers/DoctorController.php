@@ -139,7 +139,15 @@ class DoctorController extends Controller
     public function showHealthTests(int $id)
     {
         try {
-            $tests =  HealthTest::where('doctor_id', $id)->orderByDesc('rating')->paginate(3);
+            $doctor = Doctor::where('id', $id)->first();
+
+            if (!$doctor) {
+                return response([
+                    'message' => 'Doctor was not found',
+                ], 404);
+            }
+
+            $tests = HealthTest::where('doctor_id', $doctor->id)->orderByDesc('rating')->paginate(10);
 
             // Get test categories
             foreach ($tests as $test) {
@@ -201,8 +209,17 @@ class DoctorController extends Controller
     public function update(int $id, Request $request)
     {
         try {
+            $doctor = Doctor::where('id', $id)->first();
+
+            if (!$doctor) {
+                return response([
+                    'message' => 'Doctor was not found',
+                ], 404);
+            }
+
             // Validate request 
             $fields = $request->validate([
+                'organization_id' => 'nullable|exists:organizations,id',
                 'specialty' => 'required|string',
                 'mobile_number' => 'required|string',
                 'office_number' => 'nullable|string',
@@ -212,19 +229,13 @@ class DoctorController extends Controller
                 'address_4' => 'nullable|string',
                 'address_5' => 'nullable|string',
                 'description' => 'required|string',
+                'contact_email' => 'nullable|email|unique:doctors,contact_email,' . $doctor->id,
             ]);
-
-            $doctor = Doctor::where('id', $id)->first();
-
-            if (!$doctor) {
-                return response([
-                    'message' => 'Doctor was not found',
-                ], 404);
-            }
 
             // Update doctor
             Doctor::where('id', $id)
                 ->update([
+                    'organization_id' => $fields['organization_id'] ?? null,
                     'specialty' => $fields['specialty'],
                     'mobile_number' => $fields['mobile_number'],
                     'office_number' => $fields['office_number'],
@@ -234,6 +245,7 @@ class DoctorController extends Controller
                     'address_4' => $fields['address_4'],
                     'address_5' => $fields['address_5'],
                     'description' => $fields['description'],
+                    'contact_email' => $fields['contact_email'],
                 ]);
 
             $doctor = Doctor::where('id', $id)->first();
