@@ -24,6 +24,17 @@ class ImagesController extends Controller
     }
 
     /**
+     * Get logo
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function getLogo()
+    {
+        $image = Storage::get('images/logo/logo.png');
+        return response($image, 200)->header('Content-Type', Storage::getMimeType('images/logo/logo.png'));
+    }
+
+    /**
      * Get image
      * 
      * @param  \Illuminate\Http\Request  $request

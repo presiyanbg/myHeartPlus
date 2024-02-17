@@ -38,6 +38,7 @@ Route::get('users', [UserController::class, 'index']);
 Route::get('users/{id}', [UserController::class, 'show']);
 
 // Images
+Route::get('logo', [ImageController::class, 'getLogo']);
 Route::get('image/{path}', [ImageController::class, 'getImage'])->where('path', '.*');
 Route::post('image', [ImageController::class, 'uploadImage']);
 
