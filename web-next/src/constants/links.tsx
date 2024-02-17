@@ -89,7 +89,7 @@ export const LINKS = [
 
 export const LOGO_LINK = {
     title: 'Logo',
-    url: '/',
+    url: `${process.env.NEXT_PUBLIC_API_URL}/images/logo/logo.png`,
     logo: Logo,
     selected: false,
     icon: faHeart,
