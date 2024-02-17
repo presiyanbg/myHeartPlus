@@ -1,9 +1,8 @@
+import HeroBanner from "@/components/common/hero/heroBanner";
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
+import OrganizationDoctorsDisplay from "@/components/organizations/organizationDoctorsDisplay/organizationDoctorsDisplay";
 import OrganizationsServices from "@/services/organizationsServices/organizationsServices";
-import { DoctorType, DoctorsType, OrganizationsType } from "@/ts/types";
-import { Button, Card, CardBody, CardFooter, CardHeader, Image } from "@nextui-org/react";
-import Link from "next/link";
-import { v4 as uuid } from 'uuid';
+import { DoctorsType, OrganizationsType } from "@/ts/types";
 
 const Home = async () => {
     let data: any;
@@ -13,9 +12,11 @@ const Home = async () => {
     let doctors: DoctorsType = [] as DoctorsType;
 
     try {
+        // Get organizations 
         data = await OrganizationsServices().organizationsList();
         organizations = await data?.organizations || [];
 
+        // Get doctors for the first organization 
         dataOrganizationDoctors = await OrganizationsServices().organizationDoctors(organizations[0]?.id || 0);
         doctors = await dataOrganizationDoctors?.data || [];
     } catch (ex) {
@@ -24,49 +25,40 @@ const Home = async () => {
 
     return (
         <>
-            <PageLayout>
-                <div className="text-center py-8">
-                    <h1>FIT 4 HEALTH</h1>
-                </div>
+            {/* Hero */}
+            <HeroBanner></HeroBanner>
 
-                <div className="grid grid-cols-4 gap-4 lg:gap-8">
-                    <div className=" col-span-4 ">
+            <PageLayout>
+                {/* Title and about us */}
+                <section>
+                    {/* Title */}
+                    <div className="text-center py-8">
+                        <h1>{!!(organizations?.length) ? (organizations[0]?.title) : 'Test'}</h1>
+                    </div>
+
+                    {/* About us */}
+                    <div className="w-full text-center pb-12">
+                        <p>
+                            Founded in 2023, we take pride in being a dynamic and forward-thinking company dedicated to providing top-notch
+                            health solutions. Our commitment to quality, customer satisfaction,
+                            and cutting-edge technology sets us apart in the competitive landscape.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Doctors display */}
+                <section>
+                    <div className="w-full pb-6">
                         <hr />
                     </div>
 
-                    {
-                        !!(doctors?.length > 0) && (
-                            doctors.map((doctor: DoctorType) => {
-                                return (
-                                    <Link href={`/doctors/${doctor?.id}`} key={uuid()}
-                                        className="hover:cursor-pointer hover:scale-110 transition duration-500 cursor-pointer hover:z-50 col-span-2 md:col-span-1">
-                                        <Card isFooterBlurred className="w-full h-[300px] md:h-[400px] col-span-12 sm:col-span-5">
-                                            <div className="flex items-center justify-items-center h-full w-full">
-                                                <Image
-                                                    isZoomed
-                                                    className="min-h-[300px] md:min-h-[400px] h-fit w-fit"
-                                                    src={`${process.env.NEXT_PUBLIC_API_URL}/${doctor?.image}`}
-                                                    alt={doctor.full_name} />
-                                            </div>
+                    <OrganizationDoctorsDisplay doctors={doctors}></OrganizationDoctorsDisplay>
 
-                                            <CardFooter className="absolute bg-white/60 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
-                                                <div className="text-center w-full">
-                                                    <h5 className="font-bold text-black">{doctor.full_name}</h5>
-                                                    <p className="text-tiny uppercase font-bold text-black">{doctor.specialty}</p>
-                                                </div>
-                                            </CardFooter>
-                                        </Card>
-                                    </Link>
-                                )
-                            })
-                        )
-                    }
-                </div>
+                    <div className="w-full pt-6">
+                        <hr />
+                    </div>
+                </section>
             </PageLayout>
-
-            <div className="py-16">
-
-            </div>
         </>
     )
 }

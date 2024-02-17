@@ -96,3 +96,7 @@ export const LOGO_LINK = {
     topLink: true,
     onClick: () => { },
 };
+
+export const HERO = {
+    url: `${process.env.NEXT_PUBLIC_API_URL}/images/banners/hero.jpg`,
+}
