@@ -16,8 +16,9 @@
         "@nextui-org/react": "^2.2.9",
         "@types/uuid": "^9.0.6",
         "axios": "^1.6.2",
+        "clsx": "^2.1.0",
         "cross-env": "^7.0.3",
-        "framer-motion": "^10.16.5",
+        "framer-motion": "^10.18.0",
         "negotiator": "^0.6.3",
         "next": "14.0.1",
         "next-intl": "^2.22.1",
@@ -25,7 +26,9 @@
         "qs": "^6.11.2",
         "react": "^18",
         "react-dom": "^18",
+        "react-element-to-jsx-string": "^15.0.0",
         "sharp": "^0.33.1",
+        "tailwind-merge": "^2.2.1",
         "uuid": "^9.0.1"
     },
     "devDependencies": {
