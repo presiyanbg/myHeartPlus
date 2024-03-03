@@ -13,6 +13,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,9 +39,10 @@ Route::get('users', [UserController::class, 'index']);
 Route::get('users/{id}', [UserController::class, 'show']);
 
 // Images
-Route::get('logo', [ImageController::class, 'getLogo']);
-Route::get('image/{path}', [ImageController::class, 'getImage'])->where('path', '.*');
-Route::post('image', [ImageController::class, 'uploadImage']);
+Route::get('logo', [ImagesController::class, 'getLogo']);
+Route::get('image/{path}', [ImagesController::class, 'getImage'])->where('path', '.*');
+Route::get('banners', [ImagesController::class, 'getBanners']);
+Route::post('image', [ImagesController::class, 'uploadImage']);
 
 // Articles
 Route::get('articles', [ArticleController::class, 'index']);

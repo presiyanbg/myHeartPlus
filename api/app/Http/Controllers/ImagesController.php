@@ -44,4 +44,23 @@ class ImagesController extends Controller
         $image = Storage::get($path);
         return response($image, 200)->header('Content-Type', Storage::getMimeType($path));
     }
+
+    /**
+     * Get banners
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function getBanners()
+    {
+        $imageDir = public_path('images/banners');
+        $images = [];
+
+        foreach (scandir($imageDir) as $path) {
+            if (!is_dir($imageDir . '/' . $path)) {
+                $images[] = '/images/banners/' . $path;
+            }
+        }
+
+        return response($images, 200);
+    }
 }
