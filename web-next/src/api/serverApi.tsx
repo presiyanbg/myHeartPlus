@@ -61,6 +61,12 @@ const ServerSideApi = () => {
                 config.cache = 'no-store';
             }
 
+            // Disable cache while in dev 
+            if (process.env.CACHE === 'DISABLED') {
+                config.cache = 'no-store';
+                config.next = undefined;
+            }
+
             const response = await fetch(`${apiUrl}/api${url}`, config);
 
             return await response?.json();
