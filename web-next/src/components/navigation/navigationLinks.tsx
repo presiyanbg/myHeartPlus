@@ -27,27 +27,19 @@ const NavigationLinks = () => {
         mainPath = '/' + pathnamesArray[2];
     }
 
-    /**
-     * Display only links marked with topLink flag
-     */
     return (
         <>
             {
                 LINKS?.map((link) => {
-                    // Don't show user specific links  when user is logged out
-                    if (typeof link.isAuth == 'boolean' && link.isAuth && !isAuth) return <div key={uuid()}></div>;
-
-                    if (link.topLink === true) {
-                        return (
-                            <NavbarItem key={uuid()}>
-                                <Link href={link.url}
-                                    shallow={true}
-                                    className={(mainPath == link.url) ? 'text-blue-500' : 'foreground'}>
-                                    {t(link.title)}
-                                </Link>
-                            </NavbarItem>
-                        )
-                    }
+                    return (
+                        <NavbarItem key={uuid()}>
+                            <Link href={link.url}
+                                shallow={true}
+                                className={(mainPath == link.url) ? 'text-blue-500' : 'foreground'}>
+                                {t(link.title)}
+                            </Link>
+                        </NavbarItem>
+                    )
                 })
             }
         </>

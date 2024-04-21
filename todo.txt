@@ -5,6 +5,9 @@
 
 <Ideas>
     Main page for Fit 4 health
+        - Hero banner
+        - Info about cause and Ani 
+        - Small news section 
 
     Organization
         - Add organization has doctors, medical centres 
@@ -58,8 +61,4 @@
 		- Comments real time
 		- Collect data from doctor test table 
 </Ideas>
-
-# *********************************************************************************
-#										Ready 
-# *********************************************************************************
 

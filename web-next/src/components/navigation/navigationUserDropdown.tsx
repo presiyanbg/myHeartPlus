@@ -1,16 +1,5 @@
 'use client';
-
-import {
-    Dropdown,
-    DropdownTrigger,
-    DropdownMenu,
-    DropdownItem,
-    Button,
-    Spinner,
-    Switch,
-    Avatar
-} from "@nextui-org/react";
-
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, Spinner, Switch, Avatar } from "@nextui-org/react";
 import { faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslations } from 'next-intl';

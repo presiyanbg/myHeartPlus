@@ -56,35 +56,6 @@ export const LINKS = [
         topLink: true,
         onClick: () => { },
     },
-    // {
-    //     title: 'Login',
-    //     url: '/authentication',
-    //     selected: false,
-    //     icon: faStaffSnake,
-    //     context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
-    //     topLink: true,
-    //     authentication: true,
-    //     onClick: () => { },
-    // },
-    {
-        title: 'Forum',
-        url: '/forum',
-        selected: false,
-        icon: faStaffSnake,
-        context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
-        topLink: false,
-        onClick: () => { },
-    },
-    {
-        title: 'Profile page',
-        url: '/profile',
-        selected: false,
-        icon: faUser,
-        context: 'Redundant alt attribute. Screen-readers already announce `img` tags as an image.',
-        topLink: false,
-        isAuth: true,
-        onClick: () => { },
-    },
 ];
 
 export const LOGO_LINK = {
