@@ -17,7 +17,6 @@ class Doctor extends Model
     protected $fillable = [
         'organization_id',
         'user_id',
-        'specialty',
         'contact_email',
         'mobile_number',
         'office_number',
@@ -27,7 +26,6 @@ class Doctor extends Model
         'address_4',
         'address_5',
         'description',
-        'rating',
         'rating',
     ];
 

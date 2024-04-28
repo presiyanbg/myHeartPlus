@@ -104,7 +104,6 @@ class User extends Authenticatable
                 $profile = Doctor::create([
                     'user_id' => $this->id,
                     'rating' => 0,
-                    'specialty' => '',
                     'contact_email' => '',
                     'mobile_number' => '',
                     'office_number' => '',

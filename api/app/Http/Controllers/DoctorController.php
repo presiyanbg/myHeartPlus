@@ -220,7 +220,6 @@ class DoctorController extends Controller
             // Validate request 
             $fields = $request->validate([
                 'organization_id' => 'nullable|exists:organizations,id',
-                'specialty' => 'required|string',
                 'mobile_number' => 'required|string',
                 'office_number' => 'nullable|string',
                 'address_1' => 'required|string',
@@ -236,7 +235,6 @@ class DoctorController extends Controller
             Doctor::where('id', $id)
                 ->update([
                     'organization_id' => $fields['organization_id'] ?? null,
-                    'specialty' => $fields['specialty'],
                     'mobile_number' => $fields['mobile_number'],
                     'office_number' => $fields['office_number'],
                     'address_1' => $fields['address_1'],
