@@ -18,7 +18,7 @@ const Category = (props: Props) => {
                 'backgroundColor': props?.category?.bg_color,
             }}>
 
-            {t(props?.category?.title)}
+            {props?.category?.title}
         </span>
     )
 }
