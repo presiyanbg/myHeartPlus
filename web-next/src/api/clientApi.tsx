@@ -12,7 +12,33 @@ const ClientSideApi = () => {
     const { notify } = useContext(NotificationContext);
 
     /**
-     * Post data to API
+     * POST data to API
+     * 
+     * @param url string
+     * @param data object
+     * @param formData object
+     * 
+     * @returns object - Api response data
+     */
+    const post = async (url: string, data?: {}, formData: boolean = false) => {
+        return request('POST', url, data, formData);
+    }
+
+    /**
+     * GET data from API
+     * 
+     * @param url string
+     * @param data object
+     * @param formData object
+     * 
+     * @returns object - Api response data
+     */
+    const get = async (url: string, data?: {}, formData: boolean = false) => {
+        return request('GET', url, data, formData);
+    }
+
+    /**
+     * Request data from API
      * 
      * @param url string - API url that data is sended to
      * @param data object - Data for the API
@@ -20,7 +46,7 @@ const ClientSideApi = () => {
      * 
      * @returns object - Api response data
      */
-    const post = async (url: string, data?: {}, formData: boolean = false) => {
+    const request = async (method: 'POST' | 'GET', url: string, data?: {}, formData: boolean = false, notification: boolean = false) => {
         setLoading(true);
 
         try {
@@ -32,7 +58,7 @@ const ClientSideApi = () => {
 
             // Request data from API
             const config = {
-                method: 'post',
+                method: method,
                 url: `${apiUrl}${url}`,
                 headers: {
                     'Accept': 'application/json',
@@ -45,13 +71,13 @@ const ClientSideApi = () => {
             return axios(config)
                 .then(function (response: any) {
                     setLoading(false);
-                    notify(response?.data?.message, response?.status);
+                    notification && notify(response?.data?.message, response?.status);
 
                     return response.data;
                 })
                 .catch(function (error: any) {
                     setLoading(false);
-                    notify(error?.response?.data?.message, error?.response?.status);
+                    notification && notify(error?.response?.data?.message, error?.response?.status);
 
                     return {};
                 });
@@ -62,7 +88,8 @@ const ClientSideApi = () => {
     }
 
     return {
-        post
+        post,
+        get,
     }
 }
 

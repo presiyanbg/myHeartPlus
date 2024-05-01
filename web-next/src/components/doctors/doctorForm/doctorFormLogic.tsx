@@ -1,5 +1,5 @@
+'use client';
 import DoctorServicesClientServices from "@/services/doctorsServices/doctorServicesClientServices";
-import DoctorsServices from "@/services/doctorsServices/doctorsServices";
 import { DoctorFormType, DoctorType } from "@/ts/types";
 
 const DoctorFormLogic = () => {
@@ -12,10 +12,9 @@ const DoctorFormLogic = () => {
      * @returns API response 
      */
     const doctorShow = async (doctorId: number) => {
-        const doctorData: any = await DoctorsServices().doctorShow(doctorId);
-        const doctor: DoctorType = await doctorData?.doctor || {};
+        const doctorData: any = await doctorClientServices.doctorShow(doctorId);
 
-        return doctor;
+        return await doctorData?.doctor || {};;
     }
 
     /**
@@ -40,7 +39,7 @@ const DoctorFormLogic = () => {
         formData.append('address_5', params.address_5 || '');
         formData.append('description', params.description);
 
-        return await doctorClientServices.update(doctorId, formData);
+        return await doctorClientServices.doctorUpdate(doctorId, formData);
     }
 
     return {

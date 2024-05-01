@@ -11,7 +11,7 @@ type Props = {
     bodyDataType?: 'articles' | 'doctors' | 'healthTests' | 'prescriptions' | 'medicaments',
 }
 
-const SidePanel = async (props: Props) => {
+const SidePanel = (props: Props) => {
     const logic = SidePanelLogic();
     const data = logic.formatBodyData(props.bodyDataType || '', props.bodyData);
 

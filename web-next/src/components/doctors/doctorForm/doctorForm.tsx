@@ -112,7 +112,7 @@ const DoctorForm = (props: Props) => {
 
         setTimeout(() => {
             logic.doctorShow(props.doctorId).then(doctor => {
-                updateFormData(doctor);
+                updateFormData(doctor as DoctorType);
             });
         })
     }, []);
