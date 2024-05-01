@@ -53,6 +53,7 @@ const ServerSideApi = () => {
                     'Locale': locale,
                 },
                 body: JSON.stringify(data),
+                next: { revalidate: 3600 }
             } as RequestInit;
 
             // Load cached data
@@ -62,12 +63,12 @@ const ServerSideApi = () => {
 
             // Load new data
             if (!loadCache) {
-                config.cache = 'no-store';
+                config.cache = 'no-cache';
             }
 
-            // Disable cache while in dev 
+            // Disable cache while in dev
             if (process.env.CACHE === 'DISABLED') {
-                config.cache = 'no-store';
+                config.cache = 'no-cache';
                 config.next = undefined;
             }
 

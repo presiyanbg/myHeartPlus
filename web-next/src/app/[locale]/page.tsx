@@ -2,29 +2,18 @@ import HeroBanner from "@/components/common/hero/heroBanner";
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import OrganizationDoctorsDisplay from "@/components/organizations/organizationDoctorsDisplay/organizationDoctorsDisplay";
 import OrganizationsServices from "@/services/organizationsServices/organizationsServices";
-import { DoctorsType, OrganizationsType } from "@/ts/types";
 import { unstable_setRequestLocale } from 'next-intl/server';
 
 const Home = async ({ params: { locale } }: { params: { locale: any } }) => {
     unstable_setRequestLocale(locale);
 
-    let data: any;
-    let organizations: OrganizationsType = [] as OrganizationsType;
+    // Get organizations 
+    let data = await OrganizationsServices().organizationsList();
+    let organizations = await data?.organizations || [];
 
-    let dataOrganizationDoctors: any;
-    let doctors: DoctorsType = [] as DoctorsType;
-
-    try {
-        // Get organizations 
-        data = await OrganizationsServices().organizationsList();
-        organizations = await data?.organizations || [];
-
-        // Get doctors for the first organization 
-        dataOrganizationDoctors = await OrganizationsServices().organizationDoctors(organizations[0]?.id || 0);
-        doctors = await dataOrganizationDoctors?.data || [];
-    } catch (ex) {
-        console.error(ex);
-    }
+    // Get doctors for the first organization 
+    let dataOrganizationDoctors = await OrganizationsServices().organizationDoctors(organizations[0]?.id || 0);
+    let doctors = await dataOrganizationDoctors?.data || [];
 
     return (
         <>
