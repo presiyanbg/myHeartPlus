@@ -115,8 +115,8 @@ class HealthTestController extends Controller
 
             if (!$test) {
                 return response([
-                    'message' => 'Internal error - Test was not found'
-                ], 500);
+                    'message' => 'Test was not found'
+                ], 404);
             }
 
             // Get all advices for test
@@ -125,7 +125,7 @@ class HealthTestController extends Controller
             if (!$advice) {
                 return response([
                     'message' => 'No advices were found'
-                ], 404);
+                ], 200);
             }
 
             // Set default user id
