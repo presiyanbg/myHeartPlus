@@ -17,28 +17,6 @@ export const NavigationContextProvider = ({ children }: NavigationProviderProps)
     const [links, setLinks] = useState(LINKS);
     const logoLink = LOGO_LINK;
 
-    const { isAuth } = useContext(UserContext);
-
-    const updateAuthLink = (auth: boolean) => {
-        setLinks((prev) => {
-            return prev.map((link) => {
-                if (link.isAuth && auth) {
-                    link.title = 'Logout';
-                }
-
-                if (link.isAuth && !auth) {
-                    link.title = 'Login';
-                }
-
-                return link;
-            })
-        });
-    }
-
-    useEffect(() => {
-        updateAuthLink(isAuth);
-    }, [isAuth])
-
     return (
         <NavigationContext.Provider value={{ links, logoLink }}>
             {children}

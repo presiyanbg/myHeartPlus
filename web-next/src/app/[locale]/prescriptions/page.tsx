@@ -4,8 +4,11 @@ import SidePanel from "@/components/sidePanel/sidePanel";
 import PrescriptionsServices from "@/services/prescriptionsServices/prescriptionsServices";
 import { SELECTORS } from "@/constants/selectors";
 import { PaginationType, PrescriptionsType } from "@/ts/types";
+import { unstable_setRequestLocale } from 'next-intl/server';
 
-const PrescriptionsPage = async () => {
+const PrescriptionsPage = async ({ params: { locale } }: { params: { locale: any } }) => {
+    unstable_setRequestLocale(locale);
+
     const data: any = await PrescriptionsServices().prescriptionsList();
     const prescriptions: PrescriptionsType = await data?.prescriptions?.data || [];
     const pagination: PaginationType = await data?.prescriptions || [];

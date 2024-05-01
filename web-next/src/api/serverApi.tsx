@@ -1,3 +1,4 @@
+import { getLocale } from "next-intl/server";
 
 const ServerSideApi = () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -41,12 +42,15 @@ const ServerSideApi = () => {
      */
     const request = async (method: 'GET' | 'POST', url: string, data?: {}, loadCache: boolean = true) => {
         try {
+            const locale = await getLocale();
+
             const config = {
                 method: method,
                 headers: {
                     'Accept': 'application/json',
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Locale': locale,
                 },
                 body: JSON.stringify(data),
             } as RequestInit;

@@ -12,19 +12,18 @@ import Link from "next/link";
 type Props = {
     params: {
         id: number,
-        locale: any,
     },
 }
 
 const ArticlePage = async (props: Props) => {
     // Load main article data
-    const data: any = await ArticleServices().articleSelect(props?.params?.locale, props?.params?.id);
+    const data: any = await ArticleServices().articleSelect(props?.params?.id);
     const article: ArticleType = await data?.article || {};
     const articleHTML: any = await data?.page;
     const writer: UserType = await data?.writer || {};
 
     // Load top articles for side panel
-    const sidePanelData: any = await ArticleServices().articlesListTopViews(props?.params?.locale);
+    const sidePanelData: any = await ArticleServices().articlesListTopViews();
     const articles: ArticlesType = await sidePanelData?.articles?.data || [];
 
     // Update main article views

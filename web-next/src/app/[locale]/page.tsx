@@ -3,8 +3,11 @@ import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import OrganizationDoctorsDisplay from "@/components/organizations/organizationDoctorsDisplay/organizationDoctorsDisplay";
 import OrganizationsServices from "@/services/organizationsServices/organizationsServices";
 import { DoctorsType, OrganizationsType } from "@/ts/types";
+import { unstable_setRequestLocale } from 'next-intl/server';
 
-const Home = async () => {
+const Home = async ({ params: { locale } }: { params: { locale: any } }) => {
+    unstable_setRequestLocale(locale);
+
     let data: any;
     let organizations: OrganizationsType = [] as OrganizationsType;
 

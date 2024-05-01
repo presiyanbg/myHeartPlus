@@ -5,12 +5,11 @@ import SidePanel from "@/components/sidePanel/sidePanel";
 import MedicamentsServices from "@/services/medicamentsServices/medicamentsServices";
 import { MedicamentType, MedicamentsType } from "@/ts/types";
 import { formatCurrency } from "@/utils/utils";
-import { Button, Card, CardBody, CardFooter, CardHeader, Divider, Image, User } from "@nextui-org/react";
-import Link from "next/link";
+import { Button, Card, CardBody, CardHeader, Divider, Image } from "@nextui-org/react";
 
 type Props = {
     params: {
-        id: number
+        id: number,
     }
 }
 

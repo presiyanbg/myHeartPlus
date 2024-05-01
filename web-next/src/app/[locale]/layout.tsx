@@ -11,11 +11,11 @@ import Notifications from '@/components/notifications/notificatins';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
-import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { Suspense } from 'react';
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 config.autoAddCss = false;
 
@@ -30,23 +30,19 @@ export function generateStaticParams() {
     return [{ locale: 'bg' }, { locale: 'en' }];
 }
 
-export default async function RootLayout({
+export default function LocaleLayout({
     children,
     params: { locale }
 }: {
     children: React.ReactNode,
-    params: { locale: any }
+    params: { locale: string }
 }) {
-    let messages;
+    unstable_setRequestLocale(locale);
 
-    try {
-        messages = (await import(`../../messages/${locale}.json`)).default;
-    } catch (error) {
-        notFound();
-    }
+    const messages = useMessages();
 
     return (
-        <html lang="bg-BG" suppressHydrationWarning>
+        <html lang={locale} suppressHydrationWarning>
             <body className="relative text-foreground bg-background overflow-x-hidden">
                 <Providers>
                     <NextIntlClientProvider locale={locale} messages={messages}>

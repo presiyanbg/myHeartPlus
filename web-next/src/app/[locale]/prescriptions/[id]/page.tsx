@@ -12,7 +12,7 @@ import { Card, CardBody, CardFooter, CardHeader, Divider, User } from "@nextui-o
 
 type Props = {
     params: {
-        id: number
+        id: number,
     }
 }
 

@@ -3,16 +3,16 @@ import Api from "../../api/serverApi";
 const ArticleServices = () => {
     const api = Api();
 
-    const articlesList = async (locale: string, page: number = 1) => {
-        return api.get(`/articles?page=${page}&locale=${locale}`, undefined, true);
+    const articlesList = async (page: number = 1) => {
+        return api.get(`/articles?page=${page}`, undefined, true);
     }
 
-    const articleSelect = async (locale: string = '', id: number,) => {
-        return api.get(`/articles/${id}?locale=${locale}`, undefined, true);
+    const articleSelect = async (id: number,) => {
+        return api.get(`/articles/${id}`, undefined, true);
     }
 
-    const articlesListTopViews = async (locale: string, page: number = 1) => {
-        return api.get(`/articles?page=${page}&top=true&locale=${locale}`, undefined, true);
+    const articlesListTopViews = async (page: number = 1) => {
+        return api.get(`/articles?page=${page}&top=true`, undefined, true);
     }
 
     const articlesUpdateViews = async (id: number) => {

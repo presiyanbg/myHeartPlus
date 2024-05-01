@@ -7,7 +7,7 @@ import SidePanel from "@/components/sidePanel/sidePanel";
 import { ArticlesType, PaginationType } from '../../../ts/types';
 import { SELECTORS } from "@/constants/selectors";
 
-const ArticlesPage = async ({ params: { locale } }: { params: { locale: any } }) => {
+const ArticlesPage = async () => {
     let data: any;
     let articles: ArticlesType = [] as ArticlesType;
     let pagination: PaginationType = {} as PaginationType;
@@ -16,11 +16,11 @@ const ArticlesPage = async ({ params: { locale } }: { params: { locale: any } })
     let topArticles: any;
 
     try {
-        data = await ArticleServices().articlesList(locale);
+        data = await ArticleServices().articlesList();
         articles = await data?.articles?.data || [];
         pagination = await data?.articles || [];
 
-        dataTopArticles = await ArticleServices().articlesListTopViews(locale);
+        dataTopArticles = await ArticleServices().articlesListTopViews();
         topArticles = await dataTopArticles?.articles?.data || [];
     } catch (ex) {
         console.error(ex);
