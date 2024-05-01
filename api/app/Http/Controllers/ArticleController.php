@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
-use function PHPUnit\Framework\isNull;
-
 class ArticleController extends Controller
 {
     /**
@@ -26,8 +24,8 @@ class ArticleController extends Controller
         $locale = App::getLocale();
 
         // Validate locale 
-        if ($request->has('locale')) {
-            $locale = Language::getValidLocale($request->input('locale'));
+        if ($request->hasHeader('Locale')) {
+            $locale = Language::getValidLocale($request->header('Locale'));
         }
 
         // Default order by date created 
@@ -143,15 +141,15 @@ class ArticleController extends Controller
             $article = Article::where('id', $id)->first();
             $locale = App::getLocale();
 
-            // Validate locale 
-            if ($request->has('locale')) {
-                $locale = Language::getValidLocale($request->input('locale'));
-            }
-
             if ($article == null) {
                 return response([
                     'message' => 'Article was not found',
                 ], 404);
+            }
+
+            // Validate locale 
+            if ($request->hasHeader('Locale')) {
+                $locale = Language::getValidLocale($request->header('Locale'));
             }
 
             // Translate

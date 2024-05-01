@@ -3,9 +3,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 
 class UserController extends Controller
 {
@@ -163,6 +165,21 @@ class UserController extends Controller
                 'token' => $token,
                 'message' => 'Success',
             ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
+    }
+
+    public function setLocale(string $locale)
+    {
+        try {
+            $locale = Language::getValidLocale($locale);
+
+            App::setLocale($locale);
+
+            return App::getLocale();
         } catch (Throwable $e) {
             return response([
                 'message' => $e

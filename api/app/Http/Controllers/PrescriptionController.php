@@ -6,28 +6,38 @@ use App\Http\Requests\StorePrescriptionRequest;
 use App\Http\Requests\UpdatePrescriptionRequest;
 use App\Models\Doctor;
 use App\Models\HealthCategory;
+use App\Models\HealthCategoryTranslation;
+use App\Models\Language;
 use App\Models\Medicament;
 use App\Models\Prescription;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class PrescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $prescriptions = Prescription::paginate(10);
+        $locale = App::getLocale();
+
+        // Translate
+        if ($request->hasHeader('Locale')) {
+            $locale = Language::getValidLocale($request->header('Locale'));
+        }
 
         // Get category for test
         foreach ($prescriptions as $prescription) {
             $category = HealthCategory::where('id', $prescription->category_id)->first();
 
             if ($category) {
-                $prescription->category = $category;
+                $prescription->category = HealthCategoryTranslation::translate($category, $locale);
             }
         }
 
@@ -95,9 +105,10 @@ class PrescriptionController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         try {
             $prescription = Prescription::where('id', $id)->first();
@@ -113,6 +124,13 @@ class PrescriptionController extends Controller
 
             // Load category 
             $prescription->category = HealthCategory::where('id', $prescription->category_id)->first();
+
+            // Translate category
+            if ($request->hasHeader('Locale')) {
+                $locale = Language::getValidLocale($request->header('Locale'));
+
+                $prescription->category = HealthCategoryTranslation::translate($prescription->category, $locale);
+            }
 
             // Load doctor
             $prescription->doctor = Doctor::where('id', $prescription->doctor_id)->first();

@@ -2,26 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMedicamentRequest;
 use App\Http\Requests\UpdateMedicamentRequest;
 use App\Models\HealthCategory;
+use App\Models\HealthCategoryTranslation;
 use App\Models\Medicament;
 use Illuminate\Http\Request;
+use App\Models\Language;
 
 class MedicamentController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $medicaments = Medicament::paginate(10);
 
         // Get category for medicament
         foreach ($medicaments as $medicament) {
             $medicament->category = HealthCategory::where('id', $medicament->category_id)->first();
+
+            if ($request->hasHeader('Locale')) {
+                $locale = Language::getValidLocale($request->header('Locale'));
+
+                $medicament->category = HealthCategoryTranslation::translate($medicament->category, $locale);
+            }
         }
 
         return response([
@@ -95,9 +103,10 @@ class MedicamentController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         try {
             $medicament = Medicament::where('id', $id)->first();
@@ -110,6 +119,13 @@ class MedicamentController extends Controller
 
             // Load category 
             $medicament->category = HealthCategory::where('id', $medicament->category_id)->first();
+
+            // Translate
+            if ($request->hasHeader('Locale')) {
+                $locale = Language::getValidLocale($request->header('Locale'));
+
+                $medicament->category = HealthCategoryTranslation::translate($medicament->category, $locale);
+            }
 
             return response([
                 'medicament' => $medicament,

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateHealthCategoryRequest;
 use App\Models\HealthCategory;
+use App\Models\HealthCategoryTranslation;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
 class HealthCategoryController extends Controller
@@ -11,13 +13,31 @@ class HealthCategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
+            $categories = HealthCategory::all();
+
+            if (count($categories) <= 0) {
+                return response([
+                    'categories' => [],
+                ], 200);
+            }
+
+            // Translate 
+            if ($request->hasHeader('Locale')) {
+                $locale = Language::getValidLocale($request->header('Locale'));
+
+                foreach ($categories as $category) {
+                    $category = HealthCategoryTranslation::translate($category, $locale);
+                }
+            }
+
             return response([
-                'categories' => HealthCategory::all(),
+                'categories' => $categories,
             ], 200);
         } catch (Throwable $e) {
             return response([

@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleTranslationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HealthCategoryController;
+use App\Http\Controllers\HealthCategoryTranslationController;
 use App\Http\Controllers\HealthTestAdviceController;
 use App\Http\Controllers\HealthTestController;
 use App\Http\Controllers\HealthTestResultController;
@@ -37,6 +38,7 @@ Route::post('users/login', [AuthController::class, 'login']);
 Route::post('users/register', [AuthController::class, 'register']);
 Route::get('users', [UserController::class, 'index']);
 Route::get('users/{id}', [UserController::class, 'show']);
+Route::post('users/locale/{locale}', [UserController::class, 'setLocale']);
 
 // Images
 Route::get('logo', [ImagesController::class, 'getLogo']);
@@ -108,6 +110,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Health categories
     Route::post('health-category/store', [HealthCategoryController::class, 'store']);
+    Route::post('health-category/{id}/update/{locale}', [HealthCategoryTranslationController::class, 'update']);
 
     // Health Advices
     Route::post('health-advice/store', [HealthTestAdviceController::class, 'store']);

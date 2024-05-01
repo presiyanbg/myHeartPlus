@@ -21,9 +21,16 @@ class ArticleTranslation extends Model
         'content',
     ];
 
+    /**
+     * Translate
+     * 
+     * @param App\Models\Article $article
+     * @param string $locale
+     * @return App\Models\Article $article
+     */
     public static function translate(Article $article, string $locale)
     {
-        if (!$article || strlen($locale) <= 0) return;
+        if (!($article instanceof Article) || strlen($locale) <= 0) return $article;
 
         $articleTranslated = ArticleTranslation::where([
             ['article_id', '=', $article->id],
