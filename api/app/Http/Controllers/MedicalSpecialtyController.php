@@ -14,7 +14,9 @@ class MedicalSpecialtyController extends Controller
      */
     public function index()
     {
-        //
+        return response([
+            'medicalSpecialties' => MedicalSpecialty::all(),
+        ], 200);
     }
 
     /**

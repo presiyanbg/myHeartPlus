@@ -78,7 +78,7 @@ class MedicalSpecialtySeeder extends Seeder
         ]);
 
         DB::table('medical_specialties')->insert([
-            'title' => 'Unknown',
+            'title' => 'None',
             'description' => '',
             'bg_color' => '#2e86de',
             'font_color' => '#fff'

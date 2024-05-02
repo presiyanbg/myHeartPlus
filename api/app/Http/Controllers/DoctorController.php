@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 use App\Models\Doctor;
+use App\Models\DoctorMedicalSpecialty;
 use App\Models\HealthCategory;
 use App\Models\HealthTest;
+use App\Models\MedicalSpecialty;
 use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\User;
@@ -84,6 +86,9 @@ class DoctorController extends Controller
 
             // Load user data
             $doctor = Doctor::getUserData($doctor);
+
+            // Load medical specialties
+            $doctor->medicalSpecialties = DoctorMedicalSpecialty::where('doctor_id', $id)->get();
 
             return response([
                 'doctor' => $doctor,
@@ -229,6 +234,7 @@ class DoctorController extends Controller
                 'address_5' => 'nullable|string',
                 'description' => 'required|string',
                 'contact_email' => 'nullable|email|unique:doctors,contact_email,' . $doctor->id,
+                'medicalSpecialties' => 'nullable|string',
             ]);
 
             // Update doctor
@@ -246,7 +252,46 @@ class DoctorController extends Controller
                     'contact_email' => $fields['contact_email'],
                 ]);
 
+            $medicalSpecialties = json_decode($fields['medicalSpecialties'], true);
+            $prevMedicalSpecialties = DoctorMedicalSpecialty::where('doctor_id', $doctor->id)->get()->toArray();
+
+            if (!is_array($medicalSpecialties)) {
+                $medicalSpecialties = [];
+            }
+
+            // Delete removed specialties 
+            foreach ($prevMedicalSpecialties as $prevSpecialty) {
+                $specialtyIsSelected = array_search($prevSpecialty['medical_specialty_id'], $medicalSpecialties);
+
+                if ($specialtyIsSelected != null) continue;
+
+                DoctorMedicalSpecialty::where([
+                    ['doctor_id', '=', $doctor->id],
+                    ['medical_specialty_id', '=', $prevSpecialty['medical_specialty_id']],
+                ])->delete();
+            }
+
+            // Add new specialties
+            foreach ($medicalSpecialties as $medicalSpecialtyId) {
+                $specialtyIsSelected = array_search($medicalSpecialtyId, array_column($prevMedicalSpecialties, 'medical_specialty_id'));
+
+                if ($specialtyIsSelected != null) continue;
+
+                // Check specialty exists
+                $medicalSpecialty = MedicalSpecialty::where('id', $medicalSpecialtyId)->first();
+
+                if ($medicalSpecialty == null) continue;
+
+                DoctorMedicalSpecialty::create([
+                    'doctor_id' => $doctor->id,
+                    'medical_specialty_id' => $medicalSpecialtyId,
+                ]);
+            }
+
             $doctor = Doctor::where('id', $id)->first();
+
+            // Load medical specialties
+            $doctor->medicalSpecialties = DoctorMedicalSpecialty::where('doctor_id', $id)->get();
 
             return response([
                 'doctor' => $doctor,

@@ -15,6 +15,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\MedicalSpecialtyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +58,9 @@ Route::get('doctors/{id}', [DoctorController::class, 'show']);
 Route::get('doctors/{id}/health-tests', [DoctorController::class, 'showHealthTests']);
 Route::get('doctors/{id}/prescriptions', [DoctorController::class, 'showPrescriptions']);
 Route::get('doctors/{id}/patients', [DoctorController::class, 'showPatients']);
+
+// Medical Specialty
+Route::get('medicalSpecialties', [MedicalSpecialtyController::class, 'index']);
 
 // Health tests
 Route::get('health-tests', [HealthTestController::class, 'index']);
