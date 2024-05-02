@@ -1,7 +1,7 @@
 'use client';
 import DoctorFormLogic from "./doctorFormLogic";
-import { DoctorFormType, DoctorType } from "@/ts/types";
-import { Button, Input, Spinner, Textarea } from "@nextui-org/react";
+import { DoctorFormType, DoctorType, MedicalSpecialtiesType, MedicalSpecialtyType } from "@/ts/types";
+import { Button, Input, Select, SelectItem, Spinner, Textarea } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { setNativeValue } from "@/utils/utils";
@@ -13,6 +13,8 @@ type Props = {
 
 const DoctorForm = (props: Props) => {
     const [doctor, setDoctor] = useState<DoctorType>();
+    const [medicalSpecialtiesList, setMedicalSpecialtiesList] = useState<MedicalSpecialtiesType>([]);
+    const [medicalSpecialtiesSelected, setMedicalSpecialtiesSelected] = useState<any>([]);
     const [formValid, setFormValid] = useState<boolean>(true);
     const [formData, setFormData] = useState<DoctorFormType>({} as DoctorFormType);
     const logic = DoctorFormLogic();
@@ -48,7 +50,7 @@ const DoctorForm = (props: Props) => {
     const handleSubmit = (event: React.SyntheticEvent): void => {
         setDoctor({} as DoctorType);
 
-        logic.doctorUpdate(props.doctorId, formData).then(response => {
+        logic.doctorUpdate(props.doctorId, formData, Array.from(medicalSpecialtiesSelected)).then(response => {
             updateFormData(response?.doctor);
         });
     }
@@ -87,7 +89,6 @@ const DoctorForm = (props: Props) => {
      */
     const validateFormData = (): void => {
         const fieldsToCheck = [
-            'specialty',
             'mobile_number',
             'address_1',
             'address_2',
@@ -111,9 +112,24 @@ const DoctorForm = (props: Props) => {
         if (props.doctorId <= 0) return;
 
         setTimeout(() => {
-            logic.doctorShow(props.doctorId).then(doctor => {
-                updateFormData(doctor as DoctorType);
-            });
+            // Load medical specialties 
+            logic.medicalSpecialtiesList().then(medicalList => {
+                setMedicalSpecialtiesList(medicalList);
+
+                // Load doctor info 
+                logic.doctorShow(props.doctorId).then(doctor => {
+                    updateFormData(doctor as DoctorType);
+
+                    // Set doctor medial specialties 
+                    let selectedSpecialtiesIDs: any = [];
+
+                    doctor?.medicalSpecialties?.forEach((specialty: any) => {
+                        selectedSpecialtiesIDs.push(specialty?.medical_specialty_id + '');
+                    });
+
+                    setMedicalSpecialtiesSelected(selectedSpecialtiesIDs);
+                });
+            })
         })
     }, []);
 
@@ -139,14 +155,19 @@ const DoctorForm = (props: Props) => {
                 {/* Specialty */}
                 <div className="flex flex-wrap sm:grid grid-cols-2 gap-4">
                     <div className="w-full sm:w-auto">
-                        <Input type="text"
-                            isRequired
-                            id="specialty"
-                            aria-describedby="Specialty number input"
-                            label="Specialty number"
-                            color="default"
+                        <Select label="Medical specialties"
+                            selectionMode="multiple"
                             variant="bordered"
-                            onChange={(e) => handleInputChange('specialty', e)} />
+                            selectedKeys={medicalSpecialtiesSelected}
+                            onSelectionChange={setMedicalSpecialtiesSelected}>
+                            {
+                                medicalSpecialtiesList?.map((specialty: MedicalSpecialtyType) => (
+                                    <SelectItem key={specialty.id} value={specialty.title}>
+                                        {specialty.title}
+                                    </SelectItem>
+                                ))
+                            }
+                        </Select>
                     </div>
                 </div >
 

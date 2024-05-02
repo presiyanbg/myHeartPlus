@@ -94,7 +94,8 @@ type DoctorType = {
     updated_at: string,
     description: string,
     full_name: string,
-    image: string
+    image: string,
+    medicalSpecialties: MedicalSpecialtiesType,
 }
 
 type DoctorsType = Array<DoctorType>;
@@ -273,6 +274,19 @@ type OrganizationType = {
 
 type OrganizationsType = Array<OrganizationType>;
 
+/* Medical Specialties Types */
+type MedicalSpecialtyType = {
+    id: number,
+    title: string,
+    description: string,
+    bg_color: string,
+    font_color: string,
+    created_at: string,
+    updated_at: string
+}
+
+type MedicalSpecialtiesType = Array<MedicalSpecialtyType>;
+
 export type {
     NavLinkType,
     NavLinksType,
@@ -327,4 +341,7 @@ export type {
 
     OrganizationType,
     OrganizationsType,
+
+    MedicalSpecialtyType,
+    MedicalSpecialtiesType
 }
