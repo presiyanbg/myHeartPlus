@@ -1,11 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Checkbox, Input } from '@nextui-org/react';
-import { UserFormType, UserType } from '@/ts/types';
+import { Avatar, Button, Input, Select, SelectItem, user } from '@nextui-org/react';
+import { UserFormType, UserType, UserRolesType, UserRoleType } from '@/ts/types';
 import { faCamera, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslations } from 'next-intl';
 import { checkSameObjects, setNativeValue } from '@/utils/utils';
+import UsersServicesClientServices from '@/services/usersServices/usersServicesClientServices';
+import { v4 as uuid } from 'uuid';
 
 type Props = {
     passData: (key: string, data: any) => void,
@@ -20,6 +22,8 @@ const UserForm = (props: Props) => {
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
     const [passwordConfirmInvalid, setPasswordConfirmInvalid] = useState<boolean>(false);
     const [formValid, setFormValid] = useState<boolean>(false);
+    const [userRoles, setUserRoles] = useState<UserRolesType>([] as UserRolesType);
+    const userService = UsersServicesClientServices();
     const t = useTranslations();
 
     /**
@@ -39,10 +43,6 @@ const UserForm = (props: Props) => {
 
             case 'password_confirmation':
                 setPasswordConfirmInvalid(event.currentTarget.value != formData['password']);
-                break;
-
-            case 'role':
-                data = event.currentTarget.checked ? 'doctor' : 'patient';
                 break;
 
             case 'profile_picture':
@@ -166,6 +166,7 @@ const UserForm = (props: Props) => {
             first_name: props.user.first_name,
             last_name: props.user.last_name,
             profile_picture: `${process.env.NEXT_PUBLIC_API_URL}/${props.user.image}`,
+            role: props.user.role,
         });
 
         setUserProfilePicture(`${process.env.NEXT_PUBLIC_API_URL}/${props.user.image}`);
@@ -177,8 +178,21 @@ const UserForm = (props: Props) => {
         });
     }, [props]);
 
+
+    // Load user roles
+    useEffect(() => {
+        // Do not load roles on user update
+        if (props.mode == 'user-update') return;
+
+        userService.roles().then((data: any) => {
+            if (!data?.roles?.length) return;
+
+            setUserRoles(data.roles);
+        });
+    }, []);
+
     return (
-        <>
+        <form >
             {/* User image */}
             <div className="flex text-center">
                 <div className="w-full pt-4 pb-9">
@@ -196,6 +210,16 @@ const UserForm = (props: Props) => {
                         id="profile_picture"
                         aria-describedby="profile picture input"
                         onChange={(e) => handleInputChange('profile_picture', e)} />
+
+                    {
+                        props.mode == 'user-update' && (
+                            <div className="pt-2">
+                                <small className="uppercase font-bold">
+                                    {props?.user?.role}
+                                </small>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
 
@@ -291,15 +315,20 @@ const UserForm = (props: Props) => {
 
                         <div className="pb-4 flex pt-4">
                             {/* Roles */}
-                            <div className="px-4 w-1/2 pt-6">
-                                <Checkbox className="cursor--pointer"
-                                    type="checkbox"
-                                    id="role"
-                                    color="primary"
-                                    aria-describedby="Doctor registration check"
-                                    onChange={(e) => handleInputChange('role', e)}>
-                                    Doctor registration
-                                </Checkbox>
+                            <div className="px-4 w-1/2">
+                                <Select label="Register as"
+                                    isRequired
+                                    variant="bordered">
+                                    {
+                                        userRoles?.map((row: UserRoleType) => (
+                                            <SelectItem key={uuid()}
+                                                value={row.role}
+                                                onClick={() => updateFormData('role', row.role)}>
+                                                {row.role}
+                                            </SelectItem>
+                                        ))
+                                    }
+                                </Select>
                             </div>
                         </div >
                     </>
@@ -320,7 +349,8 @@ const UserForm = (props: Props) => {
                     </Button>
                 </div>
             </div>
-        </>);
+        </form>
+    );
 }
 
 export default UserForm;

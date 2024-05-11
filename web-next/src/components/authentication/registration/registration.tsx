@@ -13,7 +13,7 @@ const Registration = () => {
         'password': '',
         'password_confirmation': '',
         'profile_picture': '',
-        'role': false,
+        'role': 'patient',
     });
 
     const logic = RegistrationLogic();

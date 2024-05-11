@@ -18,7 +18,7 @@ const RegistrationLogic = () => {
         formData.append('last_name', params.last_name);
         formData.append('password', params.password || '');
         formData.append('password_confirmation', params.password_confirmation || '');
-        formData.append('role', params.role ? 'doctor' : 'patient');
+        formData.append('role', params.role || '');
         formData.append('profile_picture', params.profile_picture);
 
         const data = await auth.register(formData);

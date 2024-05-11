@@ -7,8 +7,13 @@ const UsersServicesClientServices = () => {
         return api.post(`/users/${userId}/update`, params, true);
     }
 
+    const roles = () => {
+        return api.get(`/users/roles`, undefined, false);
+    }
+
     return {
-        update
+        update,
+        roles,
     }
 }
 

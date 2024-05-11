@@ -38,9 +38,18 @@ type UserFormType = {
     profile_picture: File | string,
     password?: string,
     password_confirmation?: string,
-    role?: boolean,
+    role?: string,
     [key: string]: any;
 }
+
+type UserRoleType = {
+    role: string,
+    level: number,
+    created_at: string,
+    updated_at: string,
+}
+
+type UserRolesType = Array<UserRoleType>;
 
 /* Article Types */
 type ArticleType = {
@@ -343,5 +352,8 @@ export type {
     OrganizationsType,
 
     MedicalSpecialtyType,
-    MedicalSpecialtiesType
+    MedicalSpecialtiesType,
+
+    UserRoleType,
+    UserRolesType,
 }
