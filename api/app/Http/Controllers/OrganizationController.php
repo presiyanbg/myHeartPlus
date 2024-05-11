@@ -17,15 +17,9 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        try {
-            return response([
-                'organizations' => Organization::all(),
-            ], 200);
-        } catch (Throwable $e) {
-            return response([
-                'message' => $e
-            ], 500);
-        }
+        return response([
+            'organizations' => Organization::all(),
+        ], 200);
     }
 
     /**

@@ -16,6 +16,7 @@ use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\MedicalSpecialtyController;
+use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('users/login', [AuthController::class, 'login']);
 Route::post('users/register', [AuthController::class, 'register']);
 Route::get('users', [UserController::class, 'index']);
+Route::get('users/roles/', [UserRoleController::class, 'index']);
 Route::get('users/{id}', [UserController::class, 'show']);
 Route::post('users/locale/{locale}', [UserController::class, 'setLocale']);
 

@@ -98,7 +98,7 @@ class AuthController extends Controller
                 'profile_picture' => 'nullable|file',
                 'role' => [
                     'required',
-                    Rule::in(['doctor', 'patient', 'admin']),
+                    'exists:user_roles,role',
                 ],
             ]);
 
