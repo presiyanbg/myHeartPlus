@@ -8,10 +8,13 @@ import UserControlPanel from "../userControlPanel/userControlPanel";
 import { UserContext } from "@/context/userContext/userContextProvider";
 import { Tab, Tabs } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import UsersServicesClientServices from "@/services/usersServices/usersServicesClientServices";
 
 const UserProfile = () => {
-    const { user, medicalProfiles } = useContext(UserContext);
+    const { user, medicalProfiles, token } = useContext(UserContext);
+    const [role, setRole] = useState<string>('');
+    const userService = UsersServicesClientServices();
     const t = useTranslations();
 
     // Default tabs
@@ -36,17 +39,26 @@ const UserProfile = () => {
         },
     ];
 
-    // Doctor (or admin) tabs
-    if (user?.role == 'doctor' || user?.role == 'admin') {
+    // Doctor tabs
+    if (role == 'doctor' || role == 'manager' || role == 'admin') {
         tabs.push(
             {
                 id: "controlPanel",
                 order: 0,
                 label: t("Control panel"),
-                content: (<UserControlPanel user={user} doctor={medicalProfiles.doctor}></UserControlPanel>),
+                content: (<UserControlPanel user={user} doctor={medicalProfiles.doctor} role={role}></UserControlPanel>),
             }
         );
     }
+
+    // Load user role 
+    useEffect(() => {
+        if (!token?.length) return;
+
+        userService.getRole(token).then((data: any) => {
+            setRole(data?.role);
+        })
+    }, [token]);
 
     return (
         <>

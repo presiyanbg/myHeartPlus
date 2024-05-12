@@ -11,9 +11,14 @@ const UsersServicesClientServices = () => {
         return api.get(`/users/roles`, undefined, false);
     }
 
+    const getRole = (token: string) => {
+        return api.post(`/users/get-role`, { token }, false);
+    }
+
     return {
         update,
         roles,
+        getRole,
     }
 }
 
