@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Users
     Route::post('users/logout', [AuthController::class, 'logout']);
     Route::post('users/{id}/update', [UserController::class, 'update']);
+    Route::post('users/get-role', [UserController::class, 'getRoleFromToken']);
 
     // Articles
     Route::post('articles/store', [ArticleController::class, 'store']);

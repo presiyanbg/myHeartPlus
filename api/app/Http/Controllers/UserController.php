@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
 {
@@ -90,6 +91,40 @@ class UserController extends Controller
                 'user' => $user,
                 'medical_profiles' => $medical_profiles,
                 'message' => 'Success',
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
+    }
+
+    /**
+     * Get users role from access token
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getRoleFromToken(Request $request)
+    {
+        try {
+            $fields = $request->validate([
+                'token' => 'required|string',
+            ]);
+
+            $hashedToken = PersonalAccessToken::findToken($fields['token']);
+
+            // Check if token is valid 
+            if ($hashedToken == null || $hashedToken->tokenable_id <= 0) {
+                return response([
+                    'message' => 'Internal error'
+                ], 500);
+            }
+
+            $user = User::where('id', $hashedToken->tokenable_id)->first();
+
+            return response([
+                'role' =>  $user->role,
             ], 200);
         } catch (Throwable $e) {
             return response([
