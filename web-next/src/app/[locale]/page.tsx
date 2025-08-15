@@ -2,10 +2,15 @@ import HeroBanner from "@/components/common/hero/heroBanner";
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
 import OrganizationDoctorsDisplay from "@/components/organizations/organizationDoctorsDisplay/organizationDoctorsDisplay";
 import OrganizationsServices from "@/services/organizationsServices/organizationsServices";
+import React from 'react';
+import Portal from "@/components/portal/portal";
+
 import { unstable_setRequestLocale } from 'next-intl/server';
 
 const Home = async ({ params: { locale } }: { params: { locale: any } }) => {
     unstable_setRequestLocale(locale);
+
+    return (<Portal></Portal>);
 
     // Get organizations 
     let data = await OrganizationsServices().organizationsList();

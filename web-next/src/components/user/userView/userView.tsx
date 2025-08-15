@@ -1,6 +1,6 @@
 import { UserType } from "@/ts/types";
 import { Card, CardBody } from "@nextui-org/react";
-import UserBasics from "../userBasics/userBasics";
+import UserBasics from "../userComponents/userBasics/userBasics";
 
 type Props = {
     user: UserType,

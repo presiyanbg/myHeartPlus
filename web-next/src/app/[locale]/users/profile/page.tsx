@@ -1,14 +1,14 @@
 import PageLayout from "@/components/layouts/pageLayout/pageLayout";
-import UserProfile from "@/components/user/userProfile/userProfile";
+import UserProfilePortal from "@/components/user/userPanels/userProfilePanel/userProfilePanel";
 
-const ProfilePage = async () => {
+const UserProfilePage = async () => {
     return (
         <PageLayout>
             <div className="px-3">
-                <UserProfile></UserProfile>
+                <UserProfilePortal></UserProfilePortal>
             </div>
         </PageLayout>
     )
 }
 
-export default ProfilePage;
+export default UserProfilePage;

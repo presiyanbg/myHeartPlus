@@ -1,5 +1,5 @@
 'use client';
-import UserDailyStatistics from "../user/userDailyStatistics/userDailyStatistics";
+import UserDailyStatistics from "../user/userComponents/userDailyStatistics/userDailyStatistics";
 
 import { Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
 import { ArticleType, ArticlesType, DoctorsType, HealthTestType, HealthTestsType } from "@/ts/types";

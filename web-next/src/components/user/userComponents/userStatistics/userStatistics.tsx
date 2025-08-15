@@ -1,7 +1,8 @@
+import { UserType } from "@/ts/types";
 import { Card, CardBody } from "@nextui-org/react";
 
 type Props = {
-    userId: number
+    user: UserType
 }
 
 const UserStatistics = (props: Props) => {

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import RegistrationLogic from './registrationLogic';
-import UserForm from '../../user/userForm/userForm';
+import UserForm from '../../user/userComponents/userForm/userForm';
 import { UserFormType } from '../../../ts/types';
 import { useTranslations } from 'next-intl';
 

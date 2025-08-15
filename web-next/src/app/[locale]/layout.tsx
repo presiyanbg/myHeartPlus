@@ -43,7 +43,7 @@ export default function LocaleLayout({
 
     return (
         <html lang={locale} suppressHydrationWarning>
-            <body className="relative text-foreground bg-background overflow-x-hidden">
+            <body className="relative text-foreground bg-background overflow-x-hidden text-lg">
                 <Providers>
                     <NextIntlClientProvider locale={locale} messages={messages}>
                         <Navigation />

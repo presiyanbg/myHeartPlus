@@ -47,7 +47,7 @@ const PageTitle = (props: Props) => {
             <div className="row w-100">
                 {/* Page title and breadcrumbs */}
                 <div className="col-sm-12 col-md-6">
-                    <h4 className="text-2xl font-light">
+                    <h4 className="text-2xl font-light capitalize">
                         {breadCrumbs}
                         {props.title}
                     </h4>

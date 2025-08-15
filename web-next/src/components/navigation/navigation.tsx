@@ -21,15 +21,18 @@ const Navigation = () => {
             </NavbarContent>
 
             {/* Default Links */}
-            <NavbarContent className="hidden md:flex">
-                <NavigationLinks></NavigationLinks>
+            <NavbarContent className="md:flex">
+                <span className="text-center w-full text-lg font-semibold">
+                    My Heart Plus
+                </span>
+                {/* <NavigationLinks></NavigationLinks> */}
             </NavbarContent>
 
             <NavbarContent justify="end">
                 {/* Link menu */}
-                <NavbarContent className="md:hidden" justify="end">
+                {/* <NavbarContent className="md:hidden" justify="end">
                     <NavigationLinksDropdown></NavigationLinksDropdown>
-                </NavbarContent>
+                </NavbarContent> */}
 
                 {/* User Panel */}
                 <NavigationUserDropdown></NavigationUserDropdown>
