@@ -20,8 +20,6 @@ const Logout = (props: Props) => {
      * @param event HTML Form submit event
      */
     const handleSubmit = (event: React.SyntheticEvent) => {
-        event.preventDefault();
-
         logic.logout();
 
         props.displayLogin();

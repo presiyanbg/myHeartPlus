@@ -19,8 +19,6 @@ const Login = ({ }: Props) => {
      * @param event HTML Form submit event
      */
     const handleSubmit = (event: React.SyntheticEvent) => {
-        event.preventDefault();
-
         // Validate credentials
         // if (email.length <= 10 || password.length <= 8) return;
 

@@ -44,8 +44,6 @@ const UserEdit = (props: Props) => {
      * @param event HTML Form submit event
      */
     const handleSubmit = (event: React.SyntheticEvent) => {
-        event.preventDefault();
-
         logic.update(props.user?.id, userData);
     }
 

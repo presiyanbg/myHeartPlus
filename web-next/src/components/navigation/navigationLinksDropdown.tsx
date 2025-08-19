@@ -14,7 +14,6 @@ const NavigationLinksDropdown = () => {
 
     // Change page
     const handleClick = (e: any, link: string) => {
-        e.preventDefault();
         router.push(link);
     }
 

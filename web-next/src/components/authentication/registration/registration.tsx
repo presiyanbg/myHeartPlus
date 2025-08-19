@@ -39,8 +39,6 @@ const Registration = () => {
      * @param event HTML Form submit event
      */
     const handleSubmit = (event: React.SyntheticEvent) => {
-        event.preventDefault();
-
         logic.register(userData);
     }
 

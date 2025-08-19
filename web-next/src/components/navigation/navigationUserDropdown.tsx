@@ -29,7 +29,6 @@ const NavigationUserDropdown = () => {
      * @param link string - Link to open
      */
     const handleLinkClick = (e: any, link: string) => {
-        e.preventDefault();
         router.push(link);
     }
 
