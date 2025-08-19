@@ -179,17 +179,17 @@ const UserForm = (props: Props) => {
     }, [props]);
 
 
-    // Load user roles
-    useEffect(() => {
-        // Do not load roles on user update
-        if (props.mode == 'user-update') return;
+    // // Load user roles
+    // useEffect(() => {
+    //     // Do not load roles on user update
+    //     if (props.mode == 'user-update') return;
 
-        userService.roles().then((data: any) => {
-            if (!data?.roles?.length) return;
+    //     userService.roles().then((data: any) => {
+    //         if (!data?.roles?.length) return;
 
-            setUserRoles(data.roles);
-        });
-    }, []);
+    //         setUserRoles(data.roles);
+    //     });
+    // }, []);
 
     return (
         <form >
@@ -313,8 +313,8 @@ const UserForm = (props: Props) => {
                             </div >
                         </div>
 
-                        <div className="pb-4 flex pt-4">
-                            {/* Roles */}
+                        {/* Roles */}
+                        {/* <div className="pb-4 flex pt-4">
                             <div className="px-4 w-1/2">
                                 <Select label="Register as"
                                     isRequired
@@ -330,7 +330,7 @@ const UserForm = (props: Props) => {
                                     }
                                 </Select>
                             </div>
-                        </div >
+                        </div > */}
                     </>
                 )
             }
