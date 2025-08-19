@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 
 class ArticleTranslationController extends Controller
