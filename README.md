@@ -1,4 +1,4 @@
-# My Hearth Plus
+# My Hearth Plus ❤️
 
 This project consists of a **Laravel API backend** and a **Next.js frontend**, designed to provide a scalable health platform with multilingual support, authentication, and modular features.
 
