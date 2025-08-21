@@ -1,0 +1,147 @@
+#!/bin/bash
+
+# ==========================
+# Ubuntu Laravel + Next.js Setup Script
+# ==========================
+
+set -e
+
+# Variables
+DOMAIN_LARAVEL="your_laravel_domain_or_ip"
+DOMAIN_NEXT="your_next_domain_or_ip"
+PHP_VERSION="8.3"
+NODE_VERSION="20"
+PROJECT_DIR="/var/www/mhp"
+LARAVEL_DIR="$PROJECT_DIR/api"
+NEXT_DIR="$PROJECT_DIR/web-next"
+
+# 1️⃣ System Update & Tools
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y curl unzip git build-essential
+
+# 2️⃣ Install Nginx
+sudo apt install -y nginx
+sudo systemctl enable nginx
+sudo systemctl start nginx
+
+# 3️⃣ Install PHP & Extensions
+sudo apt install -y php php-cli php-fpm php-mysql php-mbstring php-xml php-bcmath php-curl php-zip
+sudo systemctl enable php${PHP_VERSION}-fpm
+sudo systemctl start php${PHP_VERSION}-fpm
+
+# 4️⃣ Install MySQL
+sudo apt install -y mysql-server
+sudo systemctl start mysql
+
+# 5️⃣ Install Composer
+sudo apt install -y composer
+
+# 6️⃣ Setup Adminer
+sudo mkdir -p /var/www/adminer
+cd /var/www/adminer
+sudo wget -O index.php https://www.adminer.org/latest.php
+sudo chown -R www-data:www-data /var/www/adminer
+
+sudo tee /etc/nginx/sites-available/adminer.conf > /dev/null <<EOL
+server {
+    listen 80;
+    server_name $DOMAIN_LARAVEL;
+    root /var/www/adminer;
+    index index.php;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location ~ \.php\$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php${PHP_VERSION}-fpm.sock;
+    }
+}
+EOL
+
+sudo ln -s /etc/nginx/sites-available/adminer.conf /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+
+# 7️⃣ Setup Laravel Project
+sudo mkdir -p $LARAVEL_DIR
+cd $LARAVEL_DIR
+sudo git clone https://github.com/presiyanbg/myHeartPlus.git .
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
+sudo chown -R www-data:www-data storage bootstrap/cache public/images/users
+sudo chmod -R 775 storage bootstrap/cache public/images/users
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+sudo tee /etc/nginx/sites-available/mhp_api.conf > /dev/null <<EOL
+server {
+    listen 80;
+    server_name $DOMAIN_LARAVEL;
+    root $LARAVEL_DIR/public;
+    index index.php index.html;
+
+    location / {
+        try_files \$uri \$uri/ /index.php?\$query_string;
+    }
+
+    location ~ \.php\$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php${PHP_VERSION}-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+EOL
+
+sudo ln -s /etc/nginx/sites-available/mhp_api.conf /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+
+# 8️⃣ Install Node.js & NPM
+curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# 9️⃣ Setup Next.js Project
+sudo mkdir -p $NEXT_DIR
+cd $NEXT_DIR
+sudo git clone https://github.com/presiyanbg/myHeartPlus.git .
+npm install
+cp .env.local.example .env.local
+npm run build
+sudo chown -R $USER:www-data $NEXT_DIR
+sudo chmod -R 775 $NEXT_DIR
+
+sudo npm install -g pm2
+pm2 start npm --name "mhp-next" -- start
+pm2 save
+pm2 startup
+
+sudo tee /etc/nginx/sites-available/mhp-web.conf > /dev/null <<EOL
+server {
+    listen 80;
+    server_name $DOMAIN_NEXT;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host \$host;
+        proxy_cache_bypass \$http_upgrade;
+    }
+}
+EOL
+
+sudo ln -s /etc/nginx/sites-available/mhp-web.conf /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+
+echo "✅ Setup completed!"
