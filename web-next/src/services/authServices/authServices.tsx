@@ -5,7 +5,7 @@ const AuthenticationServices = () => {
     const api = ClientSideApi();
 
     const login = (params: {}) => {
-        return api.post('/users/login', params, false);
+        return api.post('/users/login', params, false, true);
     }
 
     const logout = () => {
@@ -13,7 +13,7 @@ const AuthenticationServices = () => {
     }
 
     const register = (params: {}) => {
-        return api.post('/users/register', params, true);
+        return api.post('/users/register', params, true, true);
     }
 
     return {

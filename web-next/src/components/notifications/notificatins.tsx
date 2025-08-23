@@ -2,7 +2,7 @@
 import { NotificationContext } from "@/context/notificationContext/notificationContextProvider";
 import { Button } from "@nextui-org/react";
 import { useContext, useEffect, useState } from "react";
-import { faInfoCircle, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Notifications = () => {
@@ -20,15 +20,17 @@ const Notifications = () => {
     }, [displayNotification]);
 
     return (
-        <div className={'fixed transition-opacity z-50 ease-in-out w-full lg:w-11/12 xl:w-10/12 mx-auto lg:rounded-lg ' + (visible ? 'opacity-100' : ' pointer-events-none opacity-0')}>
+        <div className={'fixed transition-opacity z-50 ease-in-out w-full lg:w-11/12 xl:w-10/12 mx-auto lg:rounded-lg' + (visible ? 'opacity-100' : ' pointer-events-none opacity-0')}>
             <div className="absolute z-50 top-4 right-4">
                 <Button
                     onClick={() => handleClick()}
                     color={notificationData?.color}
                     variant="shadow">
-                    <FontAwesomeIcon className="text-lg" icon={faInfoCircle} />
+                    <FontAwesomeIcon className="text-white text-lg" icon={faInfoCircle} />
 
-                    {notificationData?.message}
+                    <span className="text-white">
+                        {notificationData?.message}
+                    </span>
                 </Button>
             </div>
         </div>

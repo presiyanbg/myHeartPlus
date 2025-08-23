@@ -1,5 +1,5 @@
 import { UserType } from "@/ts/types";
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody, CardHeader } from "@nextui-org/react";
 
 type Props = {
     user: UserType
@@ -7,10 +7,15 @@ type Props = {
 
 const UserStatistics = (props: Props) => {
 
+console.log(props.user)
+
     return (
         <Card>
+            <CardHeader>
+                <h4>Health statistics</h4>
+            </CardHeader>
+            
             <CardBody>
-                Data
             </CardBody>
         </Card>
     )

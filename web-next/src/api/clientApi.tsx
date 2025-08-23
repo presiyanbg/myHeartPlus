@@ -20,8 +20,8 @@ const ClientSideApi = () => {
      * 
      * @returns object - Api response data
      */
-    const post = async (url: string, data?: {}, formData: boolean = false) => {
-        return request('POST', url, data, formData);
+    const post = async (url: string, data?: {}, formData: boolean = false, notification: boolean = false) => {
+        return request('POST', url, data, formData, notification);
     }
 
     /**
@@ -33,8 +33,8 @@ const ClientSideApi = () => {
      * 
      * @returns object - Api response data
      */
-    const get = async (url: string, data?: {}, formData: boolean = false) => {
-        return request('GET', url, data, formData);
+    const get = async (url: string, data?: {}, formData: boolean = false, notification: boolean = false) => {
+        return request('GET', url, data, formData, notification);
     }
 
     /**

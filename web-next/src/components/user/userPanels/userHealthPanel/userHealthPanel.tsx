@@ -81,7 +81,7 @@ const UserHealthPortal = () => {
                 color="primary"
                 className="w-full px-1"
                 fullWidth={true}>
-                {(item) => (
+                {(item: any) => (
                     <Tab key={item.id} title={item.label}>
                         <span className="text-lg">
                             {item.content}
