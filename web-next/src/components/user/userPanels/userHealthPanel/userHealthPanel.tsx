@@ -82,7 +82,8 @@ const UserHealthPortal = () => {
                 className="w-full px-1"
                 fullWidth={true}>
                 {(item: any) => (
-                    <Tab key={item.id} title={item.label}>
+                    <Tab key={item.id}
+                        title={<span className="uppercase">{item.label}</span>}>
                         <span className="text-lg">
                             {item.content}
                         </span>

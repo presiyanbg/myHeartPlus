@@ -43,7 +43,8 @@ const UserProfilePortal = () => {
                 className="w-full px-1"
                 fullWidth={true}>
                 {(item) => (
-                    <Tab key={item.id} title={item.label}>
+                    <Tab key={item.id}
+                        title={<span className="uppercase">{item.label}</span>}>
                         {item.content}
                     </Tab>
                 )}
