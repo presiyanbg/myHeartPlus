@@ -27,7 +27,11 @@ export const metadata: Metadata = {
 }
 
 export function generateStaticParams() {
-    return [{ locale: 'bg' }, { locale: 'en' }];
+    return [
+        { locale: 'bg' },
+        { locale: 'en' },
+        { locale: 'uk' },
+    ];
 }
 
 export default function LocaleLayout({

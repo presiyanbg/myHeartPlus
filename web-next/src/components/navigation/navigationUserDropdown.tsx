@@ -7,20 +7,25 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext/userContextProvider";
 import { v4 as uuid } from 'uuid';
 import { LoadingContext } from "@/context/loadingContext/loadingContextProvider";
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useTheme } from "next-themes";
 import { CommonContext } from "@/context/commonContext/commonContextProvider";
-import Link from "next/link";
+import { useParams } from "next/navigation";
+import { getCurrentLocale, getCurrentPath } from "@/utils/utils";
 
 const NavigationUserDropdown = () => {
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
+    const [currentPath, setCurrentPath] = useState<string>('');
+    const [currentLocale, setCurrentLocale] = useState<string>('');
     const { isAuth, user } = useContext(UserContext);
     const { isLoading } = useContext(LoadingContext);
     const { darkMode } = useContext(CommonContext);
+    const { locale } = useParams<{ locale: string }>();
     const { toggleDarkMode } = useContext(CommonContext);
     const { setTheme } = useTheme();
     const t = useTranslations();
     const router = useRouter();
+    const pathname = usePathname();
 
     /**
      * Handle click
@@ -51,6 +56,16 @@ const NavigationUserDropdown = () => {
         localStorage.setItem('darkMode', JSON.stringify({ darkMode: mode }));
     }
 
+    /**
+     * Handle language change
+     * 
+     * @param e Event
+     * @param lang string - Language code
+     */
+    const handleLanguageChange = (e: any, lang: string) => {
+        router.push(pathname?.replace(`${locale}`, lang));
+    }
+
     // Check loading
     useEffect(() => {
         setIsLoaded(!isLoading);
@@ -68,6 +83,12 @@ const NavigationUserDropdown = () => {
         toggleDarkMode(!!storageDarkMode?.darkMode);
     }, []);
 
+    // Update path and locale on pathname change
+    useEffect(() => {
+        setCurrentPath(getCurrentPath(pathname || ''));
+        setCurrentLocale(getCurrentLocale(pathname || ''));
+    }, [pathname]);
+
     return (
         <>
             {
@@ -80,44 +101,37 @@ const NavigationUserDropdown = () => {
                                 </Button>
                             </DropdownTrigger>
 
-                            <DropdownMenu aria-label="Language select">
+                            <DropdownMenu aria-label="Language select" >
                                 {/* Bulgarian */}
                                 <DropdownItem
                                     key={uuid()}
-                                    textValue={'bulgarian'}>
-                                    <Link
-                                        className="text-lg"
-                                        key={uuid()}
-                                        href="/"
-                                        locale="bg">
-                                        Bulgarian
-                                    </Link>
+                                    className={((currentLocale == 'bg') ? 'bg-primary text-white' : '')}
+                                    onClick={(e) => handleLanguageChange(e, 'bg')}>
+                                    <span className="text-lg">
+                                        {t('Bulgarian')}
+                                    </span>
                                 </DropdownItem>
 
                                 {/* Ukrainian */}
                                 <DropdownItem
                                     key={uuid()}
-                                    textValue={'ukrainian'}>
-                                    <Link
-                                        className="text-lg"
-                                        key={uuid()}
-                                        href="/"
-                                        locale="uk">
-                                        Ukrainian
-                                    </Link>
+                                    textValue={t('Ukrainian')}
+                                    className={((currentLocale == 'uk') ? 'bg-primary text-white' : '')}
+                                    onClick={(e) => handleLanguageChange(e, 'uk')}>
+                                    <span className="text-lg">
+                                        {t('Ukrainian')}
+                                    </span>
                                 </DropdownItem>
 
                                 {/* English */}
                                 <DropdownItem
                                     key={uuid()}
-                                    textValue={'english'}>
-                                    <Link
-                                        className="text-lg"
-                                        key={uuid()}
-                                        href="/"
-                                        locale="en">
-                                        English
-                                    </Link>
+                                    textValue={t('English')}
+                                    className={((currentLocale == 'en') ? 'bg-primary text-white' : '')}
+                                    onClick={(e) => handleLanguageChange(e, 'en')}>
+                                    <span className="text-lg">
+                                        {t('English')}
+                                    </span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
@@ -144,7 +158,7 @@ const NavigationUserDropdown = () => {
                                 {/* Profile page link */}
                                 <DropdownItem
                                     key={uuid()}
-                                    className={!isAuth ? 'hidden' : ''}
+                                    className={(!isAuth ? 'hidden' : '') + ' ' + ((currentPath == '/users/profile') ? 'bg-primary text-white ' : '')}
                                     textValue={'profilePage'}
                                     onClick={(e) => handleLinkClick(e, '/users/profile')}>
                                     <span className="text-lg">
@@ -155,7 +169,7 @@ const NavigationUserDropdown = () => {
                                 {/* Profile page link */}
                                 <DropdownItem
                                     key={uuid()}
-                                    className={!isAuth ? 'hidden' : ''}
+                                    className={(!isAuth ? 'hidden' : '') + ' ' + ((currentPath == '/users/health') ? 'bg-primary text-white' : '')}
                                     textValue={'profilePage'}
                                     onClick={(e) => handleLinkClick(e, '/users/health')}>
                                     <span className="text-lg">
@@ -196,6 +210,7 @@ const NavigationUserDropdown = () => {
                                 <DropdownItem
                                     key={uuid()}
                                     textValue={'authentication'}
+                                    className={(!isAuth ? 'hidden' : '') + ' ' + ((currentPath == '/authentication') ? 'bg-primary text-white' : '')}
                                     onClick={(e) => handleLinkClick(e, '/authentication')}>
                                     <span className="text-lg">
                                         {isAuth ? t('Logout') : t('Login')}

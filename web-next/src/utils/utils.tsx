@@ -330,3 +330,29 @@ export const checkSameObjects = (objA: any, objB: any): boolean => {
 
     return same;
 }
+
+export const getCurrentPath = (pathName: string): string => {
+    const pathnamesArray = pathName?.split('/') || [];
+    const localePaths = ['bg', 'en', 'uk'];
+
+    let mainPath = '/';
+
+    // Get active link when default localization  
+    if (pathnamesArray?.length > 0 && !localePaths.includes(pathnamesArray[1])) {
+        mainPath = '/' + pathnamesArray[1];
+    }
+
+    // Get active link when localization is active
+    if (pathnamesArray?.length > 0 && localePaths.includes(pathnamesArray[1])) {
+        mainPath = '/' + pathnamesArray[2] + pathnamesArray.slice(3).map(p => '/' + p).join('/');
+    }
+
+    return mainPath;
+}
+
+export const getCurrentLocale = (pathName: string): string => {
+    const pathnamesArray = pathName?.split('/') || [];
+    const localePaths = ['bg', 'en', 'uk'];
+
+    return localePaths.find(locale => locale === pathnamesArray[1]) || localePaths[0];
+}
