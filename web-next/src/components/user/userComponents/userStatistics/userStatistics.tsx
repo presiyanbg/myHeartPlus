@@ -9,15 +9,14 @@ type Props = {
 }
 
 const UserStatistics = (props: Props) => {
-
-    console.log(props.user)
-
     return (
         <div className="flex flex-row">
             <div className="w-2/3 pr-2">
                 <Card>
                     <CardHeader>
-                        <h3>Health statistics</h3>
+                        <div className="py-2 px-4">
+                            <h3>Health statistics</h3>
+                        </div>
                     </CardHeader>
 
                     <CardBody>

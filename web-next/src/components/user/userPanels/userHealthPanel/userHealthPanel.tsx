@@ -4,6 +4,7 @@ import { UserContext } from "@/context/userContext/userContextProvider";
 import { Tab, Tabs } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { useContext, useEffect, useState } from "react";
+import { PatientType } from "@/ts/types";
 
 import UserStatistics from "../../userComponents/userStatistics/userStatistics";
 import UserControlPanel from "../../userComponents/userControlPanel/userControlPanel";
@@ -14,7 +15,7 @@ import UserDoctorRecommendations from "../../userComponents/userDoctorRecommenda
 import UserHealthHistory from "../../userComponents/userHealthHistory/userHealthHistory";
 
 const UserHealthPortal = () => {
-    const { user, medicalProfiles, token } = useContext(UserContext);
+    const { user, medicalProfiles, token, refreshMedicalProfiles } = useContext(UserContext);
     const [role, setRole] = useState<string>('');
     const userService = UsersServicesClientServices();
     const t = useTranslations();
@@ -31,7 +32,7 @@ const UserHealthPortal = () => {
             id: "health",
             order: 10,
             label: t("Health"),
-            content: (<UserHealthEdit user={user}></UserHealthEdit>),
+            content: (<UserHealthEdit patient={medicalProfiles.patient as PatientType}></UserHealthEdit>),
         },
         {
             id: "healthCheck",
@@ -66,12 +67,21 @@ const UserHealthPortal = () => {
     }
 
     // Load user role 
+    // Load medical profiles
     useEffect(() => {
         if (!token?.length) return;
 
         userService.getRole(token).then((data: any) => {
+            if (data?.role == null) return;
+
             setRole(data?.role);
-        })
+
+            userService.getUserMedicalProfiles(user.id).then((data: any) => {
+                if (data?.medical_profiles) {
+                    refreshMedicalProfiles(data.medical_profiles);
+                }
+            });
+        });
     }, [token]);
 
     return (

@@ -11,6 +11,7 @@ interface UserContextInterface {
     authenticate: Function,
     renounce: Function,
     medicalProfiles: MedicalProfilesType,
+    refreshMedicalProfiles: Function,
 }
 
 interface CommonContextInterface {

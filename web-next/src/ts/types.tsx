@@ -51,6 +51,14 @@ type UserRoleType = {
 
 type UserRolesType = Array<UserRoleType>;
 
+type UserHealthFormType = {
+    weight: number,
+    height: number,
+    date_of_birth: Date | string,
+    gender: string,
+    health_details: string,
+}
+
 /* Article Types */
 type ArticleType = {
     content: string,
@@ -131,6 +139,15 @@ type PatientType = {
     weight: number,
     gender: string,
     date_of_birth: string,
+    created_at: string,
+    updated_at: string,
+    health_details: HealthDetailType[],
+}
+
+type HealthDetailType = {
+    id: number,
+    patient_id: number,
+    health_details: string,
     created_at: string,
     updated_at: string,
 }
@@ -302,6 +319,7 @@ export type {
 
     UserType,
     UserFormType,
+    UserHealthFormType,
 
     ArticleType,
     ArticlesType,
@@ -312,6 +330,7 @@ export type {
 
     PatientType,
     PatientsType,
+    HealthDetailType,
 
     MedicamentType,
     MedicamentsType,

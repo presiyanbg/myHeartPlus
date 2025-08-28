@@ -10,9 +10,10 @@ export const UserContext = createContext<UserContextInterface>({
     isAuth: false,
     setIsAuth: (active: boolean) => { },
     token: '',
-    authenticate: (userData: UserType, token: string) => { },
+    authenticate: (userData: UserType, token: string, medicalProfiles: MedicalProfilesType) => { },
     renounce: () => { },
     medicalProfiles: {},
+    refreshMedicalProfiles: (medicalProfiles: MedicalProfilesType) => { },
 });
 
 export const UserContextProvider = ({ children }: ReactNoteInterface) => {
@@ -54,6 +55,19 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
         setIsAuth(false);
     }
 
+    /**
+     * Refresh medical profiles
+     * 
+     * @param medicalProfiles MedicalProfilesType
+     */
+    const refreshMedicalProfiles = (medicalProfiles: MedicalProfilesType) => {
+        localStorage.setItem('medicalProfiles', JSON.stringify(medicalProfiles));
+        setMedicalProfiles(medicalProfiles);
+    }
+
+    /**
+     * Renounce user session
+     */
     const renounce = () => {
         // Remove data from local storage
         localStorage.removeItem('user');
@@ -80,7 +94,7 @@ export const UserContextProvider = ({ children }: ReactNoteInterface) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ user, setUser, isAuth, setIsAuth, token, authenticate, renounce, medicalProfiles, }}>
+        <UserContext.Provider value={{ user, setUser, isAuth, setIsAuth, token, authenticate, renounce, medicalProfiles, refreshMedicalProfiles, }}>
             {children}
         </UserContext.Provider>
     );
