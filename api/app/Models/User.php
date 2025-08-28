@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Throwable;
 
 class User extends Authenticatable
 {
@@ -58,15 +59,19 @@ class User extends Authenticatable
             $medicalProfiles = [];
 
             // Get patient profile data
-            $profile = Patient::where('user_id', $this->id)->first();
+            $patient = Patient::where('user_id', $this->id)->first();
 
-            !!$profile && $medicalProfiles['patient'] = $profile;
+            if ($patient) {
+                $patient->health_details = PatientHealth::where('patient_id', $patient->id)->get();
+
+                $medicalProfiles['patient'] = $patient;
+            }
 
             // Get doctor profile data
             if ($this->role == 'doctor' || $this->role == 'admin') {
-                $profile = Doctor::where('user_id', $this->id)->first();
+                $doctor = Doctor::where('user_id', $this->id)->first();
 
-                !!$profile && $medicalProfiles['doctor'] = $profile;
+                !!$doctor && $medicalProfiles['doctor'] = $doctor;
             }
 
             // Create new record for user if non found

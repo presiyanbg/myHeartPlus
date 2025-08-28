@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Laravel\Sanctum\PersonalAccessToken;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -41,9 +42,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -81,7 +80,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getMedicalProfile($user_id)
+    public function getMedicalProfiles($user_id)
     {
         try {
             $user = User::where('id', $user_id)->first();

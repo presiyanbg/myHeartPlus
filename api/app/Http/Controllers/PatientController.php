@@ -7,7 +7,10 @@ use App\Http\Requests\UpdatePatientRequest;
 use App\Models\HealthTest;
 use App\Models\HealthTestResult;
 use App\Models\Patient;
+use App\Models\PatientHealth;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Throwable;
 
 class PatientController extends Controller
 {
@@ -79,6 +82,9 @@ class PatientController extends Controller
                 $result->test = HealthTest::where('id', $result->test_id)->first();
             }
 
+            // Load health details
+            $patient->health_details =  PatientHealth::where('patient_id', $patient->id)->first();
+
             return response([
                 'results' => $results
             ], 200);
@@ -103,13 +109,55 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePatientRequest  $request
-     * @param  \App\Models\Patient  $patient
+     * @param  int $id User id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePatientRequest $request, Patient $patient)
+    public function update(int $id, Request $request)
     {
-        //
+        try {
+            $user = User::where('id', $id)->first();
+            $patient = Patient::where('user_id', $user->id)->first();
+
+            // Check if article was created 
+            if (!$patient) {
+                return response([
+                    'message' => 'Patient was not found'
+                ], 404);
+            }
+
+            // Validate request 
+            $fields = $request->validate([
+                'weight' => 'required|string',
+                'height' => 'required|string',
+                'date_of_birth' => 'required|date',
+                'gender' => 'required|string',
+                'health_details' => 'required|string',
+            ]);
+
+            // Update patient
+            Patient::where('id', $patient->id)
+                ->update([
+                    'weight' => $fields['weight'],
+                    'height' => $fields['height'],
+                    'date_of_birth' => $fields['date_of_birth'],
+                    'gender' => $fields['gender'],
+                ]);
+
+            // Create record of patient health details
+            PatientHealth::create([
+                'patient_id' => $patient->id,
+                'health_details' => $fields['health_details'] ?? '',
+            ]);
+
+            return response([
+                'message' => 'Success',
+            ], 200);
+        } catch (Throwable $e) {
+            return response([
+                'message' => $e
+            ], 500);
+        }
     }
 
     /**
