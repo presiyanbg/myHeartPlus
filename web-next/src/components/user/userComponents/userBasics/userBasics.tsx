@@ -53,11 +53,11 @@ const UserBasics = (props: Props) => {
                     infoArray?.map(info => {
                         return (
                             <div className="sm:grid sm:grid-cols-4 pb-2" key={uuid()}>
-                                <div className="col-span-2 sm:text-right pr-2 font-bold">
+                                <div className="col-span-2 sm:text-right pr-2 font-bold text-small">
                                     {t(info.title)}
                                 </div>
 
-                                <div className="col-span-2">
+                                <div className="col-span-2 text-small">
                                     {info.value}
                                 </div>
                             </div>

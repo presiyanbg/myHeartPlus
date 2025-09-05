@@ -9,68 +9,102 @@ const config: Config = {
         "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
     ],
     theme: {
-        extend: {
-            backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-conic':
-                    'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-            },
-            animation: {
-                shimmer: "shimmer 2s linear infinite",
-            },
-            keyframes: {
-                shimmer: {
-                    from: {
-                        backgroundPosition: "0 0",
-                    },
-                    to: {
-                        backgroundPosition: "-200% 0",
-                    },
-                },
-            },
-            colors: {
-                primary: {
-                    DEFAULT: '#e57373', // calm soft red (rose)
-                    light: '#ffcdd2',   // pale background red
-                    dark: '#c62828',    // deeper accent
-                },
-                secondary: {
-                    DEFAULT: '#0288d1', // medical blue
-                    light: '#4fc3f7',
-                    dark: '#01579b',
-                },
-                accent: {
-                    DEFAULT: '#26a69a', // teal for trust
-                    light: '#80cbc4',
-                    dark: '#00695c',
-                },
-                neutral: {
-                    light: '#f9fafb',
-                    DEFAULT: '#f3f4f6',
-                    dark: '#e5e7eb',
-                },
-                warning: {
-                    DEFAULT: '#fbc02d',
-                },
-                success: {
-                    DEFAULT: '#2e7d32',
-                }
-            },
-            fontSize: {
-                xs: '0.875rem',   // 14px
-                sm: '1rem',       // 16px
-                base: '1.125rem', // 18px
-                lg: '1.25rem',    // 20px
-                xl: '1.5rem',     // 24px
-                '2xl': '1.75rem', // 28px
-                '3xl': '2rem',    // 32px
-                '4xl': '2.5rem',  // 40px
-                '5xl': '3rem',    // 48px
-                '6xl': '3.75rem', // 60px
+        container: {
+            center: true,
+            padding: '2rem',
+            screens: {
+                '2xl': '1400px'
             }
         },
+        extend: {
+            colors: {
+                border: 'hsl(var(--border))',
+                input: 'hsl(var(--input))',
+                ring: 'hsl(var(--ring))',
+                background: 'hsl(var(--background))',
+                foreground: 'hsl(var(--foreground))',
+                primary: {
+                    DEFAULT: 'hsl(var(--primary))',
+                    foreground: 'hsl(var(--primary-foreground))',
+                    light: 'hsl(var(--primary-light))',
+                    dark: 'hsl(var(--primary-dark))'
+                },
+                secondary: {
+                    DEFAULT: 'hsl(var(--secondary))',
+                    foreground: 'hsl(var(--secondary-foreground))'
+                },
+                success: {
+                    DEFAULT: 'hsl(var(--success))',
+                    foreground: 'hsl(var(--success-foreground))',
+                    light: 'hsl(var(--success-light))'
+                },
+                warning: {
+                    DEFAULT: 'hsl(var(--warning))',
+                    foreground: 'hsl(var(--warning-foreground))',
+                    light: 'hsl(var(--warning-light))'
+                },
+                destructive: {
+                    DEFAULT: 'hsl(var(--destructive))',
+                    foreground: 'hsl(var(--destructive-foreground))'
+                },
+                muted: {
+                    DEFAULT: 'hsl(var(--muted))',
+                    foreground: 'hsl(var(--muted-foreground))'
+                },
+                accent: {
+                    DEFAULT: 'hsl(var(--accent))',
+                    foreground: 'hsl(var(--accent-foreground))',
+                    light: 'hsl(var(--accent-light))'
+                },
+                popover: {
+                    DEFAULT: 'hsl(var(--popover))',
+                    foreground: 'hsl(var(--popover-foreground))'
+                },
+                card: {
+                    DEFAULT: 'hsl(var(--card))',
+                    foreground: 'hsl(var(--card-foreground))'
+                },
+                sidebar: {
+                    DEFAULT: 'hsl(var(--sidebar-background))',
+                    foreground: 'hsl(var(--sidebar-foreground))',
+                    primary: 'hsl(var(--sidebar-primary))',
+                    'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+                    accent: 'hsl(var(--sidebar-accent))',
+                    'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+                    border: 'hsl(var(--sidebar-border))',
+                    ring: 'hsl(var(--sidebar-ring))'
+                }
+            },
+            borderRadius: {
+                lg: 'var(--radius)',
+                md: 'calc(var(--radius) - 2px)',
+                sm: 'calc(var(--radius) - 4px)'
+            },
+            keyframes: {
+                'accordion-down': {
+                    from: {
+                        height: '0'
+                    },
+                    to: {
+                        height: 'var(--radix-accordion-content-height)'
+                    }
+                },
+                'accordion-up': {
+                    from: {
+                        height: 'var(--radix-accordion-content-height)'
+                    },
+                    to: {
+                        height: '0'
+                    }
+                }
+            },
+            animation: {
+                'accordion-down': 'accordion-down 0.2s ease-out',
+                'accordion-up': 'accordion-up 0.2s ease-out'
+            }
+        }
     },
     darkMode: "class",
-    plugins: [nextui()],
+    plugins: [nextui(), require("tailwindcss-animate")],
 }
 export default config

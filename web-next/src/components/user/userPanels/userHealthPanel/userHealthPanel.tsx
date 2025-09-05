@@ -1,10 +1,11 @@
 'use client';
 
 import { UserContext } from "@/context/userContext/userContextProvider";
-import { Tab, Tabs } from "@nextui-org/react";
+import { divider, Tab, Tabs } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { useContext, useEffect, useState } from "react";
 import { PatientType } from "@/ts/types";
+import { DynamicIcon } from 'lucide-react/dynamic';
 
 import UserStatistics from "../../userComponents/userStatistics/userStatistics";
 import UserControlPanel from "../../userComponents/userControlPanel/userControlPanel";
@@ -26,30 +27,35 @@ const UserHealthPortal = () => {
             id: "stats",
             order: 0,
             label: t("Statistics"),
+            icon: 'activity',
             content: (<UserStatistics user={user}></UserStatistics>),
         },
         {
             id: "health",
             order: 10,
             label: t("Health"),
+            icon: 'heart',
             content: (<UserHealthEdit patient={medicalProfiles.patient as PatientType}></UserHealthEdit>),
         },
         {
             id: "healthCheck",
             order: 20,
             label: t("Health check"),
+            icon: 'search',
             content: (<UserHealthCheck user={user}></UserHealthCheck>),
         },
         {
             id: "doctorRecommendations",
             order: 30,
             label: t("Doctor recommendations"),
+            icon: 'user-round',
             content: (<UserDoctorRecommendations user={user}></UserDoctorRecommendations>),
         },
         {
             id: "history",
             order: 40,
             label: t("History"),
+            icon: 'clock',
             content: (<UserHealthHistory user={user}></UserHealthHistory>),
         },
     ];
@@ -61,6 +67,7 @@ const UserHealthPortal = () => {
                 id: "controlPanel",
                 order: 0,
                 label: t("Control panel"),
+                icon: 'wrench',
                 content: (<UserControlPanel user={user} doctor={medicalProfiles.doctor} role={role}></UserControlPanel>),
             }
         );
@@ -89,11 +96,22 @@ const UserHealthPortal = () => {
             <Tabs aria-label="Health tabs"
                 items={tabs}
                 color="primary"
-                className="w-full px-1"
-                fullWidth={true}>
+                className="px-1 w-full"
+                fullWidth={true}
+                classNames={{
+                    tabList: "rounded-xl bg-background border border-border/50 p-1 mb-3",
+                }}>
                 {(item: any) => (
                     <Tab key={item.id}
-                        title={<span className="uppercase">{item.label}</span>}>
+                        title={
+                            <div className="flex justify-between items-center content-between w-full">
+                                <DynamicIcon name={item.icon} size={15}></DynamicIcon>
+
+                                <span className="px-2">
+                                    {item.label}
+                                </span>
+                            </div>
+                        }>
                         <span className="text-lg">
                             {item.content}
                         </span>

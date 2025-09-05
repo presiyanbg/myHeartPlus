@@ -22,7 +22,7 @@ const Navigation = () => {
 
             {/* Default Links */}
             <NavbarContent className="md:flex">
-                <span className="text-center w-full text-lg font-semibold">
+                <span className="text-center w-full text-xl font-bold text-foreground/80">
                     My Heart Plus
                 </span>
                 {/* <NavigationLinks></NavigationLinks> */}

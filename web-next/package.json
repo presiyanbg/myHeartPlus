@@ -19,6 +19,7 @@
         "clsx": "^2.1.0",
         "cross-env": "^7.0.3",
         "framer-motion": "^12.0.0",
+        "lucide-react": "^0.542.0",
         "negotiator": "^0.6.3",
         "next": "^14.2.3",
         "next-intl": "^3.12.0",
@@ -29,6 +30,7 @@
         "react-element-to-jsx-string": "^15.0.0",
         "sharp": "^0.33.1",
         "tailwind-merge": "^2.2.1",
+        "tailwindcss-animate": "^1.0.7",
         "uuid": "^9.0.1"
     },
     "devDependencies": {

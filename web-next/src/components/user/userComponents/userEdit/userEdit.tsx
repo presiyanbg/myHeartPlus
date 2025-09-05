@@ -50,7 +50,7 @@ const UserEdit = (props: Props) => {
     // Check user authenticated
     if (!props.user?.id) {
         return (
-            <Card>
+            <Card className="group hover:shadow-medium rounded-3xl overflow-hidden cursor-pointer glass-card">
                 <CardBody>Unauthenticated</CardBody>
             </Card>
         )
@@ -59,9 +59,9 @@ const UserEdit = (props: Props) => {
     // Check if loading
     if (isLoading) {
         return (
-            <Card>
+            <Card className="group hover:shadow-medium rounded-3xl overflow-hidden cursor-pointer glass-card">
                 <CardBody>
-                    <div className="h-96 flex justify-center items-center">
+                    <div className="flex justify-center items-center h-96">
                         <Spinner></Spinner>
                     </div>
                 </CardBody>
@@ -70,15 +70,22 @@ const UserEdit = (props: Props) => {
     }
 
     return (
-        <Card>
-            <CardBody>
-                <UserForm
-                    user={props.user}
-                    mode={'user-update'}
-                    passData={getUserData}
-                    submitData={handleSubmit}></UserForm>
-            </CardBody>
-        </Card>
+        <>
+            <div className="space-y-2 text-center mb-3">
+                <h1 className="font-bold text-foreground text-2xl">Edit profile</h1>
+                <p className="text-muted-foreground">Last edited: 10/05/2005</p>
+            </div>
+
+            <Card className="group hover:shadow-medium rounded-3xl overflow-hidden cursor-pointer glass-card mb-3">
+                <CardBody>
+                    <UserForm
+                        user={props.user}
+                        mode={'user-update'}
+                        passData={getUserData}
+                        submitData={handleSubmit}></UserForm>
+                </CardBody>
+            </Card>
+        </>
     )
 
 }

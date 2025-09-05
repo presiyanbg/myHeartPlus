@@ -1,6 +1,6 @@
 'use client';
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, Spinner, Switch, Avatar } from "@nextui-org/react";
-import { faLanguage, faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, Spinner, Switch, Avatar, DropdownSection } from "@nextui-org/react";
+import { faAngleDoubleDown, faAngleDown, faArrowDown, faLanguage, faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslations } from 'next-intl';
 import { useContext, useEffect, useState } from "react";
@@ -12,6 +12,7 @@ import { useTheme } from "next-themes";
 import { CommonContext } from "@/context/commonContext/commonContextProvider";
 import { useParams } from "next/navigation";
 import { getCurrentLocale, getCurrentPath } from "@/utils/utils";
+import { Heart, Lock, User } from "lucide-react";
 
 const NavigationUserDropdown = () => {
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
@@ -138,46 +139,109 @@ const NavigationUserDropdown = () => {
 
                         <Dropdown closeOnSelect={false}>
                             <DropdownTrigger>
-                                <Button color="default" isIconOnly aria-label="user-menu" variant="bordered">
-                                    {
-                                        isAuth && (
-                                            <Avatar
-                                                className="rounded-none"
-                                                src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`}
-                                                alt="User photo" />
-                                        )
-                                    }
+                                <Button color="default" aria-label="user-menu" variant="bordered" className="p-1">
+                                    <div className="flex justify-center items-center">
+                                        {
+                                            isAuth && (
+                                                <Avatar
+                                                    radius="md"
+                                                    size="sm"
+                                                    src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`}
+                                                    alt="User photo" />
+                                            )
+                                        }
 
-                                    {
-                                        !isAuth && (<FontAwesomeIcon icon={faUser} />)
-                                    }
+                                        {
+                                            !isAuth && (<FontAwesomeIcon icon={faUser} />)
+                                        }
+
+                                        <span className="px-4">{t('Menu')}</span>
+
+                                        <span className="pr-2">
+                                            <FontAwesomeIcon icon={faAngleDown} />
+                                        </span>
+                                    </div>
                                 </Button>
                             </DropdownTrigger>
 
                             <DropdownMenu aria-label="User Actions">
-                                {/* Profile page link */}
-                                <DropdownItem
-                                    key={uuid()}
-                                    className={(!isAuth ? 'hidden' : '') + ' ' + ((currentPath == '/users/profile') ? 'bg-primary text-white ' : '')}
-                                    textValue={'profilePage'}
-                                    onClick={(e) => handleLinkClick(e, '/users/profile')}>
-                                    <span className="text-lg">
-                                        {t('Profile')}
-                                    </span>
-                                </DropdownItem>
+                                <DropdownSection showDivider aria-label="Profile">
+                                    <DropdownItem key="profile" isReadOnly >
+                                        <div className="px-1 py-1">
+                                            <div className="flex items-center space-x-3">
+                                                <div>
+                                                    {
+                                                        isAuth && (
+                                                            <Avatar
+                                                                radius="sm"
+                                                                size="lg"
+                                                                src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`}
+                                                                alt="User photo" />
+                                                        )
+                                                    }
 
-                                {/* Profile page link */}
-                                <DropdownItem
-                                    key={uuid()}
-                                    className={(!isAuth ? 'hidden' : '') + ' ' + ((currentPath == '/users/health') ? 'bg-primary text-white' : '')}
-                                    textValue={'profilePage'}
-                                    onClick={(e) => handleLinkClick(e, '/users/health')}>
-                                    <span className="text-lg">
-                                        {t('Health portal')}
-                                    </span>
-                                </DropdownItem>
+                                                    {
+                                                        !isAuth && (<FontAwesomeIcon icon={faUser} />)
+                                                    }
+                                                </div>
 
+                                                <div className="flex flex-col space-y-1">
+                                                    <div className="text-sm font-medium">{user?.full_name}</div>
+                                                    <div className="text-xs text-muted-foreground">{user?.email}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </DropdownItem>
+                                </DropdownSection>
 
+                                <DropdownSection showDivider aria-label="Links">
+                                    {/* Profile page link */}
+                                    <DropdownItem
+                                        key={uuid()}
+                                        className={(!isAuth ? 'hidden' : '') + ' mb-1 ' + ((currentPath == '/users/profile') ? 'bg-primary/10 text-primary ' : 'mb-1')}
+                                        textValue={'profilePage'}
+                                        onClick={(e) => handleLinkClick(e, '/users/profile')}>
+                                        <div className="flex justify-start items-center space-x-3">
+                                            <User className="h-4 w-4"></User>
+
+                                            <span className="text-sm">
+                                                {t('Profile')}
+                                            </span>
+                                        </div>
+                                    </DropdownItem>
+
+                                    {/* Profile page link */}
+                                    <DropdownItem
+                                        key={uuid()}
+                                        className={(!isAuth ? 'hidden' : '') + ' mb-1 ' + ((currentPath == '/users/health') ? 'bg-primary/10 text-primary' : '')}
+                                        textValue={'profilePage'}
+                                        onClick={(e) => handleLinkClick(e, '/users/health')}>
+                                        <div className="flex justify-start items-center space-x-3">
+                                            <Heart className="h-4 w-4"></Heart>
+
+                                            <span className="text-sm">
+                                                {t('Health portal')}
+                                            </span>
+                                        </div>
+
+                                    </DropdownItem>
+
+                                    {/* Login/Logout link */}
+                                    <DropdownItem
+                                        key={uuid()}
+                                        textValue={'authentication'}
+                                        className={(!isAuth ? 'hidden' : '') + ' mb-1 ' + ((currentPath == '/authentication') ? 'bg-primary/10 text-primary' : '')}
+                                        onClick={(e) => handleLinkClick(e, '/authentication')}>
+                                        <div className="flex justify-start items-center space-x-3">
+                                            <Lock className="h-4 w-4"></Lock>
+
+                                            <span className="text-sm">
+                                                {isAuth ? t('Logout') : t('Login')}
+                                            </span>
+                                        </div>
+                                    </DropdownItem>
+
+                                </DropdownSection>
 
                                 {/* Theme switch */}
                                 <DropdownItem
@@ -198,23 +262,12 @@ const NavigationUserDropdown = () => {
                                             )
                                         }
                                     >
-                                        <span className="text-lg">
+                                        <span className="text-sm">
                                             {
                                                 darkMode ? t('Dark mode') : t('Light mode')
                                             }
                                         </span>
                                     </Switch>
-                                </DropdownItem>
-
-                                {/* Login/Logout link */}
-                                <DropdownItem
-                                    key={uuid()}
-                                    textValue={'authentication'}
-                                    className={(!isAuth ? 'hidden' : '') + ' ' + ((currentPath == '/authentication') ? 'bg-primary text-white' : '')}
-                                    onClick={(e) => handleLinkClick(e, '/authentication')}>
-                                    <span className="text-lg">
-                                        {isAuth ? t('Logout') : t('Login')}
-                                    </span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>

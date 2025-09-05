@@ -203,3 +203,11 @@
 .article-content p {
     padding-bottom: 1rem;
 }
+
+.animated-card { 
+    transition: transform 0.5s ease-in-out;
+}
+
+.animated-card:hover {
+    transform: scale(1.05);
+}
