@@ -6,14 +6,14 @@ import HealthTestsServices from "@/services/healthTestsServices/healthTestsServi
 import { HealthTestQuestionsType, HealthTestType } from "@/ts/types";
 import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 
-type Props = {
-    params: {
-        id: number
-    }
-}
+const HealthTestPage = async ({
+    params,
+}: {
+    params: Promise<{ id: number }>
+}) => {
+    const { id } = await params;
 
-const HealthTestPage = async (props: Props) => {
-    const data: any = await HealthTestsServices().healthTestShow(props?.params?.id);
+    const data: any = await HealthTestsServices().healthTestShow(id);
     const test: HealthTestType = await data?.test || {};
     const testQA: HealthTestQuestionsType = await data?.testQA || {};
 

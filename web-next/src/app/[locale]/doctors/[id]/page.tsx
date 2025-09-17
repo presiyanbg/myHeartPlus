@@ -7,20 +7,20 @@ import DoctorsServices from "@/services/doctorsServices/doctorsServices";
 import { DoctorType, HealthTestsType, PrescriptionsType } from "@/ts/types";
 import { Card, CardHeader } from "@nextui-org/react";
 
-type Props = {
-    params: {
-        id: number
-    }
-}
+const DoctorPage = async ({
+    params,
+}: {
+    params: Promise<{ id: number }>
+}) => {
+    const { id } = await params;
 
-const DoctorPage = async (props: Props) => {
-    const doctorData: any = await DoctorsServices().doctorShow(props?.params?.id);
+    const doctorData: any = await DoctorsServices().doctorShow(id);
     const doctor: DoctorType = await doctorData?.doctor || {};
 
-    const prescriptionsData: any = await DoctorsServices().doctorShowPrescriptions(props?.params?.id);
+    const prescriptionsData: any = await DoctorsServices().doctorShowPrescriptions(id);
     const prescriptions: PrescriptionsType = await prescriptionsData?.data || {};
 
-    const testsData: any = await DoctorsServices().doctorShowHealthTests(props?.params?.id);
+    const testsData: any = await DoctorsServices().doctorShowHealthTests(id);
     const tests: HealthTestsType = await testsData?.data || {};
 
     return (

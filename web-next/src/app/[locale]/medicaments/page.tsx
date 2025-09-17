@@ -4,11 +4,8 @@ import SidePanel from "@/components/sidePanel/sidePanel";
 import { SELECTORS } from "@/constants/selectors";
 import MedicamentsServices from "@/services/medicamentsServices/medicamentsServices";
 import { MedicamentsType, PaginationType } from "@/ts/types";
-import { unstable_setRequestLocale } from 'next-intl/server';
 
-const MedicamentsPage = async ({ params: { locale } }: { params: { locale: any } }) => {
-    unstable_setRequestLocale(locale);
-
+const MedicamentsPage = async () => {
     const data: any = await MedicamentsServices().medicamentsList();
     const medicaments: MedicamentsType = await data?.medicaments?.data || [];
     const pagination: PaginationType = await data?.medicaments || [];

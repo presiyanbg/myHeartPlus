@@ -4,6 +4,13 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 
+module.exports = {
+  i18n: {
+    locales: ['bg', 'uk', 'en'],
+    defaultLocale: 'bg',
+  },
+}
+
 const nextConfig = {
     headers: () => [
         {

@@ -10,14 +10,13 @@ import { v4 as uuid } from 'uuid';
 import { MedicamentType, MedicamentsType, PrescriptionType, PrescriptionsType } from "@/ts/types";
 import { Card, CardBody, CardFooter, CardHeader, Divider, User } from "@nextui-org/react";
 
-type Props = {
-    params: {
-        id: number,
-    }
-}
-
-const PrescriptionPage = async (props: Props) => {
-    const data: any = await PrescriptionsServices().prescriptionShow(props?.params?.id);
+const PrescriptionPage = async ({
+    params,
+}: {
+    params: Promise<{ id: number }>
+}) => {
+    const { id } = await params;
+    const data: any = await PrescriptionsServices().prescriptionShow(id);
     const prescription: PrescriptionType = await data?.prescription || {};
 
     const sidePanelData: any = await PrescriptionsServices().prescriptionsList();

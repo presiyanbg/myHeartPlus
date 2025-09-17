@@ -4,11 +4,8 @@ import SidePanel from "@/components/sidePanel/sidePanel";
 import { SELECTORS } from "@/constants/selectors";
 import HealthTestsServices from "@/services/healthTestsServices/healthTestsServices";
 import { HealthTestsType, PaginationType } from "@/ts/types";
-import { unstable_setRequestLocale } from 'next-intl/server';
 
-const HealthTestsPage = async ({ params: { locale } }: { params: { locale: any } }) => {
-    unstable_setRequestLocale(locale);
-
+const HealthTestsPage = async () => {
     const data: any = await HealthTestsServices().healthTestsList();
     const healthTests: HealthTestsType = await data?.tests?.data || [];
     const pagination: PaginationType = await data?.tests || [];

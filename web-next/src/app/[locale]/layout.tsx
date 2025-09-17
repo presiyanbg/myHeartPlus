@@ -10,12 +10,12 @@ import Notifications from '@/components/notifications/notificatins';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
+import { ErrorBoundary, ErrorComponent } from 'next/dist/client/components/error-boundary';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { Suspense } from 'react';
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 
 config.autoAddCss = false;
 
@@ -36,12 +36,13 @@ export function generateStaticParams() {
 
 export default function LocaleLayout({
     children,
-    params: { locale }
+    params
 }: {
-    children: React.ReactNode,
-    params: { locale: string }
+    children: any,
+    params: any
 }) {
-    unstable_setRequestLocale(locale);
+    const { locale } = params;
+    setRequestLocale(locale);
 
     const messages = useMessages();
 
@@ -54,13 +55,13 @@ export default function LocaleLayout({
 
                         <Notifications></Notifications>
 
-                        <ErrorBoundary errorComponent={ErrorHandler}>
-                            <Suspense fallback={<Loading />}>
-                                <main className="min-h-screen">
-                                    {children}
-                                </main>
-                            </Suspense>
-                        </ErrorBoundary>
+                        {/* <ErrorBoundary fallback={<ErrorHandler/>}> */}
+                        <Suspense fallback={<Loading />}>
+                            <main className="min-h-screen">
+                                {children}
+                            </main>
+                        </Suspense>
+                        {/* </ErrorBoundary> */}
 
                         <Footer></Footer>
                     </NextIntlClientProvider>

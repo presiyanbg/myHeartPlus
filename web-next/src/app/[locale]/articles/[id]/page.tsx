@@ -9,15 +9,14 @@ import { parseDateAndTime } from "@/utils/utils";
 import { Avatar, Card, CardBody, CardHeader, Divider, Image } from "@nextui-org/react";
 import Link from "next/link";
 
-type Props = {
-    params: {
-        id: number,
-    },
-}
-
-const ArticlePage = async (props: Props) => {
+const ArticlePage = async ({
+    params,
+}: {
+    params: Promise<{ id: number }>
+}) => {
+    const { id } = await params;
     // Load main article data
-    const data: any = await ArticleServices().articleSelect(props?.params?.id);
+    const data: any = await ArticleServices().articleSelect(id);
     const article: ArticleType = await data?.article || {};
     const articleHTML: any = await data?.page;
     const writer: UserType = await data?.writer || {};
@@ -27,7 +26,7 @@ const ArticlePage = async (props: Props) => {
     const articles: ArticlesType = await sidePanelData?.articles?.data || [];
 
     // Update main article views
-    ArticleServices().articlesUpdateViews(props?.params?.id);
+    ArticleServices().articlesUpdateViews(id);
 
     return (
         <PageLayout>

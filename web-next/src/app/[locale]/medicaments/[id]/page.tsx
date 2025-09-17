@@ -7,14 +7,13 @@ import { MedicamentType, MedicamentsType } from "@/ts/types";
 import { formatCurrency } from "@/utils/utils";
 import { Button, Card, CardBody, CardHeader, Divider, Image } from "@nextui-org/react";
 
-type Props = {
-    params: {
-        id: number,
-    }
-}
-
-const MedicamentPage = async (props: Props) => {
-    const data: any = await MedicamentsServices().medicamentShow(props?.params?.id);
+const MedicamentPage = async ({
+    params,
+}: {
+    params: Promise<{ id: number }>
+}) => {
+    const { id } = await params;
+    const data: any = await MedicamentsServices().medicamentShow(id);
     const medicament: MedicamentType = await data?.medicament || {};
 
     const sidePanelData: any = await MedicamentsServices().medicamentsList();

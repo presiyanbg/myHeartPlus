@@ -5,11 +5,7 @@ import OrganizationsServices from "@/services/organizationsServices/organization
 import React from 'react';
 import Portal from "@/components/portal/portal";
 
-import { unstable_setRequestLocale } from 'next-intl/server';
-
-const Home = async ({ params: { locale } }: { params: { locale: any } }) => {
-    unstable_setRequestLocale(locale);
-
+const Home = async () => {
     return (<Portal></Portal>);
 
     // Get organizations 

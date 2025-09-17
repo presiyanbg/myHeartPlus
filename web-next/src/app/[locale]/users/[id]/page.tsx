@@ -5,17 +5,16 @@ import UserView from "@/components/user/userView/userView";
 import UsersServices from "@/services/usersServices/usersServices";
 
 import { UserType } from "@/ts/types";
-import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import { Card, CardBody } from "@nextui-org/react";
 
-type Props = {
-    params: {
-        id: number
-    }
-}
-
-const UserViewPage = async (props: Props) => {
+const UserViewPage = async ({
+    params,
+}: {
+    params: Promise<{ id: number }>
+}) => {
+    const { id } = await params;
     // Load main article data
-    const data: any = await UsersServices().userShow(props?.params?.id);
+    const data: any = await UsersServices().userShow(id);
     const user: UserType = await data?.user || {};
 
     return (
